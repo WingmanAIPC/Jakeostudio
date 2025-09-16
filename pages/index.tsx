@@ -245,7 +245,7 @@ export default function PortfolioSite() {
       {/* Contact */}
       <section id="contact" className="mx-auto max-w-5xl px-4 pb-20">
         <div className="border border-white/10 rounded-2xl p-6">
-          <h2 className="text-2xl font-semibold">Let’s build something</h2>
+          <h2 className="text-2xl font-semibold">Let's build something</h2>
           <p className="mt-2 text-sm text-zinc-300">Tell me about your project. I respond within 24 hours.</p>
           <form className="mt-6 grid md:grid-cols-2 gap-4">
             <input className="px-3 py-2 rounded-xl bg-zinc-900 border border-white/10 text-sm" placeholder="Your name" />
