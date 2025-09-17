@@ -17,21 +17,18 @@ export default function PortfolioSite() {
     { id: "contact", label: "Contact" },
   ];
 
-  // Floating elements data
-  const floatingElements = [
-    { text: "Python", x: 20, y: 15, delay: 0 },
-    { text: "Swift", x: 80, y: 25, delay: 0.5 },
-    { text: "TypeScript", x: 15, y: 70, delay: 1 },
-    { text: "Runway", x: 75, y: 60, delay: 1.5 },
-    { text: "Google AI Studio", x: 45, y: 10, delay: 2 },
-    { text: "Vertex AI", x: 60, y: 80, delay: 2.5 },
-    { text: "Adobe CC", x: 25, y: 45, delay: 3 },
-    { text: "Figma", x: 70, y: 35, delay: 3.5 },
-    { text: "DaVinci", x: 40, y: 65, delay: 4 },
-    { text: "After Effects", x: 85, y: 15, delay: 4.5 },
-    { text: "Founder", x: 50, y: 50, delay: 5 },
-    { text: "Creative Technologist", x: 30, y: 30, delay: 5.5 },
-  ];
+  // Dither background settings
+  const ditherSettings = {
+    waveColor: [0.5, 0.5, 0.5],
+    disableAnimation: false,
+    enableMouseInteraction: true,
+    mouseRadius: 0.3,
+    colorNum: 4,
+    waveAmplitude: 0.3,
+    waveFrequency: 3,
+    waveSpeed: 0.05,
+    pixelSize: 2
+  };
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -55,23 +52,33 @@ export default function PortfolioSite() {
     <div className="min-h-screen bg-black text-zinc-100">
       <header className="sticky top-0 z-50 backdrop-blur-md bg-black/20 border-b border-white/10">
         <div className="mx-auto max-w-7xl px-4 py-4 flex items-center justify-between">
-          <a href="#top" className="font-semibold tracking-tight">
+          <a href="#top" className={`font-semibold tracking-tight transition-colors duration-1000 ${
+            isHovering ? 'text-black' : 'text-white'
+          }`}>
             jostudio
           </a>
           <nav className="hidden md:flex gap-6">
             {nav.map((n) => (
-              <a key={n.id} href={`#${n.id}`} className="text-sm text-zinc-300 hover:text-white">
+              <a key={n.id} href={`#${n.id}`} className={`text-sm transition-colors duration-1000 ${
+                isHovering ? 'text-zinc-700 hover:text-black' : 'text-zinc-300 hover:text-white'
+              }`}>
                 {n.label}
               </a>
             ))}
           </nav>
-          <button className="md:hidden text-sm" onClick={() => setOpen(!open)}>menu</button>
+          <button className={`md:hidden text-sm transition-colors duration-1000 ${
+            isHovering ? 'text-black' : 'text-white'
+          }`} onClick={() => setOpen(!open)}>menu</button>
         </div>
         {open && (
-          <div className="md:hidden border-t border-white/10">
+          <div className={`md:hidden border-t transition-colors duration-1000 ${
+            isHovering ? 'border-black/10' : 'border-white/10'
+          }`}>
             <div className="px-4 py-3 flex flex-col gap-3">
               {nav.map((n) => (
-                <a key={n.id} href={`#${n.id}`} className="text-sm text-zinc-300" onClick={() => setOpen(false)}>
+                <a key={n.id} href={`#${n.id}`} className={`text-sm transition-colors duration-1000 ${
+                  isHovering ? 'text-zinc-700 hover:text-black' : 'text-zinc-300 hover:text-white'
+                }`} onClick={() => setOpen(false)}>
                   {n.label}
                 </a>
               ))}
@@ -80,7 +87,7 @@ export default function PortfolioSite() {
         )}
       </header>
 
-      {/* Bubble Spatial Matrix Hero */}
+      {/* Dither Background Hero */}
       <section 
         id="top" 
         ref={heroRef}
@@ -90,39 +97,36 @@ export default function PortfolioSite() {
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
       >
-        {/* Floating Background Elements */}
-        <div className="absolute inset-0 pointer-events-none">
-          {floatingElements.map((element, index) => {
-            const parallaxX = (mousePosition.x - 0.5) * 50;
-            const parallaxY = (mousePosition.y - 0.5) * 50;
-            const baseX = element.x + parallaxX * 0.3;
-            const baseY = element.y + parallaxY * 0.3;
-            
-            return (
-              <div
-                key={index}
-                className={`absolute text-xs font-medium transition-all duration-1000 ${
-                  isHovering 
-                    ? 'text-black opacity-100 blur-0' 
-                    : 'text-zinc-500 opacity-30 blur-sm'
-                }`}
-                style={{
-                  left: `${baseX}%`,
-                  top: `${baseY}%`,
-                  transform: `translate(-50%, -50%) scale(${isHovering ? 1.1 : 1})`,
-                  animationDelay: `${element.delay}s`,
-                  animation: isHovering 
-                    ? `floatUp 2s ease-out ${element.delay}s infinite alternate` 
-                    : 'none'
-                }}
-              >
-                {element.text}
-              </div>
-            );
-          })}
-        </div>
+        {/* Dither Background */}
+        <div 
+          className="absolute inset-0 w-full h-full"
+          style={{
+            background: `
+              radial-gradient(circle at ${mousePosition.x * 100}% ${mousePosition.y * 100}%, 
+                rgba(255,255,255,0.1) 0%, 
+                rgba(0,0,0,0.1) 50%, 
+                rgba(255,255,255,0.05) 100%
+              ),
+              linear-gradient(45deg, 
+                rgba(128,128,128,0.1) 25%, 
+                transparent 25%, 
+                transparent 75%, 
+                rgba(128,128,128,0.1) 75%
+              ),
+              linear-gradient(-45deg, 
+                rgba(128,128,128,0.1) 25%, 
+                transparent 25%, 
+                transparent 75%, 
+                rgba(128,128,128,0.1) 75%
+              )
+            `,
+            backgroundSize: '20px 20px, 20px 20px, 20px 20px',
+            animation: 'ditherWave 2s ease-in-out infinite alternate',
+            filter: isHovering ? 'invert(1) contrast(1.2)' : 'invert(0) contrast(1)'
+          }}
+        />
 
-        {/* Central Bubble */}
+        {/* Central Logo */}
         <div className="relative z-10">
           <div
             className={`relative group cursor-pointer transition-all duration-1000 ${
@@ -132,79 +136,35 @@ export default function PortfolioSite() {
               transform: `translate(${(mousePosition.x - 0.5) * 20}px, ${(mousePosition.y - 0.5) * 20}px)`,
             }}
           >
-            {/* Bubble Background */}
-            <div 
-              className={`w-64 h-64 rounded-full transition-all duration-1000 ${
-                isHovering 
-                  ? 'bg-gradient-to-br from-zinc-100 to-zinc-200 shadow-2xl shadow-black/50' 
-                  : 'bg-gradient-to-br from-zinc-800 to-zinc-900 shadow-2xl shadow-black/20'
-              }`}
-              style={{
-                background: isHovering 
-                  ? 'radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8), rgba(200,200,200,0.6))'
-                  : 'radial-gradient(circle at 30% 30%, rgba(255,255,255,0.1), rgba(0,0,0,0.3))'
-              }}
-            >
-              {/* Fluid Glass Effect */}
-              <div 
-                className="absolute inset-0 rounded-full opacity-30 transition-all duration-1000"
+            {/* Jakeostudio Logo */}
+            <div className="relative">
+              <img
+                src={isHovering ? "/jakeostudio-black.png" : "/jakeostudio-white.png"}
+                alt="jakeostudio"
+                className="w-64 h-64 object-contain transition-all duration-1000 filter drop-shadow-2xl"
                 style={{
-                  background: isHovering
-                    ? 'linear-gradient(45deg, rgba(255,255,255,0.3), rgba(255,255,255,0.1))'
-                    : 'linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05))',
-                  backdropFilter: 'blur(10px)',
-                  border: '1px solid rgba(255,255,255,0.2)'
+                  filter: isHovering 
+                    ? 'drop-shadow(0 25px 50px rgba(0,0,0,0.3))' 
+                    : 'drop-shadow(0 25px 50px rgba(255,255,255,0.1))'
                 }}
               />
               
-              {/* Gradient Text Effect */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <h1 
-                  className={`text-2xl font-bold transition-all duration-1000 ${
-                    isHovering 
-                      ? 'bg-gradient-to-r from-black via-zinc-800 to-black bg-clip-text text-transparent' 
-                      : 'text-white'
-                  }`}
-                  style={{
-                    background: isHovering 
-                      ? 'linear-gradient(45deg, #000000, #404040, #000000)'
-                      : 'none',
-                    backgroundSize: '200% 200%',
-                    animation: isHovering ? 'gradientShift 3s ease-in-out infinite' : 'none'
-                  }}
-                >
-                  jakeostudio
-                </h1>
-              </div>
-
-              {/* Aurora Effect Ring */}
+              {/* Hover Glow Effect */}
               <div 
-                className={`absolute -inset-4 rounded-full transition-all duration-1000 ${
+                className={`absolute inset-0 transition-all duration-1000 ${
                   isHovering ? 'opacity-100' : 'opacity-0'
                 }`}
                 style={{
-                  background: 'conic-gradient(from 0deg, transparent, rgba(0,0,0,0.1), transparent)',
-                  animation: isHovering ? 'auroraRotate 4s linear infinite' : 'none'
+                  background: 'radial-gradient(circle, rgba(255,255,255,0.2), transparent)',
+                  filter: 'blur(20px)',
+                  transform: 'scale(1.2)'
                 }}
               />
             </div>
-
-            {/* Bubble Pop Animation */}
-            <div 
-              className={`absolute inset-0 rounded-full transition-all duration-500 ${
-                isHovering 
-                  ? 'scale-150 opacity-0' 
-                  : 'scale-100 opacity-0'
-              }`}
-              style={{
-                background: 'radial-gradient(circle, rgba(255,255,255,0.3), transparent)',
-                animation: isHovering ? 'bubblePop 0.6s ease-out' : 'none'
-              }}
-            />
           </div>
         </div>
 
-        {/* Content below bubble */}
+        {/* Content below logo */}
         <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 text-center">
           <h2 className={`text-4xl md:text-6xl font-semibold mb-4 transition-all duration-1000 ${
             isHovering ? 'text-black' : 'text-white'
@@ -220,27 +180,19 @@ export default function PortfolioSite() {
 
         {/* CSS Animations */}
         <style jsx>{`
-          @keyframes floatUp {
-            0% { transform: translateY(0px) scale(1); opacity: 0.3; }
-            50% { transform: translateY(-10px) scale(1.05); opacity: 0.8; }
-            100% { transform: translateY(-20px) scale(1.1); opacity: 1; }
-          }
-          
-          @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-          }
-          
-          @keyframes auroraRotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-          }
-          
-          @keyframes bubblePop {
-            0% { transform: scale(1); opacity: 0.8; }
-            50% { transform: scale(1.2); opacity: 0.4; }
-            100% { transform: scale(1.5); opacity: 0; }
+          @keyframes ditherWave {
+            0% { 
+              background-position: 0% 0%, 0% 0%, 0% 0%;
+              filter: invert(0) contrast(1);
+            }
+            50% { 
+              background-position: 50% 50%, 10px 10px, -10px -10px;
+              filter: invert(0.1) contrast(1.1);
+            }
+            100% { 
+              background-position: 100% 100%, 20px 20px, -20px -20px;
+              filter: invert(0.2) contrast(1.2);
+            }
           }
         `}</style>
       </section>
@@ -357,7 +309,7 @@ export default function PortfolioSite() {
           <div className="space-y-4">
             <h3 className="text-xl font-semibold">Wingman — Your AI Assistant for Life</h3>
             <p className="text-zinc-300 text-sm">
-              Now Available on the iOS App Store. Meet Wingman, your personal life coach, designed to help you reflect deeply, grow intentionally, and thrive in every area of life.
+              Meet Wingman, your personal life coach, designed to help you reflect deeply, grow intentionally, and thrive in every area of life.
             </p>
             <div className="flex flex-wrap gap-2 text-xs">
               <span className="px-2 py-1 rounded-full bg-white/10">AI Coach</span>
@@ -412,13 +364,13 @@ export default function PortfolioSite() {
           <p className="text-sm text-zinc-300 mb-6">Design, creative, and technology solutions. I respond within 24 hours.</p>
           <div className="space-y-4">
             <a 
-              href="mailto:hello@jakeostudio.com" 
+              href="mailto:jakeostudio@gmail.com" 
               className="inline-block px-6 py-3 rounded-2xl bg-white text-black text-sm font-medium hover:bg-zinc-100 transition-colors"
             >
               Ask me
             </a>
             <div className="text-xs text-zinc-500">
-              hello@jakeostudio.com • Based in Michigan • Available for remote
+              jakeostudio@gmail.com • Based in USA • Available for remote
             </div>
           </div>
         </div>
