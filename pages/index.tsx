@@ -232,15 +232,19 @@ export default function PortfolioSite() {
         {/* Wingman Feature */}
         <div className="grid md:grid-cols-2 gap-8 items-center mb-16">
           <div className="aspect-video rounded-2xl overflow-hidden border border-white/10 bg-zinc-900 group cursor-pointer">
-            <iframe
-              src="https://www.youtube.com/embed/Ag7EAF_djj4"
-              title="Wingman Feature Video"
-              className="w-full h-full"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
+            <img 
+              src="https://img.youtube.com/vi/Ag7EAF_djj4/maxresdefault.jpg" 
+              alt="Wingman Feature Video"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center rounded-2xl">
+              <div className="text-center p-6">
+                <h3 className="text-lg font-semibold mb-2">Wingman Feature Video</h3>
+                <p className="text-sm text-zinc-300 mb-4">AI Life Coach • iOS App • EQ Training</p>
+                <p className="text-xs text-zinc-400">Click to watch on YouTube</p>
               </div>
+            </div>
+          </div>
           <div className="space-y-4">
             <h3 className="text-xl font-semibold">Wingman — Your AI Assistant for Life</h3>
             <p className="text-zinc-300 text-sm">
@@ -260,6 +264,11 @@ export default function PortfolioSite() {
               Download App
             </a>
           </div>
+        </div>
+
+        {/* Divider Line */}
+        <div className="flex justify-center my-12">
+          <div className="w-24 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
         </div>
 
         {/* Cloverleaf Testimonials Feature */}
@@ -285,68 +294,113 @@ export default function PortfolioSite() {
             </a>
           </div>
           <div className="aspect-video rounded-2xl overflow-hidden border border-white/10 bg-zinc-900 group cursor-pointer">
-            <iframe
-              src="https://www.youtube.com/embed/videoseries?list=PL18Q1CsxcdgRhhpWPSXSjkJCx12SRp_1_"
-              title="Cloverleaf Testimonials Playlist"
-              className="w-full h-full"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
+            <div className="w-full h-full bg-gradient-to-br from-zinc-800 to-zinc-900 flex items-center justify-center">
+              <div className="text-center">
+                <div className="w-16 h-16 mx-auto mb-4 bg-white/10 rounded-full flex items-center justify-center">
+                  <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                </div>
+                <p className="text-sm text-zinc-300">Cloverleaf Testimonials</p>
+                <p className="text-xs text-zinc-500">YouTube Playlist</p>
+              </div>
             </div>
+            <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center rounded-2xl">
+              <div className="text-center p-6">
+                <h3 className="text-lg font-semibold mb-2">Cloverleaf Testimonials</h3>
+                <p className="text-sm text-zinc-300 mb-4">Customer Stories • Product Marketing • Video Design</p>
+                <p className="text-xs text-zinc-400">Click to view playlist on YouTube</p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Design Section */}
+      {/* Design Section - Masonry Layout */}
       <section id="design" className="mx-auto max-w-7xl px-4 py-16">
         <h2 className="text-2xl font-semibold mb-8">
           Design
         </h2>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          <div className="aspect-square bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl">
-            <img src="/BeatsStudioBuds.png" alt="Beats Studio Buds" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
-          </div>
-          <div className="aspect-square bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl">
-            <img src="/BionicKid.jpg" alt="Bionic Kid" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
-          </div>
-          <div className="aspect-square bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl">
-            <img src="/CrystalStrawberry.jpg" alt="Crystal Strawberry" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
-          </div>
-          <div className="aspect-square bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl">
-            <img src="/KoreanBBQ.jpg" alt="Korean BBQ" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
-          </div>
-          <div className="aspect-square bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl">
-            <img src="/LandoNorris.jpg" alt="Lando Norris" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
-          </div>
-          <div className="aspect-square bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl">
-            <img src="/OutofSync.jpg" alt="Out of Sync" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
-          </div>
-          <div className="aspect-square bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl">
-            <img src="/PlayboiCarti.jpg" alt="Playboi Carti" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
-          </div>
-          <div className="aspect-square bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl">
-            <img src="/ProfessionalDevelopment.jpg" alt="Professional Development" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
-          </div>
-          <div className="aspect-square bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl">
-            <img src="/SSLCards.jpg" alt="SSL Cards" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
-          </div>
-          <div className="aspect-square bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl">
-            <img src="/WHMDayton.jpg" alt="WHM Dayton" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
-          </div>
-          <div className="aspect-square bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl">
-            <img src="/WomenLead.jpg" alt="Women Lead" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
+        <div className="columns-1 md:columns-2 lg:columns-3 xl:columns-4 gap-6 space-y-6">
+          {/* Bionic Kid - Tall vertical */}
+          <div className="break-inside-avoid mb-6">
+            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl">
+              <img src="/BionicKid.jpg" alt="Bionic Kid" className="w-full h-auto object-cover" style={{ aspectRatio: '3/4' }} />
+              <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
             </div>
+          </div>
+          
+          {/* Crystal Strawberry - Very tall vertical */}
+          <div className="break-inside-avoid mb-6">
+            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl">
+              <img src="/CrystalStrawberry.jpg" alt="Crystal Strawberry" className="w-full h-auto object-cover" style={{ aspectRatio: '2/3' }} />
+              <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
+            </div>
+          </div>
+          
+          {/* Lando Norris - Square */}
+          <div className="break-inside-avoid mb-6">
+            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl">
+              <img src="/LandoNorris.jpg" alt="Lando Norris" className="w-full h-auto object-cover" style={{ aspectRatio: '1/1' }} />
+              <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
+            </div>
+          </div>
+          
+          {/* Playboi Carti - Wide horizontal */}
+          <div className="break-inside-avoid mb-6">
+            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl">
+              <img src="/PlayboiCarti.jpg" alt="Playboi Carti" className="w-full h-auto object-cover" style={{ aspectRatio: '4/3' }} />
+              <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
+            </div>
+          </div>
+          
+          {/* WHM Dayton - Wide horizontal */}
+          <div className="break-inside-avoid mb-6">
+            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl">
+              <img src="/WHMDayton.jpg" alt="WHM Dayton" className="w-full h-auto object-cover" style={{ aspectRatio: '16/9' }} />
+              <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
+            </div>
+          </div>
+          
+          {/* SSL Cards - Tall vertical */}
+          <div className="break-inside-avoid mb-6">
+            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl">
+              <img src="/SSLCards.jpg" alt="SSL Cards" className="w-full h-auto object-cover" style={{ aspectRatio: '3/4' }} />
+              <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
+            </div>
+          </div>
+          
+          {/* Out of Sync - Very tall vertical */}
+          <div className="break-inside-avoid mb-6">
+            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl">
+              <img src="/OutofSync.jpg" alt="Out of Sync" className="w-full h-auto object-cover" style={{ aspectRatio: '2/3' }} />
+              <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
+            </div>
+          </div>
+          
+          {/* Professional Development - Tall vertical */}
+          <div className="break-inside-avoid mb-6">
+            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl">
+              <img src="/ProfessionalDevelopment.jpg" alt="Professional Development" className="w-full h-auto object-cover" style={{ aspectRatio: '3/4' }} />
+              <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
+            </div>
+          </div>
+          
+          {/* Beats Studio Buds - Wide horizontal */}
+          <div className="break-inside-avoid mb-6">
+            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl">
+              <img src="/BeatsStudioBuds.png" alt="Beats Studio Buds" className="w-full h-auto object-cover" style={{ aspectRatio: '16/9' }} />
+              <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
+            </div>
+          </div>
+          
+          {/* Korean BBQ - Wide horizontal */}
+          <div className="break-inside-avoid mb-6">
+            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl">
+              <img src="/KoreanBBQ.jpg" alt="Korean BBQ" className="w-full h-auto object-cover" style={{ aspectRatio: '4/3' }} />
+              <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -357,8 +411,8 @@ export default function PortfolioSite() {
             Feed
           </h2>
         </div>
-        <div className="max-w-md mx-auto">
-          <div className="space-y-4 max-h-96 overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-600 scrollbar-track-transparent">
+        <div className="max-w-4xl mx-auto">
+          <div className="space-y-6 max-h-[600px] overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-600 scrollbar-track-transparent">
             {/* Instagram Post 1 */}
             <div className="bg-zinc-900 rounded-2xl border border-white/10 overflow-hidden">
               <iframe
@@ -478,54 +532,47 @@ export default function PortfolioSite() {
           </p>
               </div>
 
-        <div className="grid md:grid-cols-2 gap-12 mb-16">
-          {/* Services */}
-          <div>
-            <h3 className="text-2xl font-semibold mb-6">Services</h3>
-            <div className="grid grid-cols-2 gap-3">
-              <div className="border border-white/10 rounded-xl p-4">
-                <h4 className="font-medium text-sm mb-2">UX/UI Design</h4>
-                <p className="text-xs text-zinc-400">Prototyping, user research, interface design</p>
-              </div>
-              <div className="border border-white/10 rounded-xl p-4">
-                <h4 className="font-medium text-sm mb-2">Creative Direction</h4>
-                <p className="text-xs text-zinc-400">Brand strategy, visual identity, art direction</p>
-              </div>
-              <div className="border border-white/10 rounded-xl p-4">
-                <h4 className="font-medium text-sm mb-2">Video Editing</h4>
-                <p className="text-xs text-zinc-400">Narrative, commercial, music video production</p>
-              </div>
-              <div className="border border-white/10 rounded-xl p-4">
-                <h4 className="font-medium text-sm mb-2">VFX & Animation</h4>
-                <p className="text-xs text-zinc-400">Motion graphics, visual effects, 3D animation</p>
-              </div>
-              <div className="border border-white/10 rounded-xl p-4">
-                <h4 className="font-medium text-sm mb-2">Motion Design</h4>
-                <p className="text-xs text-zinc-400">Title sequences, animation, motion graphics</p>
-              </div>
-              <div className="border border-white/10 rounded-xl p-4">
-                <h4 className="font-medium text-sm mb-2">AI Integration</h4>
-                <p className="text-xs text-zinc-400">Machine learning, automation, AI-powered tools</p>
-              </div>
+        {/* Creative Services & Tools */}
+        <div className="mb-16">
+          <h3 className="text-2xl font-semibold mb-6 text-center">Creative Services & Tools</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {/* Services */}
+            <div className="border border-white/10 rounded-xl p-4">
+              <h4 className="font-medium text-sm mb-2">UX/UI Design</h4>
+              <p className="text-xs text-zinc-400">Prototyping, user research, interface design</p>
             </div>
+            <div className="border border-white/10 rounded-xl p-4">
+              <h4 className="font-medium text-sm mb-2">Creative Direction</h4>
+              <p className="text-xs text-zinc-400">Brand strategy, visual identity, art direction</p>
+            </div>
+            <div className="border border-white/10 rounded-xl p-4">
+              <h4 className="font-medium text-sm mb-2">Video Editing</h4>
+              <p className="text-xs text-zinc-400">Narrative, commercial, music video production</p>
+            </div>
+              <div className="border border-white/10 rounded-xl p-4">
+              <h4 className="font-medium text-sm mb-2">VFX & Animation</h4>
+              <p className="text-xs text-zinc-400">Motion graphics, visual effects, 3D animation</p>
+              </div>
+              <div className="border border-white/10 rounded-xl p-4">
+              <h4 className="font-medium text-sm mb-2">Motion Design</h4>
+              <p className="text-xs text-zinc-400">Title sequences, animation, motion graphics</p>
+              </div>
+            <div className="border border-white/10 rounded-xl p-4">
+              <h4 className="font-medium text-sm mb-2">AI Integration</h4>
+              <p className="text-xs text-zinc-400">Machine learning, automation, AI-powered tools</p>
+            </div>
+            {/* Tools */}
+            <div className="border border-white/10 rounded-xl p-4">
+              <h4 className="font-medium text-sm mb-2">Creative Suite</h4>
+              <p className="text-xs text-zinc-400">Adobe Creative Cloud, Figma, After Effects, Blender</p>
           </div>
-
-          {/* Tools */}
-          <div>
-            <h3 className="text-2xl font-semibold mb-6">Tools</h3>
-            <div className="space-y-4">
-              <div className="border border-white/10 rounded-xl p-4">
-                <h4 className="font-medium text-sm mb-2">Creative Suite</h4>
-                <p className="text-xs text-zinc-400">Adobe Creative Cloud, Figma, After Effects, Blender</p>
-              </div>
-              <div className="border border-white/10 rounded-xl p-4">
-                <h4 className="font-medium text-sm mb-2">Development</h4>
-                <p className="text-xs text-zinc-400">Cursor, TypeScript, Python, HTML, CSS, React, Next.js</p>
-              </div>
-              <div className="border border-white/10 rounded-xl p-4">
-                <h4 className="font-medium text-sm mb-2">AI & ML</h4>
-                <p className="text-xs text-zinc-400">Google AI Labs, OpenAI (Codex, ChatGPT), Runway, Vertex AI</p>
-              </div>
+            <div className="border border-white/10 rounded-xl p-4">
+              <h4 className="font-medium text-sm mb-2">Development</h4>
+              <p className="text-xs text-zinc-400">Cursor, TypeScript, Python, HTML, CSS, React, Next.js</p>
+            </div>
+            <div className="border border-white/10 rounded-xl p-4">
+              <h4 className="font-medium text-sm mb-2">AI & ML</h4>
+              <p className="text-xs text-zinc-400">Google AI Labs, OpenAI (Codex, ChatGPT), Runway, Vertex AI</p>
             </div>
           </div>
         </div>
