@@ -37,12 +37,12 @@ export default function PortfolioSite() {
         {/* Prismatic Burst Background - Optimized */}
         <div className="absolute inset-0 z-0">
           <PrismaticBurst
-            intensity={2.5}
-            speed={0.25}
-            animationType="rotate"
+            intensity={1.75}
+            speed={0.4}
+            animationType="hover"
             colors={['#ffffff', '#ffffff', '#ffffff']}
             distort={0.3}
-            rayCount={12}
+            rayCount={2}
             mixBlendMode="lighten"
           />
         </div>
