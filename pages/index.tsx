@@ -55,7 +55,11 @@ export default function PortfolioSite() {
           <a href="#top" className={`font-semibold tracking-tight transition-colors duration-1000 ${
             isHovering ? 'text-black' : 'text-white'
           }`}>
-            jostudio
+            <img 
+              src={isHovering ? "/jostudio.png" : "/jostudiowhite.png"} 
+              alt="jostudio" 
+              className="h-8 w-auto"
+            />
           </a>
           <nav className="hidden md:flex gap-6">
             {nav.map((n) => (
@@ -139,7 +143,7 @@ export default function PortfolioSite() {
             {/* Jakeostudio Logo */}
             <div className="relative">
               <img
-                src={isHovering ? "/jakeostudio-black.png" : "/jakeostudio-white.png"}
+                src={isHovering ? "/jakeostudio.png" : "/jakeostudiowhite.png"}
                 alt="jakeostudio"
                 className="w-64 h-64 object-contain transition-all duration-1000 filter drop-shadow-2xl"
                 style={{
