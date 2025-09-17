@@ -130,7 +130,7 @@ void main(){
       hoverMat = rotY(ang.y) * rotX(ang.x);
     }
 
-    for (int i = 0; i < 44; ++i) {
+    for (int i = 0; i < 24; ++i) {
         vec3 P = marchT * dir;
         P.z -= 2.0;
         float rad = length(P);
@@ -250,7 +250,8 @@ const PrismaticBurst = ({
     const container = containerRef.current;
     if (!container) return;
 
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    // Reduced DPR for better performance
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
     const renderer = new Renderer({ dpr, alpha: false, antialias: false });
     rendererRef.current = renderer;
 
@@ -338,22 +339,40 @@ const PrismaticBurst = ({
       );
       io.observe(container);
     }
-    const onVis = () => {};
+    const onVis = () => {
+      if (document.hidden) {
+        // Pause animation when tab is not visible
+        pausedRef.current = true;
+      } else {
+        // Resume animation when tab becomes visible
+        pausedRef.current = paused;
+      }
+    };
     document.addEventListener('visibilitychange', onVis);
 
     let raf = 0;
     let last = performance.now();
     let accumTime = 0;
+    let frameCount = 0;
 
     const update = (now: number) => {
       const dt = Math.max(0, now - last) * 0.001;
       last = now;
       const visible = isVisibleRef.current && !document.hidden;
+      
+      // Skip frames for better performance (render every 2nd frame)
+      frameCount++;
+      if (frameCount % 2 !== 0) {
+        raf = requestAnimationFrame(update);
+        return;
+      }
+      
       if (!pausedRef.current) accumTime += dt;
       if (!visible) {
         raf = requestAnimationFrame(update);
         return;
       }
+      
       const tau = 0.02 + Math.max(0, Math.min(1, hoverDampRef.current)) * 0.5;
       const alpha = 1 - Math.exp(-dt / tau);
       const tgt = mouseTargetRef.current;

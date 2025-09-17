@@ -1,80 +1,72 @@
 import React, { useState, useEffect } from "react";
 import PrismaticBurst from "../components/PrismaticBurst";
+import PillNav from "../components/PillNav";
 
 // Minimal single-file React portfolio using Tailwind CSS classes.
 // Drop into Next.js/React. Replace placeholders with real content.
 
 export default function PortfolioSite() {
-  const [open, setOpen] = useState(false);
-  const [showNav, setShowNav] = useState(false);
+  const [activeSection, setActiveSection] = useState("videos");
+  
+  const navItems = [
+    { label: "Videos", href: "#videos", ariaLabel: "Go to Videos section" },
+    { label: "Design", href: "#design", ariaLabel: "Go to Design section" },
+    { label: "Feature", href: "#feature", ariaLabel: "Go to Feature section" },
+    { label: "Feed", href: "#feed", ariaLabel: "Go to Feed section" },
+    { label: "Me", href: "#contact", ariaLabel: "Go to Me section" },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      setShowNav(scrollTop > 100);
+      const sections = ['videos', 'design', 'feature', 'feed', 'contact'];
+      const scrollPosition = window.scrollY + 100;
+
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const { offsetTop, offsetHeight } = element;
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
     };
 
     window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Check initial position
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-  
-  const nav = [
-    { id: "videos", label: "Videos" },
-    { id: "design", label: "Design" },
-    { id: "feature", label: "Feature" },
-    { id: "feed", label: "Feed" },
-    { id: "contact", label: "Me" },
-  ];
 
   return (
     <div className="min-h-screen bg-black text-zinc-100 scroll-smooth">
-      <header className={`sticky top-0 z-50 transition-all duration-300 ${
-        showNav ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
-      }`}>
-        <div className="mx-auto max-w-7xl px-4 py-4 flex items-center justify-between">
-          <a href="#videos" className="font-semibold tracking-tight text-white">
-            <img 
-              src="/jostudiowhite.png" 
-              alt="jostudio" 
-              className="h-8 w-auto"
-            />
-          </a>
-          <nav className="hidden md:flex gap-6">
-            {nav.map((n) => (
-              <a key={n.id} href={`#${n.id}`} className="text-sm text-zinc-300 hover:text-white">
-                {n.label}
-              </a>
-            ))}
-          </nav>
-          <button className="md:hidden text-sm text-white" onClick={() => setOpen(!open)}>menu</button>
-        </div>
-        {open && (
-          <div className="md:hidden border-t border-white/10">
-            <div className="px-4 py-3 flex flex-col gap-3">
-              {nav.map((n) => (
-                <a key={n.id} href={`#${n.id}`} className="text-sm text-zinc-300 hover:text-white" onClick={() => setOpen(false)}>
-                  {n.label}
-                </a>
-              ))}
-            </div>
-          </div>
-        )}
-      </header>
+      {/* Floating Pill Navigation */}
+      <PillNav
+        logo="/jostudiowhite.png"
+        logoAlt="jostudio"
+        items={navItems}
+        activeHref={`#${activeSection}`}
+        baseColor="#000000"
+        pillColor="#ffffff"
+        hoveredPillTextColor="#000000"
+        pillTextColor="#ffffff"
+        initialLoadAnimation={true}
+      />
 
       {/* Hero with Prismatic Burst Background */}
       <section 
         id="top" 
         className="relative min-h-screen flex items-center justify-center overflow-hidden"
       >
-        {/* Prismatic Burst Background */}
+        {/* Prismatic Burst Background - Optimized */}
         <div className="absolute inset-0 z-0">
           <PrismaticBurst
-            intensity={1.5}
-            speed={0.3}
-            animationType="rotate3d"
-            colors={['#ffffff', '#000000', '#ffffff']}
-            distort={0.5}
-            rayCount={24}
+            intensity={0.8}
+            speed={0.15}
+            animationType="rotate"
+            colors={['#ffffff', '#000000']}
+            distort={0.2}
+            rayCount={12}
             mixBlendMode="lighten"
           />
         </div>
