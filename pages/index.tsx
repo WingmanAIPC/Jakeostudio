@@ -417,7 +417,7 @@ export default function PortfolioSite() {
           {/* Data Landmark - Wide horizontal poster */}
           <div className="break-inside-avoid mb-6">
             <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl">
-              <img src="/datalandmarkposter.jpg" alt="Data Landmark" className="w-full h-auto object-cover" style={{ aspectRatio: '16/9' }} />
+              <img src="/DataLandmarkPoster.jpg" alt="Data Landmark" className="w-full h-auto object-cover" style={{ aspectRatio: '16/9' }} />
               <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
             </div>
           </div>
@@ -440,6 +440,13 @@ export default function PortfolioSite() {
           </h2>
         </div>
         <div className="w-full">
+          <style jsx>{`
+            iframe {
+              width: 100% !important;
+              min-width: 100% !important;
+              max-width: 100% !important;
+            }
+          `}</style>
           <div className="space-y-8 max-h-[800px] overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-600 scrollbar-track-transparent">
             {/* Instagram Reel 1 - 9:16 aspect ratio */}
             <div className="bg-zinc-900 rounded-2xl border border-white/10 overflow-hidden w-full">
@@ -452,6 +459,7 @@ export default function PortfolioSite() {
                   scrolling="no"
                   allowTransparency={true}
                   className="w-full"
+                  style={{ minWidth: '100%', width: '100%' }}
                 ></iframe>
               </div>
             </div>
@@ -546,6 +554,20 @@ export default function PortfolioSite() {
               </div>
             </div>
             
+            {/* Instagram Post 8 - 1:1 aspect ratio (regular post) */}
+            <div className="bg-zinc-900 rounded-2xl border border-white/10 overflow-hidden w-full">
+              <div className="w-full">
+                <iframe
+                  src="https://www.instagram.com/p/DF_XY4uPeLV/embed/"
+                  width="100%"
+                  height="600"
+                  frameBorder="0"
+                  scrolling="no"
+                  allowTransparency={true}
+                  className="w-full"
+                ></iframe>
+              </div>
+            </div>
           </div>
           <div className="text-center mt-6">
             <p className="text-xs text-zinc-500">Follow for more creative content ✦</p>
