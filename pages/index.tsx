@@ -1,13 +1,11 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 
 // Minimal single-file React portfolio using Tailwind CSS classes.
 // Drop into Next.js/React. Replace placeholders with real content.
 
 export default function PortfolioSite() {
   const [open, setOpen] = useState(false);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
-  const heroRef = useRef<HTMLElement>(null);
   
   const nav = [
     { id: "videos", label: "Videos" },
@@ -16,37 +14,6 @@ export default function PortfolioSite() {
     { id: "feed", label: "Feed" },
     { id: "contact", label: "Contact" },
   ];
-
-  // Dither background settings
-  const ditherSettings = {
-    waveColor: [0.5, 0.5, 0.5],
-    disableAnimation: false,
-    enableMouseInteraction: true,
-    mouseRadius: 0.3,
-    colorNum: 4,
-    waveAmplitude: 0.3,
-    waveFrequency: 3,
-    waveSpeed: 0.05,
-    pixelSize: 2
-  };
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (heroRef.current) {
-        const rect = heroRef.current.getBoundingClientRect();
-        setMousePosition({
-          x: (e.clientX - rect.left) / rect.width,
-          y: (e.clientY - rect.top) / rect.height,
-        });
-      }
-    };
-
-    const hero = heroRef.current;
-    if (hero) {
-      hero.addEventListener('mousemove', handleMouseMove);
-      return () => hero.removeEventListener('mousemove', handleMouseMove);
-    }
-  }, []);
 
   return (
     <div className="min-h-screen bg-black text-zinc-100">
@@ -91,114 +58,39 @@ export default function PortfolioSite() {
         )}
       </header>
 
-      {/* Dither Background Hero */}
+      {/* Simple Hero with Color Switch */}
       <section 
         id="top" 
-        ref={heroRef}
-        className={`relative min-h-screen flex items-center justify-center overflow-hidden transition-all duration-1000 ${
+        className={`relative min-h-screen flex items-center justify-center ${
           isHovering ? 'bg-white' : 'bg-black'
         }`}
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
       >
-        {/* Dither Background */}
-        <div 
-          className="absolute inset-0 w-full h-full"
-          style={{
-            background: `
-              radial-gradient(circle at ${mousePosition.x * 100}% ${mousePosition.y * 100}%, 
-                rgba(255,255,255,0.1) 0%, 
-                rgba(0,0,0,0.1) 50%, 
-                rgba(255,255,255,0.05) 100%
-              ),
-              linear-gradient(45deg, 
-                rgba(128,128,128,0.1) 25%, 
-                transparent 25%, 
-                transparent 75%, 
-                rgba(128,128,128,0.1) 75%
-              ),
-              linear-gradient(-45deg, 
-                rgba(128,128,128,0.1) 25%, 
-                transparent 25%, 
-                transparent 75%, 
-                rgba(128,128,128,0.1) 75%
-              )
-            `,
-            backgroundSize: '20px 20px, 20px 20px, 20px 20px',
-            animation: 'ditherWave 2s ease-in-out infinite alternate',
-            filter: isHovering ? 'invert(1) contrast(1.2)' : 'invert(0) contrast(1)'
-          }}
-        />
-
         {/* Central Logo */}
         <div className="relative z-10">
-          <div
-            className={`relative group cursor-pointer transition-all duration-1000 ${
-              isHovering ? 'scale-110' : 'scale-100'
-            }`}
-            style={{
-              transform: `translate(${(mousePosition.x - 0.5) * 20}px, ${(mousePosition.y - 0.5) * 20}px)`,
-            }}
-          >
-            {/* Jakeostudio Logo */}
-            <div className="relative">
-              <img
-                src={isHovering ? "/jakeostudio.png" : "/jakeostudiowhite.png"}
-                alt="jakeostudio"
-                className="w-64 h-64 object-contain transition-all duration-1000 filter drop-shadow-2xl"
-                style={{
-                  filter: isHovering 
-                    ? 'drop-shadow(0 25px 50px rgba(0,0,0,0.3))' 
-                    : 'drop-shadow(0 25px 50px rgba(255,255,255,0.1))'
-                }}
-              />
-              
-              {/* Hover Glow Effect */}
-              <div 
-                className={`absolute inset-0 transition-all duration-1000 ${
-                  isHovering ? 'opacity-100' : 'opacity-0'
-                }`}
-                style={{
-                  background: 'radial-gradient(circle, rgba(255,255,255,0.2), transparent)',
-                  filter: 'blur(20px)',
-                  transform: 'scale(1.2)'
-                }}
-              />
-            </div>
+          <div className="relative group cursor-pointer">
+            <img
+              src={isHovering ? "/jakeostudio.png" : "/jakeostudiowhite.png"}
+              alt="jakeostudio"
+              className="w-64 h-64 object-contain"
+            />
           </div>
         </div>
 
         {/* Content below logo */}
         <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 text-center">
-          <h2 className={`text-4xl md:text-6xl font-semibold mb-4 transition-all duration-1000 ${
+          <h2 className={`text-4xl md:text-6xl font-semibold mb-4 ${
             isHovering ? 'text-black' : 'text-white'
           }`}>
             Creative Technologist
           </h2>
-          <p className={`text-lg md:text-xl max-w-2xl mx-auto transition-all duration-1000 ${
+          <p className={`text-lg md:text-xl max-w-2xl mx-auto ${
             isHovering ? 'text-zinc-700' : 'text-zinc-300'
           }`}>
             I design, edit, and engineer experiences across video, graphics, and AI-driven products.
           </p>
         </div>
-
-        {/* CSS Animations */}
-        <style jsx>{`
-          @keyframes ditherWave {
-            0% { 
-              background-position: 0% 0%, 0% 0%, 0% 0%;
-              filter: invert(0) contrast(1);
-            }
-            50% { 
-              background-position: 50% 50%, 10px 10px, -10px -10px;
-              filter: invert(0.1) contrast(1.1);
-            }
-            100% { 
-              background-position: 100% 100%, 20px 20px, -20px -20px;
-              filter: invert(0.2) contrast(1.2);
-            }
-          }
-        `}</style>
       </section>
 
       {/* Videos Section */}
