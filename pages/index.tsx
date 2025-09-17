@@ -17,7 +17,7 @@ export default function PortfolioSite() {
 
   return (
     <div className="min-h-screen bg-black text-zinc-100">
-      <header className="sticky top-0 z-50 backdrop-blur-md bg-black/20 border-b border-white/10">
+      <header className="sticky top-0 z-50 backdrop-blur-md border-b border-white/10">
         <div className="mx-auto max-w-7xl px-4 py-4 flex items-center justify-between">
           <a href="#top" className={`font-semibold tracking-tight transition-colors duration-1000 ${
             isHovering ? 'text-black' : 'text-white'
