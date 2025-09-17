@@ -6,8 +6,6 @@ import PillNav from "../components/PillNav";
 // Drop into Next.js/React. Replace placeholders with real content.
 
 export default function PortfolioSite() {
-  const [activeSection, setActiveSection] = useState("videos");
-  
   const navItems = [
     { label: "Videos", href: "#videos", ariaLabel: "Go to Videos section" },
     { label: "Design", href: "#design", ariaLabel: "Go to Design section" },
@@ -16,41 +14,19 @@ export default function PortfolioSite() {
     { label: "Me", href: "#contact", ariaLabel: "Go to Me section" },
   ];
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const sections = ['videos', 'design', 'feature', 'feed', 'contact'];
-      const scrollPosition = window.scrollY + 100;
-
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const { offsetTop, offsetHeight } = element;
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(section);
-            break;
-          }
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Check initial position
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   return (
     <div className="min-h-screen bg-black text-zinc-100 scroll-smooth">
       {/* Floating Pill Navigation */}
       <PillNav
-        logo="/jostudiowhite.png"
+        logo="/jowhite.png"
         logoAlt="jostudio"
         items={navItems}
-        activeHref={`#${activeSection}`}
+        activeHref=""
         baseColor="#000000"
         pillColor="#ffffff"
         hoveredPillTextColor="#000000"
         pillTextColor="#ffffff"
-        initialLoadAnimation={true}
+        initialLoadAnimation={false}
       />
 
       {/* Hero with Prismatic Burst Background */}
@@ -61,11 +37,11 @@ export default function PortfolioSite() {
         {/* Prismatic Burst Background - Optimized */}
         <div className="absolute inset-0 z-0">
           <PrismaticBurst
-            intensity={0.8}
-            speed={0.15}
+            intensity={1.0}
+            speed={0.25}
             animationType="rotate"
             colors={['#ffffff', '#000000']}
-            distort={0.2}
+            distort={0.3}
             rayCount={12}
             mixBlendMode="lighten"
           />
@@ -82,19 +58,6 @@ export default function PortfolioSite() {
           </div>
         </div>
 
-        {/* Scroll Indicator Arrow */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
-          <div 
-            className="w-6 h-6 border-2 border-white rounded-full flex items-center justify-center cursor-pointer hover:bg-white/10 transition-colors"
-            onClick={() => {
-              document.getElementById('videos')?.scrollIntoView({ 
-                behavior: 'smooth' 
-              });
-            }}
-          >
-            <div className="w-0 h-0 border-l-[6px] border-l-white border-y-[4px] border-y-transparent transform rotate-90"></div>
-          </div>
-        </div>
 
       </section>
 
@@ -216,7 +179,7 @@ export default function PortfolioSite() {
               <span className="px-2 py-1 rounded-full bg-white/10">AI Coach</span>
               <span className="px-2 py-1 rounded-full bg-white/10">EQ Training</span>
               <span className="px-2 py-1 rounded-full bg-white/10">iOS App</span>
-            </div>
+              </div>
             <a 
               href="https://apps.apple.com/us/app/wingman-eq-life-coach/id6747995730" 
               target="_blank" 
@@ -249,7 +212,7 @@ export default function PortfolioSite() {
               <div className="text-center">
                 <div className="text-sm text-zinc-400 mb-2">IG Post Second Recent</div>
                 <div className="text-xs text-zinc-500">Instagram integration coming soon</div>
-              </div>
+            </div>
             </div>
           </div>
           <div className="text-center">
@@ -265,7 +228,7 @@ export default function PortfolioSite() {
           <p className="text-xl text-zinc-300 max-w-3xl mx-auto mb-8">
             Blending the art of technology, creative thinking, and design.
           </p>
-        </div>
+              </div>
 
         <div className="grid md:grid-cols-2 gap-12 mb-16">
           {/* Profile Image Slideshow */}
@@ -347,7 +310,7 @@ export default function PortfolioSite() {
             <div className="text-xs text-zinc-500">
               jakeostudio@gmail.com • Based in USA • Available for remote
             </div>
-          </div>
+        </div>
         </div>
       </section>
 
@@ -357,7 +320,7 @@ export default function PortfolioSite() {
           <div className="flex items-center gap-2">
             <span className="text-sm text-zinc-500">jakeostudio</span>
           </div>
-            <div className="flex gap-4">
+          <div className="flex gap-4">
               <a href="#" className="w-8 h-8 rounded-lg border border-white/20 flex items-center justify-center text-xs hover:bg-white/10 transition-colors">IG</a>
               <a href="#" className="w-8 h-8 rounded-lg border border-white/20 flex items-center justify-center text-xs hover:bg-white/10 transition-colors">IN</a>
               <a href="#" className="w-8 h-8 rounded-lg border border-white/20 flex items-center justify-center text-xs hover:bg-white/10 transition-colors">Li</a>

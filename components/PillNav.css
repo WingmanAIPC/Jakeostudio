@@ -68,7 +68,6 @@
 }
 
 .pill {
-  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -81,54 +80,17 @@
   font-weight: 500;
   font-size: 14px;
   transition: all 0.3s ease;
-  overflow: hidden;
   cursor: pointer;
 }
 
 .pill:hover {
+  background: var(--pill-bg);
   color: var(--hover-text);
 }
 
 .pill.is-active {
   background: var(--pill-bg);
   color: var(--base);
-}
-
-.hover-circle {
-  position: absolute;
-  background: var(--pill-bg);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: -1;
-}
-
-.label-stack {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  overflow: hidden;
-}
-
-.pill-label {
-  display: block;
-  transition: transform 0.3s ease;
-  white-space: nowrap;
-}
-
-.pill-label-hover {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--hover-text);
-  font-weight: 500;
-  white-space: nowrap;
 }
 
 .mobile-menu-button {

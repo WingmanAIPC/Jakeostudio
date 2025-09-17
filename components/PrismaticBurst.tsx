@@ -353,19 +353,11 @@ const PrismaticBurst = ({
     let raf = 0;
     let last = performance.now();
     let accumTime = 0;
-    let frameCount = 0;
 
     const update = (now: number) => {
       const dt = Math.max(0, now - last) * 0.001;
       last = now;
       const visible = isVisibleRef.current && !document.hidden;
-      
-      // Skip frames for better performance (render every 2nd frame)
-      frameCount++;
-      if (frameCount % 2 !== 0) {
-        raf = requestAnimationFrame(update);
-        return;
-      }
       
       if (!pausedRef.current) accumTime += dt;
       if (!visible) {
