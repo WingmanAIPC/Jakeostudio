@@ -47,9 +47,13 @@ export default function PortfolioSite() {
           />
         </div>
 
-        {/* Fade Out Overlays */}
-        <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-black to-transparent z-20 pointer-events-none"></div>
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent z-20 pointer-events-none"></div>
+        {/* Fade Out Overlays with Arc Ease */}
+        <div className="absolute top-0 left-0 right-0 h-32 z-20 pointer-events-none" style={{
+          background: 'linear-gradient(to bottom, #000000 0%, #000000 20%, rgba(0,0,0,0.8) 40%, rgba(0,0,0,0.4) 60%, rgba(0,0,0,0.1) 80%, transparent 100%)'
+        }}></div>
+        <div className="absolute bottom-0 left-0 right-0 h-32 z-20 pointer-events-none" style={{
+          background: 'linear-gradient(to top, #000000 0%, #000000 20%, rgba(0,0,0,0.8) 40%, rgba(0,0,0,0.4) 60%, rgba(0,0,0,0.1) 80%, transparent 100%)'
+        }}></div>
 
         {/* Central Logo */}
         <div className="relative z-10">
@@ -73,14 +77,11 @@ export default function PortfolioSite() {
         <div className="grid grid-cols-2 gap-0">
           {/* Worldwide Technologies Commercial Demo */}
           <div className="aspect-video bg-zinc-900 group cursor-pointer relative overflow-hidden">
-            <iframe
-              src="https://www.youtube.com/embed/3Uy1mO11f7s"
-              title="Worldwide Technologies Commercial Demo"
-              className="w-full h-full"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
+            <img 
+              src="https://img.youtube.com/vi/3Uy1mO11f7s/maxresdefault.jpg" 
+              alt="Worldwide Technologies Commercial Demo"
+              className="w-full h-full object-cover"
+            />
             {/* Hover details */}
             <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
               <div className="text-center p-6">
@@ -94,14 +95,11 @@ export default function PortfolioSite() {
 
           {/* STARGIRL */}
           <div className="aspect-video bg-zinc-900 group cursor-pointer relative overflow-hidden">
-            <iframe
-              src="https://www.youtube.com/embed/OZf9mW6tnT8"
-              title="STARGIRL"
-              className="w-full h-full"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
+            <img 
+              src="https://img.youtube.com/vi/OZf9mW6tnT8/maxresdefault.jpg" 
+              alt="STARGIRL"
+              className="w-full h-full object-cover"
+            />
             {/* Hover details */}
             <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
               <div className="text-center p-6">
@@ -115,14 +113,11 @@ export default function PortfolioSite() {
 
           {/* Midwest */}
           <div className="aspect-video bg-zinc-900 group cursor-pointer relative overflow-hidden">
-            <iframe
-              src="https://www.youtube.com/embed/iZUIeVODCgs"
-              title="Midwest"
-              className="w-full h-full"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
+            <img 
+              src="https://img.youtube.com/vi/iZUIeVODCgs/maxresdefault.jpg" 
+              alt="Midwest"
+              className="w-full h-full object-cover"
+            />
             {/* Hover details */}
             <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
               <div className="text-center p-6">
@@ -136,14 +131,11 @@ export default function PortfolioSite() {
 
           {/* Magical Meals */}
           <div className="aspect-video bg-zinc-900 group cursor-pointer relative overflow-hidden">
-            <iframe
-              src="https://www.youtube.com/embed/xSFlMa3p748"
-              title="Magical Meals"
-              className="w-full h-full"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
+            <img 
+              src="https://img.youtube.com/vi/xSFlMa3p748/maxresdefault.jpg" 
+              alt="Magical Meals"
+              className="w-full h-full object-cover"
+            />
             {/* Hover details */}
             <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
               <div className="text-center p-6">
@@ -157,14 +149,11 @@ export default function PortfolioSite() {
 
           {/* Welcome to the Nati */}
           <div className="aspect-video bg-zinc-900 group cursor-pointer relative overflow-hidden">
-            <iframe
-              src="https://www.youtube.com/embed/mvUyHR0VAas"
-              title="Welcome to the Nati"
-              className="w-full h-full"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
+            <img 
+              src="https://img.youtube.com/vi/mvUyHR0VAas/maxresdefault.jpg" 
+              alt="Welcome to the Nati"
+              className="w-full h-full object-cover"
+            />
             {/* Hover details */}
             <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
               <div className="text-center p-6">
@@ -178,14 +167,11 @@ export default function PortfolioSite() {
 
           {/* Nights Like This */}
           <div className="aspect-video bg-zinc-900 group cursor-pointer relative overflow-hidden">
-            <iframe
-              src="https://www.youtube.com/embed/bhBixCPlr7s"
-              title="Nights Like This"
-              className="w-full h-full"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
+            <img 
+              src="https://img.youtube.com/vi/bhBixCPlr7s/maxresdefault.jpg" 
+              alt="Nights Like This"
+              className="w-full h-full object-cover"
+            />
             {/* Hover details */}
             <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
               <div className="text-center p-6">
@@ -199,14 +185,11 @@ export default function PortfolioSite() {
 
           {/* Summer in Colorado */}
           <div className="aspect-video bg-zinc-900 group cursor-pointer relative overflow-hidden">
-            <iframe
-              src="https://www.youtube.com/embed/3ZP0ILPIlHM"
-              title="Summer in Colorado"
-              className="w-full h-full"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
+            <img 
+              src="https://img.youtube.com/vi/3ZP0ILPIlHM/maxresdefault.jpg" 
+              alt="Summer in Colorado"
+              className="w-full h-full object-cover"
+            />
             {/* Hover details */}
             <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
               <div className="text-center p-6">
@@ -220,14 +203,11 @@ export default function PortfolioSite() {
 
           {/* Ski-Tage */}
           <div className="aspect-video bg-zinc-900 group cursor-pointer relative overflow-hidden">
-            <iframe
-              src="https://www.youtube.com/embed/dVAJL6DPhmo"
-              title="Ski-Tage"
-              className="w-full h-full"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
+            <img 
+              src="https://img.youtube.com/vi/dVAJL6DPhmo/maxresdefault.jpg" 
+              alt="Ski-Tage"
+              className="w-full h-full object-cover"
+            />
             {/* Hover details */}
             <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
               <div className="text-center p-6">
@@ -366,7 +346,7 @@ export default function PortfolioSite() {
           <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl">
             <img src="/WomenLead.jpg" alt="Women Lead" className="w-full h-auto object-contain" />
             <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
-          </div>
+            </div>
         </div>
       </section>
 
