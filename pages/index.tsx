@@ -37,10 +37,10 @@ export default function PortfolioSite() {
         {/* Prismatic Burst Background - Optimized */}
         <div className="absolute inset-0 z-0">
           <PrismaticBurst
-            intensity={1.0}
+            intensity={2.5}
             speed={0.25}
             animationType="rotate"
-            colors={['#ffffff', '#000000']}
+            colors={['#ffffff', '#ffffff', '#ffffff']}
             distort={0.3}
             rayCount={12}
             mixBlendMode="lighten"
@@ -324,7 +324,6 @@ export default function PortfolioSite() {
               <a href="#" className="w-8 h-8 rounded-lg border border-white/20 flex items-center justify-center text-xs hover:bg-white/10 transition-colors">IG</a>
               <a href="#" className="w-8 h-8 rounded-lg border border-white/20 flex items-center justify-center text-xs hover:bg-white/10 transition-colors">IN</a>
               <a href="#" className="w-8 h-8 rounded-lg border border-white/20 flex items-center justify-center text-xs hover:bg-white/10 transition-colors">Li</a>
-              <div className="w-8 h-8 rounded-lg border border-white/20 flex items-center justify-center text-xs"></div>
             </div>
           </div>
           <div className="text-center text-xs text-zinc-500">

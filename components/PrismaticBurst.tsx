@@ -166,7 +166,7 @@ void main(){
             rayPattern *= smoothstep(0.15, 0.95, comb);
         }
 
-        vec3 spectralDefault = 1.0 + vec3(
+        vec3 spectralDefault = 2.0 + vec3(
             cos(marchT * 3.0 + 0.0),
             cos(marchT * 3.0 + 1.0),
             cos(marchT * 3.0 + 2.0)
@@ -176,7 +176,7 @@ void main(){
         float tRay = saw * saw * (3.0 - 2.0 * saw);
         vec3 userGradient = 2.0 * sampleGradient(tRay);
         vec3 spectral = (uColorCount > 0) ? userGradient : spectralDefault;
-        vec3 base = (0.05 / (0.4 + stepLen))
+        vec3 base = (0.15 / (0.4 + stepLen))
                   * smoothstep(5.0, 0.0, rad)
                   * spectral;
 
