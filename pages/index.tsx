@@ -311,18 +311,11 @@ export default function PortfolioSite() {
           </div>
           <a href="https://www.youtube.com/playlist?list=PL18Q1CsxcdgRhhpWPSXSjkJCx12SRp_1_" target="_blank" rel="noopener noreferrer">
             <div className="aspect-video rounded-2xl overflow-hidden border border-white/10 bg-zinc-900 group cursor-pointer relative">
-              <div className="w-full h-full bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 flex items-center justify-center relative">
-                <div className="absolute inset-0 bg-black/20"></div>
-                <div className="text-center relative z-10">
-                  <div className="w-20 h-20 mx-auto mb-4 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
-                    <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M8 5v14l11-7z"/>
-                    </svg>
-                  </div>
-                  <p className="text-lg font-semibold text-white mb-2">Cloverleaf Testimonials</p>
-                  <p className="text-sm text-white/80">YouTube Playlist</p>
-                </div>
-              </div>
+              <img 
+                src="https://img.youtube.com/vi/ITr7VHyHa2E/maxresdefault.jpg" 
+                alt="Cloverleaf Testimonials Playlist"
+                className="w-full h-full object-cover"
+              />
               <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center rounded-2xl">
                 <div className="text-center p-6">
                   <h3 className="text-lg font-semibold mb-2">Cloverleaf Testimonials</h3>
@@ -424,7 +417,7 @@ export default function PortfolioSite() {
           {/* Data Landmark - Wide horizontal poster */}
           <div className="break-inside-avoid mb-6">
             <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl">
-              <img src="/DataLandmark.jpg" alt="Data Landmark" className="w-full h-auto object-cover" style={{ aspectRatio: '16/9' }} />
+              <img src="/datalandmarkposter.jpg" alt="Data Landmark" className="w-full h-auto object-cover" style={{ aspectRatio: '16/9' }} />
               <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
             </div>
           </div>
@@ -446,124 +439,124 @@ export default function PortfolioSite() {
             Feed
           </h2>
         </div>
-        <div className="max-w-5xl mx-auto">
+        <div className="w-full">
           <div className="space-y-8 max-h-[800px] overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-600 scrollbar-track-transparent">
             {/* Instagram Reel 1 - 9:16 aspect ratio */}
-            <div className="bg-zinc-900 rounded-2xl border border-white/10 overflow-hidden">
-              <div className="aspect-[9/16] w-full max-w-md mx-auto">
+            <div className="bg-zinc-900 rounded-2xl border border-white/10 overflow-hidden w-full">
+              <div className="w-full">
                 <iframe
                   src="https://www.instagram.com/reel/DC_R8DvRon5/embed/"
                   width="100%"
-                  height="100%"
+                  height="600"
                   frameBorder="0"
                   scrolling="no"
                   allowTransparency={true}
-                  className="w-full h-full"
+                  className="w-full"
                 ></iframe>
               </div>
             </div>
             
             {/* Instagram Reel 2 - 9:16 aspect ratio */}
-            <div className="bg-zinc-900 rounded-2xl border border-white/10 overflow-hidden">
-              <div className="aspect-[9/16] w-full max-w-md mx-auto">
+            <div className="bg-zinc-900 rounded-2xl border border-white/10 overflow-hidden w-full">
+              <div className="w-full">
                 <iframe
                   src="https://www.instagram.com/reel/DCq-2X3pvFj/embed/"
                   width="100%"
-                  height="100%"
+                  height="600"
                   frameBorder="0"
                   scrolling="no"
                   allowTransparency={true}
-                  className="w-full h-full"
+                  className="w-full"
                 ></iframe>
               </div>
             </div>
             
             {/* Instagram Reel 3 - 9:16 aspect ratio */}
-            <div className="bg-zinc-900 rounded-2xl border border-white/10 overflow-hidden">
-              <div className="aspect-[9/16] w-full max-w-md mx-auto">
+            <div className="bg-zinc-900 rounded-2xl border border-white/10 overflow-hidden w-full">
+              <div className="w-full">
                 <iframe
                   src="https://www.instagram.com/reel/C1ICys3xpJS/embed/"
                   width="100%"
-                  height="100%"
+                  height="600"
                   frameBorder="0"
                   scrolling="no"
                   allowTransparency={true}
-                  className="w-full h-full"
+                  className="w-full"
                 ></iframe>
               </div>
             </div>
             
             {/* Instagram Reel 4 - 9:16 aspect ratio */}
-            <div className="bg-zinc-900 rounded-2xl border border-white/10 overflow-hidden">
-              <div className="aspect-[9/16] w-full max-w-md mx-auto">
+            <div className="bg-zinc-900 rounded-2xl border border-white/10 overflow-hidden w-full">
+              <div className="w-full">
                 <iframe
                   src="https://www.instagram.com/reel/C0-ETfhvIYd/embed/"
                   width="100%"
-                  height="100%"
+                  height="600"
                   frameBorder="0"
                   scrolling="no"
                   allowTransparency={true}
-                  className="w-full h-full"
+                  className="w-full"
                 ></iframe>
               </div>
             </div>
             
             {/* Instagram Reel 5 - 9:16 aspect ratio */}
-            <div className="bg-zinc-900 rounded-2xl border border-white/10 overflow-hidden">
-              <div className="aspect-[9/16] w-full max-w-md mx-auto">
+            <div className="bg-zinc-900 rounded-2xl border border-white/10 overflow-hidden w-full">
+              <div className="w-full">
                 <iframe
                   src="https://www.instagram.com/reel/C07OmITJvBm/embed/"
                   width="100%"
-                  height="100%"
+                  height="600"
                   frameBorder="0"
                   scrolling="no"
                   allowTransparency={true}
-                  className="w-full h-full"
+                  className="w-full"
                 ></iframe>
               </div>
             </div>
             
             {/* Instagram Reel 6 - 9:16 aspect ratio */}
-            <div className="bg-zinc-900 rounded-2xl border border-white/10 overflow-hidden">
-              <div className="aspect-[9/16] w-full max-w-md mx-auto">
+            <div className="bg-zinc-900 rounded-2xl border border-white/10 overflow-hidden w-full">
+              <div className="w-full">
                 <iframe
                   src="https://www.instagram.com/reel/C045T56PQx2/embed/"
                   width="100%"
-                  height="100%"
+                  height="600"
                   frameBorder="0"
                   scrolling="no"
                   allowTransparency={true}
-                  className="w-full h-full"
+                  className="w-full"
                 ></iframe>
               </div>
             </div>
             
             {/* Instagram Reel 7 - 9:16 aspect ratio */}
-            <div className="bg-zinc-900 rounded-2xl border border-white/10 overflow-hidden">
-              <div className="aspect-[9/16] w-full max-w-md mx-auto">
+            <div className="bg-zinc-900 rounded-2xl border border-white/10 overflow-hidden w-full">
+              <div className="w-full">
                 <iframe
                   src="https://www.instagram.com/reel/C02K4lxP8MD/embed/"
                   width="100%"
-                  height="100%"
+                  height="600"
                   frameBorder="0"
                   scrolling="no"
                   allowTransparency={true}
-                  className="w-full h-full"
+                  className="w-full"
                 ></iframe>
               </div>
             </div>
             
             {/* Instagram Post 8 - 1:1 aspect ratio (regular post) */}
-            <div className="bg-zinc-900 rounded-2xl border border-white/10 overflow-hidden">
-              <div className="aspect-square w-full max-w-md mx-auto">
+            <div className="bg-zinc-900 rounded-2xl border border-white/10 overflow-hidden w-full">
+              <div className="w-full">
                 <iframe
                   src="https://www.instagram.com/p/DF_XY4uPeLV/embed/"
                   width="100%"
-                  height="100%"
+                  height="600"
                   frameBorder="0"
                   scrolling="no"
                   allowTransparency={true}
-                  className="w-full h-full"
+                  className="w-full"
                 ></iframe>
               </div>
             </div>
