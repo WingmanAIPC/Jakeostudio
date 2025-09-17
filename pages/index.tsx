@@ -38,10 +38,10 @@ export default function PortfolioSite() {
         <div className="absolute inset-0 z-0">
           <PrismaticBurst
             intensity={1.75}
-            speed={0.4}
-            animationType="hover"
+            speed={0.7}
+            animationType="rotate"
             colors={['#ffffff', '#ffffff', '#ffffff']}
-            distort={0.3}
+            distort={3.2}
             rayCount={2}
             mixBlendMode="lighten"
           />
