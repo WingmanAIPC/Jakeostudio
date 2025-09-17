@@ -151,8 +151,8 @@ export default function PortfolioSite() {
                   <p className="text-xs text-zinc-400">Process: concept → brand kit → shoot → edit → vfx → delivery</p>
                   <p className="text-xs text-zinc-400">Stack: After Effects, Illustrator, Brand Kit, Canon XF400</p>
                 </div>
-              </div>
             </div>
+          </div>
           </a>
 
           {/* Welcome to the Nati */}
@@ -190,7 +190,7 @@ export default function PortfolioSite() {
                   <p className="text-sm text-zinc-300 mb-4">24 Hours • Premiere Pro • Canon 5D Mark</p>
                   <p className="text-xs text-zinc-400">Process: concept → shoot → edit → grade → delivery</p>
                   <p className="text-xs text-zinc-400">Stack: Premiere Pro, Canon 5D Mark</p>
-                </div>
+          </div>
               </div>
             </div>
           </a>
@@ -211,8 +211,8 @@ export default function PortfolioSite() {
                   <p className="text-xs text-zinc-400">Process: concept → shoot → edit → grade → delivery</p>
                   <p className="text-xs text-zinc-400">Stack: Premiere Pro, Canon 5D Mark, GoPro Hero 6</p>
                 </div>
-              </div>
-            </div>
+          </div>
+        </div>
           </a>
 
           {/* Ski-Tage */}
@@ -247,7 +247,7 @@ export default function PortfolioSite() {
         
         {/* Wingman Feature */}
         <div className="grid md:grid-cols-2 gap-8 items-center mb-16">
-          <div className="aspect-video rounded-2xl overflow-hidden border border-white/10 bg-zinc-900 group cursor-pointer">
+          <div className="aspect-video rounded-2xl overflow-hidden border border-white/10 bg-zinc-900 group cursor-pointer relative">
             <img 
               src="https://img.youtube.com/vi/Ag7EAF_djj4/maxresdefault.jpg" 
               alt="Wingman Feature Video"
@@ -311,15 +311,16 @@ export default function PortfolioSite() {
           </div>
           <a href="https://www.youtube.com/playlist?list=PL18Q1CsxcdgRhhpWPSXSjkJCx12SRp_1_" target="_blank" rel="noopener noreferrer">
             <div className="aspect-video rounded-2xl overflow-hidden border border-white/10 bg-zinc-900 group cursor-pointer relative">
-              <div className="w-full h-full bg-gradient-to-br from-zinc-800 to-zinc-900 flex items-center justify-center">
-                <div className="text-center">
-                  <div className="w-16 h-16 mx-auto mb-4 bg-white/10 rounded-full flex items-center justify-center">
-                    <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+              <div className="w-full h-full bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 flex items-center justify-center relative">
+                <div className="absolute inset-0 bg-black/20"></div>
+                <div className="text-center relative z-10">
+                  <div className="w-20 h-20 mx-auto mb-4 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                    <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M8 5v14l11-7z"/>
                     </svg>
                   </div>
-                  <p className="text-sm text-zinc-300">Cloverleaf Testimonials</p>
-                  <p className="text-xs text-zinc-500">YouTube Playlist</p>
+                  <p className="text-lg font-semibold text-white mb-2">Cloverleaf Testimonials</p>
+                  <p className="text-sm text-white/80">YouTube Playlist</p>
                 </div>
               </div>
               <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center rounded-2xl">
@@ -416,6 +417,22 @@ export default function PortfolioSite() {
           <div className="break-inside-avoid mb-6">
             <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl">
               <img src="/KoreanBBQ.jpg" alt="Korean BBQ" className="w-full h-auto object-cover" style={{ aspectRatio: '3/4' }} />
+              <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
+            </div>
+          </div>
+          
+          {/* Data Landmark - Wide horizontal poster */}
+          <div className="break-inside-avoid mb-6">
+            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl">
+              <img src="/DataLandmark.jpg" alt="Data Landmark" className="w-full h-auto object-cover" style={{ aspectRatio: '16/9' }} />
+              <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
+            </div>
+          </div>
+          
+          {/* Social Hour - Tall vertical poster */}
+          <div className="break-inside-avoid mb-6">
+            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl">
+              <img src="/SocialHour.jpg" alt="Social Hour" className="w-full h-auto object-cover" style={{ aspectRatio: '3/4' }} />
               <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
             </div>
           </div>
