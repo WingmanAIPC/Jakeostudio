@@ -17,8 +17,7 @@ export default function PortfolioSite() {
     <div className="min-h-screen bg-black text-zinc-100">
       <header className="sticky top-0 z-50 backdrop-blur-md bg-black/20 border-b border-white/10">
         <div className="mx-auto max-w-7xl px-4 py-4 flex items-center justify-between">
-          <a href="#top" className="font-semibold tracking-tight flex items-center gap-2">
-            <span className="text-2xl">✦</span>
+          <a href="#top" className="font-semibold tracking-tight">
             jostudio
           </a>
           <nav className="hidden md:flex gap-6">
@@ -63,16 +62,12 @@ export default function PortfolioSite() {
             </div>
           </div>
         </div>
-        <div className="mt-8 text-center">
-          <p className="text-sm text-zinc-500">Scroll for more content ✦</p>
-        </div>
       </section>
 
       {/* Videos Section */}
       <section id="videos" className="mx-auto max-w-7xl px-4 py-16">
         <div className="flex items-center justify-between mb-8">
-          <h2 className="text-2xl font-semibold flex items-center gap-2">
-            <span className="text-lg">✦</span>
+          <h2 className="text-2xl font-semibold">
             Videos
           </h2>
         </div>
@@ -117,11 +112,9 @@ export default function PortfolioSite() {
       {/* Design Section */}
       <section id="design" className="mx-auto max-w-7xl px-4 py-16">
         <div className="flex items-center justify-between mb-8">
-          <h2 className="text-2xl font-semibold flex items-center gap-2">
-            <span className="text-lg">✦</span>
+          <h2 className="text-2xl font-semibold">
             Design
           </h2>
-          <span className="text-sm text-zinc-500">Static image frames for images</span>
         </div>
         <div className="grid md:grid-cols-4 gap-6">
           {[1,2,3,4,5,6,7,8].map((i) => (
@@ -135,8 +128,7 @@ export default function PortfolioSite() {
       {/* Wingman Feature */}
       <section id="feature" className="mx-auto max-w-7xl px-4 py-16">
         <div className="flex items-center justify-between mb-8">
-          <h2 className="text-2xl font-semibold flex items-center gap-2">
-            <span className="text-lg">✦</span>
+          <h2 className="text-2xl font-semibold">
             Feature
           </h2>
         </div>
@@ -174,8 +166,7 @@ export default function PortfolioSite() {
       {/* About Me Section */}
       <section id="about" className="mx-auto max-w-7xl px-4 py-16">
         <div className="flex items-center justify-between mb-8">
-          <h2 className="text-2xl font-semibold flex items-center gap-2">
-            <span className="text-lg">✦</span>
+          <h2 className="text-2xl font-semibold">
             About Me
           </h2>
         </div>
@@ -271,8 +262,7 @@ export default function PortfolioSite() {
       {/* Instagram Feed */}
       <section id="feed" className="mx-auto max-w-7xl px-4 py-16">
         <div className="flex items-center justify-between mb-8">
-          <h2 className="text-2xl font-semibold flex items-center gap-2">
-            <span className="text-lg">✦</span>
+          <h2 className="text-2xl font-semibold">
             Feed
           </h2>
         </div>
@@ -319,10 +309,9 @@ export default function PortfolioSite() {
       <footer className="border-t border-white/10">
         <div className="mx-auto max-w-7xl px-4 py-8">
           <div className="flex items-center justify-between mb-6">
-            <div className="flex items-center gap-2">
-              <span className="text-2xl">✦</span>
-              <span className="text-sm text-zinc-500">jakeostudio</span>
-            </div>
+          <div className="flex items-center gap-2">
+            <span className="text-sm text-zinc-500">jakeostudio</span>
+          </div>
             <div className="flex gap-4">
               <a href="#" className="w-8 h-8 rounded-lg border border-white/20 flex items-center justify-center text-xs hover:bg-white/10 transition-colors">IG</a>
               <a href="#" className="w-8 h-8 rounded-lg border border-white/20 flex items-center justify-center text-xs hover:bg-white/10 transition-colors">IN</a>
