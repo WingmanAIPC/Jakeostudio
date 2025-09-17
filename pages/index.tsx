@@ -15,7 +15,7 @@ export default function PortfolioSite() {
   ];
 
   return (
-    <div className="min-h-screen bg-black text-zinc-100 scroll-smooth">
+    <div className="min-h-screen bg-black text-zinc-100 scroll-smooth" style={{ backgroundColor: '#000000' }}>
       {/* Floating Pill Navigation */}
       <PillNav
         logo="/jowhite.png"

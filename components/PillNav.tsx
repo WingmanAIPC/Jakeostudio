@@ -223,7 +223,7 @@ const PillNav: React.FC<PillNavProps> = ({
       <nav className={`pill-nav ${className}`} aria-label="Primary" style={cssVars}>
         <a
           className="pill-logo"
-          href={items?.[0]?.href || '#'}
+          href="#top"
           aria-label="Home"
           onMouseEnter={handleLogoEnter}
           ref={el => {

@@ -15,6 +15,12 @@
     transform: none;
     padding: 1em;
   }
+  
+  .mobile-menu-popover {
+    left: 1em;
+    right: 1em;
+    width: auto;
+  }
 }
 
 .pill-nav {
