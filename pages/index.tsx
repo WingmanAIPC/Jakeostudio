@@ -8,8 +8,8 @@ import PillNav from "../components/PillNav";
 export default function PortfolioSite() {
   const navItems = [
     { label: "Videos", href: "#videos", ariaLabel: "Go to Videos section" },
-    { label: "Design", href: "#design", ariaLabel: "Go to Design section" },
     { label: "Feature", href: "#feature", ariaLabel: "Go to Feature section" },
+    { label: "Design", href: "#design", ariaLabel: "Go to Design section" },
     { label: "Feed", href: "#feed", ariaLabel: "Go to Feed section" },
     { label: "Me", href: "#contact", ariaLabel: "Go to Me section" },
   ];
@@ -46,6 +46,10 @@ export default function PortfolioSite() {
             mixBlendMode="lighten"
           />
         </div>
+
+        {/* Fade Out Overlays */}
+        <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-black to-transparent z-20 pointer-events-none"></div>
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent z-20 pointer-events-none"></div>
 
         {/* Central Logo */}
         <div className="relative z-10">
@@ -237,83 +241,16 @@ export default function PortfolioSite() {
         </div>
       </section>
 
-      {/* Design Section */}
-      <section id="design" className="mx-auto max-w-7xl px-4 py-16">
-        <h2 className="text-2xl font-semibold mb-8">
-          Design
-        </h2>
-        <div className="grid grid-cols-4 gap-0">
-          <div className="aspect-square bg-zinc-900 group cursor-pointer relative overflow-hidden">
-            <img src="/BaseballGamedayKings.jpg" alt="Baseball Gameday Kings" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-          </div>
-          <div className="aspect-square bg-zinc-900 group cursor-pointer relative overflow-hidden">
-            <img src="/BeatsStudioBuds.png" alt="Beats Studio Buds" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-          </div>
-          <div className="aspect-square bg-zinc-900 group cursor-pointer relative overflow-hidden">
-            <img src="/BionicKid.jpg" alt="Bionic Kid" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-          </div>
-          <div className="aspect-square bg-zinc-900 group cursor-pointer relative overflow-hidden">
-            <img src="/CrystalStrawberry.jpg" alt="Crystal Strawberry" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-          </div>
-          <div className="aspect-square bg-zinc-900 group cursor-pointer relative overflow-hidden">
-            <img src="/KoreanBBQ.jpg" alt="Korean BBQ" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-          </div>
-          <div className="aspect-square bg-zinc-900 group cursor-pointer relative overflow-hidden">
-            <img src="/LandoNorris.jpg" alt="Lando Norris" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-          </div>
-          <div className="aspect-square bg-zinc-900 group cursor-pointer relative overflow-hidden">
-            <img src="/OutofSync.jpg" alt="Out of Sync" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-          </div>
-          <div className="aspect-square bg-zinc-900 group cursor-pointer relative overflow-hidden">
-            <img src="/PlayboiCarti.jpg" alt="Playboi Carti" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-          </div>
-          <div className="aspect-square bg-zinc-900 group cursor-pointer relative overflow-hidden">
-            <img src="/ProfessionalDevelopment.jpg" alt="Professional Development" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-          </div>
-          <div className="aspect-square bg-zinc-900 group cursor-pointer relative overflow-hidden">
-            <img src="/SSLCards.jpg" alt="SSL Cards" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-          </div>
-          <div className="aspect-square bg-zinc-900 group cursor-pointer relative overflow-hidden">
-            <img src="/VideoDesignCertificate.jpg" alt="Video Design Certificate" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-          </div>
-          <div className="aspect-square bg-zinc-900 group cursor-pointer relative overflow-hidden">
-            <img src="/VisualDesignCertificate.jpg" alt="Visual Design Certificate" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-          </div>
-          <div className="aspect-square bg-zinc-900 group cursor-pointer relative overflow-hidden">
-            <img src="/VisualDesignCertificate2.jpg" alt="Visual Design Certificate 2" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-          </div>
-          <div className="aspect-square bg-zinc-900 group cursor-pointer relative overflow-hidden">
-            <img src="/WHMDayton.jpg" alt="WHM Dayton" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-          </div>
-          <div className="aspect-square bg-zinc-900 group cursor-pointer relative overflow-hidden">
-            <img src="/WomenLead.jpg" alt="Women Lead" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-          </div>
-        </div>
-      </section>
-
-      {/* Wingman Feature */}
+      {/* Feature Section */}
       <section id="feature" className="mx-auto max-w-7xl px-4 py-16">
         <div className="flex items-center justify-between mb-8">
           <h2 className="text-2xl font-semibold">
             Feature
           </h2>
         </div>
-        <div className="grid md:grid-cols-2 gap-8 items-center">
+        
+        {/* Wingman Feature */}
+        <div className="grid md:grid-cols-2 gap-8 items-center mb-16">
           <div className="aspect-video rounded-2xl overflow-hidden border border-white/10 bg-zinc-900 group cursor-pointer">
             <iframe
               src="https://www.youtube.com/embed/Ag7EAF_djj4"
@@ -323,7 +260,7 @@ export default function PortfolioSite() {
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
             ></iframe>
-          </div>
+              </div>
           <div className="space-y-4">
             <h3 className="text-xl font-semibold">Wingman — Your AI Assistant for Life</h3>
             <p className="text-zinc-300 text-sm">
@@ -344,15 +281,8 @@ export default function PortfolioSite() {
             </a>
           </div>
         </div>
-      </section>
 
-      {/* Cloverleaf Testimonials Feature */}
-      <section id="feature2" className="mx-auto max-w-7xl px-4 py-16">
-        <div className="flex items-center justify-between mb-8">
-          <h2 className="text-2xl font-semibold">
-            Feature
-          </h2>
-        </div>
+        {/* Cloverleaf Testimonials Feature */}
         <div className="grid md:grid-cols-2 gap-8 items-center">
           <div className="space-y-4">
             <h3 className="text-xl font-semibold">Cloverleaf Testimonials — Creative Storytelling</h3>
@@ -383,6 +313,59 @@ export default function PortfolioSite() {
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
             ></iframe>
+            </div>
+        </div>
+      </section>
+
+      {/* Design Section */}
+      <section id="design" className="mx-auto max-w-7xl px-4 py-16">
+        <h2 className="text-2xl font-semibold mb-8">
+          Design
+        </h2>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl">
+            <img src="/BeatsStudioBuds.png" alt="Beats Studio Buds" className="w-full h-auto object-contain" />
+            <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
+          </div>
+          <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl">
+            <img src="/BionicKid.jpg" alt="Bionic Kid" className="w-full h-auto object-contain" />
+            <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
+          </div>
+          <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl">
+            <img src="/CrystalStrawberry.jpg" alt="Crystal Strawberry" className="w-full h-auto object-contain" />
+            <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
+          </div>
+          <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl">
+            <img src="/KoreanBBQ.jpg" alt="Korean BBQ" className="w-full h-auto object-contain" />
+            <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
+          </div>
+          <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl">
+            <img src="/LandoNorris.jpg" alt="Lando Norris" className="w-full h-auto object-contain" />
+            <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
+          </div>
+          <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl">
+            <img src="/OutofSync.jpg" alt="Out of Sync" className="w-full h-auto object-contain" />
+            <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
+          </div>
+          <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl">
+            <img src="/PlayboiCarti.jpg" alt="Playboi Carti" className="w-full h-auto object-contain" />
+            <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
+          </div>
+          <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl">
+            <img src="/ProfessionalDevelopment.jpg" alt="Professional Development" className="w-full h-auto object-contain" />
+            <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
+          </div>
+          <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl">
+            <img src="/SSLCards.jpg" alt="SSL Cards" className="w-full h-auto object-contain" />
+            <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
+          </div>
+          <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl">
+            <img src="/WHMDayton.jpg" alt="WHM Dayton" className="w-full h-auto object-contain" />
+            <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
+          </div>
+          <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl">
+            <img src="/WomenLead.jpg" alt="Women Lead" className="w-full h-auto object-contain" />
+            <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
           </div>
         </div>
       </section>
