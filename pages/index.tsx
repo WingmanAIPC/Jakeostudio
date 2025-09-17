@@ -67,71 +67,170 @@ export default function PortfolioSite() {
           Videos
         </h2>
         <div className="grid grid-cols-2 gap-0">
-          <div className="aspect-video bg-zinc-900 grid place-items-center group cursor-pointer relative">
-            <div className="text-center">
-              <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center mb-4 group-hover:bg-white/30 transition-colors">
-                <div className="w-0 h-0 border-l-[12px] border-l-white border-y-[8px] border-y-transparent ml-1"></div>
-              </div>
-              <span className="text-zinc-400 text-sm">YouTube Video 1</span>
-            </div>
+          {/* Worldwide Technologies Commercial Demo */}
+          <div className="aspect-video bg-zinc-900 group cursor-pointer relative overflow-hidden">
+            <iframe
+              src="https://www.youtube.com/embed/3Uy1mO11f7s"
+              title="Worldwide Technologies Commercial Demo"
+              className="w-full h-full"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
             {/* Hover details */}
             <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
               <div className="text-center p-6">
-                <h3 className="text-lg font-semibold mb-2">Music Video — Cinematic Story</h3>
-                <p className="text-sm text-zinc-300 mb-4">Director • Edit • Color</p>
-                <p className="text-xs text-zinc-400">Process: storyboard → edit → grade → deliverables</p>
-                <p className="text-xs text-zinc-400">Stack: Adobe, DaVinci, After Effects</p>
+                <h3 className="text-lg font-semibold mb-2">Worldwide Technologies Commercial Demo</h3>
+                <p className="text-sm text-zinc-300 mb-4">48 Hours • Google Vertex AI • Capcut • ElevenLabs • ChatGPT</p>
+                <p className="text-xs text-zinc-400">Process: concept → AI integration → edit → delivery</p>
+                <p className="text-xs text-zinc-400">Stack: Google Vertex AI, Capcut, ElevenLabs, ChatGPT</p>
               </div>
             </div>
           </div>
-          <div className="aspect-video bg-zinc-900 grid place-items-center group cursor-pointer relative">
-            <div className="text-center">
-              <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center mb-4 group-hover:bg-white/30 transition-colors">
-                <div className="w-0 h-0 border-l-[12px] border-l-white border-y-[8px] border-y-transparent ml-1"></div>
-              </div>
-              <span className="text-zinc-400 text-sm">YouTube Video 2</span>
-            </div>
+
+          {/* STARGIRL */}
+          <div className="aspect-video bg-zinc-900 group cursor-pointer relative overflow-hidden">
+            <iframe
+              src="https://www.youtube.com/embed/OZf9mW6tnT8"
+              title="STARGIRL"
+              className="w-full h-full"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
             {/* Hover details */}
             <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
               <div className="text-center p-6">
-                <h3 className="text-lg font-semibold mb-2">Brand Film — Launch</h3>
-                <p className="text-sm text-zinc-300 mb-4">Edit • VFX • Grade</p>
-                <p className="text-xs text-zinc-400">Process: concept → edit → vfx → delivery</p>
-                <p className="text-xs text-zinc-400">Stack: Adobe, After Effects, DaVinci</p>
+                <h3 className="text-lg font-semibold mb-2">STARGIRL</h3>
+                <p className="text-sm text-zinc-300 mb-4">7 Day Production • Runway • After Effects • Photoshop</p>
+                <p className="text-xs text-zinc-400">Process: concept → shoot → edit → vfx → delivery</p>
+                <p className="text-xs text-zinc-400">Stack: Runway, After Effects, Photoshop, Canon XF400, DJI Osmo</p>
               </div>
             </div>
           </div>
-          <div className="aspect-video bg-zinc-900 grid place-items-center group cursor-pointer relative">
-            <div className="text-center">
-              <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center mb-4 group-hover:bg-white/30 transition-colors">
-                <div className="w-0 h-0 border-l-[12px] border-l-white border-y-[8px] border-y-transparent ml-1"></div>
-              </div>
-              <span className="text-zinc-400 text-sm">Music Video</span>
-            </div>
+
+          {/* Midwest */}
+          <div className="aspect-video bg-zinc-900 group cursor-pointer relative overflow-hidden">
+            <iframe
+              src="https://www.youtube.com/embed/iZUIeVODCgs"
+              title="Midwest"
+              className="w-full h-full"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
             {/* Hover details */}
             <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
               <div className="text-center p-6">
-                <h3 className="text-lg font-semibold mb-2">Music Video — Cinematic Story</h3>
-                <p className="text-sm text-zinc-300 mb-4">Director • Edit • Color</p>
-                <p className="text-xs text-zinc-400">Process: storyboard → edit → grade → deliverables</p>
-                <p className="text-xs text-zinc-400">Stack: Adobe, DaVinci, After Effects</p>
+                <h3 className="text-lg font-semibold mb-2">Midwest</h3>
+                <p className="text-sm text-zinc-300 mb-4">6 Month Production • Premiere Pro • Photoshop</p>
+                <p className="text-xs text-zinc-400">Process: concept → shoot → edit → grade → delivery</p>
+                <p className="text-xs text-zinc-400">Stack: Premiere Pro, Photoshop, Canon XF400, Canon 5D Mark</p>
               </div>
             </div>
           </div>
-          <div className="aspect-video bg-zinc-900 grid place-items-center group cursor-pointer relative">
-            <div className="text-center">
-              <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center mb-4 group-hover:bg-white/30 transition-colors">
-                <div className="w-0 h-0 border-l-[12px] border-l-white border-y-[8px] border-y-transparent ml-1"></div>
-              </div>
-              <span className="text-zinc-400 text-sm">Brand Film</span>
-            </div>
+
+          {/* Magical Meals */}
+          <div className="aspect-video bg-zinc-900 group cursor-pointer relative overflow-hidden">
+            <iframe
+              src="https://www.youtube.com/embed/xSFlMa3p748"
+              title="Magical Meals"
+              className="w-full h-full"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
             {/* Hover details */}
             <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
               <div className="text-center p-6">
-                <h3 className="text-lg font-semibold mb-2">Brand Film — Launch</h3>
-                <p className="text-sm text-zinc-300 mb-4">Edit • VFX • Grade</p>
-                <p className="text-xs text-zinc-400">Process: concept → edit → vfx → delivery</p>
-                <p className="text-xs text-zinc-400">Stack: Adobe, After Effects, DaVinci</p>
+                <h3 className="text-lg font-semibold mb-2">Magical Meals</h3>
+                <p className="text-sm text-zinc-300 mb-4">2 Month Production • Team of 8 • After Effects • Illustrator</p>
+                <p className="text-xs text-zinc-400">Process: concept → brand kit → shoot → edit → vfx → delivery</p>
+                <p className="text-xs text-zinc-400">Stack: After Effects, Illustrator, Brand Kit, Canon XF400</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Welcome to the Nati */}
+          <div className="aspect-video bg-zinc-900 group cursor-pointer relative overflow-hidden">
+            <iframe
+              src="https://www.youtube.com/embed/mvUyHR0VAas"
+              title="Welcome to the Nati"
+              className="w-full h-full"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+            {/* Hover details */}
+            <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+              <div className="text-center p-6">
+                <h3 className="text-lg font-semibold mb-2">Welcome to the Nati</h3>
+                <p className="text-sm text-zinc-300 mb-4">24 Hours • After Effects • Canon 5D Mark • GoPro Hero 6</p>
+                <p className="text-xs text-zinc-400">Process: concept → shoot → edit → vfx → delivery</p>
+                <p className="text-xs text-zinc-400">Stack: After Effects, Canon 5D Mark, GoPro Hero 6</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Nights Like This */}
+          <div className="aspect-video bg-zinc-900 group cursor-pointer relative overflow-hidden">
+            <iframe
+              src="https://www.youtube.com/embed/bhBixCPlr7s"
+              title="Nights Like This"
+              className="w-full h-full"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+            {/* Hover details */}
+            <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+              <div className="text-center p-6">
+                <h3 className="text-lg font-semibold mb-2">Nights Like This</h3>
+                <p className="text-sm text-zinc-300 mb-4">24 Hours • Premiere Pro • Canon 5D Mark</p>
+                <p className="text-xs text-zinc-400">Process: concept → shoot → edit → grade → delivery</p>
+                <p className="text-xs text-zinc-400">Stack: Premiere Pro, Canon 5D Mark</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Summer in Colorado */}
+          <div className="aspect-video bg-zinc-900 group cursor-pointer relative overflow-hidden">
+            <iframe
+              src="https://www.youtube.com/embed/3ZP0ILPIlHM"
+              title="Summer in Colorado"
+              className="w-full h-full"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+            {/* Hover details */}
+            <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+              <div className="text-center p-6">
+                <h3 className="text-lg font-semibold mb-2">Summer in Colorado</h3>
+                <p className="text-sm text-zinc-300 mb-4">48 Hours • Premiere Pro • Canon 5D Mark • GoPro Hero 6</p>
+                <p className="text-xs text-zinc-400">Process: concept → shoot → edit → grade → delivery</p>
+                <p className="text-xs text-zinc-400">Stack: Premiere Pro, Canon 5D Mark, GoPro Hero 6</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Ski-Tage */}
+          <div className="aspect-video bg-zinc-900 group cursor-pointer relative overflow-hidden">
+            <iframe
+              src="https://www.youtube.com/embed/dVAJL6DPhmo"
+              title="Ski-Tage"
+              className="w-full h-full"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+            {/* Hover details */}
+            <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+              <div className="text-center p-6">
+                <h3 className="text-lg font-semibold mb-2">Ski-Tage</h3>
+                <p className="text-sm text-zinc-300 mb-4">72 Hours • After Effects • Canon 5D Mark • GoPro Hero 6</p>
+                <p className="text-xs text-zinc-400">Process: concept → shoot → edit → vfx → delivery</p>
+                <p className="text-xs text-zinc-400">Stack: After Effects, Canon 5D Mark, GoPro Hero 6</p>
               </div>
             </div>
           </div>
@@ -144,13 +243,66 @@ export default function PortfolioSite() {
           Design
         </h2>
         <div className="grid grid-cols-4 gap-0">
-          {[1,2,3,4,5,6,7,8].map((i) => (
-            <div key={i} className="aspect-square bg-zinc-900 grid place-items-center group cursor-pointer relative overflow-hidden">
-              <span className="text-zinc-500 text-xs">Design {i}</span>
-              {/* This will adapt to different aspect ratios when real images are uploaded */}
-              <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-            </div>
-          ))}
+          <div className="aspect-square bg-zinc-900 group cursor-pointer relative overflow-hidden">
+            <img src="/BaseballGamedayKings.jpg" alt="Baseball Gameday Kings" className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          </div>
+          <div className="aspect-square bg-zinc-900 group cursor-pointer relative overflow-hidden">
+            <img src="/BeatsStudioBuds.png" alt="Beats Studio Buds" className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          </div>
+          <div className="aspect-square bg-zinc-900 group cursor-pointer relative overflow-hidden">
+            <img src="/BionicKid.jpg" alt="Bionic Kid" className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          </div>
+          <div className="aspect-square bg-zinc-900 group cursor-pointer relative overflow-hidden">
+            <img src="/CrystalStrawberry.jpg" alt="Crystal Strawberry" className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          </div>
+          <div className="aspect-square bg-zinc-900 group cursor-pointer relative overflow-hidden">
+            <img src="/KoreanBBQ.jpg" alt="Korean BBQ" className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          </div>
+          <div className="aspect-square bg-zinc-900 group cursor-pointer relative overflow-hidden">
+            <img src="/LandoNorris.jpg" alt="Lando Norris" className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          </div>
+          <div className="aspect-square bg-zinc-900 group cursor-pointer relative overflow-hidden">
+            <img src="/OutofSync.jpg" alt="Out of Sync" className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          </div>
+          <div className="aspect-square bg-zinc-900 group cursor-pointer relative overflow-hidden">
+            <img src="/PlayboiCarti.jpg" alt="Playboi Carti" className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          </div>
+          <div className="aspect-square bg-zinc-900 group cursor-pointer relative overflow-hidden">
+            <img src="/ProfessionalDevelopment.jpg" alt="Professional Development" className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          </div>
+          <div className="aspect-square bg-zinc-900 group cursor-pointer relative overflow-hidden">
+            <img src="/SSLCards.jpg" alt="SSL Cards" className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          </div>
+          <div className="aspect-square bg-zinc-900 group cursor-pointer relative overflow-hidden">
+            <img src="/VideoDesignCertificate.jpg" alt="Video Design Certificate" className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          </div>
+          <div className="aspect-square bg-zinc-900 group cursor-pointer relative overflow-hidden">
+            <img src="/VisualDesignCertificate.jpg" alt="Visual Design Certificate" className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          </div>
+          <div className="aspect-square bg-zinc-900 group cursor-pointer relative overflow-hidden">
+            <img src="/VisualDesignCertificate2.jpg" alt="Visual Design Certificate 2" className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          </div>
+          <div className="aspect-square bg-zinc-900 group cursor-pointer relative overflow-hidden">
+            <img src="/WHMDayton.jpg" alt="WHM Dayton" className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          </div>
+          <div className="aspect-square bg-zinc-900 group cursor-pointer relative overflow-hidden">
+            <img src="/WomenLead.jpg" alt="Women Lead" className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          </div>
         </div>
       </section>
 
@@ -162,13 +314,15 @@ export default function PortfolioSite() {
           </h2>
         </div>
         <div className="grid md:grid-cols-2 gap-8 items-center">
-          <div className="aspect-video rounded-2xl overflow-hidden border border-white/10 bg-zinc-900 grid place-items-center group cursor-pointer">
-            <div className="text-center">
-              <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center mb-4 group-hover:bg-white/30 transition-colors">
-                <div className="w-0 h-0 border-l-[12px] border-l-white border-y-[8px] border-y-transparent ml-1"></div>
-              </div>
-              <span className="text-zinc-400 text-sm">Wingman Demo</span>
-            </div>
+          <div className="aspect-video rounded-2xl overflow-hidden border border-white/10 bg-zinc-900 group cursor-pointer">
+            <iframe
+              src="https://www.youtube.com/embed/Ag7EAF_djj4"
+              title="Wingman Feature Video"
+              className="w-full h-full"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
           </div>
           <div className="space-y-4">
             <h3 className="text-xl font-semibold">Wingman — Your AI Assistant for Life</h3>
@@ -192,6 +346,46 @@ export default function PortfolioSite() {
         </div>
       </section>
 
+      {/* Cloverleaf Testimonials Feature */}
+      <section id="feature2" className="mx-auto max-w-7xl px-4 py-16">
+        <div className="flex items-center justify-between mb-8">
+          <h2 className="text-2xl font-semibold">
+            Feature
+          </h2>
+        </div>
+        <div className="grid md:grid-cols-2 gap-8 items-center">
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">Cloverleaf Testimonials — Creative Storytelling</h3>
+            <p className="text-zinc-300 text-sm">
+              Developed compelling customer testimonial videos that showcase product value through authentic storytelling and professional video design.
+            </p>
+            <div className="flex flex-wrap gap-2 text-xs">
+              <span className="px-2 py-1 rounded-full bg-white/10">Testimonials</span>
+              <span className="px-2 py-1 rounded-full bg-white/10">Storytelling</span>
+              <span className="px-2 py-1 rounded-full bg-white/10">Video Design</span>
+              <span className="px-2 py-1 rounded-full bg-white/10">Product Marketing</span>
+            </div>
+            <a 
+              href="https://www.youtube.com/playlist?list=PL18Q1CsxcdgRhhpWPSXSjkJCx12SRp_1_" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-block px-4 py-2 rounded-2xl bg-white text-black text-sm font-medium hover:bg-zinc-100 transition-colors"
+            >
+              View Playlist
+            </a>
+          </div>
+          <div className="aspect-video rounded-2xl overflow-hidden border border-white/10 bg-zinc-900 group cursor-pointer">
+            <iframe
+              src="https://www.youtube.com/embed/videoseries?list=PL18Q1CsxcdgRhhpWPSXSjkJCx12SRp_1_"
+              title="Cloverleaf Testimonials Playlist"
+              className="w-full h-full"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          </div>
+        </div>
+      </section>
 
       {/* Instagram Feed */}
       <section id="feed" className="mx-auto max-w-7xl px-4 py-16">
@@ -201,22 +395,113 @@ export default function PortfolioSite() {
           </h2>
         </div>
         <div className="space-y-6">
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="aspect-square rounded-2xl overflow-hidden border border-white/10 bg-zinc-900 grid place-items-center">
-              <div className="text-center">
-                <div className="text-sm text-zinc-400 mb-2">IG Post Recent</div>
-                <div className="text-xs text-zinc-500">Instagram integration coming soon</div>
-              </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Instagram Post 1 */}
+            <div className="aspect-square rounded-2xl overflow-hidden border border-white/10 bg-zinc-900">
+              <iframe
+                src="https://www.instagram.com/reel/DC_R8DvRon5/embed/"
+                width="100%"
+                height="100%"
+                frameBorder="0"
+                scrolling="no"
+                allowTransparency={true}
+                className="w-full h-full"
+              ></iframe>
             </div>
-            <div className="aspect-square rounded-2xl overflow-hidden border border-white/10 bg-zinc-900 grid place-items-center">
-              <div className="text-center">
-                <div className="text-sm text-zinc-400 mb-2">IG Post Second Recent</div>
-                <div className="text-xs text-zinc-500">Instagram integration coming soon</div>
+            
+            {/* Instagram Post 2 */}
+            <div className="aspect-square rounded-2xl overflow-hidden border border-white/10 bg-zinc-900">
+              <iframe
+                src="https://www.instagram.com/reel/DCq-2X3pvFj/embed/"
+                width="100%"
+                height="100%"
+                frameBorder="0"
+                scrolling="no"
+                allowTransparency={true}
+                className="w-full h-full"
+              ></iframe>
             </div>
+            
+            {/* Instagram Post 3 */}
+            <div className="aspect-square rounded-2xl overflow-hidden border border-white/10 bg-zinc-900">
+              <iframe
+                src="https://www.instagram.com/reel/C1ICys3xpJS/embed/"
+                width="100%"
+                height="100%"
+                frameBorder="0"
+                scrolling="no"
+                allowTransparency={true}
+                className="w-full h-full"
+              ></iframe>
+            </div>
+            
+            {/* Instagram Post 4 */}
+            <div className="aspect-square rounded-2xl overflow-hidden border border-white/10 bg-zinc-900">
+              <iframe
+                src="https://www.instagram.com/reel/C0-ETfhvIYd/embed/"
+                width="100%"
+                height="100%"
+                frameBorder="0"
+                scrolling="no"
+                allowTransparency={true}
+                className="w-full h-full"
+              ></iframe>
+            </div>
+            
+            {/* Instagram Post 5 */}
+            <div className="aspect-square rounded-2xl overflow-hidden border border-white/10 bg-zinc-900">
+              <iframe
+                src="https://www.instagram.com/reel/C07OmITJvBm/embed/"
+                width="100%"
+                height="100%"
+                frameBorder="0"
+                scrolling="no"
+                allowTransparency={true}
+                className="w-full h-full"
+              ></iframe>
+            </div>
+            
+            {/* Instagram Post 6 */}
+            <div className="aspect-square rounded-2xl overflow-hidden border border-white/10 bg-zinc-900">
+              <iframe
+                src="https://www.instagram.com/reel/C045T56PQx2/embed/"
+                width="100%"
+                height="100%"
+                frameBorder="0"
+                scrolling="no"
+                allowTransparency={true}
+                className="w-full h-full"
+              ></iframe>
+            </div>
+            
+            {/* Instagram Post 7 */}
+            <div className="aspect-square rounded-2xl overflow-hidden border border-white/10 bg-zinc-900">
+              <iframe
+                src="https://www.instagram.com/reel/C02K4lxP8MD/embed/"
+                width="100%"
+                height="100%"
+                frameBorder="0"
+                scrolling="no"
+                allowTransparency={true}
+                className="w-full h-full"
+              ></iframe>
+            </div>
+            
+            {/* Instagram Post 8 */}
+            <div className="aspect-square rounded-2xl overflow-hidden border border-white/10 bg-zinc-900">
+              <iframe
+                src="https://www.instagram.com/p/DF_XY4uPeLV/embed/"
+                width="100%"
+                height="100%"
+                frameBorder="0"
+                scrolling="no"
+                allowTransparency={true}
+                className="w-full h-full"
+              ></iframe>
             </div>
           </div>
           <div className="text-center">
-            <p className="text-xs text-zinc-500">Scrollable feed ✦</p>
+            <p className="text-xs text-zinc-500">Follow for more creative content ✦</p>
           </div>
         </div>
       </section>

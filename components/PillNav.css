@@ -19,7 +19,7 @@
   .mobile-menu-popover {
     left: 1em;
     right: 1em;
-    width: auto;
+    width: calc(100% - 2em);
   }
 }
 
