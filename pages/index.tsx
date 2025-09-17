@@ -9,8 +9,8 @@ export default function PortfolioSite() {
     { id: "videos", label: "Videos" },
     { id: "design", label: "Design" },
     { id: "feature", label: "Feature" },
-    { id: "about", label: "About" },
     { id: "feed", label: "Feed" },
+    { id: "contact", label: "Contact" },
   ];
 
   return (
@@ -42,23 +42,63 @@ export default function PortfolioSite() {
         )}
       </header>
 
-      {/* Hero with YouTube Embeds */}
-      <section id="top" className="mx-auto max-w-7xl px-4 pt-16 pb-8">
-        <div className="grid md:grid-cols-2 gap-8">
-          <div className="aspect-video rounded-2xl overflow-hidden border border-white/10 bg-zinc-900 grid place-items-center group cursor-pointer">
-            <div className="text-center">
-              <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center mb-4 group-hover:bg-white/30 transition-colors">
-                <div className="w-0 h-0 border-l-[12px] border-l-white border-y-[8px] border-y-transparent ml-1"></div>
-              </div>
-              <span className="text-zinc-400 text-sm">YouTube Video 1</span>
+      {/* Hero Section */}
+      <section id="top" className="mx-auto max-w-7xl px-4 pt-16 pb-16">
+        <div className="text-center mb-12">
+          <h1 className="text-5xl md:text-7xl font-semibold leading-tight mb-6">
+            Creative Technologist
+          </h1>
+          <p className="text-xl text-zinc-300 max-w-3xl mx-auto mb-8">
+            I design, edit, and engineer experiences across video, graphics, and AI-driven products. 
+            Minimalist UX, high craft, fast delivery.
+          </p>
+        </div>
+        
+        <div className="grid md:grid-cols-2 gap-8 mb-12">
+          <div className="space-y-6">
+            <div className="border border-white/10 rounded-xl p-6">
+              <h3 className="text-lg font-semibold mb-4">Capabilities</h3>
+              <ul className="text-sm text-zinc-300 space-y-2">
+                <li>• Video Editing & Color Grading</li>
+                <li>• Motion Graphics & VFX</li>
+                <li>• UX/UI Design & Prototyping</li>
+                <li>• AI Integration & Frontend Dev</li>
+                <li>• Creative Direction</li>
+              </ul>
+            </div>
+            
+            <div className="border border-white/10 rounded-xl p-6">
+              <h3 className="text-lg font-semibold mb-4">Software</h3>
+              <ul className="text-sm text-zinc-300 space-y-2">
+                <li>• Adobe Creative Suite</li>
+                <li>• DaVinci Resolve</li>
+                <li>• Figma & After Effects</li>
+                <li>• Python & Swift</li>
+                <li>• Runway & Supabase</li>
+              </ul>
             </div>
           </div>
-          <div className="aspect-video rounded-2xl overflow-hidden border border-white/10 bg-zinc-900 grid place-items-center group cursor-pointer">
-            <div className="text-center">
-              <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center mb-4 group-hover:bg-white/30 transition-colors">
-                <div className="w-0 h-0 border-l-[12px] border-l-white border-y-[8px] border-y-transparent ml-1"></div>
+          
+          <div className="space-y-6">
+            <div className="border border-white/10 rounded-xl p-6">
+              <h3 className="text-lg font-semibold mb-4">My Edge</h3>
+              <p className="text-sm text-zinc-300">
+                Taste + systems thinking. I balance craft with speed and ship reliably. 
+                Small teams, fast cycles, measurable impact.
+              </p>
+            </div>
+            
+            <div className="border border-white/10 rounded-xl p-6">
+              <h3 className="text-lg font-semibold mb-4">Currently Available</h3>
+              <p className="text-sm text-zinc-300 mb-4">
+                Open to work all kinds of work: freelance, contract, part-time, full-time.
+              </p>
+              <div className="flex items-center justify-between">
+                <span className="text-xs text-zinc-500">Remote • Grand Rapids, MI</span>
+                <a href="#" className="text-xs px-3 py-1 rounded-lg bg-white/10 hover:bg-white/20 transition-colors">
+                  Resume
+                </a>
               </div>
-              <span className="text-zinc-400 text-sm">YouTube Video 2</span>
             </div>
           </div>
         </div>
@@ -66,13 +106,45 @@ export default function PortfolioSite() {
 
       {/* Videos Section */}
       <section id="videos" className="mx-auto max-w-7xl px-4 py-16">
-        <div className="flex items-center justify-between mb-8">
-          <h2 className="text-2xl font-semibold">
-            Videos
-          </h2>
-        </div>
-        <div className="grid md:grid-cols-2 gap-8">
-          <div className="aspect-video rounded-2xl overflow-hidden border border-white/10 bg-zinc-900 grid place-items-center group cursor-pointer relative">
+        <h2 className="text-2xl font-semibold mb-8">
+          Videos
+        </h2>
+        <div className="grid grid-cols-2 gap-0">
+          <div className="aspect-video bg-zinc-900 grid place-items-center group cursor-pointer relative">
+            <div className="text-center">
+              <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center mb-4 group-hover:bg-white/30 transition-colors">
+                <div className="w-0 h-0 border-l-[12px] border-l-white border-y-[8px] border-y-transparent ml-1"></div>
+              </div>
+              <span className="text-zinc-400 text-sm">YouTube Video 1</span>
+            </div>
+            {/* Hover details */}
+            <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+              <div className="text-center p-6">
+                <h3 className="text-lg font-semibold mb-2">Music Video — Cinematic Story</h3>
+                <p className="text-sm text-zinc-300 mb-4">Director • Edit • Color</p>
+                <p className="text-xs text-zinc-400">Process: storyboard → edit → grade → deliverables</p>
+                <p className="text-xs text-zinc-400">Stack: Adobe, DaVinci, After Effects</p>
+              </div>
+            </div>
+          </div>
+          <div className="aspect-video bg-zinc-900 grid place-items-center group cursor-pointer relative">
+            <div className="text-center">
+              <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center mb-4 group-hover:bg-white/30 transition-colors">
+                <div className="w-0 h-0 border-l-[12px] border-l-white border-y-[8px] border-y-transparent ml-1"></div>
+              </div>
+              <span className="text-zinc-400 text-sm">YouTube Video 2</span>
+            </div>
+            {/* Hover details */}
+            <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+              <div className="text-center p-6">
+                <h3 className="text-lg font-semibold mb-2">Brand Film — Launch</h3>
+                <p className="text-sm text-zinc-300 mb-4">Edit • VFX • Grade</p>
+                <p className="text-xs text-zinc-400">Process: concept → edit → vfx → delivery</p>
+                <p className="text-xs text-zinc-400">Stack: Adobe, After Effects, DaVinci</p>
+              </div>
+            </div>
+          </div>
+          <div className="aspect-video bg-zinc-900 grid place-items-center group cursor-pointer relative">
             <div className="text-center">
               <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center mb-4 group-hover:bg-white/30 transition-colors">
                 <div className="w-0 h-0 border-l-[12px] border-l-white border-y-[8px] border-y-transparent ml-1"></div>
@@ -89,7 +161,7 @@ export default function PortfolioSite() {
               </div>
             </div>
           </div>
-          <div className="aspect-video rounded-2xl overflow-hidden border border-white/10 bg-zinc-900 grid place-items-center group cursor-pointer relative">
+          <div className="aspect-video bg-zinc-900 grid place-items-center group cursor-pointer relative">
             <div className="text-center">
               <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center mb-4 group-hover:bg-white/30 transition-colors">
                 <div className="w-0 h-0 border-l-[12px] border-l-white border-y-[8px] border-y-transparent ml-1"></div>
@@ -111,15 +183,15 @@ export default function PortfolioSite() {
 
       {/* Design Section */}
       <section id="design" className="mx-auto max-w-7xl px-4 py-16">
-        <div className="flex items-center justify-between mb-8">
-          <h2 className="text-2xl font-semibold">
-            Design
-          </h2>
-        </div>
-        <div className="grid md:grid-cols-4 gap-6">
+        <h2 className="text-2xl font-semibold mb-8">
+          Design
+        </h2>
+        <div className="grid grid-cols-4 gap-0">
           {[1,2,3,4,5,6,7,8].map((i) => (
-            <div key={i} className="aspect-square rounded-2xl overflow-hidden border border-white/10 bg-zinc-900 grid place-items-center group cursor-pointer">
+            <div key={i} className="aspect-square bg-zinc-900 grid place-items-center group cursor-pointer relative overflow-hidden">
               <span className="text-zinc-500 text-xs">Design {i}</span>
+              {/* This will adapt to different aspect ratios when real images are uploaded */}
+              <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity"></div>
             </div>
           ))}
         </div>
@@ -163,101 +235,6 @@ export default function PortfolioSite() {
         </div>
       </section>
 
-      {/* About Me Section */}
-      <section id="about" className="mx-auto max-w-7xl px-4 py-16">
-        <div className="flex items-center justify-between mb-8">
-          <h2 className="text-2xl font-semibold">
-            About Me
-          </h2>
-        </div>
-        <div className="grid md:grid-cols-2 gap-12">
-          <div className="space-y-6">
-            <div>
-              <h3 className="text-lg font-semibold mb-3">Creative Technologist & Video Editor</h3>
-              <p className="text-zinc-300 text-sm leading-relaxed">
-                I design, edit, and engineer experiences across video, graphics, and AI-driven products. 
-                Minimalist UX, high craft, fast delivery. I build clear stories and usable products.
-              </p>
-            </div>
-            
-            <div className="grid sm:grid-cols-2 gap-4">
-              <div className="border border-white/10 rounded-xl p-4">
-                <div className="font-medium text-sm mb-2 flex items-center gap-1">
-                  <span>✦</span>
-                  Capabilities
-                </div>
-                <ul className="text-xs text-zinc-300 space-y-1">
-                  <li>• Video Editing & Color Grading</li>
-                  <li>• Motion Graphics & VFX</li>
-                  <li>• UX/UI Design & Prototyping</li>
-                  <li>• AI Integration & Frontend Dev</li>
-                  <li>• Creative Direction</li>
-                </ul>
-              </div>
-              
-              <div className="border border-white/10 rounded-xl p-4">
-                <div className="font-medium text-sm mb-2 flex items-center gap-1">
-                  <span>✦</span>
-                  Software
-                </div>
-                <ul className="text-xs text-zinc-300 space-y-1">
-                  <li>• Adobe Creative Suite</li>
-                  <li>• DaVinci Resolve</li>
-                  <li>• Figma & After Effects</li>
-                  <li>• Python & Swift</li>
-                  <li>• Runway & Supabase</li>
-                </ul>
-              </div>
-            </div>
-            
-            <div className="border border-white/10 rounded-xl p-4">
-              <div className="font-medium text-sm mb-2 flex items-center gap-1">
-                <span>✦</span>
-                My Edge
-              </div>
-              <p className="text-xs text-zinc-300">
-                Taste + systems thinking. I balance craft with speed and ship reliably. 
-                Small teams, fast cycles, measurable impact.
-              </p>
-            </div>
-          </div>
-          
-          <div className="space-y-6">
-            <div className="border border-white/10 rounded-2xl p-6">
-              <div className="text-sm font-medium mb-2 flex items-center gap-1">
-                <span>✦</span>
-                Download Resume
-              </div>
-              <p className="text-xs text-zinc-400 mb-4">One-page capabilities + portfolio links</p>
-              <a href="#" className="inline-block px-4 py-2 rounded-xl bg-white text-black text-sm font-medium hover:bg-zinc-100 transition-colors">
-                Download PDF
-              </a>
-            </div>
-            
-            <div className="border border-white/10 rounded-2xl p-6">
-              <div className="text-sm font-medium mb-3 flex items-center gap-1">
-                <span>✦</span>
-                Currently Available
-              </div>
-              <ul className="text-xs text-zinc-300 space-y-2">
-                <li>• Freelance video editing projects</li>
-                <li>• AI companion product development</li>
-                <li>• Creative agency collaborations</li>
-                <li>• Remote work • Grand Rapids, MI</li>
-              </ul>
-            </div>
-            
-            <div className="text-center">
-              <a 
-                href="#contact" 
-                className="inline-block px-6 py-3 rounded-2xl bg-white text-black text-sm font-medium hover:bg-zinc-100 transition-colors"
-              >
-                Work With Me
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Instagram Feed */}
       <section id="feed" className="mx-auto max-w-7xl px-4 py-16">
@@ -290,14 +267,14 @@ export default function PortfolioSite() {
       {/* Contact */}
       <section id="contact" className="mx-auto max-w-5xl px-4 pb-20">
         <div className="border border-white/10 rounded-2xl p-8 text-center">
-          <h2 className="text-2xl font-semibold mb-4">Let's build something</h2>
-          <p className="text-sm text-zinc-300 mb-6">Tell me about your project. I respond within 24 hours.</p>
+          <h2 className="text-2xl font-semibold mb-4">Need help with something?</h2>
+          <p className="text-sm text-zinc-300 mb-6">Design, creative, and technology solutions. I respond within 24 hours.</p>
           <div className="space-y-4">
             <a 
               href="mailto:hello@jakeostudio.com" 
               className="inline-block px-6 py-3 rounded-2xl bg-white text-black text-sm font-medium hover:bg-zinc-100 transition-colors"
             >
-              Get In Touch
+              Ask me
             </a>
             <div className="text-xs text-zinc-500">
               hello@jakeostudio.com • Based in Michigan • Available for remote
