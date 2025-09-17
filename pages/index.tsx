@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
+import PrismaticBurst from "../components/PrismaticBurst";
 
 // Minimal single-file React portfolio using Tailwind CSS classes.
 // Drop into Next.js/React. Replace placeholders with real content.
 
 export default function PortfolioSite() {
   const [open, setOpen] = useState(false);
-  const [isHovering, setIsHovering] = useState(false);
   const [showNav, setShowNav] = useState(false);
 
   useEffect(() => {
@@ -32,37 +32,27 @@ export default function PortfolioSite() {
         showNav ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
       }`}>
         <div className="mx-auto max-w-7xl px-4 py-4 flex items-center justify-between">
-          <a href="#videos" className={`font-semibold tracking-tight transition-colors duration-1000 ${
-            isHovering ? 'text-black' : 'text-white'
-          }`}>
+          <a href="#videos" className="font-semibold tracking-tight text-white">
             <img 
-              src={isHovering ? "/jostudio.png" : "/jostudiowhite.png"} 
+              src="/jostudiowhite.png" 
               alt="jostudio" 
               className="h-8 w-auto"
             />
           </a>
           <nav className="hidden md:flex gap-6">
             {nav.map((n) => (
-              <a key={n.id} href={`#${n.id}`} className={`text-sm transition-colors duration-1000 ${
-                isHovering ? 'text-zinc-700 hover:text-black' : 'text-zinc-300 hover:text-white'
-              }`}>
+              <a key={n.id} href={`#${n.id}`} className="text-sm text-zinc-300 hover:text-white">
                 {n.label}
               </a>
             ))}
           </nav>
-          <button className={`md:hidden text-sm transition-colors duration-1000 ${
-            isHovering ? 'text-black' : 'text-white'
-          }`} onClick={() => setOpen(!open)}>menu</button>
+          <button className="md:hidden text-sm text-white" onClick={() => setOpen(!open)}>menu</button>
         </div>
         {open && (
-          <div className={`md:hidden border-t transition-colors duration-1000 ${
-            isHovering ? 'border-black/10' : 'border-white/10'
-          }`}>
+          <div className="md:hidden border-t border-white/10">
             <div className="px-4 py-3 flex flex-col gap-3">
               {nav.map((n) => (
-                <a key={n.id} href={`#${n.id}`} className={`text-sm transition-colors duration-1000 ${
-                  isHovering ? 'text-zinc-700 hover:text-black' : 'text-zinc-300 hover:text-white'
-                }`} onClick={() => setOpen(false)}>
+                <a key={n.id} href={`#${n.id}`} className="text-sm text-zinc-300 hover:text-white" onClick={() => setOpen(false)}>
                   {n.label}
                 </a>
               ))}
@@ -71,20 +61,29 @@ export default function PortfolioSite() {
         )}
       </header>
 
-      {/* Simple Hero with Color Switch */}
+      {/* Hero with Prismatic Burst Background */}
       <section 
         id="top" 
-        className={`relative min-h-screen flex items-center justify-center ${
-          isHovering ? 'bg-white' : 'bg-black'
-        }`}
-        onMouseEnter={() => setIsHovering(true)}
-        onMouseLeave={() => setIsHovering(false)}
+        className="relative min-h-screen flex items-center justify-center overflow-hidden"
       >
+        {/* Prismatic Burst Background */}
+        <div className="absolute inset-0 z-0">
+          <PrismaticBurst
+            intensity={1.5}
+            speed={0.3}
+            animationType="rotate3d"
+            colors={['#ffffff', '#000000', '#ffffff']}
+            distort={0.5}
+            rayCount={24}
+            mixBlendMode="lighten"
+          />
+        </div>
+
         {/* Central Logo */}
         <div className="relative z-10">
           <div className="relative group cursor-pointer">
             <img
-              src={isHovering ? "/jakeostudio.png" : "/jakeostudiowhite.png"}
+              src="/jakeostudiowhite.png"
               alt="jakeostudio"
               className="w-64 h-64 object-contain"
             />
@@ -92,11 +91,9 @@ export default function PortfolioSite() {
         </div>
 
         {/* Scroll Indicator Arrow */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
-          <div className={`w-6 h-6 border-2 border-current rounded-full flex items-center justify-center transition-colors duration-1000 ${
-            isHovering ? 'text-black' : 'text-white'
-          }`}>
-            <div className="w-0 h-0 border-l-[6px] border-l-current border-y-[4px] border-y-transparent transform rotate-90"></div>
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
+          <div className="w-6 h-6 border-2 border-white rounded-full flex items-center justify-center">
+            <div className="w-0 h-0 border-l-[6px] border-l-white border-y-[4px] border-y-transparent transform rotate-90"></div>
           </div>
         </div>
 
