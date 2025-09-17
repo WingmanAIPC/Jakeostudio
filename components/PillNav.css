@@ -5,6 +5,7 @@
   transform: translateX(-50%);
   z-index: 99;
   width: auto;
+  padding-left: 1em;
 }
 
 
