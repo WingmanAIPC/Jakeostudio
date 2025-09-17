@@ -76,148 +76,164 @@ export default function PortfolioSite() {
         </h2>
         <div className="grid grid-cols-2 gap-2">
           {/* Worldwide Technologies Commercial Demo */}
-          <div className="aspect-video bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl border border-white/20">
-            <img 
-              src="https://img.youtube.com/vi/3Uy1mO11f7s/maxresdefault.jpg" 
-              alt="Worldwide Technologies Commercial Demo"
-              className="w-full h-full object-cover rounded-2xl"
-            />
-            {/* Hover details */}
-            <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center rounded-2xl">
-              <div className="text-center p-6">
-                <h3 className="text-lg font-semibold mb-2">Worldwide Technologies Commercial Demo</h3>
-                <p className="text-sm text-zinc-300 mb-4">48 Hours • Google Vertex AI • Capcut • ElevenLabs • ChatGPT</p>
-                <p className="text-xs text-zinc-400">Process: concept → AI integration → edit → delivery</p>
-                <p className="text-xs text-zinc-400">Stack: Google Vertex AI, Capcut, ElevenLabs, ChatGPT</p>
+          <a href="https://youtu.be/3Uy1mO11f7s" target="_blank" rel="noopener noreferrer">
+            <div className="aspect-video bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl border border-white/20">
+              <img 
+                src="https://img.youtube.com/vi/3Uy1mO11f7s/maxresdefault.jpg" 
+                alt="Worldwide Technologies Commercial Demo"
+                className="w-full h-full object-cover rounded-2xl"
+              />
+              {/* Hover details */}
+              <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center rounded-2xl">
+                <div className="text-center p-6">
+                  <h3 className="text-lg font-semibold mb-2">Worldwide Technologies Commercial Demo</h3>
+                  <p className="text-sm text-zinc-300 mb-4">48 Hours • Google Vertex AI • Capcut • ElevenLabs • ChatGPT</p>
+                  <p className="text-xs text-zinc-400">Process: concept → AI integration → edit → delivery</p>
+                  <p className="text-xs text-zinc-400">Stack: Google Vertex AI, Capcut, ElevenLabs, ChatGPT</p>
+                </div>
               </div>
             </div>
-          </div>
+          </a>
 
           {/* STARGIRL */}
-          <div className="aspect-video bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl border border-white/20">
-            <img 
-              src="https://img.youtube.com/vi/OZf9mW6tnT8/maxresdefault.jpg" 
-              alt="STARGIRL"
-              className="w-full h-full object-cover rounded-2xl"
-            />
-            {/* Hover details */}
-            <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center rounded-2xl">
-              <div className="text-center p-6">
-                <h3 className="text-lg font-semibold mb-2">STARGIRL</h3>
-                <p className="text-sm text-zinc-300 mb-4">7 Day Production • Runway • After Effects • Photoshop</p>
-                <p className="text-xs text-zinc-400">Process: concept → shoot → edit → vfx → delivery</p>
-                <p className="text-xs text-zinc-400">Stack: Runway, After Effects, Photoshop, Canon XF400, DJI Osmo</p>
+          <a href="https://youtu.be/OZf9mW6tnT8" target="_blank" rel="noopener noreferrer">
+            <div className="aspect-video bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl border border-white/20">
+              <img 
+                src="https://img.youtube.com/vi/OZf9mW6tnT8/maxresdefault.jpg" 
+                alt="STARGIRL"
+                className="w-full h-full object-cover rounded-2xl"
+              />
+              {/* Hover details */}
+              <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center rounded-2xl">
+                <div className="text-center p-6">
+                  <h3 className="text-lg font-semibold mb-2">STARGIRL</h3>
+                  <p className="text-sm text-zinc-300 mb-4">7 Day Production • Runway • After Effects • Photoshop</p>
+                  <p className="text-xs text-zinc-400">Process: concept → shoot → edit → vfx → delivery</p>
+                  <p className="text-xs text-zinc-400">Stack: Runway, After Effects, Photoshop, Canon XF400, DJI Osmo</p>
+                </div>
               </div>
             </div>
-          </div>
+          </a>
 
           {/* Midwest */}
-          <div className="aspect-video bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl border border-white/20">
-            <img 
-              src="https://img.youtube.com/vi/iZUIeVODCgs/maxresdefault.jpg" 
-              alt="Midwest"
-              className="w-full h-full object-cover rounded-2xl"
-            />
-            {/* Hover details */}
-            <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center rounded-2xl">
-              <div className="text-center p-6">
-                <h3 className="text-lg font-semibold mb-2">Midwest</h3>
-                <p className="text-sm text-zinc-300 mb-4">6 Month Production • Premiere Pro • Photoshop</p>
-                <p className="text-xs text-zinc-400">Process: concept → shoot → edit → grade → delivery</p>
-                <p className="text-xs text-zinc-400">Stack: Premiere Pro, Photoshop, Canon XF400, Canon 5D Mark</p>
+          <a href="https://youtu.be/iZUIeVODCgs" target="_blank" rel="noopener noreferrer">
+            <div className="aspect-video bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl border border-white/20">
+              <img 
+                src="https://img.youtube.com/vi/iZUIeVODCgs/maxresdefault.jpg" 
+                alt="Midwest"
+                className="w-full h-full object-cover rounded-2xl"
+              />
+              {/* Hover details */}
+              <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center rounded-2xl">
+                <div className="text-center p-6">
+                  <h3 className="text-lg font-semibold mb-2">Midwest</h3>
+                  <p className="text-sm text-zinc-300 mb-4">6 Month Production • Premiere Pro • Photoshop</p>
+                  <p className="text-xs text-zinc-400">Process: concept → shoot → edit → grade → delivery</p>
+                  <p className="text-xs text-zinc-400">Stack: Premiere Pro, Photoshop, Canon XF400, Canon 5D Mark</p>
+                </div>
               </div>
             </div>
-          </div>
+          </a>
 
           {/* Magical Meals */}
-          <div className="aspect-video bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl border border-white/20">
-            <img 
-              src="https://img.youtube.com/vi/xSFlMa3p748/maxresdefault.jpg" 
-              alt="Magical Meals"
-              className="w-full h-full object-cover rounded-2xl"
-            />
-            {/* Hover details */}
-            <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center rounded-2xl">
-              <div className="text-center p-6">
-                <h3 className="text-lg font-semibold mb-2">Magical Meals</h3>
-                <p className="text-sm text-zinc-300 mb-4">2 Month Production • Team of 8 • After Effects • Illustrator</p>
-                <p className="text-xs text-zinc-400">Process: concept → brand kit → shoot → edit → vfx → delivery</p>
-                <p className="text-xs text-zinc-400">Stack: After Effects, Illustrator, Brand Kit, Canon XF400</p>
+          <a href="https://youtu.be/xSFlMa3p748" target="_blank" rel="noopener noreferrer">
+            <div className="aspect-video bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl border border-white/20">
+              <img 
+                src="https://img.youtube.com/vi/xSFlMa3p748/maxresdefault.jpg" 
+                alt="Magical Meals"
+                className="w-full h-full object-cover rounded-2xl"
+              />
+              {/* Hover details */}
+              <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center rounded-2xl">
+                <div className="text-center p-6">
+                  <h3 className="text-lg font-semibold mb-2">Magical Meals</h3>
+                  <p className="text-sm text-zinc-300 mb-4">2 Month Production • Team of 8 • After Effects • Illustrator</p>
+                  <p className="text-xs text-zinc-400">Process: concept → brand kit → shoot → edit → vfx → delivery</p>
+                  <p className="text-xs text-zinc-400">Stack: After Effects, Illustrator, Brand Kit, Canon XF400</p>
+                </div>
               </div>
             </div>
-          </div>
+          </a>
 
           {/* Welcome to the Nati */}
-          <div className="aspect-video bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl border border-white/20">
-            <img 
-              src="https://img.youtube.com/vi/mvUyHR0VAas/maxresdefault.jpg" 
-              alt="Welcome to the Nati"
-              className="w-full h-full object-cover rounded-2xl"
-            />
-            {/* Hover details */}
-            <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center rounded-2xl">
-              <div className="text-center p-6">
-                <h3 className="text-lg font-semibold mb-2">Welcome to the Nati</h3>
-                <p className="text-sm text-zinc-300 mb-4">24 Hours • After Effects • Canon 5D Mark • GoPro Hero 6</p>
-                <p className="text-xs text-zinc-400">Process: concept → shoot → edit → vfx → delivery</p>
-                <p className="text-xs text-zinc-400">Stack: After Effects, Canon 5D Mark, GoPro Hero 6</p>
+          <a href="https://youtu.be/mvUyHR0VAas" target="_blank" rel="noopener noreferrer">
+            <div className="aspect-video bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl border border-white/20">
+              <img 
+                src="https://img.youtube.com/vi/mvUyHR0VAas/maxresdefault.jpg" 
+                alt="Welcome to the Nati"
+                className="w-full h-full object-cover rounded-2xl"
+              />
+              {/* Hover details */}
+              <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center rounded-2xl">
+                <div className="text-center p-6">
+                  <h3 className="text-lg font-semibold mb-2">Welcome to the Nati</h3>
+                  <p className="text-sm text-zinc-300 mb-4">24 Hours • After Effects • Canon 5D Mark • GoPro Hero 6</p>
+                  <p className="text-xs text-zinc-400">Process: concept → shoot → edit → vfx → delivery</p>
+                  <p className="text-xs text-zinc-400">Stack: After Effects, Canon 5D Mark, GoPro Hero 6</p>
+                </div>
               </div>
             </div>
-          </div>
+          </a>
 
           {/* Nights Like This */}
-          <div className="aspect-video bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl border border-white/20">
-            <img 
-              src="https://img.youtube.com/vi/bhBixCPlr7s/maxresdefault.jpg" 
-              alt="Nights Like This"
-              className="w-full h-full object-cover rounded-2xl"
-            />
-            {/* Hover details */}
-            <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center rounded-2xl">
-              <div className="text-center p-6">
-                <h3 className="text-lg font-semibold mb-2">Nights Like This</h3>
-                <p className="text-sm text-zinc-300 mb-4">24 Hours • Premiere Pro • Canon 5D Mark</p>
-                <p className="text-xs text-zinc-400">Process: concept → shoot → edit → grade → delivery</p>
-                <p className="text-xs text-zinc-400">Stack: Premiere Pro, Canon 5D Mark</p>
+          <a href="https://youtu.be/bhBixCPlr7s" target="_blank" rel="noopener noreferrer">
+            <div className="aspect-video bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl border border-white/20">
+              <img 
+                src="https://img.youtube.com/vi/bhBixCPlr7s/maxresdefault.jpg" 
+                alt="Nights Like This"
+                className="w-full h-full object-cover rounded-2xl"
+              />
+              {/* Hover details */}
+              <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center rounded-2xl">
+                <div className="text-center p-6">
+                  <h3 className="text-lg font-semibold mb-2">Nights Like This</h3>
+                  <p className="text-sm text-zinc-300 mb-4">24 Hours • Premiere Pro • Canon 5D Mark</p>
+                  <p className="text-xs text-zinc-400">Process: concept → shoot → edit → grade → delivery</p>
+                  <p className="text-xs text-zinc-400">Stack: Premiere Pro, Canon 5D Mark</p>
+                </div>
               </div>
             </div>
-          </div>
+          </a>
 
           {/* Summer in Colorado */}
-          <div className="aspect-video bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl border border-white/20">
-            <img 
-              src="https://img.youtube.com/vi/3ZP0ILPIlHM/maxresdefault.jpg" 
-              alt="Summer in Colorado"
-              className="w-full h-full object-cover rounded-2xl"
-            />
-            {/* Hover details */}
-            <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center rounded-2xl">
-              <div className="text-center p-6">
-                <h3 className="text-lg font-semibold mb-2">Summer in Colorado</h3>
-                <p className="text-sm text-zinc-300 mb-4">48 Hours • Premiere Pro • Canon 5D Mark • GoPro Hero 6</p>
-                <p className="text-xs text-zinc-400">Process: concept → shoot → edit → grade → delivery</p>
-                <p className="text-xs text-zinc-400">Stack: Premiere Pro, Canon 5D Mark, GoPro Hero 6</p>
+          <a href="https://youtu.be/3ZP0ILPIlHM" target="_blank" rel="noopener noreferrer">
+            <div className="aspect-video bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl border border-white/20">
+              <img 
+                src="https://img.youtube.com/vi/3ZP0ILPIlHM/maxresdefault.jpg" 
+                alt="Summer in Colorado"
+                className="w-full h-full object-cover rounded-2xl"
+              />
+              {/* Hover details */}
+              <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center rounded-2xl">
+                <div className="text-center p-6">
+                  <h3 className="text-lg font-semibold mb-2">Summer in Colorado</h3>
+                  <p className="text-sm text-zinc-300 mb-4">48 Hours • Premiere Pro • Canon 5D Mark • GoPro Hero 6</p>
+                  <p className="text-xs text-zinc-400">Process: concept → shoot → edit → grade → delivery</p>
+                  <p className="text-xs text-zinc-400">Stack: Premiere Pro, Canon 5D Mark, GoPro Hero 6</p>
+                </div>
               </div>
             </div>
-          </div>
+          </a>
 
           {/* Ski-Tage */}
-          <div className="aspect-video bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl border border-white/20">
-            <img 
-              src="https://img.youtube.com/vi/dVAJL6DPhmo/maxresdefault.jpg" 
-              alt="Ski-Tage"
-              className="w-full h-full object-cover rounded-2xl"
-            />
-            {/* Hover details */}
-            <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center rounded-2xl">
-              <div className="text-center p-6">
-                <h3 className="text-lg font-semibold mb-2">Ski-Tage</h3>
-                <p className="text-sm text-zinc-300 mb-4">72 Hours • After Effects • Canon 5D Mark • GoPro Hero 6</p>
-                <p className="text-xs text-zinc-400">Process: concept → shoot → edit → vfx → delivery</p>
-                <p className="text-xs text-zinc-400">Stack: After Effects, Canon 5D Mark, GoPro Hero 6</p>
+          <a href="https://youtu.be/dVAJL6DPhmo" target="_blank" rel="noopener noreferrer">
+            <div className="aspect-video bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl border border-white/20">
+              <img 
+                src="https://img.youtube.com/vi/dVAJL6DPhmo/maxresdefault.jpg" 
+                alt="Ski-Tage"
+                className="w-full h-full object-cover rounded-2xl"
+              />
+              {/* Hover details */}
+              <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center rounded-2xl">
+                <div className="text-center p-6">
+                  <h3 className="text-lg font-semibold mb-2">Ski-Tage</h3>
+                  <p className="text-sm text-zinc-300 mb-4">72 Hours • After Effects • Canon 5D Mark • GoPro Hero 6</p>
+                  <p className="text-xs text-zinc-400">Process: concept → shoot → edit → vfx → delivery</p>
+                  <p className="text-xs text-zinc-400">Stack: After Effects, Canon 5D Mark, GoPro Hero 6</p>
+                </div>
               </div>
             </div>
-          </div>
+          </a>
         </div>
       </section>
 
@@ -293,26 +309,28 @@ export default function PortfolioSite() {
               View Playlist
             </a>
           </div>
-          <div className="aspect-video rounded-2xl overflow-hidden border border-white/10 bg-zinc-900 group cursor-pointer relative">
-            <div className="w-full h-full bg-gradient-to-br from-zinc-800 to-zinc-900 flex items-center justify-center">
-              <div className="text-center">
-                <div className="w-16 h-16 mx-auto mb-4 bg-white/10 rounded-full flex items-center justify-center">
-                  <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M8 5v14l11-7z"/>
-                  </svg>
+          <a href="https://www.youtube.com/playlist?list=PL18Q1CsxcdgRhhpWPSXSjkJCx12SRp_1_" target="_blank" rel="noopener noreferrer">
+            <div className="aspect-video rounded-2xl overflow-hidden border border-white/10 bg-zinc-900 group cursor-pointer relative">
+              <div className="w-full h-full bg-gradient-to-br from-zinc-800 to-zinc-900 flex items-center justify-center">
+                <div className="text-center">
+                  <div className="w-16 h-16 mx-auto mb-4 bg-white/10 rounded-full flex items-center justify-center">
+                    <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z"/>
+                    </svg>
+                  </div>
+                  <p className="text-sm text-zinc-300">Cloverleaf Testimonials</p>
+                  <p className="text-xs text-zinc-500">YouTube Playlist</p>
                 </div>
-                <p className="text-sm text-zinc-300">Cloverleaf Testimonials</p>
-                <p className="text-xs text-zinc-500">YouTube Playlist</p>
+              </div>
+              <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center rounded-2xl">
+                <div className="text-center p-6">
+                  <h3 className="text-lg font-semibold mb-2">Cloverleaf Testimonials</h3>
+                  <p className="text-sm text-zinc-300 mb-4">Customer Stories • Product Marketing • Video Design</p>
+                  <p className="text-xs text-zinc-400">Click to view playlist on YouTube</p>
+                </div>
               </div>
             </div>
-            <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center rounded-2xl">
-              <div className="text-center p-6">
-                <h3 className="text-lg font-semibold mb-2">Cloverleaf Testimonials</h3>
-                <p className="text-sm text-zinc-300 mb-4">Customer Stories • Product Marketing • Video Design</p>
-                <p className="text-xs text-zinc-400">Click to view playlist on YouTube</p>
-              </div>
-            </div>
-          </div>
+          </a>
         </div>
       </section>
 
@@ -411,11 +429,11 @@ export default function PortfolioSite() {
             Feed
           </h2>
         </div>
-        <div className="max-w-4xl mx-auto">
-          <div className="space-y-6 max-h-[600px] overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-600 scrollbar-track-transparent">
+        <div className="max-w-5xl mx-auto">
+          <div className="space-y-8 max-h-[800px] overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-600 scrollbar-track-transparent">
             {/* Instagram Reel 1 - 9:16 aspect ratio */}
             <div className="bg-zinc-900 rounded-2xl border border-white/10 overflow-hidden">
-              <div className="aspect-[9/16] w-full max-w-sm mx-auto">
+              <div className="aspect-[9/16] w-full max-w-md mx-auto">
                 <iframe
                   src="https://www.instagram.com/reel/DC_R8DvRon5/embed/"
                   width="100%"
@@ -430,7 +448,7 @@ export default function PortfolioSite() {
             
             {/* Instagram Reel 2 - 9:16 aspect ratio */}
             <div className="bg-zinc-900 rounded-2xl border border-white/10 overflow-hidden">
-              <div className="aspect-[9/16] w-full max-w-sm mx-auto">
+              <div className="aspect-[9/16] w-full max-w-md mx-auto">
                 <iframe
                   src="https://www.instagram.com/reel/DCq-2X3pvFj/embed/"
                   width="100%"
@@ -445,7 +463,7 @@ export default function PortfolioSite() {
             
             {/* Instagram Reel 3 - 9:16 aspect ratio */}
             <div className="bg-zinc-900 rounded-2xl border border-white/10 overflow-hidden">
-              <div className="aspect-[9/16] w-full max-w-sm mx-auto">
+              <div className="aspect-[9/16] w-full max-w-md mx-auto">
                 <iframe
                   src="https://www.instagram.com/reel/C1ICys3xpJS/embed/"
                   width="100%"
@@ -460,7 +478,7 @@ export default function PortfolioSite() {
             
             {/* Instagram Reel 4 - 9:16 aspect ratio */}
             <div className="bg-zinc-900 rounded-2xl border border-white/10 overflow-hidden">
-              <div className="aspect-[9/16] w-full max-w-sm mx-auto">
+              <div className="aspect-[9/16] w-full max-w-md mx-auto">
                 <iframe
                   src="https://www.instagram.com/reel/C0-ETfhvIYd/embed/"
                   width="100%"
@@ -475,7 +493,7 @@ export default function PortfolioSite() {
             
             {/* Instagram Reel 5 - 9:16 aspect ratio */}
             <div className="bg-zinc-900 rounded-2xl border border-white/10 overflow-hidden">
-              <div className="aspect-[9/16] w-full max-w-sm mx-auto">
+              <div className="aspect-[9/16] w-full max-w-md mx-auto">
                 <iframe
                   src="https://www.instagram.com/reel/C07OmITJvBm/embed/"
                   width="100%"
@@ -490,7 +508,7 @@ export default function PortfolioSite() {
             
             {/* Instagram Reel 6 - 9:16 aspect ratio */}
             <div className="bg-zinc-900 rounded-2xl border border-white/10 overflow-hidden">
-              <div className="aspect-[9/16] w-full max-w-sm mx-auto">
+              <div className="aspect-[9/16] w-full max-w-md mx-auto">
                 <iframe
                   src="https://www.instagram.com/reel/C045T56PQx2/embed/"
                   width="100%"
@@ -505,7 +523,7 @@ export default function PortfolioSite() {
             
             {/* Instagram Reel 7 - 9:16 aspect ratio */}
             <div className="bg-zinc-900 rounded-2xl border border-white/10 overflow-hidden">
-              <div className="aspect-[9/16] w-full max-w-sm mx-auto">
+              <div className="aspect-[9/16] w-full max-w-md mx-auto">
                 <iframe
                   src="https://www.instagram.com/reel/C02K4lxP8MD/embed/"
                   width="100%"
