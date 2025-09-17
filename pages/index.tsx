@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 // Minimal single-file React portfolio using Tailwind CSS classes.
 // Drop into Next.js/React. Replace placeholders with real content.
@@ -6,18 +6,31 @@ import React, { useState } from "react";
 export default function PortfolioSite() {
   const [open, setOpen] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
+  const [showNav, setShowNav] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      setShowNav(scrollTop > 100);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
   
   const nav = [
     { id: "videos", label: "Videos" },
     { id: "design", label: "Design" },
     { id: "feature", label: "Feature" },
     { id: "feed", label: "Feed" },
-    { id: "contact", label: "Contact" },
+    { id: "contact", label: "Me" },
   ];
 
   return (
-    <div className="min-h-screen bg-black text-zinc-100">
-      <header className="sticky top-0 z-50 backdrop-blur-md border-b border-white/10">
+    <div className="min-h-screen bg-black text-zinc-100 scroll-smooth">
+      <header className={`sticky top-0 z-50 backdrop-blur-md border-b border-white/10 transition-all duration-300 ${
+        showNav ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
+      }`}>
         <div className="mx-auto max-w-7xl px-4 py-4 flex items-center justify-between">
           <a href="#top" className={`font-semibold tracking-tight transition-colors duration-1000 ${
             isHovering ? 'text-black' : 'text-white'
@@ -78,19 +91,15 @@ export default function PortfolioSite() {
           </div>
         </div>
 
-        {/* Content below logo */}
-        <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 text-center">
-          <h2 className={`text-4xl md:text-6xl font-semibold mb-4 ${
+        {/* Scroll Indicator Arrow */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+          <div className={`w-6 h-6 border-2 border-current rounded-full flex items-center justify-center transition-colors duration-1000 ${
             isHovering ? 'text-black' : 'text-white'
           }`}>
-            Creative Technologist
-          </h2>
-          <p className={`text-lg md:text-xl max-w-2xl mx-auto ${
-            isHovering ? 'text-zinc-700' : 'text-zinc-300'
-          }`}>
-            I design, edit, and engineer experiences across video, graphics, and AI-driven products.
-          </p>
+            <div className="w-0 h-0 border-l-[6px] border-l-current border-y-[4px] border-y-transparent transform rotate-90"></div>
+          </div>
         </div>
+
       </section>
 
       {/* Videos Section */}
@@ -253,10 +262,88 @@ export default function PortfolioSite() {
         </div>
       </section>
 
-      {/* Contact */}
-      <section id="contact" className="mx-auto max-w-5xl px-4 pb-20">
+      {/* Me Section */}
+      <section id="contact" className="mx-auto max-w-7xl px-4 py-16">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl md:text-6xl font-semibold mb-4">Creative Technologist</h2>
+          <p className="text-xl text-zinc-300 max-w-3xl mx-auto mb-8">
+            Blending the art of technology, creative thinking, and design.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-12 mb-16">
+          {/* Profile Image Slideshow */}
+          <div className="space-y-6">
+            <h3 className="text-2xl font-semibold mb-6">About Me</h3>
+            <div className="aspect-square rounded-2xl overflow-hidden border border-white/10 bg-zinc-900 grid place-items-center">
+              <div className="text-center">
+                <div className="text-sm text-zinc-400 mb-2">Profile Slideshow</div>
+                <div className="text-xs text-zinc-500">Images coming soon</div>
+              </div>
+            </div>
+            <p className="text-zinc-300 text-sm leading-relaxed">
+              I design, edit, and engineer experiences across video, graphics, and AI-driven products. 
+              Minimalist UX, high craft, fast delivery. I build clear stories and usable products.
+            </p>
+          </div>
+
+          {/* Services & Tools */}
+          <div className="space-y-8">
+            {/* Services */}
+            <div>
+              <h3 className="text-2xl font-semibold mb-4">Services</h3>
+              <div className="grid grid-cols-2 gap-3">
+                <div className="border border-white/10 rounded-xl p-4">
+                  <h4 className="font-medium text-sm mb-2">UX/UI Design</h4>
+                  <p className="text-xs text-zinc-400">Prototyping, user research, interface design</p>
+                </div>
+                <div className="border border-white/10 rounded-xl p-4">
+                  <h4 className="font-medium text-sm mb-2">Creative Direction</h4>
+                  <p className="text-xs text-zinc-400">Brand strategy, visual identity, art direction</p>
+                </div>
+                <div className="border border-white/10 rounded-xl p-4">
+                  <h4 className="font-medium text-sm mb-2">Video Editing</h4>
+                  <p className="text-xs text-zinc-400">Narrative, commercial, music video production</p>
+                </div>
+                <div className="border border-white/10 rounded-xl p-4">
+                  <h4 className="font-medium text-sm mb-2">VFX & Animation</h4>
+                  <p className="text-xs text-zinc-400">Motion graphics, visual effects, 3D animation</p>
+                </div>
+                <div className="border border-white/10 rounded-xl p-4">
+                  <h4 className="font-medium text-sm mb-2">Motion Design</h4>
+                  <p className="text-xs text-zinc-400">Title sequences, explainer videos, motion graphics</p>
+                </div>
+                <div className="border border-white/10 rounded-xl p-4">
+                  <h4 className="font-medium text-sm mb-2">AI Integration</h4>
+                  <p className="text-xs text-zinc-400">Machine learning, automation, AI-powered tools</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Tools */}
+            <div>
+              <h3 className="text-2xl font-semibold mb-4">Tools</h3>
+              <div className="space-y-4">
+                <div className="border border-white/10 rounded-xl p-4">
+                  <h4 className="font-medium text-sm mb-2">Creative Suite</h4>
+                  <p className="text-xs text-zinc-400">Adobe Creative Cloud, Figma, DaVinci Resolve, After Effects</p>
+                </div>
+                <div className="border border-white/10 rounded-xl p-4">
+                  <h4 className="font-medium text-sm mb-2">Development</h4>
+                  <p className="text-xs text-zinc-400">Cursor, TypeScript, Python, HTML, CSS, React, Next.js</p>
+                </div>
+                <div className="border border-white/10 rounded-xl p-4">
+                  <h4 className="font-medium text-sm mb-2">AI & ML</h4>
+                  <p className="text-xs text-zinc-400">Google AI Labs, OpenAI (Codex, ChatGPT), Runway, Vertex AI</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Contact CTA */}
         <div className="border border-white/10 rounded-2xl p-8 text-center">
-          <h2 className="text-2xl font-semibold mb-4">Need help with something?</h2>
+          <h3 className="text-2xl font-semibold mb-4">Need help with something?</h3>
           <p className="text-sm text-zinc-300 mb-6">Design, creative, and technology solutions. I respond within 24 hours.</p>
           <div className="space-y-4">
             <a 
