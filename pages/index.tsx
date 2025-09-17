@@ -28,11 +28,11 @@ export default function PortfolioSite() {
 
   return (
     <div className="min-h-screen bg-black text-zinc-100 scroll-smooth">
-      <header className={`sticky top-0 z-50 backdrop-blur-md border-b border-white/10 transition-all duration-300 ${
+      <header className={`sticky top-0 z-50 transition-all duration-300 ${
         showNav ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
       }`}>
         <div className="mx-auto max-w-7xl px-4 py-4 flex items-center justify-between">
-          <a href="#top" className={`font-semibold tracking-tight transition-colors duration-1000 ${
+          <a href="#videos" className={`font-semibold tracking-tight transition-colors duration-1000 ${
             isHovering ? 'text-black' : 'text-white'
           }`}>
             <img 
@@ -281,10 +281,6 @@ export default function PortfolioSite() {
                 <div className="text-xs text-zinc-500">Images coming soon</div>
               </div>
             </div>
-            <p className="text-zinc-300 text-sm leading-relaxed">
-              I design, edit, and engineer experiences across video, graphics, and AI-driven products. 
-              Minimalist UX, high craft, fast delivery. I build clear stories and usable products.
-            </p>
           </div>
 
           {/* Services & Tools */}
@@ -311,7 +307,7 @@ export default function PortfolioSite() {
                 </div>
                 <div className="border border-white/10 rounded-xl p-4">
                   <h4 className="font-medium text-sm mb-2">Motion Design</h4>
-                  <p className="text-xs text-zinc-400">Title sequences, explainer videos, motion graphics</p>
+                  <p className="text-xs text-zinc-400">Title sequences, animation, motion graphics</p>
                 </div>
                 <div className="border border-white/10 rounded-xl p-4">
                   <h4 className="font-medium text-sm mb-2">AI Integration</h4>
@@ -326,7 +322,7 @@ export default function PortfolioSite() {
               <div className="space-y-4">
                 <div className="border border-white/10 rounded-xl p-4">
                   <h4 className="font-medium text-sm mb-2">Creative Suite</h4>
-                  <p className="text-xs text-zinc-400">Adobe Creative Cloud, Figma, DaVinci Resolve, After Effects</p>
+                  <p className="text-xs text-zinc-400">Adobe Creative Cloud, Figma, After Effects, Blender</p>
                 </div>
                 <div className="border border-white/10 rounded-xl p-4">
                   <h4 className="font-medium text-sm mb-2">Development</h4>
