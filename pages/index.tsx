@@ -92,7 +92,14 @@ export default function PortfolioSite() {
 
         {/* Scroll Indicator Arrow */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
-          <div className="w-6 h-6 border-2 border-white rounded-full flex items-center justify-center">
+          <div 
+            className="w-6 h-6 border-2 border-white rounded-full flex items-center justify-center cursor-pointer hover:bg-white/10 transition-colors"
+            onClick={() => {
+              document.getElementById('videos')?.scrollIntoView({ 
+                behavior: 'smooth' 
+              });
+            }}
+          >
             <div className="w-0 h-0 border-l-[6px] border-l-white border-y-[4px] border-y-transparent transform rotate-90"></div>
           </div>
         </div>
