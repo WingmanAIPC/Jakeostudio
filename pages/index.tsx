@@ -546,20 +546,6 @@ export default function PortfolioSite() {
               </div>
             </div>
             
-            {/* Instagram Post 8 - 1:1 aspect ratio (regular post) */}
-            <div className="bg-zinc-900 rounded-2xl border border-white/10 overflow-hidden w-full">
-              <div className="w-full">
-                <iframe
-                  src="https://www.instagram.com/p/DF_XY4uPeLV/embed/"
-                  width="100%"
-                  height="600"
-                  frameBorder="0"
-                  scrolling="no"
-                  allowTransparency={true}
-                  className="w-full"
-                ></iframe>
-              </div>
-            </div>
           </div>
           <div className="text-center mt-6">
             <p className="text-xs text-zinc-500">Follow for more creative content ✦</p>
