@@ -237,6 +237,60 @@ export default function PortfolioSite() {
         </div>
       </section>
 
+      {/* Creative Technologist Section */}
+      <section className="mx-auto max-w-7xl px-4 py-16">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl md:text-6xl font-semibold mb-4">Creative Technologist</h2>
+          <p className="text-xl text-zinc-300 max-w-3xl mx-auto mb-8">
+            Blending the art of technology, creative thinking, and design.
+          </p>
+        </div>
+
+        {/* Creative Services & Tools */}
+        <div className="mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {/* Services */}
+            <div className="border border-white/10 rounded-xl p-4">
+              <h4 className="font-medium text-sm mb-2">UX/UI Design</h4>
+              <p className="text-xs text-zinc-400">Prototyping, user research, interface design</p>
+            </div>
+            <div className="border border-white/10 rounded-xl p-4">
+              <h4 className="font-medium text-sm mb-2">Creative Direction</h4>
+              <p className="text-xs text-zinc-400">Brand strategy, visual identity, art direction</p>
+            </div>
+            <div className="border border-white/10 rounded-xl p-4">
+              <h4 className="font-medium text-sm mb-2">Video Editing</h4>
+              <p className="text-xs text-zinc-400">Narrative, commercial, music video production</p>
+            </div>
+            <div className="border border-white/10 rounded-xl p-4">
+              <h4 className="font-medium text-sm mb-2">VFX & Animation</h4>
+              <p className="text-xs text-zinc-400">Motion graphics, visual effects, 3D animation</p>
+            </div>
+            <div className="border border-white/10 rounded-xl p-4">
+              <h4 className="font-medium text-sm mb-2">Motion Design</h4>
+              <p className="text-xs text-zinc-400">Title sequences, animation, motion graphics</p>
+            </div>
+            <div className="border border-white/10 rounded-xl p-4">
+              <h4 className="font-medium text-sm mb-2">AI Integration</h4>
+              <p className="text-xs text-zinc-400">Machine learning, automation, AI-powered tools</p>
+            </div>
+            {/* Tools */}
+            <div className="border border-white/10 rounded-xl p-4">
+              <h4 className="font-medium text-sm mb-2">Creative Suite</h4>
+              <p className="text-xs text-zinc-400">Adobe Creative Cloud, Figma, After Effects, Blender</p>
+            </div>
+            <div className="border border-white/10 rounded-xl p-4">
+              <h4 className="font-medium text-sm mb-2">Development</h4>
+              <p className="text-xs text-zinc-400">Cursor, TypeScript, Python, HTML, CSS, React, Next.js</p>
+            </div>
+            <div className="border border-white/10 rounded-xl p-4">
+              <h4 className="font-medium text-sm mb-2">AI & ML</h4>
+              <p className="text-xs text-zinc-400">Google AI Labs, OpenAI (Codex, ChatGPT), Runway, Vertex AI</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Feature Section */}
       <section id="feature" className="mx-auto max-w-7xl px-4 py-16">
         <div className="flex items-center justify-between mb-8">
@@ -437,6 +491,13 @@ export default function PortfolioSite() {
               <img src="/VelocityBlueLong.png" alt="Velocity Blue Long" className="w-full h-auto object-cover" style={{ aspectRatio: '16/9' }} />
             </div>
           </div>
+          
+          {/* Jacob Cross Engineer - Square */}
+          <div className="break-inside-avoid mb-6">
+            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl border-2 border-transparent hover:border-white/30 transition-all duration-300">
+              <img src="/JacobCrossEngineer.png" alt="Jacob Cross Engineer" className="w-full h-auto object-cover" style={{ aspectRatio: '1/1' }} />
+            </div>
+          </div>
         </div>
       </section>
 
@@ -559,7 +620,7 @@ export default function PortfolioSite() {
                   allowTransparency={true}
                   className="w-full"
                 ></iframe>
-              </div>
+          </div>
             </div>
             
             {/* Instagram Post 8 - 1:1 aspect ratio (regular post) */}
@@ -583,59 +644,8 @@ export default function PortfolioSite() {
         </div>
       </section>
 
-      {/* Me Section */}
+      {/* Contact Section */}
       <section id="contact" className="mx-auto max-w-7xl px-4 py-16">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-6xl font-semibold mb-4">Creative Technologist</h2>
-          <p className="text-xl text-zinc-300 max-w-3xl mx-auto mb-8">
-            Blending the art of technology, creative thinking, and design.
-          </p>
-              </div>
-
-        {/* Creative Services & Tools */}
-        <div className="mb-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {/* Services */}
-            <div className="border border-white/10 rounded-xl p-4">
-              <h4 className="font-medium text-sm mb-2">UX/UI Design</h4>
-              <p className="text-xs text-zinc-400">Prototyping, user research, interface design</p>
-            </div>
-            <div className="border border-white/10 rounded-xl p-4">
-              <h4 className="font-medium text-sm mb-2">Creative Direction</h4>
-              <p className="text-xs text-zinc-400">Brand strategy, visual identity, art direction</p>
-            </div>
-            <div className="border border-white/10 rounded-xl p-4">
-              <h4 className="font-medium text-sm mb-2">Video Editing</h4>
-              <p className="text-xs text-zinc-400">Narrative, commercial, music video production</p>
-            </div>
-              <div className="border border-white/10 rounded-xl p-4">
-              <h4 className="font-medium text-sm mb-2">VFX & Animation</h4>
-              <p className="text-xs text-zinc-400">Motion graphics, visual effects, 3D animation</p>
-              </div>
-              <div className="border border-white/10 rounded-xl p-4">
-              <h4 className="font-medium text-sm mb-2">Motion Design</h4>
-              <p className="text-xs text-zinc-400">Title sequences, animation, motion graphics</p>
-              </div>
-            <div className="border border-white/10 rounded-xl p-4">
-              <h4 className="font-medium text-sm mb-2">AI Integration</h4>
-              <p className="text-xs text-zinc-400">Machine learning, automation, AI-powered tools</p>
-            </div>
-            {/* Tools */}
-            <div className="border border-white/10 rounded-xl p-4">
-              <h4 className="font-medium text-sm mb-2">Creative Suite</h4>
-              <p className="text-xs text-zinc-400">Adobe Creative Cloud, Figma, After Effects, Blender</p>
-          </div>
-            <div className="border border-white/10 rounded-xl p-4">
-              <h4 className="font-medium text-sm mb-2">Development</h4>
-              <p className="text-xs text-zinc-400">Cursor, TypeScript, Python, HTML, CSS, React, Next.js</p>
-            </div>
-            <div className="border border-white/10 rounded-xl p-4">
-              <h4 className="font-medium text-sm mb-2">AI & ML</h4>
-              <p className="text-xs text-zinc-400">Google AI Labs, OpenAI (Codex, ChatGPT), Runway, Vertex AI</p>
-            </div>
-          </div>
-        </div>
-
         {/* Contact CTA */}
         <div className="border border-white/10 rounded-2xl p-8 text-center">
           <h3 className="text-2xl font-semibold mb-4">Need help with something?</h3>
