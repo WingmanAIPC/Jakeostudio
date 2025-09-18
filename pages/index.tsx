@@ -651,12 +651,22 @@ export default function PortfolioSite() {
           <h3 className="text-2xl font-semibold mb-4">Need help with something?</h3>
           <p className="text-sm text-zinc-300 mb-6">Design, creative, and technology solutions. I respond within 24 hours.</p>
           <div className="space-y-4">
-            <a 
-              href="mailto:jakeostudio@gmail.com" 
-              className="inline-block px-6 py-3 rounded-2xl bg-white text-black text-sm font-medium hover:bg-zinc-100 transition-colors"
-            >
-              Ask me
-            </a>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a 
+                href="mailto:jakeostudio@gmail.com" 
+                className="inline-block px-6 py-3 rounded-2xl bg-white text-black text-sm font-medium hover:bg-zinc-100 transition-colors"
+              >
+                Ask me
+              </a>
+              <a 
+                href="/Resume2025.pdf" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-block px-6 py-3 rounded-2xl border border-white/20 text-white text-sm font-medium hover:bg-white/10 transition-colors"
+              >
+                Check my Resume
+              </a>
+            </div>
             <div className="text-xs text-zinc-500">
               jakeostudio@gmail.com • Based in USA • Available for remote
             </div>
