@@ -289,7 +289,25 @@ export default function PortfolioSite() {
 
         {/* Cloverleaf Testimonials Feature */}
         <div className="grid md:grid-cols-2 gap-8 items-center">
-          <div className="space-y-4">
+          {/* Video - shown first on mobile, second on desktop */}
+          <a href="https://www.youtube.com/playlist?list=PL18Q1CsxcdgRhhpWPSXSjkJCx12SRp_1_" target="_blank" rel="noopener noreferrer" className="order-1 md:order-2">
+            <div className="aspect-video rounded-2xl overflow-hidden border border-white/10 bg-zinc-900 group cursor-pointer relative">
+              <img 
+                src="https://img.youtube.com/vi/ITr7VHyHa2E/maxresdefault.jpg" 
+                alt="Cloverleaf Testimonials Playlist"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center rounded-2xl">
+                <div className="text-center p-6">
+                  <h3 className="text-lg font-semibold mb-2">Cloverleaf Testimonials</h3>
+                  <p className="text-sm text-zinc-300 mb-4">Customer Stories • Product Marketing • Video Design</p>
+                  <p className="text-xs text-zinc-400">Click to view playlist on YouTube</p>
+                </div>
+              </div>
+            </div>
+          </a>
+          {/* Text - shown second on mobile, first on desktop */}
+          <div className="space-y-4 order-2 md:order-1">
             <h3 className="text-xl font-semibold">Cloverleaf Testimonials — Creative Storytelling</h3>
             <p className="text-zinc-300 text-sm">
               Developed compelling customer testimonial videos that showcase product value through authentic storytelling and professional video design.
@@ -309,22 +327,6 @@ export default function PortfolioSite() {
               View Playlist
             </a>
           </div>
-          <a href="https://www.youtube.com/playlist?list=PL18Q1CsxcdgRhhpWPSXSjkJCx12SRp_1_" target="_blank" rel="noopener noreferrer">
-            <div className="aspect-video rounded-2xl overflow-hidden border border-white/10 bg-zinc-900 group cursor-pointer relative">
-              <img 
-                src="https://img.youtube.com/vi/ITr7VHyHa2E/maxresdefault.jpg" 
-                alt="Cloverleaf Testimonials Playlist"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center rounded-2xl">
-                <div className="text-center p-6">
-                  <h3 className="text-lg font-semibold mb-2">Cloverleaf Testimonials</h3>
-                  <p className="text-sm text-zinc-300 mb-4">Customer Stories • Product Marketing • Video Design</p>
-                  <p className="text-xs text-zinc-400">Click to view playlist on YouTube</p>
-                </div>
-              </div>
-            </div>
-          </a>
         </div>
       </section>
 
@@ -336,57 +338,50 @@ export default function PortfolioSite() {
         <div className="columns-1 md:columns-2 lg:columns-3 xl:columns-4 gap-6 space-y-6">
           {/* Bionic Kid - Tall vertical */}
           <div className="break-inside-avoid mb-6">
-            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl">
+            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl border-2 border-transparent hover:border-white/30 transition-all duration-300">
               <img src="/BionicKid.jpg" alt="Bionic Kid" className="w-full h-auto object-cover" style={{ aspectRatio: '3/4' }} />
-              <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
             </div>
           </div>
           
           {/* Crystal Strawberry - Very tall vertical */}
           <div className="break-inside-avoid mb-6">
-            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl">
+            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl border-2 border-transparent hover:border-white/30 transition-all duration-300">
               <img src="/CrystalStrawberry.jpg" alt="Crystal Strawberry" className="w-full h-auto object-cover" style={{ aspectRatio: '2/3' }} />
-              <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
             </div>
           </div>
           
           {/* Lando Norris - Tall vertical */}
           <div className="break-inside-avoid mb-6">
-            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl">
+            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl border-2 border-transparent hover:border-white/30 transition-all duration-300">
               <img src="/LandoNorris.jpg" alt="Lando Norris" className="w-full h-auto object-cover" style={{ aspectRatio: '3/4' }} />
-              <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
             </div>
           </div>
           
           {/* SSL Cards - Wide horizontal */}
           <div className="break-inside-avoid mb-6">
-            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl">
+            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl border-2 border-transparent hover:border-white/30 transition-all duration-300">
               <img src="/SSLCards.jpg" alt="SSL Cards" className="w-full h-auto object-cover" style={{ aspectRatio: '4/3' }} />
-              <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
             </div>
           </div>
           
           {/* WHM Dayton - Wide horizontal */}
           <div className="break-inside-avoid mb-6">
-            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl">
+            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl border-2 border-transparent hover:border-white/30 transition-all duration-300">
               <img src="/WHMDayton.jpg" alt="WHM Dayton" className="w-full h-auto object-cover" style={{ aspectRatio: '16/9' }} />
-              <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
             </div>
           </div>
           
           {/* Playboi Carti - Tall vertical */}
           <div className="break-inside-avoid mb-6">
-            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl">
+            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl border-2 border-transparent hover:border-white/30 transition-all duration-300">
               <img src="/PlayboiCarti.jpg" alt="Playboi Carti" className="w-full h-auto object-cover" style={{ aspectRatio: '3/4' }} />
-              <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
             </div>
           </div>
           
           {/* Out of Sync - Very tall vertical */}
           <div className="break-inside-avoid mb-6">
-            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl">
+            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl border-2 border-transparent hover:border-white/30 transition-all duration-300">
               <img src="/OutofSync.jpg" alt="Out of Sync" className="w-full h-auto object-cover" style={{ aspectRatio: '2/3' }} />
-              <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
             </div>
           </div>
           
@@ -424,9 +419,22 @@ export default function PortfolioSite() {
           
           {/* Social Hour - Tall vertical poster */}
           <div className="break-inside-avoid mb-6">
-            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl">
+            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl border-2 border-transparent hover:border-white/30 transition-all duration-300">
               <img src="/SocialHour.jpg" alt="Social Hour" className="w-full h-auto object-cover" style={{ aspectRatio: '3/4' }} />
-              <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
+            </div>
+          </div>
+          
+          {/* Royal Mafia White - Square */}
+          <div className="break-inside-avoid mb-6">
+            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl border-2 border-transparent hover:border-white/30 transition-all duration-300">
+              <img src="/royalmafiaWhite.png" alt="Royal Mafia White" className="w-full h-auto object-cover" style={{ aspectRatio: '1/1' }} />
+            </div>
+          </div>
+          
+          {/* Velocity Blue Long - Wide horizontal */}
+          <div className="break-inside-avoid mb-6">
+            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl border-2 border-transparent hover:border-white/30 transition-all duration-300">
+              <img src="/VelocityBlueLong.png" alt="Velocity Blue Long" className="w-full h-auto object-cover" style={{ aspectRatio: '16/9' }} />
             </div>
           </div>
         </div>
@@ -447,7 +455,7 @@ export default function PortfolioSite() {
               max-width: 100% !important;
             }
           `}</style>
-          <div className="space-y-8 max-h-[800px] overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-600 scrollbar-track-transparent">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Instagram Reel 1 - 9:16 aspect ratio */}
             <div className="bg-zinc-900 rounded-2xl border border-white/10 overflow-hidden w-full">
               <div className="w-full">
