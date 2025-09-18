@@ -427,7 +427,7 @@ export default function PortfolioSite() {
           {/* Royal Mafia White - Square */}
           <div className="break-inside-avoid mb-6">
             <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl border-2 border-transparent hover:border-white/30 transition-all duration-300">
-              <img src="/royalmafiaWhite.png" alt="Royal Mafia White" className="w-full h-auto object-cover" style={{ aspectRatio: '1/1' }} />
+              <img src="/royalmafiaWHITE.png" alt="Royal Mafia White" className="w-full h-auto object-cover" style={{ aspectRatio: '1/1' }} />
             </div>
           </div>
           
