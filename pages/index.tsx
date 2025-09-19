@@ -7,8 +7,8 @@ import PillNav from "../components/PillNav";
 
 export default function PortfolioSite() {
   const navItems = [
-    { label: "Videos", href: "#videos", ariaLabel: "Go to Videos section" },
     { label: "Feature", href: "#feature", ariaLabel: "Go to Feature section" },
+    { label: "Video", href: "#video", ariaLabel: "Go to Video section" },
     { label: "Design", href: "#design", ariaLabel: "Go to Design section" },
     { label: "Feed", href: "#feed", ariaLabel: "Go to Feed section" },
     { label: "Me", href: "#contact", ariaLabel: "Go to Me section" },
@@ -123,10 +123,105 @@ export default function PortfolioSite() {
         </div>
       </section>
 
-      {/* Videos Section */}
-      <section id="videos" className="mx-auto max-w-7xl px-4 py-16">
+      {/* Feature Section */}
+      <section id="feature" className="mx-auto max-w-7xl px-4 py-16">
+        <div className="flex items-center justify-between mb-8">
+          <h2 className="text-2xl font-semibold">
+            Feature
+          </h2>
+        </div>
+        
+        {/* Wingman Feature */}
+        <div className="grid md:grid-cols-2 gap-8 items-center mb-16">
+          <a href="https://youtu.be/Ag7EAF_djj4?si=isbxfNNSXSiR9sxZ" target="_blank" rel="noopener noreferrer">
+            <div className="aspect-video rounded-2xl overflow-hidden border border-white/10 bg-zinc-900 group cursor-pointer relative">
+              <img 
+                src="https://img.youtube.com/vi/Ag7EAF_djj4/maxresdefault.jpg" 
+                alt="Wingman Feature Video"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center rounded-2xl">
+                <div className="text-center p-6">
+                  <h3 className="text-lg font-semibold mb-2">Wingman Feature Video</h3>
+                  <p className="text-sm text-zinc-300 mb-4">AI Life Coach • iOS App • EQ Training</p>
+                  <p className="text-xs text-zinc-400">Click to watch on YouTube</p>
+                </div>
+              </div>
+            </div>
+          </a>
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">Wingman — Your AI Assistant for Life</h3>
+            <p className="text-zinc-300 text-sm">
+              Meet Wingman, your personal life coach, designed to help you reflect deeply, grow intentionally, and thrive in every area of life.
+            </p>
+            <div className="flex flex-wrap gap-2 text-xs">
+              <span className="px-2 py-1 rounded-full bg-white/10">AI Coach</span>
+              <span className="px-2 py-1 rounded-full bg-white/10">EQ Training</span>
+              <span className="px-2 py-1 rounded-full bg-white/10">iOS App</span>
+              </div>
+            <a 
+              href="https://apps.apple.com/us/app/wingman-eq-life-coach/id6747995730" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-block px-4 py-2 rounded-2xl bg-white text-black text-sm font-medium hover:bg-zinc-100 transition-colors"
+            >
+              Download App
+            </a>
+          </div>
+        </div>
+
+        {/* Divider Line */}
+        <div className="flex justify-center my-12">
+          <div className="w-24 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+        </div>
+
+        {/* Cloverleaf Testimonials Feature */}
+        <div className="grid md:grid-cols-2 gap-8 items-center">
+          {/* Video - shown first on mobile, second on desktop */}
+          <a href="https://www.youtube.com/playlist?list=PL18Q1CsxcdgRhhpWPSXSjkJCx12SRp_1_" target="_blank" rel="noopener noreferrer" className="order-1 md:order-2">
+            <div className="aspect-video rounded-2xl overflow-hidden border border-white/10 bg-zinc-900 group cursor-pointer relative">
+              <img 
+                src="https://img.youtube.com/vi/ITr7VHyHa2E/maxresdefault.jpg" 
+                alt="Cloverleaf Testimonials Playlist"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center rounded-2xl">
+                <div className="text-center p-6">
+                  <h3 className="text-lg font-semibold mb-2">Cloverleaf Testimonials</h3>
+                  <p className="text-sm text-zinc-300 mb-4">Customer Stories • Product Marketing • Video Design</p>
+                  <p className="text-xs text-zinc-400">Click to view playlist on YouTube</p>
+                </div>
+              </div>
+            </div>
+          </a>
+          {/* Text - shown second on mobile, first on desktop */}
+          <div className="space-y-4 order-2 md:order-1">
+            <h3 className="text-xl font-semibold">Cloverleaf Testimonials — Creative Storytelling</h3>
+            <p className="text-zinc-300 text-sm">
+              Developed compelling customer testimonial videos that showcase product value through authentic storytelling and professional video design.
+            </p>
+            <div className="flex flex-wrap gap-2 text-xs">
+              <span className="px-2 py-1 rounded-full bg-white/10">Testimonials</span>
+              <span className="px-2 py-1 rounded-full bg-white/10">Storytelling</span>
+              <span className="px-2 py-1 rounded-full bg-white/10">Video Design</span>
+              <span className="px-2 py-1 rounded-full bg-white/10">Product Marketing</span>
+            </div>
+            <a 
+              href="https://www.youtube.com/playlist?list=PL18Q1CsxcdgRhhpWPSXSjkJCx12SRp_1_" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-block px-4 py-2 rounded-2xl bg-white text-black text-sm font-medium hover:bg-zinc-100 transition-colors"
+            >
+              View Playlist
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Video Section */}
+      <section id="video" className="mx-auto max-w-7xl px-4 py-16">
         <h2 className="text-2xl font-semibold mb-8">
-          Videos
+          Video
         </h2>
         <div className="grid grid-cols-2 gap-2">
           {/* Worldwide Technologies Commercial Demo */}
@@ -291,98 +386,6 @@ export default function PortfolioSite() {
         </div>
       </section>
 
-      {/* Feature Section */}
-      <section id="feature" className="mx-auto max-w-7xl px-4 py-16">
-        <div className="flex items-center justify-between mb-8">
-          <h2 className="text-2xl font-semibold">
-            Feature
-          </h2>
-        </div>
-        
-        {/* Wingman Feature */}
-        <div className="grid md:grid-cols-2 gap-8 items-center mb-16">
-          <div className="aspect-video rounded-2xl overflow-hidden border border-white/10 bg-zinc-900 group cursor-pointer relative">
-            <img 
-              src="https://img.youtube.com/vi/Ag7EAF_djj4/maxresdefault.jpg" 
-              alt="Wingman Feature Video"
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center rounded-2xl">
-              <div className="text-center p-6">
-                <h3 className="text-lg font-semibold mb-2">Wingman Feature Video</h3>
-                <p className="text-sm text-zinc-300 mb-4">AI Life Coach • iOS App • EQ Training</p>
-                <p className="text-xs text-zinc-400">Click to watch on YouTube</p>
-              </div>
-            </div>
-          </div>
-          <div className="space-y-4">
-            <h3 className="text-xl font-semibold">Wingman — Your AI Assistant for Life</h3>
-            <p className="text-zinc-300 text-sm">
-              Meet Wingman, your personal life coach, designed to help you reflect deeply, grow intentionally, and thrive in every area of life.
-            </p>
-            <div className="flex flex-wrap gap-2 text-xs">
-              <span className="px-2 py-1 rounded-full bg-white/10">AI Coach</span>
-              <span className="px-2 py-1 rounded-full bg-white/10">EQ Training</span>
-              <span className="px-2 py-1 rounded-full bg-white/10">iOS App</span>
-              </div>
-            <a 
-              href="https://apps.apple.com/us/app/wingman-eq-life-coach/id6747995730" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-block px-4 py-2 rounded-2xl bg-white text-black text-sm font-medium hover:bg-zinc-100 transition-colors"
-            >
-              Download App
-            </a>
-          </div>
-        </div>
-
-        {/* Divider Line */}
-        <div className="flex justify-center my-12">
-          <div className="w-24 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
-        </div>
-
-        {/* Cloverleaf Testimonials Feature */}
-        <div className="grid md:grid-cols-2 gap-8 items-center">
-          {/* Video - shown first on mobile, second on desktop */}
-          <a href="https://www.youtube.com/playlist?list=PL18Q1CsxcdgRhhpWPSXSjkJCx12SRp_1_" target="_blank" rel="noopener noreferrer" className="order-1 md:order-2">
-            <div className="aspect-video rounded-2xl overflow-hidden border border-white/10 bg-zinc-900 group cursor-pointer relative">
-              <img 
-                src="https://img.youtube.com/vi/ITr7VHyHa2E/maxresdefault.jpg" 
-                alt="Cloverleaf Testimonials Playlist"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center rounded-2xl">
-                <div className="text-center p-6">
-                  <h3 className="text-lg font-semibold mb-2">Cloverleaf Testimonials</h3>
-                  <p className="text-sm text-zinc-300 mb-4">Customer Stories • Product Marketing • Video Design</p>
-                  <p className="text-xs text-zinc-400">Click to view playlist on YouTube</p>
-                </div>
-              </div>
-            </div>
-          </a>
-          {/* Text - shown second on mobile, first on desktop */}
-          <div className="space-y-4 order-2 md:order-1">
-            <h3 className="text-xl font-semibold">Cloverleaf Testimonials — Creative Storytelling</h3>
-            <p className="text-zinc-300 text-sm">
-              Developed compelling customer testimonial videos that showcase product value through authentic storytelling and professional video design.
-            </p>
-            <div className="flex flex-wrap gap-2 text-xs">
-              <span className="px-2 py-1 rounded-full bg-white/10">Testimonials</span>
-              <span className="px-2 py-1 rounded-full bg-white/10">Storytelling</span>
-              <span className="px-2 py-1 rounded-full bg-white/10">Video Design</span>
-              <span className="px-2 py-1 rounded-full bg-white/10">Product Marketing</span>
-            </div>
-            <a 
-              href="https://www.youtube.com/playlist?list=PL18Q1CsxcdgRhhpWPSXSjkJCx12SRp_1_" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-block px-4 py-2 rounded-2xl bg-white text-black text-sm font-medium hover:bg-zinc-100 transition-colors"
-            >
-              View Playlist
-            </a>
-          </div>
-        </div>
-      </section>
 
       {/* Design Section - Masonry Layout */}
       <section id="design" className="mx-auto max-w-7xl px-4 py-16">
