@@ -11,7 +11,6 @@ export default function PortfolioSite() {
     { label: "Video", href: "#video", ariaLabel: "Go to Video section" },
     { label: "Design", href: "#design", ariaLabel: "Go to Design section" },
     { label: "Feed", href: "#feed", ariaLabel: "Go to Feed section" },
-    { label: "Me", href: "#contact", ariaLabel: "Go to Me section" },
   ];
 
   return (
@@ -70,7 +69,7 @@ export default function PortfolioSite() {
       </section>
 
       {/* Creative Technologist Section */}
-      <section className="mx-auto max-w-7xl px-4 py-24">
+      <section className="mx-auto max-w-7xl px-4 pt-24 pb-12">
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-6xl font-semibold mb-4">Creative Technologist</h2>
           <p className="text-xl text-zinc-300 max-w-3xl mx-auto mb-8">
@@ -656,7 +655,7 @@ export default function PortfolioSite() {
           <div className="space-y-4">
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a 
-                href="mailto:jakeostudio@gmail.com" 
+                href="mailto:jakeostudio@gmail.com?subject=Project Inquiry&body=Hi Jake, I'd like to discuss a project with you." 
                 className="inline-block px-6 py-3 rounded-2xl bg-white text-black text-sm font-medium hover:bg-zinc-100 transition-colors"
               >
                 Ask me
