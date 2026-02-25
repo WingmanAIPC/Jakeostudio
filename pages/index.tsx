@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
 import PrismaticBurst from "../components/PrismaticBurst";
 import PillNav from "../components/PillNav";
+import CodeShowcase from "../components/CodeShowcase";
+import MovieListDemo from "../components/demos/MovieListDemo";
+import MotionPlayground from "../components/demos/MotionPlayground";
+import ResponsiveDemo from "../components/demos/ResponsiveDemo";
+import { movieListCode, motionPlaygroundCode, responsiveDemoCode } from "../components/demos/codeStrings";
+import SkillsSlider from "../components/SkillsSlider";
 
 // Minimal single-file React portfolio using Tailwind CSS classes.
 // Drop into Next.js/React. Replace placeholders with real content.
@@ -24,8 +30,9 @@ export default function PortfolioSite() {
 
   const navItems = [
     { label: "Feature", href: "#feature", ariaLabel: "Go to Feature section" },
-    { label: "Video", href: "#video", ariaLabel: "Go to Video section" },
+    { label: "Code", href: "#code", ariaLabel: "Go to Code Samples section" },
     { label: "Design", href: "#design", ariaLabel: "Go to Design section" },
+    { label: "Video", href: "#video", ariaLabel: "Go to Video section" },
     { label: "Feed", href: "#feed", ariaLabel: "Go to Feed section" },
   ];
 
@@ -105,58 +112,16 @@ export default function PortfolioSite() {
 
       </section>
 
-      {/* Creative Technologist Section */}
+      {/* Design Technologist Section */}
       <section id="creative" className="mx-auto max-w-7xl px-4 pt-24 pb-12">
         <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-6xl font-semibold mb-4">Creative Technologist</h2>
+          <h2 className="text-4xl md:text-6xl font-semibold mb-4">Design Technologist</h2>
           <p className="text-xl text-zinc-300 max-w-3xl mx-auto mb-8">
-            Blending the art of technology, creative thinking, and design.
+            Blending design, technology, and creative thinking into working experiences.
           </p>
         </div>
 
-        {/* Creative Services & Tools */}
-        <div className="mb-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {/* Services */}
-            <div className="border border-white/10 rounded-xl p-4">
-              <h4 className="font-medium text-base mb-1 leading-tight">UX/UI Design</h4>
-              <p className="text-xs text-zinc-400">Prototyping, user research, interface design</p>
-            </div>
-            <div className="border border-white/10 rounded-xl p-4">
-              <h4 className="font-medium text-base mb-1 leading-tight">Creative Direction</h4>
-              <p className="text-xs text-zinc-400">Brand strategy, visual identity, art direction</p>
-            </div>
-            <div className="border border-white/10 rounded-xl p-4">
-              <h4 className="font-medium text-base mb-1 leading-tight">Video Editing</h4>
-              <p className="text-xs text-zinc-400">Narrative, commercial, music video production</p>
-            </div>
-            <div className="border border-white/10 rounded-xl p-4">
-              <h4 className="font-medium text-base mb-1 leading-tight">VFX & Animation</h4>
-              <p className="text-xs text-zinc-400">Motion graphics, visual effects, 3D animation</p>
-            </div>
-            <div className="border border-white/10 rounded-xl p-4">
-              <h4 className="font-medium text-base mb-1 leading-tight">Motion Design</h4>
-              <p className="text-xs text-zinc-400">Title sequences, animation, motion graphics</p>
-            </div>
-            <div className="border border-white/10 rounded-xl p-4">
-              <h4 className="font-medium text-base mb-1 leading-tight">AI Integration</h4>
-              <p className="text-xs text-zinc-400">Machine learning, automation, AI-powered tools</p>
-            </div>
-            {/* Tools */}
-            <div className="border border-white/10 rounded-xl p-4">
-              <h4 className="font-medium text-base mb-1 leading-tight">Creative Suite</h4>
-              <p className="text-xs text-zinc-400">Adobe Creative Cloud, Figma, After Effects, Blender</p>
-            </div>
-            <div className="border border-white/10 rounded-xl p-4">
-              <h4 className="font-medium text-base mb-1 leading-tight">Development</h4>
-              <p className="text-xs text-zinc-400">Cursor, TypeScript, Python, HTML, CSS, React, Next.js</p>
-            </div>
-            <div className="border border-white/10 rounded-xl p-4">
-              <h4 className="font-medium text-base mb-1 leading-tight">AI & ML</h4>
-              <p className="text-xs text-zinc-400">Google AI Labs, OpenAI (Codex, ChatGPT), Runway, Vertex AI</p>
-            </div>
-          </div>
-        </div>
+        <SkillsSlider />
       </section>
 
       {/* Feature Section */}
@@ -254,6 +219,150 @@ export default function PortfolioSite() {
               View Playlist
             </a>
           </div>
+        </div>
+      </section>
+
+      {/* Code for Fun Section */}
+      <section id="code" className="mx-auto max-w-7xl px-4 py-16">
+        <h2 className="text-2xl font-semibold mb-6">Code for Fun</h2>
+        <CodeShowcase
+          demos={[
+            {
+              id: "motion",
+              label: "Motion",
+              tags: ["CSS Animations", "React State", "CSS Custom Properties"],
+              code: motionPlaygroundCode,
+              language: "tsx",
+              children: <MotionPlayground />,
+            },
+            {
+              id: "movies",
+              label: "Movies",
+              tags: ["React", "TypeScript", "Fetch API", "Semantic HTML", "Accessibility"],
+              code: movieListCode,
+              language: "tsx",
+              children: <MovieListDemo />,
+            },
+            {
+              id: "responsive",
+              label: "Responsive",
+              tags: ["CSS Grid", "Container Queries", "Responsive Design"],
+              code: responsiveDemoCode,
+              language: "tsx",
+              children: <ResponsiveDemo />,
+            },
+          ]}
+        />
+      </section>
+
+      {/* Design Section - Masonry Layout */}
+      <section id="design" className="mx-auto max-w-7xl px-4 py-16">
+        <h2 className="text-2xl font-semibold mb-8">
+          Design
+        </h2>
+        <div className="columns-1 md:columns-2 lg:columns-3 xl:columns-4 gap-6 space-y-6">
+          {/* Bionic Kid - Tall vertical */}
+          <div className="break-inside-avoid mb-6">
+            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl border-2 border-transparent hover:border-white/30 transition-all duration-300">
+              <img src="/BionicKid.jpg" alt="Bionic Kid" className="w-full h-auto object-cover" style={{ aspectRatio: '3/4' }} />
+            </div>
+          </div>
+          
+          {/* Crystal Strawberry - Very tall vertical */}
+          <div className="break-inside-avoid mb-6">
+            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl border-2 border-transparent hover:border-white/30 transition-all duration-300">
+              <img src="/CrystalStrawberry.jpg" alt="Crystal Strawberry" className="w-full h-auto object-cover" style={{ aspectRatio: '2/3' }} />
+            </div>
+          </div>
+          
+          {/* Lando Norris - Tall vertical */}
+          <div className="break-inside-avoid mb-6">
+            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl border-2 border-transparent hover:border-white/30 transition-all duration-300">
+              <img src="/LandoNorris.jpg" alt="Lando Norris" className="w-full h-auto object-cover" style={{ aspectRatio: '3/4' }} />
+            </div>
+          </div>
+          
+          {/* SSL Cards - Wide horizontal */}
+          <div className="break-inside-avoid mb-6">
+            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl border-2 border-transparent hover:border-white/30 transition-all duration-300">
+              <img src="/SSLCards.jpg" alt="SSL Cards" className="w-full h-auto object-cover" style={{ aspectRatio: '4/3' }} />
+            </div>
+          </div>
+          
+          {/* WHM Dayton - Wide horizontal */}
+          <div className="break-inside-avoid mb-6">
+            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl border-2 border-transparent hover:border-white/30 transition-all duration-300">
+              <img src="/WHMDayton.jpg" alt="WHM Dayton" className="w-full h-auto object-cover" style={{ aspectRatio: '16/9' }} />
+            </div>
+          </div>
+          
+          {/* Playboi Carti - Tall vertical */}
+          <div className="break-inside-avoid mb-6">
+            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl border-2 border-transparent hover:border-white/30 transition-all duration-300">
+              <img src="/PlayboiCarti.jpg" alt="Playboi Carti" className="w-full h-auto object-cover" style={{ aspectRatio: '3/4' }} />
+            </div>
+          </div>
+          
+          {/* Out of Sync - Very tall vertical */}
+          <div className="break-inside-avoid mb-6">
+            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl border-2 border-transparent hover:border-white/30 transition-all duration-300">
+              <img src="/OutofSync.jpg" alt="Out of Sync" className="w-full h-auto object-cover" style={{ aspectRatio: '2/3' }} />
+            </div>
+          </div>
+          
+          {/* Professional Development - Tall vertical */}
+          <div className="break-inside-avoid mb-6">
+            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl">
+              <img src="/ProfessionalDevelopment.jpg" alt="Professional Development" className="w-full h-auto object-cover" style={{ aspectRatio: '3/4' }} />
+              <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
+            </div>
+          </div>
+          
+          {/* Beats Studio Buds - Wide horizontal */}
+          <div className="break-inside-avoid mb-6">
+            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl">
+              <img src="/BeatsStudioBuds.png" alt="Beats Studio Buds" className="w-full h-auto object-cover" style={{ aspectRatio: '16/9' }} />
+              <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
+            </div>
+          </div>
+          
+          {/* Korean BBQ - Tall vertical poster */}
+          <div className="break-inside-avoid mb-6">
+            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl">
+              <img src="/KoreanBBQ.jpg" alt="Korean BBQ" className="w-full h-auto object-cover" style={{ aspectRatio: '3/4' }} />
+              <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
+            </div>
+          </div>
+          
+          {/* Data Landmark - Wide horizontal poster */}
+          <div className="break-inside-avoid mb-6">
+            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl">
+              <img src="/DataLandmarkPoster.jpg" alt="Data Landmark" className="w-full h-auto object-cover" style={{ aspectRatio: '16/9' }} />
+              <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
+            </div>
+          </div>
+          
+          {/* Social Hour - Tall vertical poster */}
+          <div className="break-inside-avoid mb-6">
+            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl border-2 border-transparent hover:border-white/30 transition-all duration-300">
+              <img src="/SocialHour.jpg" alt="Social Hour" className="w-full h-auto object-cover" style={{ aspectRatio: '3/4' }} />
+            </div>
+          </div>
+          
+          {/* Royal Mafia White - Square */}
+          <div className="break-inside-avoid mb-6">
+            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl border-2 border-transparent hover:border-white/30 transition-all duration-300">
+              <img src="/royalmafiaWHITE.png" alt="Royal Mafia White" className="w-full h-auto object-cover" style={{ aspectRatio: '1/1' }} />
+            </div>
+          </div>
+          
+          {/* Velocity Blue Long - Wide horizontal */}
+          <div className="break-inside-avoid mb-6">
+            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl border-2 border-transparent hover:border-white/30 transition-all duration-300">
+              <img src="/VelocityBlueLong.png" alt="Velocity Blue Long" className="w-full h-auto object-cover" style={{ aspectRatio: '16/9' }} />
+            </div>
+          </div>
+          
         </div>
       </section>
 
@@ -425,118 +534,6 @@ export default function PortfolioSite() {
         </div>
       </section>
 
-
-      {/* Design Section - Masonry Layout */}
-      <section id="design" className="mx-auto max-w-7xl px-4 py-16">
-        <h2 className="text-2xl font-semibold mb-8">
-          Design
-        </h2>
-        <div className="columns-1 md:columns-2 lg:columns-3 xl:columns-4 gap-6 space-y-6">
-          {/* Bionic Kid - Tall vertical */}
-          <div className="break-inside-avoid mb-6">
-            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl border-2 border-transparent hover:border-white/30 transition-all duration-300">
-              <img src="/BionicKid.jpg" alt="Bionic Kid" className="w-full h-auto object-cover" style={{ aspectRatio: '3/4' }} />
-            </div>
-          </div>
-          
-          {/* Crystal Strawberry - Very tall vertical */}
-          <div className="break-inside-avoid mb-6">
-            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl border-2 border-transparent hover:border-white/30 transition-all duration-300">
-              <img src="/CrystalStrawberry.jpg" alt="Crystal Strawberry" className="w-full h-auto object-cover" style={{ aspectRatio: '2/3' }} />
-            </div>
-          </div>
-          
-          {/* Lando Norris - Tall vertical */}
-          <div className="break-inside-avoid mb-6">
-            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl border-2 border-transparent hover:border-white/30 transition-all duration-300">
-              <img src="/LandoNorris.jpg" alt="Lando Norris" className="w-full h-auto object-cover" style={{ aspectRatio: '3/4' }} />
-            </div>
-          </div>
-          
-          {/* SSL Cards - Wide horizontal */}
-          <div className="break-inside-avoid mb-6">
-            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl border-2 border-transparent hover:border-white/30 transition-all duration-300">
-              <img src="/SSLCards.jpg" alt="SSL Cards" className="w-full h-auto object-cover" style={{ aspectRatio: '4/3' }} />
-            </div>
-          </div>
-          
-          {/* WHM Dayton - Wide horizontal */}
-          <div className="break-inside-avoid mb-6">
-            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl border-2 border-transparent hover:border-white/30 transition-all duration-300">
-              <img src="/WHMDayton.jpg" alt="WHM Dayton" className="w-full h-auto object-cover" style={{ aspectRatio: '16/9' }} />
-            </div>
-          </div>
-          
-          {/* Playboi Carti - Tall vertical */}
-          <div className="break-inside-avoid mb-6">
-            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl border-2 border-transparent hover:border-white/30 transition-all duration-300">
-              <img src="/PlayboiCarti.jpg" alt="Playboi Carti" className="w-full h-auto object-cover" style={{ aspectRatio: '3/4' }} />
-            </div>
-          </div>
-          
-          {/* Out of Sync - Very tall vertical */}
-          <div className="break-inside-avoid mb-6">
-            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl border-2 border-transparent hover:border-white/30 transition-all duration-300">
-              <img src="/OutofSync.jpg" alt="Out of Sync" className="w-full h-auto object-cover" style={{ aspectRatio: '2/3' }} />
-            </div>
-          </div>
-          
-          {/* Professional Development - Tall vertical */}
-          <div className="break-inside-avoid mb-6">
-            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl">
-              <img src="/ProfessionalDevelopment.jpg" alt="Professional Development" className="w-full h-auto object-cover" style={{ aspectRatio: '3/4' }} />
-              <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
-            </div>
-          </div>
-          
-          {/* Beats Studio Buds - Wide horizontal */}
-          <div className="break-inside-avoid mb-6">
-            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl">
-              <img src="/BeatsStudioBuds.png" alt="Beats Studio Buds" className="w-full h-auto object-cover" style={{ aspectRatio: '16/9' }} />
-              <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
-            </div>
-          </div>
-          
-          {/* Korean BBQ - Tall vertical poster */}
-          <div className="break-inside-avoid mb-6">
-            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl">
-              <img src="/KoreanBBQ.jpg" alt="Korean BBQ" className="w-full h-auto object-cover" style={{ aspectRatio: '3/4' }} />
-              <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
-            </div>
-          </div>
-          
-          {/* Data Landmark - Wide horizontal poster */}
-          <div className="break-inside-avoid mb-6">
-            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl">
-              <img src="/DataLandmarkPoster.jpg" alt="Data Landmark" className="w-full h-auto object-cover" style={{ aspectRatio: '16/9' }} />
-              <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
-            </div>
-          </div>
-          
-          {/* Social Hour - Tall vertical poster */}
-          <div className="break-inside-avoid mb-6">
-            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl border-2 border-transparent hover:border-white/30 transition-all duration-300">
-              <img src="/SocialHour.jpg" alt="Social Hour" className="w-full h-auto object-cover" style={{ aspectRatio: '3/4' }} />
-            </div>
-          </div>
-          
-          {/* Royal Mafia White - Square */}
-          <div className="break-inside-avoid mb-6">
-            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl border-2 border-transparent hover:border-white/30 transition-all duration-300">
-              <img src="/royalmafiaWHITE.png" alt="Royal Mafia White" className="w-full h-auto object-cover" style={{ aspectRatio: '1/1' }} />
-            </div>
-          </div>
-          
-          {/* Velocity Blue Long - Wide horizontal */}
-          <div className="break-inside-avoid mb-6">
-            <div className="bg-zinc-900 group cursor-pointer relative overflow-hidden rounded-2xl border-2 border-transparent hover:border-white/30 transition-all duration-300">
-              <img src="/VelocityBlueLong.png" alt="Velocity Blue Long" className="w-full h-auto object-cover" style={{ aspectRatio: '16/9' }} />
-            </div>
-          </div>
-          
-        </div>
-      </section>
-
       {/* Instagram Feed */}
       <section id="feed" className="mx-auto max-w-7xl px-4 py-16">
         <div className="flex items-center justify-between mb-8">
@@ -695,7 +692,7 @@ export default function PortfolioSite() {
                 Ask me
               </a>
               <a 
-                href="/Resume2025.pdf" 
+                href="/JacobOwensResume2026.pdf" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="inline-block px-6 py-3 rounded-2xl border border-white/20 text-white text-sm font-medium hover:bg-white/10 transition-colors"

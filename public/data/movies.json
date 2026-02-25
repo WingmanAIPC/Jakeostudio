@@ -1,0 +1,138 @@
+[
+  {
+    "id": 1,
+    "title": "Inception",
+    "posterUrl": "https://image.tmdb.org/t/p/w200/ljsZTbVsrQSqZgWeep2B1QiDKuh.jpg",
+    "releaseDate": "2010-07-16",
+    "rating": 8.4,
+    "overview": "A thief who steals corporate secrets through dream-sharing technology is given the inverse task of planting an idea."
+  },
+  {
+    "id": 2,
+    "title": "Interstellar",
+    "posterUrl": "https://image.tmdb.org/t/p/w200/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg",
+    "releaseDate": "2014-11-07",
+    "rating": 8.7,
+    "overview": "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival."
+  },
+  {
+    "id": 4,
+    "title": "Parasite",
+    "posterUrl": "https://image.tmdb.org/t/p/w200/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg",
+    "releaseDate": "2019-05-30",
+    "rating": 8.5,
+    "overview": "Greed and class discrimination threaten the newly formed symbiotic relationship between the wealthy Park family and the destitute Kim clan."
+  },
+  {
+    "id": 5,
+    "title": "Spider-Man: Across the Spider-Verse",
+    "posterUrl": "https://image.tmdb.org/t/p/w200/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg",
+    "releaseDate": "2023-06-02",
+    "rating": 8.7,
+    "overview": "Miles Morales catapults across the Multiverse, where he encounters a team of Spider-People charged with protecting its very existence."
+  },
+  {
+    "id": 6,
+    "title": "Dune: Part Two",
+    "posterUrl": "https://image.tmdb.org/t/p/w200/1pdfLvkbY9ohJlCjQH2CZjjYVvJ.jpg",
+    "releaseDate": "2024-03-01",
+    "rating": 8.3,
+    "overview": "Paul Atreides unites with the Fremen while on a warpath of revenge against the conspirators who destroyed his family."
+  },
+  {
+    "id": 7,
+    "title": "Everything Everywhere All at Once",
+    "posterUrl": "https://image.tmdb.org/t/p/w200/w3LxiVYdWWRvEVdn5RYq6jIqkb1.jpg",
+    "releaseDate": "2022-03-25",
+    "rating": 8.0,
+    "overview": "A middle-aged Chinese immigrant is swept up into an insane adventure where she alone can save existence."
+  },
+  {
+    "id": 8,
+    "title": "Oppenheimer",
+    "posterUrl": "https://image.tmdb.org/t/p/w200/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg",
+    "releaseDate": "2023-07-21",
+    "rating": 8.1,
+    "overview": "The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb."
+  },
+  {
+    "id": 10,
+    "title": "The Grand Budapest Hotel",
+    "posterUrl": "https://image.tmdb.org/t/p/w200/eWdyYQreja6JGCzqHWXpWHDrrPo.jpg",
+    "releaseDate": "2014-03-28",
+    "rating": 8.1,
+    "overview": "The adventures of Gustave H, a legendary concierge at a famous European hotel, and Zero Moustafa, the lobby boy."
+  },
+  {
+    "id": 11,
+    "title": "Mad Max: Fury Road",
+    "posterUrl": "https://image.tmdb.org/t/p/w200/8tZYtuWezp8JbcsvHYO0O46tFbo.jpg",
+    "releaseDate": "2015-05-15",
+    "rating": 8.1,
+    "overview": "In a post-apocalyptic wasteland, a woman rebels against a tyrannical ruler in search for her homeland."
+  },
+  {
+    "id": 12,
+    "title": "Blade Runner 2049",
+    "posterUrl": "https://image.tmdb.org/t/p/w200/gajva2L0rPYkEWjzgFlBXCAVBE5.jpg",
+    "releaseDate": "2017-10-06",
+    "rating": 7.5,
+    "overview": "A young blade runner's discovery of a long-buried secret leads him to track down former blade runner Rick Deckard."
+  },
+  {
+    "id": 13,
+    "title": "Arrival",
+    "posterUrl": "https://image.tmdb.org/t/p/w200/x2FJsf1ElAgr63Y3PNPtJrcmpoe.jpg",
+    "releaseDate": "2016-11-11",
+    "rating": 7.9,
+    "overview": "A linguist works with the military to communicate with alien lifeforms after twelve mysterious spacecraft appear around the world."
+  },
+  {
+    "id": 14,
+    "title": "The Batman",
+    "posterUrl": "https://image.tmdb.org/t/p/w200/74xTEgt7R36Fpooo50r9T25onhq.jpg",
+    "releaseDate": "2022-03-04",
+    "rating": 7.7,
+    "overview": "When a sadistic serial killer begins murdering key political figures in Gotham, Batman is forced to investigate the city's hidden corruption."
+  },
+  {
+    "id": 16,
+    "title": "La La Land",
+    "posterUrl": "https://image.tmdb.org/t/p/w200/uDO8zWDhfWwoFdKS4fzkUJt0Rf0.jpg",
+    "releaseDate": "2016-12-09",
+    "rating": 8.0,
+    "overview": "While navigating their careers in Los Angeles, a pianist and an actress fall in love while attempting to reconcile their aspirations."
+  },
+  {
+    "id": 17,
+    "title": "Moonlight",
+    "posterUrl": "https://image.tmdb.org/t/p/w200/4911T5FbJ9eD2Faz5Z8cT3SUhU3.jpg",
+    "releaseDate": "2016-10-21",
+    "rating": 7.4,
+    "overview": "A young African-American man grapples with his identity and sexuality while experiencing the everyday struggles of childhood, adolescence, and adulthood."
+  },
+  {
+    "id": 18,
+    "title": "Spirited Away",
+    "posterUrl": "https://image.tmdb.org/t/p/w200/39wmItIWsg5sZMyRUHLkWBcuVCM.jpg",
+    "releaseDate": "2001-07-20",
+    "rating": 8.5,
+    "overview": "A young girl wanders into a world ruled by gods, witches, and spirits, where humans are changed into beasts."
+  },
+  {
+    "id": 19,
+    "title": "The Social Network",
+    "posterUrl": "https://image.tmdb.org/t/p/w200/n0ybibhJtQ5icDqTp8eRytcIHJx.jpg",
+    "releaseDate": "2010-10-01",
+    "rating": 7.7,
+    "overview": "The story of the founding of Facebook and the resulting lawsuits by Harvard students who claimed Mark Zuckerberg stole their idea."
+  },
+  {
+    "id": 20,
+    "title": "Knives Out",
+    "posterUrl": "https://image.tmdb.org/t/p/w200/pThyQovXQrw2m0s9x82twj48Jq4.jpg",
+    "releaseDate": "2019-11-27",
+    "rating": 7.9,
+    "overview": "A detective investigates the death of a patriarch of an eccentric, combative family in this whodunit mystery."
+  }
+]
