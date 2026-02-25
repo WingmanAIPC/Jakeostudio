@@ -6,6 +6,22 @@ import PillNav from "../components/PillNav";
 // Drop into Next.js/React. Replace placeholders with real content.
 
 export default function PortfolioSite() {
+  const [showScrollHint, setShowScrollHint] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShowScrollHint(true), 3500);
+
+    const handleScroll = () => {
+      if (window.scrollY > 50) setShowScrollHint(false);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   const navItems = [
     { label: "Feature", href: "#feature", ariaLabel: "Go to Feature section" },
     { label: "Video", href: "#video", ariaLabel: "Go to Video section" },
@@ -65,11 +81,32 @@ export default function PortfolioSite() {
           </div>
         </div>
 
+        {/* Scroll Down Hint Arrow */}
+        <button
+          onClick={() => {
+            document.getElementById("creative")?.scrollIntoView({ behavior: "smooth" });
+            setShowScrollHint(false);
+          }}
+          aria-label="Scroll down"
+          className={`absolute bottom-8 left-1/2 -translate-x-1/2 z-30 transition-all duration-700 ease-out cursor-pointer ${
+            showScrollHint ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"
+          }`}
+        >
+          <svg
+            className="w-6 h-6 text-white/60 animate-bounce"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
 
       </section>
 
       {/* Creative Technologist Section */}
-      <section className="mx-auto max-w-7xl px-4 pt-24 pb-12">
+      <section id="creative" className="mx-auto max-w-7xl px-4 pt-24 pb-12">
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-6xl font-semibold mb-4">Creative Technologist</h2>
           <p className="text-xl text-zinc-300 max-w-3xl mx-auto mb-8">
