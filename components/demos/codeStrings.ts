@@ -1,360 +1,276 @@
-export const movieListCode = `import React, { useState, useEffect } from "react";
+export const kineticTypographyCode = `import React, { useState, useRef, useEffect, useCallback } from "react";
 
-interface Movie {
-  id: number;
-  title: string;
-  posterUrl: string;
-  releaseDate: string;
-  rating: number;
-  overview: string;
-}
+type EffectType = "wave" | "glitch" | "bounce" | "split" | "typewriter";
 
-type SortKey = "title" | "releaseDate" | "rating";
-type SortDir = "asc" | "desc";
+const KineticTypography: React.FC = () => {
+  const [text, setText] = useState("Design Technologist");
+  const [effect, setEffect] = useState<EffectType>("wave");
+  const [speed, setSpeed] = useState(1);
+  const [intensity, setIntensity] = useState(1);
+  const [color, setColor] = useState("#ffffff");
+  const frameRef = useRef<number>(0);
+  const timeRef = useRef(0);
+  const charsRef = useRef<(HTMLSpanElement | null)[]>([]);
 
-const MovieListDemo: React.FC = () => {
-  const [movies, setMovies] = useState<Movie[]>([]);
-  const [search, setSearch] = useState("");
-  const [sortKey, setSortKey] = useState<SortKey>("rating");
-  const [sortDir, setSortDir] = useState<SortDir>("desc");
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const applyEffect = useCallback(() => {
+    const now = timeRef.current;
+    charsRef.current.forEach((el, i) => {
+      if (!el) return;
+      const offset = i * 0.15;
+      const t = now * speed - offset;
+
+      switch (effect) {
+        case "wave": {
+          const y = Math.sin(t * 3) * 12 * intensity;
+          el.style.transform = \`translateY(\${y}px)\`;
+          break;
+        }
+        case "glitch": {
+          const glitch = (Math.random() - 0.5) * 4 * intensity;
+          el.style.transform = \`translate(\${glitch}px, \${glitch}px)\`;
+          el.style.opacity = Math.sin(t * 10) > 0.9 ? "0.3" : "1";
+          break;
+        }
+        case "bounce": {
+          const bounce = Math.abs(Math.sin(t * 2.5)) * 20 * intensity;
+          el.style.transform = \`translateY(\${-bounce}px)\`;
+          break;
+        }
+        case "split": {
+          const mid = charsRef.current.length / 2;
+          const dist = (i - mid) * Math.sin(t * 1.5) * 3 * intensity;
+          el.style.transform = \`translateX(\${dist}px)\`;
+          break;
+        }
+        case "typewriter": {
+          const cycleLen = charsRef.current.length + 4;
+          const pos = ((t * 3 + cycleLen) % (cycleLen * 2));
+          el.style.opacity = pos >= i ? "1" : "0";
+          break;
+        }
+      }
+    });
+  }, [effect, speed, intensity]);
 
   useEffect(() => {
-    const controller = new AbortController();
+    let running = true;
+    let lastTime = performance.now();
+    const loop = (now: number) => {
+      if (!running) return;
+      timeRef.current += (now - lastTime) / 1000;
+      lastTime = now;
+      applyEffect();
+      frameRef.current = requestAnimationFrame(loop);
+    };
+    frameRef.current = requestAnimationFrame(loop);
+    return () => { running = false; cancelAnimationFrame(frameRef.current); };
+  }, [applyEffect]);
 
-    async function fetchMovies() {
-      try {
-        setLoading(true);
-        const res = await fetch("/data/movies.json", {
-          signal: controller.signal,
-        });
-        if (!res.ok) throw new Error(\`HTTP \${res.status}\`);
-        const data: Movie[] = await res.json();
-        setMovies(data);
-        setError(null);
-      } catch (err: unknown) {
-        if (err instanceof DOMException && err.name === "AbortError") return;
-        setError(
-          err instanceof Error ? err.message : "Failed to fetch movies"
-        );
-      } finally {
-        setLoading(false);
-      }
-    }
+  return (
+    <div className="flex flex-col gap-6">
+      <div className="flex items-center justify-center min-h-[140px]">
+        {text.split("").map((char, i) => (
+          <span
+            key={i}
+            ref={(el) => { charsRef.current[i] = el; }}
+            style={{ color, willChange: "transform, opacity" }}
+          >
+            {char === " " ? "\\u00A0" : char}
+          </span>
+        ))}
+      </div>
+      {/* Controls: text input, effect selector, speed, intensity, color */}
+    </div>
+  );
+};`;
 
-    fetchMovies();
-    return () => controller.abort();
-  }, []);
+export const miniWingmanCode = `import React, { useState, useRef, useEffect } from "react";
 
-  const handleSort = (key: SortKey) => {
-    if (sortKey === key) {
-      setSortDir((d) => (d === "asc" ? "desc" : "asc"));
+const SCALE_COLORS = ["#ef4444", "#f59e0b", "#a1a1aa", "#6ee7b7", "#10b981"];
+
+interface LikertQuestion {
+  id: string;
+  text: string;
+  dimension: string;
+}
+
+const QUESTIONS: LikertQuestion[] = [
+  { id: "sa", text: "I can easily identify what I'm feeling.", dimension: "Self-Awareness" },
+  { id: "em", text: "I naturally pick up on how others are feeling.", dimension: "Empathy" },
+  { id: "mo", text: "I stay motivated even when things get difficult.", dimension: "Motivation" },
+  { id: "ss", text: "I find it easy to navigate social situations.", dimension: "Social Skills" },
+  { id: "sr", text: "When I feel a strong emotion, I can pause before reacting.", dimension: "Self-Regulation" },
+];
+
+interface Message { role: "assistant" | "user"; content: string; }
+
+const MiniWingman: React.FC = () => {
+  const [phase, setPhase] = useState<"likert" | "profile" | "chat">("likert");
+  const [currentQ, setCurrentQ] = useState(0);
+  const [answers, setAnswers] = useState<Record<string, number>>({});
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [isStreaming, setIsStreaming] = useState(false);
+
+  // Wingman branding: dark forest green (#14532d / #166534)
+  // Likert buttons use a red-to-green color scale matching the iOS app
+  // Progress bar and chat accents use Wingman green
+
+  const handleAnswer = (value: number) => {
+    const q = QUESTIONS[currentQ];
+    const newAnswers = { ...answers, [q.id]: value };
+    setAnswers(newAnswers);
+
+    if (currentQ < QUESTIONS.length - 1) {
+      setCurrentQ(prev => prev + 1);
     } else {
-      setSortKey(key);
-      setSortDir(key === "rating" ? "desc" : "asc");
+      const profile: Record<string, number> = {};
+      QUESTIONS.forEach(q => { profile[q.dimension] = newAnswers[q.id] ?? 3; });
+      setPhase("profile");
+      setTimeout(() => {
+        setPhase("chat");
+        sendInitialMessage(profile);
+      }, 2500);
     }
   };
 
-  const filtered = movies
-    .filter((m) =>
-      m.title.toLowerCase().includes(search.toLowerCase())
-    )
-    .sort((a, b) => {
-      let cmp = 0;
-      if (sortKey === "title") cmp = a.title.localeCompare(b.title);
-      else if (sortKey === "releaseDate")
-        cmp = a.releaseDate.localeCompare(b.releaseDate);
-      else cmp = a.rating - b.rating;
-      return sortDir === "asc" ? cmp : -cmp;
+  const sendInitialMessage = async (profile: Record<string, number>) => {
+    setIsStreaming(true);
+    const res = await fetch("/api/wingman", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ messages: [], eqProfile: profile, isInitial: true }),
+    });
+    const reader = res.body?.getReader();
+    const decoder = new TextDecoder();
+    let fullText = "";
+    setMessages([{ role: "assistant", content: "" }]);
+    while (reader) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      fullText += decoder.decode(value, { stream: true });
+      setMessages([{ role: "assistant", content: fullText }]);
+    }
+    setIsStreaming(false);
+  };
+
+  // Likert scale with colored circles (red → orange → gray → green)
+  // Wingman SVG logo replaces generic "W" badge
+  // Chat UI with green-themed message bubbles and streaming
+  // ...
+};`;
+
+export const songPosterCode = `import React, { useState } from "react";
+
+const STYLE_DIRECTIONS = [
+  "Swiss International Style", "Psychedelic Concert Poster",
+  "Minimalist Bauhaus", "Risograph Print", "Japanese Woodblock",
+  "Art Deco", "Soviet Constructivist", "Vaporwave",
+  "Brutalist Typography", "Retro Futurism",
+];
+
+const SongPosterGenerator: React.FC = () => {
+  const [song, setSong] = useState("");
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [styleName, setStyleName] = useState<string | null>(null);
+
+  const generate = async (songInput?: string) => {
+    const target = songInput || song;
+    if (!target.trim()) return;
+    setLoading(true);
+
+    const res = await fetch("/api/poster", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ song: target.trim() }),
     });
 
-  if (loading) return <div role="status">Loading movies…</div>;
-  if (error) return <div role="alert">Error: {error}</div>;
+    const data = await res.json();
+    setImageUrl(data.imageUrl);
+    setStyleName(data.style);
+    setLoading(false);
+  };
+
+  // API route builds a DALL-E 3 prompt with:
+  // - Song name and artist extracted from input
+  // - Randomized style direction from 10 design movements
+  // - Visual elements inspired by the song's themes
+  // - Poster-specific composition rules
+  //
+  // Example prompt for "Bohemian Rhapsody - Queen":
+  // "Design a stunning music poster... Style: Psychedelic Concert Poster,
+  //  1960s swirling organic lettering, vibrant saturated colors..."
 
   return (
     <div>
       <input
-        type="search"
-        placeholder="Search movies…"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        aria-label="Search movies by title"
+        type="text"
+        value={song}
+        onChange={(e) => setSong(e.target.value)}
+        placeholder="e.g. Bohemian Rhapsody - Queen"
       />
-
-      <table aria-label="Movie list">
-        <caption className="sr-only">
-          A list of movies with poster, title, release date, and rating.
-        </caption>
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col" onClick={() => handleSort("title")}>
-              Title
-            </th>
-            <th scope="col" onClick={() => handleSort("releaseDate")}>
-              Released
-            </th>
-            <th scope="col" onClick={() => handleSort("rating")}>
-              Rating
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {filtered.map((movie) => (
-            <tr key={movie.id}>
-              <td>
-                <img
-                  src={movie.posterUrl}
-                  alt={\`\${movie.title} poster\`}
-                  loading="lazy"
-                />
-              </td>
-              <td>{movie.title}</td>
-              <td>
-                {new Date(movie.releaseDate).toLocaleDateString()}
-              </td>
-              <td>⭐ {movie.rating.toFixed(1)}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <p>{filtered.length} of {movies.length} movies</p>
+      <button onClick={() => generate()}>Generate</button>
+      {imageUrl && <img src={imageUrl} alt="Generated poster" />}
+      {styleName && <span>{styleName}</span>}
+      <button onClick={() => generate(song)}>Generate Another</button>
     </div>
   );
 };`;
 
-export const motionPlaygroundCode = `import React, { useState, useCallback } from "react";
+export const cardBuilderCode = `import React, { useState, useMemo } from "react";
 
-const EASING_OPTIONS = [
-  { label: "ease", value: "ease" },
-  { label: "ease-in-out", value: "ease-in-out" },
-  { label: "ease-in", value: "ease-in" },
-  { label: "ease-out", value: "ease-out" },
-  { label: "linear", value: "linear" },
-  { label: "spring", value: "cubic-bezier(0.175, 0.885, 0.32, 1.275)" },
+type AnimationStyle = "float" | "pulse" | "spin" | "wobble" | "shimmer";
+type WizardStep = "intro" | "name" | "icon" | "style" | "animation" | "message" | "done";
+
+const GRADIENTS = [
+  { label: "Indigo", value: "linear-gradient(135deg, #6366f1, #8b5cf6)", rgb: "99,102,241" },
+  { label: "Sunset", value: "linear-gradient(135deg, #f97316, #ec4899)", rgb: "249,115,22" },
+  { label: "Ocean", value: "linear-gradient(135deg, #06b6d4, #3b82f6)", rgb: "6,182,212" },
+  // ... more gradient options with rgb values for glass tinting
 ];
 
-const TRANSFORM_OPTIONS = [
-  { label: "Scale", value: "scale", unit: "", range: [0.5, 2], default: 1 },
-  { label: "Rotate", value: "rotate", unit: "deg", range: [0, 360], default: 0 },
-  { label: "TranslateY", value: "translateY", unit: "px", range: [-60, 60], default: 0 },
-  { label: "Skew", value: "skewX", unit: "deg", range: [-30, 30], default: 0 },
-];
+const ContactCard: React.FC = () => {
+  const [step, setStep] = useState<WizardStep>("intro");
+  const [name, setName] = useState("");
+  const [icon, setIcon] = useState("🚀");
+  const [gradientIdx, setGradientIdx] = useState(0);
+  const [anim, setAnim] = useState<AnimationStyle>("float");
+  const [isFlipped, setIsFlipped] = useState(false);
 
-const SHADOW_OPTIONS = [
-  { label: "None", value: "none" },
-  { label: "Soft", value: "0 8px 24px -4px" },
-  { label: "Hard", value: "0 4px 0 0" },
-  { label: "Glow", value: "0 0 24px 4px" },
-];
+  const gradient = GRADIENTS[gradientIdx];
 
-interface MotionState {
-  duration: number;
-  easing: string;
-  transformType: number;
-  transformValue: number;
-  hoverColor: string;
-  hoverShadow: string;
-  hoverBorderRadius: number;
-}
-
-const BASE_COLOR = "#6366f1";
-
-const MotionPlayground: React.FC = () => {
-  const [state, setState] = useState<MotionState>({ ...DEFAULTS });
-  const [isHovered, setIsHovered] = useState(false);
-
-  const transform = TRANSFORM_OPTIONS[state.transformType];
-
-  const buildTransform = (val: number) =>
-    transform.unit === ""
-      ? \`\${transform.value}(\${val})\`
-      : \`\${transform.value}(\${val}\${transform.unit})\`;
-
-  // Base (resting) style
-  const baseStyle: React.CSSProperties = {
-    transition: \`all \${state.duration}ms \${state.easing}\`,
-    transform: buildTransform(transform.default),
-    backgroundColor: BASE_COLOR,
-    borderRadius: 12,
-    boxShadow: "none",
-  };
-
-  // Hover style — applies configured transforms
-  const hoveredStyle: React.CSSProperties = {
-    ...baseStyle,
-    transform: buildTransform(state.transformValue),
-    backgroundColor: state.hoverColor,
-    borderRadius: state.hoverBorderRadius,
-    boxShadow: state.hoverShadow === "none"
-      ? "none"
-      : \`\${state.hoverShadow} \${state.hoverColor}66\`,
-  };
-
-  const cardStyle = isHovered ? hoveredStyle : baseStyle;
+  // Glassmorphism card with backdrop-blur, translucent tint, and edge glow
+  // Click-to-flip with CSS 3D transforms (preserve-3d + rotateY)
+  // Atmospheric background: drifting gradient orbs + dot grid overlay
+  // Step-by-step wizard: intro → name → icon → style → animation → message → done
+  // On submit, data is saved to Supabase
 
   return (
-    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
-      {/* Card with hover interaction */}
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+    <div className="grid grid-cols-2 gap-6">
+      <div className="card-preview" style={{ perspective: "800px" }}>
         <div
-          style={cardStyle}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
-          <div className="avatar" />
-          <div className="line" />
-        </div>
-      </div>
-
-      {/* Controls for hover properties */}
-      <div>
-        <label>Duration: {state.duration}ms</label>
-        <input type="range" min={100} max={2000} step={50}
-          value={state.duration}
-          onChange={(e) => setState(s => ({ ...s, duration: +e.target.value }))}
-        />
-
-        <label>Easing</label>
-        {EASING_OPTIONS.map(opt => (
-          <button key={opt.label}
-            onClick={() => setState(s => ({ ...s, easing: opt.value }))}>
-            {opt.label}
-          </button>
-        ))}
-
-        <label>Transform</label>
-        <input type="range"
-          min={transform.range[0]} max={transform.range[1]}
-          value={state.transformValue}
-          onChange={(e) => setState(s => ({ ...s, transformValue: +e.target.value }))}
-        />
-
-        <label>Shadow</label>
-        {SHADOW_OPTIONS.map(opt => (
-          <button key={opt.label}
-            onClick={() => setState(s => ({ ...s, hoverShadow: opt.value }))}>
-            {opt.label}
-          </button>
-        ))}
-
-        <label>Radius: {state.hoverBorderRadius}px</label>
-        <input type="range" min={0} max={50}
-          value={state.hoverBorderRadius}
-          onChange={(e) => setState(s => ({ ...s, hoverBorderRadius: +e.target.value }))}
-        />
-
-        <button onClick={randomize}>Randomize</button>
-        <button onClick={() => setState({ ...DEFAULTS })}>Reset</button>
-      </div>
-    </div>
-  );
-};`;
-
-export const responsiveDemoCode = `import React, { useState, useRef, useCallback, useEffect } from "react";
-
-const BREAKPOINTS = [
-  { label: "Mobile", maxWidth: 480, cols: 1, color: "#ef4444" },
-  { label: "Tablet", maxWidth: 768, cols: 2, color: "#f59e0b" },
-  { label: "Desktop", maxWidth: Infinity, cols: 4, color: "#10b981" },
-];
-
-const CARDS = [
-  { title: "Analytics", icon: "📊" },
-  { title: "Settings", icon: "⚙️" },
-  { title: "Messages", icon: "💬" },
-  { title: "Profile", icon: "👤" },
-  { title: "Calendar", icon: "📅" },
-  { title: "Storage", icon: "📁" },
-  { title: "Reports", icon: "📈" },
-  { title: "Security", icon: "🔒" },
-];
-
-const ResponsiveDemo: React.FC = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [containerWidth, setContainerWidth] = useState(800);
-  const [isDragging, setIsDragging] = useState(false);
-  const [maxWidth, setMaxWidth] = useState(800);
-
-  useEffect(() => {
-    const updateMax = () => {
-      if (containerRef.current?.parentElement) {
-        setMaxWidth(containerRef.current.parentElement.clientWidth - 32);
-      }
-    };
-    updateMax();
-    window.addEventListener("resize", updateMax);
-    return () => window.removeEventListener("resize", updateMax);
-  }, []);
-
-  const activeBreakpoint =
-    BREAKPOINTS.find((bp) => containerWidth <= bp.maxWidth) || BREAKPOINTS[2];
-  const cols = activeBreakpoint.cols;
-
-  const handleMouseDown = useCallback((e: React.MouseEvent) => {
-    e.preventDefault();
-    setIsDragging(true);
-    const startX = e.clientX;
-    const startWidth = containerWidth;
-
-    const onMove = (ev: MouseEvent) => {
-      const delta = ev.clientX - startX;
-      setContainerWidth(Math.max(280, Math.min(maxWidth, startWidth + delta)));
-    };
-    const onUp = () => {
-      setIsDragging(false);
-      document.removeEventListener("mousemove", onMove);
-      document.removeEventListener("mouseup", onUp);
-    };
-
-    document.addEventListener("mousemove", onMove);
-    document.addEventListener("mouseup", onUp);
-  }, [containerWidth, maxWidth]);
-
-  return (
-    <div>
-      {/* Breakpoint indicators */}
-      <div style={{ display: "flex", gap: 12, marginBottom: 16 }}>
-        {BREAKPOINTS.map((bp) => (
-          <span key={bp.label} style={{
-            color: activeBreakpoint.label === bp.label ? bp.color : "#666",
-            fontWeight: activeBreakpoint.label === bp.label ? 600 : 400,
-          }}>
-            {bp.label} {bp.maxWidth < Infinity ? \`≤\${bp.maxWidth}px\` : ""}
-          </span>
-        ))}
-        <span style={{ marginLeft: "auto" }}>
-          {Math.round(containerWidth)}px
-        </span>
-      </div>
-
-      {/* Resizable container with drag handle */}
-      <div ref={containerRef}
-        style={{ width: containerWidth, maxWidth: "100%", position: "relative" }}>
-        <div style={{
-          display: "grid",
-          gridTemplateColumns: \`repeat(\${cols}, 1fr)\`,
-          gap: 12,
-          padding: 16,
-          border: "1px solid rgba(255,255,255,0.1)",
-          borderRadius: 12,
-        }}>
-          {CARDS.map((card) => (
-            <div key={card.title} className="grid-card">
-              <span>{card.icon}</span>
-              <span>{card.title}</span>
-            </div>
-          ))}
-        </div>
-
-        {/* Drag handle on the right edge */}
-        <div onMouseDown={handleMouseDown}
+          onClick={() => setIsFlipped(f => !f)}
           style={{
-            position: "absolute", top: 0, right: 0, bottom: 0,
-            width: 12, cursor: "col-resize",
+            transformStyle: "preserve-3d",
+            transform: isFlipped ? "rotateY(180deg)" : undefined,
+            transition: "transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)",
           }}
-        />
+        >
+          {/* Front: glass card with icon, name, divider */}
+          <div style={{
+            background: \`rgba(\${gradient.rgb}, 0.15)\`,
+            backdropFilter: "blur(20px)",
+            border: "1px solid rgba(255,255,255,0.18)",
+            boxShadow: \`0 8px 32px rgba(\${gradient.rgb}, 0.25)\`,
+          }}>
+            <span>{icon}</span>
+            <span>{name || "Your Name"}</span>
+          </div>
+          {/* Back: enlarged icon + "Contact Card" label */}
+        </div>
+      </div>
+      <div className="wizard-step">
+        {/* Renders current step with smooth transitions */}
       </div>
     </div>
   );

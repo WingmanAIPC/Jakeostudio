@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import PrismaticBurst from "../components/PrismaticBurst";
 import PillNav from "../components/PillNav";
 import CodeShowcase from "../components/CodeShowcase";
-import MovieListDemo from "../components/demos/MovieListDemo";
-import MotionPlayground from "../components/demos/MotionPlayground";
-import ResponsiveDemo from "../components/demos/ResponsiveDemo";
-import { movieListCode, motionPlaygroundCode, responsiveDemoCode } from "../components/demos/codeStrings";
+import KineticTypography from "../components/demos/KineticTypography";
+import MiniWingman from "../components/demos/MiniWingman";
+
+import CardBuilder from "../components/demos/CardBuilder";
+import { kineticTypographyCode, miniWingmanCode, cardBuilderCode } from "../components/demos/codeStrings";
 import SkillsSlider from "../components/SkillsSlider";
 
 // Minimal single-file React portfolio using Tailwind CSS classes.
@@ -228,28 +229,31 @@ export default function PortfolioSite() {
         <CodeShowcase
           demos={[
             {
-              id: "motion",
-              label: "Motion",
-              tags: ["CSS Animations", "React State", "CSS Custom Properties"],
-              code: motionPlaygroundCode,
+              id: "card",
+              label: "Contact Card",
+              description: "Create a personal networking card to connect with Jake.",
+              tags: ["React", "TypeScript", "Supabase", "CSS Animations", "Glassmorphism"],
+              code: cardBuilderCode,
               language: "tsx",
-              children: <MotionPlayground />,
+              children: <CardBuilder />,
             },
             {
-              id: "movies",
-              label: "Movies",
-              tags: ["React", "TypeScript", "Fetch API", "Semantic HTML", "Accessibility"],
-              code: movieListCode,
+              id: "wingman",
+              label: "Mini Wingman",
+              description: "Take an EQ assessment, then chat with an AI that knows about Jake.",
+              tags: ["React", "TypeScript", "Anthropic Claude", "Streaming", "Accessibility"],
+              code: miniWingmanCode,
               language: "tsx",
-              children: <MovieListDemo />,
+              children: <MiniWingman />,
             },
             {
-              id: "responsive",
-              label: "Responsive",
-              tags: ["CSS Grid", "Container Queries", "Responsive Design"],
-              code: responsiveDemoCode,
+              id: "typography",
+              label: "Kinetic Type",
+              description: "Real-time animated typography engine with per-character effects.",
+              tags: ["React", "TypeScript", "requestAnimationFrame", "CSS Animations"],
+              code: kineticTypographyCode,
               language: "tsx",
-              children: <ResponsiveDemo />,
+              children: <KineticTypography />,
             },
           ]}
         />
