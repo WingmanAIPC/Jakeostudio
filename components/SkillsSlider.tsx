@@ -11,7 +11,7 @@ interface Skill {
 const skills: Skill[] = [
   {
     title: "UX & Product",
-    desc: "Interaction design, UX prototyping, information architecture, testing & QA",
+    desc: "Interaction design, UX prototyping, information architecture",
     gradient: "from-blue-500/60 to-blue-600/20",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-7 h-7">
@@ -71,7 +71,7 @@ const skills: Skill[] = [
   },
   {
     title: "Creative Suite",
-    desc: "After Effects, Premiere Pro, Photoshop, Illustrator, Figma, Cinema 4D & InDesign",
+    desc: "After Effects, Premiere Pro, Photoshop, Illustrator, Figma",
     gradient: "from-pink-500/60 to-pink-600/20",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-7 h-7">
@@ -91,7 +91,7 @@ const skills: Skill[] = [
   },
   {
     title: "AI & Platforms",
-    desc: "Cursor, Kiro, Supabase, Vercel, GitHub, AWS, CI/CD pipelines & cloud infrastructure",
+    desc: "Cursor, Supabase, Vercel, GitHub",
     gradient: "from-indigo-500/60 to-indigo-600/20",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-7 h-7">

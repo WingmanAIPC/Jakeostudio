@@ -90,6 +90,7 @@ const CardBuilder: React.FC = () => {
   const [email, setEmail] = useState("");
   const [note, setNote] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [fadeClass, setFadeClass] = useState("opacity-100");
   const [isFlipped, setIsFlipped] = useState(false);
   const nameInputRef = useRef<HTMLInputElement>(null);
@@ -116,6 +117,7 @@ const CardBuilder: React.FC = () => {
   const submit = async () => {
     if (!name.trim()) return;
     setSubmitting(true);
+    setSubmitError(null);
 
     try {
       const res = await fetch("/api/card", {
@@ -131,10 +133,17 @@ const CardBuilder: React.FC = () => {
         }),
       });
 
-      if (!res.ok) throw new Error("Failed to save");
+      if (!res.ok) {
+        throw new Error(`Could not save your card (${res.status}). Try again.`);
+      }
       transition("done");
-    } catch {
-      transition("done");
+    } catch (e) {
+      const raw = e instanceof Error ? e.message : "Something went wrong.";
+      const message =
+        raw === "Failed to fetch"
+          ? "Network error. Check your connection and try again."
+          : raw;
+      setSubmitError(message);
     } finally {
       setSubmitting(false);
     }
@@ -377,6 +386,11 @@ const CardBuilder: React.FC = () => {
             >
               {submitting ? "Sending..." : "Send Card"}
             </button>
+            {submitError ? (
+              <p className="text-xs text-red-400 text-center max-w-xs" role="alert">
+                {submitError}
+              </p>
+            ) : null}
           </div>
         );
 

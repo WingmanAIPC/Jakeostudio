@@ -19,6 +19,10 @@
 .DS_Store
 *.pem
 
+# Walkthrough demos are on YouTube; these exceed GitHub’s 100MB limit
+/public/Biro Labels Demo Walkthrough Main.mp4
+/public/Admn Walkthrough Demo.mp4
+
 # debug
 npm-debug.log*
 yarn-debug.log*

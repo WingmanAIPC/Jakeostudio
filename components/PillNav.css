@@ -1,11 +1,7 @@
 .pill-nav-container {
-  position: fixed;
-  top: 1em;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 99;
+  position: relative;
   width: auto;
-  padding-left: 1em;
+  padding-left: 0;
 }
 
 
@@ -87,7 +83,7 @@
   color: var(--base);
 }
 
-
+/* Hide pill nav chrome on small viewports (header uses contact icons; desktop cluster wraps PillNav). */
 @media (max-width: 768px) {
   .pill-nav-container {
     display: none;
