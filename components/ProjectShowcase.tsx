@@ -23,7 +23,7 @@ import {
 } from "../lib/work";
 
 const DEFAULT_SLIDE_MS = 9000;
-const TEXT_FADE_MS = 400;
+const TEXT_FADE_MS = 800;
 const THUMBNAIL_ROTATE_MS = 3000;
 /** Cloverleaf thumb + short YouTube preview per slot (before outro video) */
 const CLOVERLEAF_PREVIEW_PHASE_MS = THUMBNAIL_ROTATE_MS * 2;
@@ -53,11 +53,13 @@ function ThumbsThenVideoBackground({
   isActive,
   onComplete,
   reportProgress,
+  fillContainer = false,
 }: {
   project: FeaturedProject;
   isActive: boolean;
   onComplete: () => void;
   reportProgress?: (fraction: number) => void;
+  fillContainer?: boolean;
 }) {
   const thumbs = (project.thumbnails ?? []).slice(0, 2);
   const previewIds = (project.cloverleafPreviewVideoIds ?? []).slice(0, 2);
@@ -153,6 +155,7 @@ function ThumbsThenVideoBackground({
                 isActive
                 loop={false}
                 embedDelayMs={0}
+                fillContainer={fillContainer}
               />
             </div>
           ) : null}
@@ -283,6 +286,7 @@ function SlideBackground({
         key={cloverRemountKey ?? "clover"}
         project={project}
         isActive={isActive}
+        fillContainer={fillContainer}
         onComplete={() => onCloverleafComplete?.()}
         reportProgress={reportCloverleafProgress}
       />
@@ -363,6 +367,7 @@ export default function ProjectShowcase() {
   const hireProgressRef = useRef(0);
   const biroProgressRef = useRef(0);
   const flashOverlayRef = useRef<HTMLDivElement>(null);
+  const mobileFlashRef = useRef<HTMLDivElement>(null);
   const isTransitioningRef = useRef(false);
 
   const slideCount = FEATURED_PROJECTS.length;
@@ -474,32 +479,40 @@ export default function ProjectShowcase() {
       if (isTransitioningRef.current) return;
       isTransitioningRef.current = true;
       const overlay = flashOverlayRef.current;
+      const mobileOverlay = mobileFlashRef.current;
+      const primary = overlay ?? mobileOverlay;
 
-      if (!overlay) {
+      if (!primary) {
         commitSlide(nextIndex);
         isTransitioningRef.current = false;
         return;
       }
 
+      const applyFlash = (el: HTMLDivElement | null, props: Partial<CSSStyleDeclaration>) => {
+        if (el) Object.assign(el.style, props);
+      };
+
       const onFlashInEnd = (e: TransitionEvent) => {
         if (e.propertyName !== "opacity") return;
-        overlay.removeEventListener("transitionend", onFlashInEnd);
+        primary.removeEventListener("transitionend", onFlashInEnd);
         commitSlide(nextIndex);
         requestAnimationFrame(() => {
-          overlay.style.transition = `opacity ${WHITE_FLASH_OUT_MS}ms cubic-bezier(0.22, 1, 0.36, 1)`;
-          overlay.style.opacity = "0";
+          const outT = `opacity ${WHITE_FLASH_OUT_MS}ms cubic-bezier(0.22, 1, 0.36, 1)`;
+          applyFlash(overlay, { transition: outT, opacity: "0" });
+          applyFlash(mobileOverlay, { transition: outT, opacity: "0" });
           const onFlashOutEnd = (ev: TransitionEvent) => {
             if (ev.propertyName !== "opacity") return;
-            overlay.removeEventListener("transitionend", onFlashOutEnd);
+            primary.removeEventListener("transitionend", onFlashOutEnd);
             isTransitioningRef.current = false;
           };
-          overlay.addEventListener("transitionend", onFlashOutEnd);
+          primary.addEventListener("transitionend", onFlashOutEnd);
         });
       };
 
-      overlay.style.transition = `opacity ${WHITE_FLASH_IN_MS}ms ease-in`;
-      overlay.style.opacity = "1";
-      overlay.addEventListener("transitionend", onFlashInEnd);
+      const inT = `opacity ${WHITE_FLASH_IN_MS}ms ease-in`;
+      applyFlash(overlay, { transition: inT, opacity: "1" });
+      applyFlash(mobileOverlay, { transition: inT, opacity: "1" });
+      primary.addEventListener("transitionend", onFlashInEnd);
     },
     [commitSlide],
   );
@@ -637,13 +650,25 @@ export default function ProjectShowcase() {
       id="top"
       className="relative w-full md:overflow-hidden md:[height:100svh]"
     >
-      {/* Flash overlay — fixed so it covers the full viewport for both layouts */}
+      {/* Desktop flash — fixed, covers full viewport, hidden on mobile */}
       <div
         ref={flashOverlayRef}
-        className="pointer-events-none fixed inset-0 z-[500] bg-white"
+        className="pointer-events-none fixed inset-0 z-[500] bg-white hidden md:block"
         style={{ opacity: 0 }}
         aria-hidden
       />
+
+      {/* Mobile hero wrapper — clips mobile flash to the hero area only.
+          md:contents makes it transparent in the desktop layout tree so
+          md:absolute md:inset-0 on the video div still anchors to <section>. */}
+      <div className="relative overflow-hidden md:contents">
+        {/* Mobile flash — absolute within this wrapper, invisible on desktop */}
+        <div
+          ref={mobileFlashRef}
+          className="pointer-events-none absolute inset-0 z-[500] bg-white md:hidden"
+          style={{ opacity: 0 }}
+          aria-hidden
+        />
 
       {/* ─── Shared video area ──────────────────────────────────────────
           Mobile:  relative + aspect-video (in normal flow, edge-to-edge)
@@ -726,7 +751,7 @@ export default function ProjectShowcase() {
       ─────────────────────────────────────────────────────────────────── */}
       <div
         className="relative bg-black md:hidden overflow-hidden"
-        style={{ minHeight: "270px" }}
+        style={{ minHeight: "340px" }}
       >
         {FEATURED_PROJECTS.map((project, i) => {
           const isActive = i === activeIndex;
@@ -770,7 +795,7 @@ export default function ProjectShowcase() {
                   ))}
                 </div>
               )}
-              <div className="flex flex-row flex-wrap gap-2 pb-9">
+              <div className="flex flex-row flex-wrap gap-3 justify-center pb-16">
                 {project.cta.map((action) =>
                   action.external ? (
                     <a
@@ -802,7 +827,7 @@ export default function ProjectShowcase() {
           );
         })}
         {/* Dot indicators + progress bar — anchored to bottom of info area */}
-        <div className="absolute bottom-3 left-0 right-0 z-[10] flex flex-col items-center gap-4 px-5">
+        <div className="absolute bottom-6 left-0 right-0 z-[10] flex flex-col items-center gap-4 px-5">
           <div className="flex gap-2">
             {FEATURED_PROJECTS.map((_, i) => (
               <button
@@ -827,6 +852,7 @@ export default function ProjectShowcase() {
           </div>
         </div>
       </div>
+      </div>{/* end mobile hero wrapper */}
 
       {/* ─── Desktop: text overlays (hidden on mobile) ──────────────────
           Absolutely positioned over the full-screen video on desktop.
