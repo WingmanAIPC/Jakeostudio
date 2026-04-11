@@ -18,7 +18,7 @@ const EFFECTS: EffectOption[] = [
 const COLORS = ["#6366f1", "#ec4899", "#10b981", "#f59e0b", "#ef4444", "#8b5cf6", "#06b6d4", "#ffffff"];
 
 const KineticTypography: React.FC = () => {
-  const [text, setText] = useState("Design Technologist");
+  const [text, setText] = useState("Creative Technologist");
   const [effect, setEffect] = useState<EffectType>("wave");
   const [speed, setSpeed] = useState(1);
   const [intensity, setIntensity] = useState(1);

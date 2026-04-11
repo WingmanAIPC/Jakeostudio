@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/router";
 import HeaderFloatingBar from "../components/HeaderFloatingBar";
 import PillNav from "../components/PillNav";
 import SkillsSlider from "../components/SkillsSlider";
@@ -195,8 +196,36 @@ const DESIGN_GALLERY: { src: string; alt: string; ratio: string }[] = [
 ];
 
 export default function PortfolioSite() {
+  const router = useRouter();
   const [showScrollHint, setShowScrollHint] = useState(false);
   const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null);
+
+  /** Next.js client navigations to `/#feature` often land on `/` without scrolling — align with the hash after route completes. */
+  useEffect(() => {
+    const scrollToFeatureHash = () => {
+      if (typeof window === "undefined") return;
+      if (router.pathname !== "/") return;
+      const fromWindow = window.location.hash.replace(/^#/, "");
+      const fromPath = router.asPath.includes("#") ? router.asPath.split("#").pop() ?? "" : "";
+      const id = fromWindow || fromPath;
+      if (id !== "feature") return;
+      const el = document.getElementById("feature");
+      if (!el) return;
+      const scroll = () => el.scrollIntoView({ behavior: "smooth", block: "start" });
+      scroll();
+      requestAnimationFrame(() => requestAnimationFrame(scroll));
+      window.setTimeout(scroll, 80);
+      window.setTimeout(scroll, 200);
+    };
+
+    scrollToFeatureHash();
+    router.events.on("routeChangeComplete", scrollToFeatureHash);
+    window.addEventListener("hashchange", scrollToFeatureHash);
+    return () => {
+      router.events.off("routeChangeComplete", scrollToFeatureHash);
+      window.removeEventListener("hashchange", scrollToFeatureHash);
+    };
+  }, [router]);
 
   useEffect(() => {
     const timer = setTimeout(() => setShowScrollHint(true), 3500);
@@ -227,6 +256,7 @@ export default function PortfolioSite() {
   }, [lightbox]);
 
   const navItems = [
+    { label: "Work", href: "/work", ariaLabel: "View case studies" },
     { label: "Feature", href: "#feature", ariaLabel: "Go to Feature section" },
     { label: "Design", href: "#design", ariaLabel: "Go to Design section" },
     { label: "Video", href: "#video", ariaLabel: "Go to Video section" },
@@ -282,7 +312,7 @@ export default function PortfolioSite() {
           <a
             href="#creative"
             className="relative group block cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-white/40 rounded-lg"
-            aria-label="View Design Technologist section"
+            aria-label="View Creative Technologist section"
           >
             <img
               src="/jakeostudiowhite.png"
@@ -316,10 +346,10 @@ export default function PortfolioSite() {
 
       </section>
 
-      {/* Design Technologist Section */}
+      {/* Creative Technologist Section */}
       <section id="creative" className="mx-auto max-w-7xl px-4 pt-24 pb-12">
         <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-6xl font-semibold mb-4">Design Technologist</h2>
+          <h2 className="text-4xl md:text-6xl font-semibold mb-4">Creative Technologist</h2>
           <p className="text-xl text-zinc-300 max-w-3xl mx-auto mb-8">
             Blending design, technology, and creative thinking into working experiences.
           </p>
@@ -360,17 +390,25 @@ export default function PortfolioSite() {
               <span className="px-2 py-1 rounded-full bg-white/10">EQ Training</span>
               <span className="px-2 py-1 rounded-full bg-white/10">iOS App</span>
               </div>
-            <a 
-              href="https://apps.apple.com/us/app/wingman-eq-life-coach/id6747995730" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-white text-black text-sm font-medium hover:bg-zinc-100 transition-colors"
-            >
-              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
-              </svg>
-              Download App
-            </a>
+            <div className="flex flex-wrap gap-3">
+              <a 
+                href="https://apps.apple.com/us/app/wingman-eq-life-coach/id6747995730" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-white text-black text-sm font-medium hover:bg-zinc-100 transition-colors"
+              >
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                </svg>
+                Download App
+              </a>
+              <a 
+                href="/work/wingman"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-2xl border border-white/20 text-white text-sm font-medium hover:bg-white/10 transition-colors"
+              >
+                Read Case Study
+              </a>
+            </div>
           </div>
         </div>
 
@@ -392,14 +430,22 @@ export default function PortfolioSite() {
               <span className="px-2 py-1 rounded-full bg-white/10">Customer experience</span>
               <span className="px-2 py-1 rounded-full bg-white/10">Admin tools</span>
             </div>
-            <a
-              href="https://birolabels.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block px-4 py-2 rounded-2xl bg-white text-black text-sm font-medium hover:bg-zinc-100 transition-colors"
-            >
-              View Website
-            </a>
+            <div className="flex flex-wrap gap-3">
+              <a
+                href="https://birolabels.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block px-4 py-2 rounded-2xl bg-white text-black text-sm font-medium hover:bg-zinc-100 transition-colors"
+              >
+                View Website
+              </a>
+              <a 
+                href="/work/biro-labels"
+                className="inline-block px-4 py-2 rounded-2xl border border-white/20 text-white text-sm font-medium hover:bg-white/10 transition-colors"
+              >
+                Read Case Study
+              </a>
+            </div>
           </div>
           <div className="grid md:grid-cols-2 gap-6 md:gap-8">
             <div className="space-y-2">
@@ -456,14 +502,22 @@ export default function PortfolioSite() {
               <span className="px-2 py-1 rounded-full bg-white/10">Video Design</span>
               <span className="px-2 py-1 rounded-full bg-white/10">Product Marketing</span>
             </div>
-            <a 
-              href="https://www.youtube.com/playlist?list=PL18Q1CsxcdgRhhpWPSXSjkJCx12SRp_1_" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-block px-4 py-2 rounded-2xl bg-white text-black text-sm font-medium hover:bg-zinc-100 transition-colors"
-            >
-              View Playlist
-            </a>
+            <div className="flex flex-wrap gap-3">
+              <a 
+                href="https://www.youtube.com/playlist?list=PL18Q1CsxcdgRhhpWPSXSjkJCx12SRp_1_" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-block px-4 py-2 rounded-2xl bg-white text-black text-sm font-medium hover:bg-zinc-100 transition-colors"
+              >
+                View Playlist
+              </a>
+              <a 
+                href="/work/cloverleaf"
+                className="inline-block px-4 py-2 rounded-2xl border border-white/20 text-white text-sm font-medium hover:bg-white/10 transition-colors"
+              >
+                Read Case Study
+              </a>
+            </div>
           </div>
         </div>
       </section>

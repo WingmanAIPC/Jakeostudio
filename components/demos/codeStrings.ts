@@ -3,7 +3,7 @@ export const kineticTypographyCode = `import React, { useState, useRef, useEffec
 type EffectType = "wave" | "glitch" | "bounce" | "split" | "typewriter";
 
 const KineticTypography: React.FC = () => {
-  const [text, setText] = useState("Design Technologist");
+  const [text, setText] = useState("Creative Technologist");
   const [effect, setEffect] = useState<EffectType>("wave");
   const [speed, setSpeed] = useState(1);
   const [intensity, setIntensity] = useState(1);
