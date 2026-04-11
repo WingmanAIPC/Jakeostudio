@@ -1,12 +1,11 @@
 import React from "react";
 import Head from "next/head";
 import Link from "next/link";
-import { useRouter } from "next/router";
-import { navigateHomeToFeature } from "../../lib/navigateHomeToFeature";
+import { DOCUMENT_TITLE, SITE_LOGO_HEADER_SRC } from "../../lib/siteNav";
 
 export interface CaseStudyMeta {
   title: string;
-  /** When set, replaces the default text `<h1>` (e.g. client wordmark). `title` is still used for `<title>` / OG. */
+  /** When set, replaces the default text `<h1>` (e.g. client wordmark). `title` is still used for Open Graph / Twitter. */
   heroTitle?: React.ReactNode;
   description: string;
   role: string;
@@ -252,13 +251,12 @@ export function FlowNode({ label, sub }: { label: string; sub?: string }) {
 }
 
 export default function CaseStudyLayout({ meta, techStack, children, heroAddon }: CaseStudyLayoutProps) {
-  const router = useRouter();
   const pageTitle = `${meta.title} — jakeostudio`;
 
   return (
     <>
       <Head>
-        <title>{pageTitle}</title>
+        <title>{DOCUMENT_TITLE}</title>
         <meta name="description" content={meta.description} />
         <meta property="og:title" content={pageTitle} />
         <meta property="og:description" content={meta.description} />
@@ -272,21 +270,27 @@ export default function CaseStudyLayout({ meta, techStack, children, heroAddon }
       <div className="min-h-screen bg-black text-zinc-100">
         {/* Top navigation */}
         <nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/5 bg-black/80 backdrop-blur-xl">
-          <div className="mx-auto max-w-5xl flex items-center justify-between px-4 h-14">
+          <div className="mx-auto max-w-5xl flex h-14 items-center justify-start gap-5 px-4 sm:gap-6">
             <Link
-              href="/#feature"
-              prefetch={false}
-              onClick={(e) => navigateHomeToFeature(router, e)}
+              href="/"
               className="flex items-center gap-2 text-sm text-zinc-400 hover:text-white transition-colors"
             >
               <BackArrow />
               <span className="hidden sm:inline">Back</span>
             </Link>
-            <Link href="/" className="text-sm font-medium text-zinc-300 hover:text-white transition-colors">
-              jakeostudio
+            <Link
+              href="/"
+              className="rounded-md px-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+              aria-label="jakeostudio home"
+            >
+              <img
+                src={SITE_LOGO_HEADER_SRC}
+                alt="jakeostudio"
+                className="h-6 w-auto max-w-[2.75rem] object-contain object-center sm:h-7 sm:max-w-[3.25rem]"
+              />
             </Link>
             <a
-              href="/OwensResumeGen2026.pdf"
+              href="/JacobOwens2026Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="text-xs text-zinc-500 hover:text-white transition-colors"

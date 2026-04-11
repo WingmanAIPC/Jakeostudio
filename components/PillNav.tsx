@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
 import { gsap } from 'gsap';
 
 export type PillNavItem = {
@@ -9,6 +10,8 @@ export type PillNavItem = {
 
 export interface PillNavProps {
   logo: string;
+  /** Use `#top` on the homepage; `/` on inner pages */
+  logoHref?: string;
   logoAlt?: string;
   items: PillNavItem[];
   activeHref?: string;
@@ -24,6 +27,7 @@ export interface PillNavProps {
 
 const PillNav: React.FC<PillNavProps> = ({
   logo,
+  logoHref = '#top',
   logoAlt = 'Logo',
   items,
   activeHref,
@@ -218,33 +222,64 @@ const PillNav: React.FC<PillNavProps> = ({
     ['--pill-text']: resolvedPillTextColor
   } as React.CSSProperties;
 
+  const logoEl = (
+    <>
+      <img src={logo} alt={logoAlt} ref={logoImgRef} />
+    </>
+  );
+
   return (
     <div className="pill-nav-container">
       <nav className={`pill-nav ${className}`} aria-label="Primary" style={cssVars}>
-        <a
-          className="pill-logo"
-          href="#top"
-          aria-label="Home"
-          onMouseEnter={handleLogoEnter}
-          ref={el => {
-            logoRef.current = el;
-          }}
-        >
-          <img src={logo} alt={logoAlt} ref={logoImgRef} />
-        </a>
+        {logoHref.startsWith('#') ? (
+          <a
+            className="pill-logo"
+            href={logoHref}
+            aria-label="Home"
+            onMouseEnter={handleLogoEnter}
+            ref={el => {
+              logoRef.current = el;
+            }}
+          >
+            {logoEl}
+          </a>
+        ) : (
+          <Link
+            href={logoHref}
+            className="pill-logo"
+            aria-label="Home"
+            onMouseEnter={handleLogoEnter}
+            ref={el => {
+              logoRef.current = el;
+            }}
+          >
+            {logoEl}
+          </Link>
+        )}
 
         <div className="pill-nav-items desktop-only" ref={navItemsRef}>
           <ul className="pill-list" role="menubar">
             {items.map((item, i) => (
               <li key={item.href} role="none">
-                <a
-                  role="menuitem"
-                  href={item.href}
-                  className={`pill${activeHref === item.href ? ' is-active' : ''}`}
-                  aria-label={item.ariaLabel || item.label}
-                >
-                  {item.label}
-                </a>
+                {isRouterLink(item.href) ? (
+                  <Link
+                    role="menuitem"
+                    href={item.href}
+                    className={`pill${activeHref === item.href ? ' is-active' : ''}`}
+                    aria-label={item.ariaLabel || item.label}
+                  >
+                    {item.label}
+                  </Link>
+                ) : (
+                  <a
+                    role="menuitem"
+                    href={item.href}
+                    className={`pill${activeHref === item.href ? ' is-active' : ''}`}
+                    aria-label={item.ariaLabel || item.label}
+                  >
+                    {item.label}
+                  </a>
+                )}
               </li>
             ))}
           </ul>
@@ -265,13 +300,23 @@ const PillNav: React.FC<PillNavProps> = ({
         <ul className="mobile-menu-list">
           {items.map(item => (
             <li key={item.href}>
-              <a
-                href={item.href}
-                className={`mobile-menu-link${activeHref === item.href ? ' is-active' : ''}`}
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {item.label}
-              </a>
+              {isRouterLink(item.href) ? (
+                <Link
+                  href={item.href}
+                  className={`mobile-menu-link${activeHref === item.href ? ' is-active' : ''}`}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              ) : (
+                <a
+                  href={item.href}
+                  className={`mobile-menu-link${activeHref === item.href ? ' is-active' : ''}`}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {item.label}
+                </a>
+              )}
             </li>
           ))}
         </ul>

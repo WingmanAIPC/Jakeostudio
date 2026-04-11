@@ -15,19 +15,35 @@ function YouTubeLazyEmbed({
   videoId: string;
 }) {
   const [active, setActive] = React.useState(false);
+  const [iframeVisible, setIframeVisible] = React.useState(false);
   const thumbSrc = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
   const iframeSrc = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(videoId)}?autoplay=1&rel=0`;
+
+  React.useEffect(() => {
+    if (!active) setIframeVisible(false);
+  }, [active]);
 
   return (
     <div className="relative aspect-video overflow-hidden rounded-2xl bg-zinc-900 border border-white/10">
       {active ? (
-        <iframe
-          className="absolute inset-0 h-full w-full"
-          src={iframeSrc}
-          title={title}
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowFullScreen
-        />
+        <div className="absolute inset-0">
+          <img
+            src={thumbSrc}
+            alt=""
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+          <iframe
+            className="absolute inset-0 h-full w-full transition-opacity duration-[700ms] ease-out"
+            style={{ opacity: iframeVisible ? 1 : 0 }}
+            src={iframeSrc}
+            title={title}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+            onLoad={() => {
+              window.setTimeout(() => setIframeVisible(true), 200);
+            }}
+          />
+        </div>
       ) : (
         <button
           type="button"
@@ -53,7 +69,7 @@ export default function BiroLabels() {
   return (
     <CaseStudyLayout
       meta={{
-        title: "Biro Labels",
+        title: "Biro Sales Inc.",
         heroTitle: <BiroHeroWordmark />,
         description:
           "A modern e-commerce platform replacing an outdated WooCommerce site — custom storefront with Amazon-style ordering, Stripe checkout, QuickBooks integration, and a purpose-built admin dashboard for order fulfillment.",
@@ -126,14 +142,14 @@ export default function BiroLabels() {
         <div className="grid md:grid-cols-2 gap-6 md:gap-8">
           <div className="space-y-3">
             <p className="text-xs font-medium text-zinc-400 uppercase tracking-wide">Customer Experience</p>
-            <YouTubeLazyEmbed title="Biro Labels customer walkthrough" videoId="nJfioQ8lLSg" />
+            <YouTubeLazyEmbed title="Biro Sales Inc. customer walkthrough" videoId="nJfioQ8lLSg" />
             <p className="text-sm text-zinc-400">
               Full storefront flow — browsing, filtering, cart, and Stripe checkout with multiple payment methods.
             </p>
           </div>
           <div className="space-y-3">
             <p className="text-xs font-medium text-zinc-400 uppercase tracking-wide">Admin &amp; Store Managers</p>
-            <YouTubeLazyEmbed title="Biro Labels admin walkthrough" videoId="oGaejTwxYNc" />
+            <YouTubeLazyEmbed title="Biro Sales Inc. admin walkthrough" videoId="oGaejTwxYNc" />
             <p className="text-sm text-zinc-400">
               Order fulfillment view, product management, integration shortcuts to Stripe, QuickBooks, and Vercel dashboards.
             </p>

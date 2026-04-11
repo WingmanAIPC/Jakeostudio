@@ -2,8 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body {
+html,
+body {
   background-color: #000000;
   margin: 0;
   padding: 0;
+}
+
+/* First paint before React/CSS: avoid flash via #__next */
+#__next {
+  min-height: 100vh;
+  background-color: #000000;
 }

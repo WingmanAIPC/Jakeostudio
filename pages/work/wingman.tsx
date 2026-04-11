@@ -13,6 +13,59 @@ import { DeepDiveCursorClaudeAside } from "../../components/case-study/Developer
 const OPENAI_CHART_SRC = encodeURI("/openai chart.png");
 const WINGMAN_FLOW_VIDEO_SRC = encodeURI("/ScreenRecording_04-10-2026 21-43-06_1.mov");
 
+function WingmanYouTubeEmbed() {
+  const [active, setActive] = React.useState(false);
+  const [iframeVisible, setIframeVisible] = React.useState(false);
+  const videoId = "Ag7EAF_djj4";
+  const thumbSrc = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+  const iframeSrc = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`;
+
+  React.useEffect(() => {
+    if (!active) setIframeVisible(false);
+  }, [active]);
+
+  if (active) {
+    return (
+      <div className="relative h-full w-full">
+        <img
+          src={thumbSrc}
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <iframe
+          className="absolute inset-0 h-full w-full transition-opacity duration-[700ms] ease-out"
+          style={{ opacity: iframeVisible ? 1 : 0 }}
+          src={iframeSrc}
+          title="Wingman Commercial Demo"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowFullScreen
+          onLoad={() => {
+            window.setTimeout(() => setIframeVisible(true), 200);
+          }}
+        />
+      </div>
+    );
+  }
+
+  return (
+    <button
+      type="button"
+      className="group relative w-full h-full outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+      onClick={() => setActive(true)}
+      aria-label="Play: Wingman Commercial Demo"
+    >
+      <img src={thumbSrc} alt="" className="w-full h-full object-cover" />
+      <span className="pointer-events-none absolute inset-0 flex items-center justify-center bg-black/35 transition-colors group-hover:bg-black/50">
+        <span className="flex h-14 w-14 items-center justify-center rounded-full bg-black/75 text-white shadow-lg ring-1 ring-white/25">
+          <svg className="ml-1 h-7 w-7" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+            <path d="M8 5v14l11-7L8 5z" />
+          </svg>
+        </span>
+      </span>
+    </button>
+  );
+}
+
 const EQ_METRICS = [
   { name: "COMM_DIRECTNESS", description: "How directly vs. indirectly you communicate", range: "Direct ↔ Indirect" },
   { name: "COMM_EMPATHY", description: "Tendency to lead with emotional understanding", range: "Analytical ↔ Empathetic" },
@@ -95,7 +148,7 @@ export default function Wingman() {
       meta={{
         title: "Wingman",
         description:
-          "A native iOS AI companion that uses a 13-metric emotional intelligence framework to personalize every conversation — turning generic AI chat into a context-aware life coach, therapist, and thinking partner.",
+          "A native iOS AI companion that uses a 13-metric emotional\u00A0intelligence framework to personalize every conversation — turning generic AI chat into a context-aware life coach, therapist, and thinking partner.",
         role: "Solo Designer & Developer",
         timeline: "2024 – Present (ongoing)",
         liveUrl: "https://apps.apple.com/us/app/wingman-eq-life-coach/id6747995730",
@@ -109,7 +162,8 @@ export default function Wingman() {
         "Xcode",
         "OpenRouter API",
         "Kimi K2.5",
-        "Prompt Engineering",
+        "iOS Development",
+        "EQ Frameworks",
         "Figma",
         "Supabase",
         "Docker",
@@ -314,6 +368,13 @@ export default function Wingman() {
             </p>
           </DeepDiveItem>
         </DeepDiveArticle>
+      </Section>
+
+      {/* Commercial Demo */}
+      <Section label="Demo" title="Commercial Video">
+        <div className="aspect-video overflow-hidden rounded-2xl bg-zinc-900 border border-white/10">
+          <WingmanYouTubeEmbed />
+        </div>
       </Section>
 
       <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />

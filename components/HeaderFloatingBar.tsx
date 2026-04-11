@@ -3,13 +3,13 @@ import React from "react";
 const MAILTO_HREF =
   "mailto:jakeostudio@gmail.com?subject=Opportunity&body=Hi Jake, I'd like to connect about a role or project.";
 
-const RESUME_HREF = "/OwensResumeGen2026.pdf";
+const RESUME_HREF = "/JacobOwens2026Resume.pdf";
 
 /** E.164 (e.g. +15551234567). Update to your real number. */
 const PHONE_HREF = "tel:+15555550100";
 
 const iconRoundBtnClass =
-  "flex h-[42px] w-[42px] items-center justify-center rounded-full border border-white/15 bg-black/90 text-white shadow-lg backdrop-blur-md transition-colors hover:border-white/30 hover:bg-black";
+  "flex h-[42px] w-[42px] items-center justify-center rounded-full border border-white/15 bg-white/[0.06] text-white shadow-lg backdrop-blur-2xl transition-[color,background-color,border-color,box-shadow,transform] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-white/30 hover:bg-white/[0.12] active:scale-[0.97]";
 
 function PhoneIcon({ className }: { className?: string }) {
   return (
@@ -39,48 +39,75 @@ function ResumeIcon({ className }: { className?: string }) {
   );
 }
 
-/** Mail + phone icon buttons, grouped next to resume. */
-function ContactIconButtons() {
+const expandPillBaseClass =
+  "group relative hidden h-[42px] max-w-[42px] items-center overflow-hidden rounded-full border border-white/15 bg-white/[0.06] text-white shadow-lg backdrop-blur-2xl transition-[max-width,background-color,border-color,box-shadow] duration-[240ms] ease-[cubic-bezier(0.4,0,1,1)] hover:duration-[1050ms] hover:ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-white/35 hover:bg-white/[0.12] hover:shadow-[0_10px_40px_-12px_rgba(255,255,255,0.18)] focus-visible:duration-[1050ms] focus-visible:ease-[cubic-bezier(0.22,1,0.36,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-black/40 md:inline-flex";
+
+const expandLabelClass =
+  "text-xs font-medium tracking-tight text-white whitespace-nowrap opacity-0 -translate-x-1.5 transition-[opacity,transform] duration-150 ease-in delay-0 group-hover:opacity-100 group-hover:translate-x-0 group-hover:duration-[820ms] group-hover:delay-[260ms] group-hover:ease-[cubic-bezier(0.22,1,0.36,1)] group-focus-visible:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:duration-[820ms] group-focus-visible:delay-[260ms] group-focus-visible:ease-[cubic-bezier(0.22,1,0.36,1)]";
+
+/** One row so email ↔ phone ↔ resume share the same gap (avoids nested gap-2 vs parent gap-3 mismatch). */
+function ContactAndResumeActions() {
   return (
-    <div className="flex items-center gap-2" aria-label="Quick contact">
-      <a href={MAILTO_HREF} className={iconRoundBtnClass} aria-label="Email">
+    <div
+      className="flex items-center gap-2 sm:gap-3"
+      aria-label="Quick contact and resume"
+    >
+      <a
+        href={MAILTO_HREF}
+        className={`${iconRoundBtnClass} md:hidden hover:scale-[1.04]`}
+        aria-label="Email"
+      >
         <MailIcon />
       </a>
-      <a href={PHONE_HREF} className={iconRoundBtnClass} aria-label="Call">
+      <a
+        href={MAILTO_HREF}
+        className={`${expandPillBaseClass} hover:max-w-[min(100vw-8rem,320px)] focus-visible:max-w-[min(100vw-8rem,320px)]`}
+        aria-label="Email jakeostudio@gmail.com"
+      >
+        <span className="flex h-[42px] w-[42px] shrink-0 items-center justify-center" aria-hidden>
+          <MailIcon />
+        </span>
+        <span className={`pr-6 ${expandLabelClass}`}>jakeostudio@gmail.com</span>
+      </a>
+      <a
+        href={PHONE_HREF}
+        className={`${iconRoundBtnClass} md:hidden hover:scale-[1.04]`}
+        aria-label="Call"
+      >
         <PhoneIcon />
       </a>
-    </div>
-  );
-}
-
-function QuickResume() {
-  return (
-    <>
+      <a
+        href={PHONE_HREF}
+        className={`${expandPillBaseClass} hover:max-w-[200px] focus-visible:max-w-[200px]`}
+        aria-label="Call me"
+      >
+        <span className="flex h-[42px] w-[42px] shrink-0 items-center justify-center" aria-hidden>
+          <PhoneIcon />
+        </span>
+        <span className={`pr-6 ${expandLabelClass}`}>Call me</span>
+      </a>
       <a
         href={RESUME_HREF}
         target="_blank"
         rel="noopener noreferrer"
-        className={`${iconRoundBtnClass} md:hidden`}
+        className={`${iconRoundBtnClass} md:hidden hover:scale-[1.04]`}
         aria-label="View resume"
       >
         <ResumeIcon />
       </a>
-
       <a
         href={RESUME_HREF}
         target="_blank"
         rel="noopener noreferrer"
-        className={`group relative hidden h-[42px] w-[42px] items-center overflow-hidden rounded-full border border-white/15 bg-black/90 text-white shadow-lg backdrop-blur-md transition-[width] duration-300 ease-out hover:w-fit focus-visible:w-fit md:inline-flex`}
+        className={`${expandPillBaseClass} hover:max-w-[220px] focus-visible:max-w-[220px]`}
         aria-label="View resume"
       >
         <span className="flex h-[42px] w-[42px] shrink-0 items-center justify-center" aria-hidden>
           <ResumeIcon />
         </span>
-        <span className="pr-4 text-xs font-medium tracking-tight text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100 whitespace-nowrap">
-          Resume
-        </span>
+        <span className={`pr-6 ${expandLabelClass}`}>Resume</span>
       </a>
-    </>
+    </div>
   );
 }
 
@@ -89,8 +116,7 @@ export default function HeaderFloatingBar({ children }: { children: React.ReactN
     <div className="pointer-events-none fixed top-4 left-0 right-0 z-[100] flex justify-center px-2 sm:px-3">
       <div className="pointer-events-auto flex flex-wrap items-center justify-center gap-2 sm:gap-3">
         {children}
-        <ContactIconButtons />
-        <QuickResume />
+        <ContactAndResumeActions />
       </div>
     </div>
   );
