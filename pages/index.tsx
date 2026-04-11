@@ -179,26 +179,6 @@ const PAGE_WIDE_SECTION =
   "mx-auto w-full max-w-[min(100%,2800px)] px-4 sm:px-6 lg:px-10 xl:px-14 2xl:px-20";
 
 const DESIGN_GALLERY: { src: string; alt: string; ratio: string }[] = [
-  {
-    src: "/WHMDayton.jpg",
-    alt: "Women's History Month 2024 — commitment to the whole person, University of Dayton Women's Center",
-    ratio: "1/1",
-  },
-  {
-    src: "/VelocityBlueLong.png",
-    alt: "Velocity wordmark on blue",
-    ratio: "3/1",
-  },
-  {
-    src: "/WomenLead.jpg",
-    alt: "Women Lead. Certification — University of Dayton Center for Leadership",
-    ratio: "3/4",
-  },
-  {
-    src: "/ProfessionalDevelopment.jpg",
-    alt: "Professional Development 2023–2024 — University of Dayton Center for Leadership",
-    ratio: "3/4",
-  },
   { src: "/BionicKid.jpg", alt: "Bionic Kid", ratio: "3/4" },
   {
     src: "/12.17.23.jpg",
@@ -211,8 +191,28 @@ const DESIGN_GALLERY: { src: string; alt: string; ratio: string }[] = [
   { src: "/PlayboiCarti.jpg", alt: "Playboi Carti", ratio: "3/4" },
   { src: "/OutofSync.jpg", alt: "Out of Sync", ratio: "2/3" },
   { src: "/BeatsStudioBuds.png", alt: "Beats Studio Buds", ratio: "16/9" },
+  {
+    src: "/VelocityBlueLong.png",
+    alt: "Velocity wordmark on blue",
+    ratio: "3/1",
+  },
   { src: "/SocialHour.jpg", alt: "Social Hour", ratio: "3/4" },
   { src: "/KoreanBBQ.jpg", alt: "Korean BBQ", ratio: "3/4" },
+  {
+    src: "/WHMDayton.jpg",
+    alt: "Women's History Month 2024 — commitment to the whole person, University of Dayton Women's Center",
+    ratio: "1/1",
+  },
+  {
+    src: "/WomenLead.jpg",
+    alt: "Women Lead. Certification — University of Dayton Center for Leadership",
+    ratio: "3/4",
+  },
+  {
+    src: "/ProfessionalDevelopment.jpg",
+    alt: "Professional Development 2023–2024 — University of Dayton Center for Leadership",
+    ratio: "3/4",
+  },
 ];
 
 export default function PortfolioSite() {

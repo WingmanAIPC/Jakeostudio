@@ -72,7 +72,7 @@ export default function LogoIntro({
         <img
           src={SITE_LOGO_WORDMARK_SRC}
           alt="jakeostudio"
-          className="w-auto max-w-[min(88vw,28rem)] sm:max-w-[min(88vw,34rem)] h-auto max-h-[min(38vh,11rem)] sm:max-h-[min(42vh,14rem)] object-contain object-center select-none"
+          className="w-auto max-w-[min(62vw,20rem)] sm:max-w-[min(88vw,34rem)] h-auto max-h-[min(27vh,8rem)] sm:max-h-[min(42vh,14rem)] object-contain object-center select-none"
           draggable={false}
         />
       </div>

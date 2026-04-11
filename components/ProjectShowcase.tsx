@@ -615,7 +615,8 @@ export default function ProjectShowcase() {
   return (
     <section
       id="top"
-      className="relative h-screen w-full overflow-hidden"
+      className="relative w-full overflow-hidden"
+      style={{ height: "100svh" }}
     >
       {FEATURED_PROJECTS.map((_, i) => {
         const merged = mergedProject(i);
@@ -693,7 +694,7 @@ export default function ProjectShowcase() {
         return (
           <div
             key={`text-${project.slug}`}
-            className="absolute bottom-28 left-0 right-0 z-[3] px-8 md:px-16 lg:px-20"
+            className="absolute bottom-16 sm:bottom-20 md:bottom-28 left-0 right-0 z-[3] px-6 sm:px-8 md:px-16 lg:px-20"
             style={{
               opacity: isActive ? 1 : 0,
               transform: isActive ? "translateY(0)" : "translateY(12px)",
@@ -707,7 +708,7 @@ export default function ProjectShowcase() {
             <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
               <div className="min-w-0">
                 <h1
-                  className="text-4xl md:text-6xl lg:text-7xl font-bold mb-3 tracking-tight max-w-4xl"
+                  className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold mb-2 md:mb-3 tracking-tight max-w-4xl"
                   style={
                     project.titleFont
                       ? { fontFamily: project.titleFont }
@@ -793,7 +794,7 @@ export default function ProjectShowcase() {
         </svg>
       </button>
 
-      <div className="absolute bottom-8 left-0 right-0 z-50 flex flex-col items-center gap-4 px-8">
+      <div className="absolute bottom-4 sm:bottom-8 left-0 right-0 z-50 flex flex-col items-center gap-3 sm:gap-4 px-8">
         <div className="flex gap-2">
           {FEATURED_PROJECTS.map((_, i) => (
             <button
