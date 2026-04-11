@@ -480,7 +480,13 @@ export default function ProjectShowcase() {
       isTransitioningRef.current = true;
       const overlay = flashOverlayRef.current;
       const mobileOverlay = mobileFlashRef.current;
-      const primary = overlay ?? mobileOverlay;
+      /** Listen on the overlay that is actually visible — desktop flash is `hidden` on narrow viewports. */
+      const narrow =
+        typeof window !== "undefined" &&
+        window.matchMedia("(max-width: 767px)").matches;
+      const primary = narrow
+        ? (mobileOverlay ?? overlay)
+        : (overlay ?? mobileOverlay);
 
       if (!primary) {
         commitSlide(nextIndex);
@@ -658,18 +664,9 @@ export default function ProjectShowcase() {
         aria-hidden
       />
 
-      {/* Mobile hero wrapper — clips mobile flash to the hero area only.
-          md:contents makes it transparent in the desktop layout tree so
+      {/* Mobile hero wrapper — md:contents removes this box on desktop so
           md:absolute md:inset-0 on the video div still anchors to <section>. */}
       <div className="relative overflow-hidden md:contents">
-        {/* Mobile flash — absolute within this wrapper, invisible on desktop */}
-        <div
-          ref={mobileFlashRef}
-          className="pointer-events-none absolute inset-0 z-[500] bg-white md:hidden"
-          style={{ opacity: 0 }}
-          aria-hidden
-        />
-
       {/* ─── Shared video area ──────────────────────────────────────────
           Mobile:  relative + aspect-video (in normal flow, edge-to-edge)
           Desktop: absolute inset-0 (covers full 100svh section)
@@ -679,6 +676,13 @@ export default function ProjectShowcase() {
         className="mt-14 md:mt-0 relative w-full overflow-hidden md:absolute md:inset-0"
         style={{ aspectRatio: "16/9" }}
       >
+        {/* Mobile transition flash — only covers the 16:9 video (not the page below). */}
+        <div
+          ref={mobileFlashRef}
+          className="pointer-events-none absolute inset-0 z-[500] bg-white md:hidden"
+          style={{ opacity: 0 }}
+          aria-hidden
+        />
         {FEATURED_PROJECTS.map((_, i) => {
           const merged = mergedProject(i);
           const slug = FEATURED_PROJECTS[i].slug;
@@ -745,6 +749,32 @@ export default function ProjectShowcase() {
         />
       </div>
 
+      {/* Mobile: slide dots + timer bar directly under the video (YouTube-style) */}
+      <div className="md:hidden bg-black px-4 pt-2 pb-2.5">
+        <div className="flex gap-2 justify-center mb-3">
+          {FEATURED_PROJECTS.map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              onClick={() => goToSlide(i)}
+              className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                i === activeIndex
+                  ? "w-8 bg-white"
+                  : "w-2 bg-white/30 hover:bg-white/50"
+              }`}
+              aria-label={`Go to slide ${i + 1}`}
+            />
+          ))}
+        </div>
+        <div className="w-full h-[2px] bg-white/10 rounded-full overflow-hidden">
+          <div
+            ref={mobileProgressRef}
+            className="h-full bg-white/50 origin-left"
+            style={{ transform: "scaleX(0)" }}
+          />
+        </div>
+      </div>
+
       {/* ─── Mobile info area (hidden on desktop) ───────────────────────
           Appears below the video strip in normal flow on mobile.
           Fixed min-height prevents layout shift as slides cycle.
@@ -795,7 +825,7 @@ export default function ProjectShowcase() {
                   ))}
                 </div>
               )}
-              <div className="flex flex-row flex-wrap gap-3 justify-center pb-16">
+              <div className="flex flex-row flex-wrap gap-3 justify-center pb-6">
                 {project.cta.map((action) =>
                   action.external ? (
                     <a
@@ -826,31 +856,6 @@ export default function ProjectShowcase() {
             </div>
           );
         })}
-        {/* Dot indicators + progress bar — anchored to bottom of info area */}
-        <div className="absolute bottom-6 left-0 right-0 z-[10] flex flex-col items-center gap-4 px-5">
-          <div className="flex gap-2">
-            {FEATURED_PROJECTS.map((_, i) => (
-              <button
-                key={i}
-                type="button"
-                onClick={() => goToSlide(i)}
-                className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
-                  i === activeIndex
-                    ? "w-8 bg-white"
-                    : "w-2 bg-white/30 hover:bg-white/50"
-                }`}
-                aria-label={`Go to slide ${i + 1}`}
-              />
-            ))}
-          </div>
-          <div className="w-full max-w-xs h-[2px] bg-white/10 rounded-full overflow-hidden">
-            <div
-              ref={mobileProgressRef}
-              className="h-full bg-white/50 origin-left"
-              style={{ transform: "scaleX(0)" }}
-            />
-          </div>
-        </div>
       </div>
       </div>{/* end mobile hero wrapper */}
 
