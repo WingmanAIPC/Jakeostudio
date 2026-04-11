@@ -5,7 +5,11 @@ import HeaderFloatingBar from "../components/HeaderFloatingBar";
 import PrimaryNavCluster from "../components/PrimaryNavCluster";
 import { SiGithub, SiInstagram, SiLinktree } from "react-icons/si";
 import { TbBrandLinkedin } from "react-icons/tb";
-import { DOCUMENT_TITLE, SITE_LOGO_WORDMARK_SRC } from "../lib/siteNav";
+import {
+  DOCUMENT_TITLE,
+  SITE_LOGO_WORDMARK_SRC,
+  SITE_RESUME_PDF_HREF,
+} from "../lib/siteNav";
 import LogoIntro, { shouldShowIntro } from "../components/LogoIntro";
 import ProjectShowcase from "../components/ProjectShowcase";
 
@@ -167,7 +171,34 @@ const VIDEO_GRID_ITEMS = [
   },
 ];
 
+/**
+ * Wider than `max-w-7xl` (~1280px) so Design / Video (and matching blocks below)
+ * breathe on ultrawide — closer to the full-bleed hero without going true edge-to-edge.
+ */
+const PAGE_WIDE_SECTION =
+  "mx-auto w-full max-w-[min(100%,2800px)] px-4 sm:px-6 lg:px-10 xl:px-14 2xl:px-20";
+
 const DESIGN_GALLERY: { src: string; alt: string; ratio: string }[] = [
+  {
+    src: "/WHMDayton.jpg",
+    alt: "Women's History Month 2024 — commitment to the whole person, University of Dayton Women's Center",
+    ratio: "1/1",
+  },
+  {
+    src: "/VelocityBlueLong.png",
+    alt: "Velocity wordmark on blue",
+    ratio: "3/1",
+  },
+  {
+    src: "/WomenLead.jpg",
+    alt: "Women Lead. Certification — University of Dayton Center for Leadership",
+    ratio: "3/4",
+  },
+  {
+    src: "/ProfessionalDevelopment.jpg",
+    alt: "Professional Development 2023–2024 — University of Dayton Center for Leadership",
+    ratio: "3/4",
+  },
   { src: "/BionicKid.jpg", alt: "Bionic Kid", ratio: "3/4" },
   {
     src: "/12.17.23.jpg",
@@ -250,9 +281,9 @@ export default function PortfolioSite() {
         )}
 
         {/* Design Section */}
-        <section id="design" className="mx-auto max-w-7xl px-4 py-16">
+        <section id="design" className={`${PAGE_WIDE_SECTION} py-16`}>
           <h2 className="text-2xl font-semibold mb-8">Design</h2>
-          <div className="columns-1 md:columns-2 lg:columns-3 xl:columns-4 gap-6 space-y-6">
+          <div className="columns-1 md:columns-2 lg:columns-3 xl:columns-4 min-[1600px]:columns-5 min-[2200px]:columns-6 gap-6 space-y-6">
             {DESIGN_GALLERY.map((item) => (
               <div key={item.src} className="break-inside-avoid mb-6">
                 <button
@@ -279,30 +310,39 @@ export default function PortfolioSite() {
         </section>
 
         {/* Video Section */}
-        <section id="video" className="mx-auto max-w-7xl px-4 py-16">
+        <section id="video" className={`${PAGE_WIDE_SECTION} py-16`}>
           <h2 className="text-2xl font-semibold mb-8">Video</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {/*
+            Flex + justify-center so the last row (e.g. 2 tiles under a 3-col layout)
+            stays centered instead of hugging the left like CSS Grid.
+          */}
+          <div className="flex flex-wrap justify-center gap-4">
             {VIDEO_GRID_ITEMS.map((v) => (
-              <YouTubeLazyEmbed
+              <div
                 key={v.id}
-                videoId={v.id}
-                title={v.title}
-                hoverDetails={
-                  <VideoHoverOverlay
-                    heading={v.title}
-                    subtitle={v.subtitle}
-                    process={v.process}
-                    stack={v.stack}
-                  />
-                }
-              />
+                className="w-full shrink-0 sm:w-[calc((100%-1rem)/2)] lg:w-[calc((100%-2rem)/3)] min-[2000px]:w-[calc((100%-3rem)/4)]"
+              >
+                <YouTubeLazyEmbed
+                  videoId={v.id}
+                  title={v.title}
+                  className="w-full"
+                  hoverDetails={
+                    <VideoHoverOverlay
+                      heading={v.title}
+                      subtitle={v.subtitle}
+                      process={v.process}
+                      stack={v.stack}
+                    />
+                  }
+                />
+              </div>
             ))}
           </div>
         </section>
 
         {/* Contact Section */}
-        <section id="contact" className="mx-auto max-w-7xl px-4 py-20">
-          <div className="border border-white/10 rounded-2xl p-8 md:p-12 text-center">
+        <section id="contact" className={`${PAGE_WIDE_SECTION} py-20`}>
+          <div className="mx-auto w-full max-w-3xl border border-white/10 rounded-2xl p-8 md:p-12 text-center">
             <h3 className="text-2xl font-semibold mb-4">
               AI Creative Technologist available for remote work
             </h3>
@@ -318,7 +358,7 @@ export default function PortfolioSite() {
                 Get in touch
               </a>
               <a
-                href="/JacobOwens2026Resume.pdf"
+                href={SITE_RESUME_PDF_HREF}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block px-6 py-3 rounded-2xl border border-white/20 text-white text-sm font-medium hover:bg-white/10 transition-colors"
@@ -339,7 +379,7 @@ export default function PortfolioSite() {
         </section>
 
         <footer className="border-t border-white/10">
-          <div className="mx-auto max-w-7xl px-4 py-8">
+          <div className={`${PAGE_WIDE_SECTION} py-8`}>
             <div className="flex flex-col sm:flex-row items-center justify-between gap-6 mb-6">
               <Link
                 href="/"

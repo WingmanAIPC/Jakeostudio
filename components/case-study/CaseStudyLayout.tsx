@@ -1,7 +1,11 @@
 import React from "react";
 import Head from "next/head";
 import Link from "next/link";
-import { DOCUMENT_TITLE, SITE_LOGO_HEADER_SRC } from "../../lib/siteNav";
+import {
+  DOCUMENT_TITLE,
+  SITE_LOGO_HEADER_SRC,
+  SITE_RESUME_PDF_HREF,
+} from "../../lib/siteNav";
 
 export interface CaseStudyMeta {
   title: string;
@@ -290,7 +294,7 @@ export default function CaseStudyLayout({ meta, techStack, children, heroAddon }
               />
             </Link>
             <a
-              href="/JacobOwens2026Resume.pdf"
+              href={SITE_RESUME_PDF_HREF}
               target="_blank"
               rel="noopener noreferrer"
               className="text-xs text-zinc-500 hover:text-white transition-colors"

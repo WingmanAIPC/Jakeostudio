@@ -3,7 +3,11 @@ import Head from "next/head";
 import Link from "next/link";
 import YouTubeSegmentPlayer from "../components/YouTubeSegmentPlayer";
 import { CAPABILITY_CARDS } from "../lib/capabilities";
-import { DOCUMENT_TITLE, SITE_LOGO_HEADER_SRC } from "../lib/siteNav";
+import {
+  DOCUMENT_TITLE,
+  SITE_LOGO_HEADER_SRC,
+  SITE_RESUME_PDF_HREF,
+} from "../lib/siteNav";
 import { HIRE_SHOWCASE_CLIPS } from "../lib/work";
 
 export default function HirePage() {
@@ -93,16 +97,16 @@ export default function HirePage() {
         </div>
 
         <nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/[0.06] bg-black/45 backdrop-blur-md">
-          <div className="mx-auto max-w-5xl flex h-14 items-center justify-start gap-5 px-4 sm:gap-6 sm:px-6">
+          <div className="mx-auto max-w-5xl relative flex h-14 items-center justify-between px-4 sm:px-6">
             <Link
               href="/"
-              className="text-sm text-zinc-400 hover:text-white transition-colors"
+              className="relative z-10 text-sm text-zinc-400 hover:text-white transition-colors"
             >
               &larr; Home
             </Link>
             <Link
               href="/"
-              className="rounded-md px-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-black/80"
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 px-2 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-black/80"
               aria-label="jakeostudio home"
             >
               <img
@@ -113,7 +117,7 @@ export default function HirePage() {
             </Link>
             <Link
               href="/work"
-              className="text-sm text-zinc-400 hover:text-white transition-colors"
+              className="relative z-10 text-sm text-zinc-400 hover:text-white transition-colors"
             >
               View Work
             </Link>
@@ -139,7 +143,7 @@ export default function HirePage() {
                 Get in touch
               </a>
               <a
-                href="/JacobOwens2026Resume.pdf"
+                href={SITE_RESUME_PDF_HREF}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex min-h-[48px] items-center justify-center px-8 py-3.5 rounded-2xl border-2 border-white/40 bg-black/30 backdrop-blur-md text-white text-sm font-semibold hover:bg-white/15 hover:border-white/60 transition-colors text-center"

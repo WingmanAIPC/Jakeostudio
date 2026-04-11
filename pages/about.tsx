@@ -1,7 +1,11 @@
 import React from "react";
 import Head from "next/head";
 import Link from "next/link";
-import { DOCUMENT_TITLE, SITE_LOGO_HEADER_SRC } from "../lib/siteNav";
+import {
+  DOCUMENT_TITLE,
+  SITE_LOGO_HEADER_SRC,
+  SITE_RESUME_PDF_HREF,
+} from "../lib/siteNav";
 import HowIWorkContent from "../components/HowIWorkContent";
 import {
   TOOL_STACK_ICON_SIZE,
@@ -85,17 +89,17 @@ export default function AboutPage() {
 
       <div className="min-h-screen bg-black text-zinc-100">
         <nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/5 bg-black/80 backdrop-blur-xl">
-          <div className="mx-auto max-w-3xl lg:max-w-6xl flex h-14 items-center justify-start gap-5 px-4 sm:gap-6">
+          <div className="mx-auto max-w-3xl lg:max-w-6xl relative flex h-14 items-center justify-between px-4">
             <Link
               href="/"
-              className="flex items-center gap-2 text-sm text-zinc-400 hover:text-white transition-colors"
+              className="relative z-10 flex items-center gap-2 text-sm text-zinc-400 hover:text-white transition-colors"
             >
               <BackArrow />
               <span className="hidden sm:inline">Home</span>
             </Link>
             <Link
               href="/"
-              className="rounded-md px-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 px-2 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
               aria-label="jakeostudio home"
             >
               <img
@@ -105,10 +109,10 @@ export default function AboutPage() {
               />
             </Link>
             <a
-              href="/JacobOwens2026Resume.pdf"
+              href={SITE_RESUME_PDF_HREF}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs text-zinc-500 hover:text-white transition-colors"
+              className="relative z-10 text-xs text-zinc-500 hover:text-white transition-colors"
             >
               Resume
             </a>
@@ -252,7 +256,7 @@ export default function AboutPage() {
                 </p>
                 <div className="flex flex-wrap gap-3 justify-center">
                   <a
-                    href="/JacobOwens2026Resume.pdf"
+                    href={SITE_RESUME_PDF_HREF}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-block px-5 py-2.5 rounded-2xl bg-white text-black text-sm font-medium hover:bg-zinc-100 transition-colors"

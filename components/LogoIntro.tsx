@@ -41,7 +41,7 @@ export default function LogoIntro({
 
   return (
     <div
-      className={`fixed inset-0 z-[300] flex items-center justify-center bg-[#0a0a0a] transition-opacity ${
+      className={`fixed inset-0 z-[300] flex items-center justify-center bg-black transition-opacity ${
         exiting ? "opacity-0" : "opacity-100"
       }`}
       style={{
@@ -53,22 +53,29 @@ export default function LogoIntro({
         @keyframes logoReveal {
           0% {
             opacity: 0;
-            transform: scale(0.95);
+            transform: scale(0.97);
           }
           100% {
             opacity: 1;
             transform: scale(1);
           }
         }
-        .intro-logo {
+        .intro-logo-wrap {
           animation: logoReveal ${FADE_IN_MS}ms cubic-bezier(0.33, 1, 0.68, 1) forwards;
         }
       `}</style>
-      <img
-        src={SITE_LOGO_WORDMARK_SRC}
-        alt="jakeostudio"
-        className="intro-logo w-[14.4rem] h-[14.4rem] md:w-[19.2rem] md:h-[19.2rem] object-contain"
-      />
+      {/*
+        Wordmark is wide — a square box forces object-contain to shrink it to a short strip,
+        which makes the mark look broken/overlapping. Size by max-width and let height follow.
+      */}
+      <div className="intro-logo-wrap px-6">
+        <img
+          src={SITE_LOGO_WORDMARK_SRC}
+          alt="jakeostudio"
+          className="w-auto max-w-[min(88vw,28rem)] sm:max-w-[min(88vw,34rem)] h-auto max-h-[min(38vh,11rem)] sm:max-h-[min(42vh,14rem)] object-contain object-center select-none"
+          draggable={false}
+        />
+      </div>
     </div>
   );
 }

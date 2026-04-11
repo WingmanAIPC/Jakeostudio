@@ -1,4 +1,5 @@
 import type { WorkCardThemeKey } from "./workPageCardThemes";
+import { SITE_RESUME_PDF_HREF } from "./siteNav";
 
 export type { WorkCardThemeKey };
 
@@ -245,7 +246,7 @@ export const FEATURED_PROJECTS: FeaturedProject[] = [
       { label: "Get in Touch", href: "/hire" },
       {
         label: "Download Resume",
-        href: "/JacobOwens2026Resume.pdf",
+        href: SITE_RESUME_PDF_HREF,
         external: true,
       },
     ],

@@ -1,9 +1,8 @@
 import React from "react";
+import { SITE_RESUME_PDF_HREF } from "../lib/siteNav";
 
 const MAILTO_HREF =
   "mailto:jakeostudio@gmail.com?subject=Opportunity&body=Hi Jake, I'd like to connect about a role or project.";
-
-const RESUME_HREF = "/JacobOwens2026Resume.pdf";
 
 /** E.164 (e.g. +15551234567). Update to your real number. */
 const PHONE_HREF = "tel:+15555550100";
@@ -87,7 +86,7 @@ function ContactAndResumeActions() {
         <span className={`pr-6 ${expandLabelClass}`}>Call me</span>
       </a>
       <a
-        href={RESUME_HREF}
+        href={SITE_RESUME_PDF_HREF}
         target="_blank"
         rel="noopener noreferrer"
         className={`${iconRoundBtnClass} md:hidden hover:scale-[1.04]`}
@@ -96,7 +95,7 @@ function ContactAndResumeActions() {
         <ResumeIcon />
       </a>
       <a
-        href={RESUME_HREF}
+        href={SITE_RESUME_PDF_HREF}
         target="_blank"
         rel="noopener noreferrer"
         className={`${expandPillBaseClass} hover:max-w-[220px] focus-visible:max-w-[220px]`}
