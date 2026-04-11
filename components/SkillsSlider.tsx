@@ -31,7 +31,7 @@ const skills: Skill[] = [
   },
   {
     title: "Motion & Visual Design",
-    desc: "Motion graphics, color grading, sound design, storyboarding",
+    desc: "Motion graphics, brand kit → After Effects, color grading, storyboarding",
     gradient: "from-violet-500/60 to-violet-600/20",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-7 h-7">
@@ -41,7 +41,7 @@ const skills: Skill[] = [
   },
   {
     title: "Video Production",
-    desc: "Testimonials, commercials, social media content, storytelling",
+    desc: "Testimonials, remote interviews, long-form & social cuts, storytelling",
     gradient: "from-rose-500/60 to-rose-600/20",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-7 h-7">
@@ -71,7 +71,7 @@ const skills: Skill[] = [
   },
   {
     title: "Creative Suite",
-    desc: "After Effects, Premiere Pro, Photoshop, Illustrator, Figma",
+    desc: "After Effects, Premiere Pro, Photoshop, Illustrator, Figma, Riverside",
     gradient: "from-pink-500/60 to-pink-600/20",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-7 h-7">
@@ -81,7 +81,7 @@ const skills: Skill[] = [
   },
   {
     title: "Development",
-    desc: "JavaScript, TypeScript, React.js, Next.js, Node.js, HTML, CSS, SwiftUI, REST & GraphQL",
+    desc: "JavaScript, TypeScript, React, Next.js, Node.js, HTML, CSS, SwiftUI, REST APIs",
     gradient: "from-orange-500/60 to-orange-600/20",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-7 h-7">
@@ -91,7 +91,7 @@ const skills: Skill[] = [
   },
   {
     title: "AI & Platforms",
-    desc: "Cursor, Supabase, Vercel, GitHub",
+    desc: "Cursor, Supabase, Vercel, Stripe, GitHub",
     gradient: "from-indigo-500/60 to-indigo-600/20",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-7 h-7">

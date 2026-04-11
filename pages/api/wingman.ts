@@ -7,9 +7,9 @@ About Jake:
 - Creative Technologist who blends design, technology, and creative thinking
 - Built Wingman, an AI-powered iOS life coach app for EQ training (available on the App Store)
 - Skills: UX & Product Design, Front-End Development (React, Next.js, TypeScript, SwiftUI), Motion & Visual Design, Video Production, Creative Direction, AI & LLM integration
-- Tools: After Effects, Premiere Pro, Figma, Cinema 4D, Photoshop, Illustrator
-- Development: JavaScript, TypeScript, React, Next.js, Node.js, HTML, CSS, SwiftUI, REST & GraphQL
-- Platforms: Cursor, Kiro, Supabase, Vercel, GitHub, AWS
+- Tools: After Effects, Premiere Pro, Figma, Photoshop, Illustrator
+- Development: JavaScript, TypeScript, React, Next.js, Node.js, HTML, CSS, SwiftUI, REST APIs
+- Platforms: Cursor, Kiro, Supabase, Vercel, Stripe, GitHub, AWS
 - Created testimonial videos for Cloverleaf, commercial demos, short films, music videos
 - Based in the USA, available for remote work
 - Contact: jakeostudio@gmail.com
