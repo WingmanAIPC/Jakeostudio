@@ -1,5 +1,6 @@
 import React from "react";
-import { SITE_RESUME_PDF_HREF } from "../lib/siteNav";
+import Link from "next/link";
+import { SITE_RESUME_PDF_HREF, SITE_LOGO_HEADER_SRC, PRIMARY_NAV } from "../lib/siteNav";
 
 const MAILTO_HREF =
   "mailto:jakeostudio@gmail.com?subject=Opportunity&body=Hi Jake, I'd like to connect about a role or project.";
@@ -87,47 +88,66 @@ function ContactAndResumeActions() {
   );
 }
 
-/** Fixed bottom bar — mobile only (md:hidden). Email / Call / Resume shortcuts. */
-export function MobileContactBar() {
+/** Fixed full-width glass header — mobile only (md:hidden). Logo + nav on left, icons on right. */
+export function MobileHeader({ logoHref = "/" }: { logoHref?: string }) {
   return (
     <div
-      className="fixed bottom-0 left-0 right-0 z-[100] md:hidden flex items-center justify-around px-2 pt-2 bg-black/60 backdrop-blur-2xl border-t border-white/[0.08]"
-      style={{ paddingBottom: "max(env(safe-area-inset-bottom, 0px), 0.75rem)" }}
-      aria-label="Quick contact and resume"
+      className="fixed top-0 left-0 right-0 z-[101] md:hidden flex items-center justify-between px-4 bg-black/70 backdrop-blur-2xl border-b border-white/[0.08]"
+      style={{ height: "52px" }}
     >
-      <a
-        href={MAILTO_HREF}
-        className="flex flex-col items-center gap-0.5 px-5 py-1 text-white/80 hover:text-white transition-colors active:scale-95"
-        aria-label="Email"
-      >
-        <MailIcon className="w-[22px] h-[22px]" />
-        <span className="text-[10px] font-medium tracking-wide">Email</span>
-      </a>
-      <a
-        href={PHONE_HREF}
-        className="flex flex-col items-center gap-0.5 px-5 py-1 text-white/80 hover:text-white transition-colors active:scale-95"
-        aria-label="Call"
-      >
-        <PhoneIcon className="w-[22px] h-[22px]" />
-        <span className="text-[10px] font-medium tracking-wide">Call</span>
-      </a>
-      <a
-        href={SITE_RESUME_PDF_HREF}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex flex-col items-center gap-0.5 px-5 py-1 text-white/80 hover:text-white transition-colors active:scale-95"
-        aria-label="Resume"
-      >
-        <ResumeIcon className="w-[22px] h-[22px]" />
-        <span className="text-[10px] font-medium tracking-wide">Resume</span>
-      </a>
+      <div className="flex items-center gap-3">
+        <Link href={logoHref} aria-label="Home">
+          <img
+            src={SITE_LOGO_HEADER_SRC}
+            alt="jakeostudio"
+            className="h-6 w-auto object-contain"
+          />
+        </Link>
+        <nav className="flex items-center" aria-label="Primary">
+          {PRIMARY_NAV.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="px-2 py-1 text-xs font-medium text-zinc-400 hover:text-white transition-colors whitespace-nowrap"
+              aria-label={item.ariaLabel}
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+      </div>
+      <div className="flex items-center gap-1">
+        <a
+          href={MAILTO_HREF}
+          className="flex items-center justify-center w-8 h-8 text-zinc-400 hover:text-white transition-colors"
+          aria-label="Email"
+        >
+          <MailIcon className="w-5 h-5" />
+        </a>
+        <a
+          href={PHONE_HREF}
+          className="flex items-center justify-center w-8 h-8 text-zinc-400 hover:text-white transition-colors"
+          aria-label="Call"
+        >
+          <PhoneIcon className="w-5 h-5" />
+        </a>
+        <a
+          href={SITE_RESUME_PDF_HREF}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center w-8 h-8 text-zinc-400 hover:text-white transition-colors"
+          aria-label="Resume"
+        >
+          <ResumeIcon className="w-5 h-5" />
+        </a>
+      </div>
     </div>
   );
 }
 
 export default function HeaderFloatingBar({ children }: { children: React.ReactNode }) {
   return (
-    <div className="pointer-events-none fixed top-4 left-0 right-0 z-[100] flex justify-center px-2 sm:px-3">
+    <div className="pointer-events-none fixed top-4 left-0 right-0 z-[100] hidden md:flex justify-center px-2 sm:px-3">
       <div className="pointer-events-auto flex flex-wrap items-center justify-center gap-2 sm:gap-3">
         {children}
         <ContactAndResumeActions />

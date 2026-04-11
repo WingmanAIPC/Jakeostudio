@@ -651,7 +651,7 @@ export default function ProjectShowcase() {
           The aspectRatio style is ignored on desktop because inset:0 wins.
       ─────────────────────────────────────────────────────────────────── */}
       <div
-        className="relative w-full overflow-hidden md:absolute md:inset-0"
+        className="mt-14 md:mt-0 relative w-full overflow-hidden md:absolute md:inset-0"
         style={{ aspectRatio: "16/9" }}
       >
         {FEATURED_PROJECTS.map((_, i) => {
@@ -802,7 +802,7 @@ export default function ProjectShowcase() {
           );
         })}
         {/* Dot indicators + progress bar — anchored to bottom of info area */}
-        <div className="absolute bottom-3 left-0 right-0 z-[10] flex flex-col items-center gap-2 px-5">
+        <div className="absolute bottom-3 left-0 right-0 z-[10] flex flex-col items-center gap-4 px-5">
           <div className="flex gap-2">
             {FEATURED_PROJECTS.map((_, i) => (
               <button

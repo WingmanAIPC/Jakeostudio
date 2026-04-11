@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useLayoutEffect } from "react";
 import Head from "next/head";
 import Link from "next/link";
-import HeaderFloatingBar, { MobileContactBar } from "../components/HeaderFloatingBar";
+import HeaderFloatingBar, { MobileHeader } from "../components/HeaderFloatingBar";
 import PrimaryNavCluster from "../components/PrimaryNavCluster";
 import { SiGithub, SiInstagram, SiLinktree } from "react-icons/si";
 import { TbBrandLinkedin } from "react-icons/tb";
@@ -266,12 +266,11 @@ export default function PortfolioSite() {
           <LogoIntro onComplete={() => setIntroComplete(true)} />
         )}
 
+        <MobileHeader logoHref="#top" />
+
         <HeaderFloatingBar>
           <PrimaryNavCluster logoHref="#top" />
         </HeaderFloatingBar>
-
-        {/* Mobile-only fixed bottom bar with contact shortcuts */}
-        <MobileContactBar />
 
         {/* Hero — mount only after session intro check so first paint is never bright slides */}
         {heroReady ? (
@@ -381,7 +380,7 @@ export default function PortfolioSite() {
           </div>
         </section>
 
-        <footer className="border-t border-white/10 pb-20 md:pb-0">
+        <footer className="border-t border-white/10">
           <div className={`${PAGE_WIDE_SECTION} py-8`}>
             <div className="flex flex-col sm:flex-row items-center justify-between gap-6 mb-6">
               <Link
