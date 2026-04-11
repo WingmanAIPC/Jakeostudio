@@ -130,9 +130,11 @@ export default function WorkIndex() {
                           ))}
                         </div>
                       </div>
-                      <div className="flex items-center gap-2 text-sm text-zinc-500 group-hover:text-white transition-colors shrink-0 md:mt-8">
-                        <span>Read</span>
-                        <ArrowRight />
+                      <div className="shrink-0 md:mt-8 md:self-start">
+                        <span className="inline-flex items-center gap-2 rounded-2xl border-2 border-white/65 bg-white/[0.12] px-4 py-2.5 text-sm font-semibold text-white shadow-[0_0_20px_-10px_rgba(255,255,255,0.4)] transition-colors group-hover:border-white group-hover:bg-white group-hover:text-black">
+                          <span>Case study</span>
+                          <ArrowRight />
+                        </span>
                       </div>
                     </div>
                   </div>

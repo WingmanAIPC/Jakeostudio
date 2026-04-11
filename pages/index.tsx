@@ -10,6 +10,10 @@ const PrismaticBurst = dynamic(() => import("../components/PrismaticBurst"), {
   loading: () => null,
 });
 
+/** Case study CTAs sit next to solid white primaries — needs stronger border + fill to read on black. */
+const FEATURE_CASE_STUDY_BTN =
+  "inline-flex items-center justify-center px-4 py-2.5 rounded-2xl border-2 border-white/70 bg-white/[0.14] text-white text-sm font-semibold shadow-[0_0_24px_-12px_rgba(255,255,255,0.45)] hover:bg-white hover:text-black hover:border-white transition-colors";
+
 // Minimal single-file React portfolio using Tailwind CSS classes.
 // Drop into Next.js/React. Replace placeholders with real content.
 
@@ -366,21 +370,23 @@ export default function PortfolioSite() {
           </h2>
         </div>
         
-        {/* Wingman Feature */}
+        {/* Wingman — text left, video right (mobile: video first) */}
         <div className="grid md:grid-cols-2 gap-8 items-center mb-16">
-          <YouTubeLazyEmbed
-            title="Wingman Feature Video"
-            videoId="Ag7EAF_djj4"
-            borderClass="border border-white/10"
-            hoverDetails={
-              <VideoHoverOverlay
-                heading="Wingman Feature Video"
-                subtitle="AI Life Coach • iOS App • EQ Training"
-                process="Tap play to watch on this page."
-              />
-            }
-          />
-          <div className="space-y-4">
+          <div className="order-1 md:order-2">
+            <YouTubeLazyEmbed
+              title="Wingman Feature Video"
+              videoId="Ag7EAF_djj4"
+              borderClass="border border-white/10"
+              hoverDetails={
+                <VideoHoverOverlay
+                  heading="Wingman Feature Video"
+                  subtitle="AI Life Coach • iOS App • EQ Training"
+                  process="Tap play to watch on this page."
+                />
+              }
+            />
+          </div>
+          <div className="space-y-4 order-2 md:order-1">
             <h3 className="text-xl font-semibold">Wingman — Your AI Assistant for Life</h3>
             <p className="text-zinc-300 text-sm">
               Meet Wingman, your personal life coach, designed to help you reflect deeply, grow intentionally, and thrive in every area of life.
@@ -389,23 +395,20 @@ export default function PortfolioSite() {
               <span className="px-2 py-1 rounded-full bg-white/10">AI Coach</span>
               <span className="px-2 py-1 rounded-full bg-white/10">EQ Training</span>
               <span className="px-2 py-1 rounded-full bg-white/10">iOS App</span>
-              </div>
+            </div>
             <div className="flex flex-wrap gap-3">
-              <a 
-                href="https://apps.apple.com/us/app/wingman-eq-life-coach/id6747995730" 
-                target="_blank" 
+              <a
+                href="https://apps.apple.com/us/app/wingman-eq-life-coach/id6747995730"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-white text-black text-sm font-medium hover:bg-zinc-100 transition-colors"
               >
                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                  <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
                 </svg>
                 Download App
               </a>
-              <a 
-                href="/work/wingman"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-2xl border border-white/20 text-white text-sm font-medium hover:bg-white/10 transition-colors"
-              >
+              <a href="/work/wingman" className={FEATURE_CASE_STUDY_BTN}>
                 Read Case Study
               </a>
             </div>
@@ -417,9 +420,21 @@ export default function PortfolioSite() {
           <div className="w-24 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
         </div>
 
-        {/* Biro Labels */}
-        <div className="mb-16 space-y-8">
-          <div className="space-y-4 max-w-3xl">
+        {/* Biro — video left, text right (mobile: video first); customer experience walkthrough only */}
+        <div className="grid md:grid-cols-2 gap-8 items-center mb-16">
+          <YouTubeLazyEmbed
+            title="Biro Labels customer-facing site walkthrough"
+            videoId="nJfioQ8lLSg"
+            borderClass="border border-white/10"
+            hoverDetails={
+              <VideoHoverOverlay
+                heading="Biro Labels"
+                subtitle="Customer storefront walkthrough"
+                process="Tap play to watch on this page."
+              />
+            }
+          />
+          <div className="space-y-4">
             <h3 className="text-xl font-semibold">Biro Labels</h3>
             <p className="text-zinc-300 text-sm">
               Customer storefront and admin tools for store managers. Built, designed, and developed solo.
@@ -439,30 +454,9 @@ export default function PortfolioSite() {
               >
                 View Website
               </a>
-              <a 
-                href="/work/biro-labels"
-                className="inline-block px-4 py-2 rounded-2xl border border-white/20 text-white text-sm font-medium hover:bg-white/10 transition-colors"
-              >
+              <a href="/work/biro-labels" className={FEATURE_CASE_STUDY_BTN}>
                 Read Case Study
               </a>
-            </div>
-          </div>
-          <div className="grid md:grid-cols-2 gap-6 md:gap-8">
-            <div className="space-y-2">
-              <p className="text-xs font-medium text-zinc-400 uppercase tracking-wide">Customer experience</p>
-              <YouTubeLazyEmbed
-                title="Biro Labels customer-facing site walkthrough"
-                videoId="nJfioQ8lLSg"
-                borderClass="border border-white/10"
-              />
-            </div>
-            <div className="space-y-2">
-              <p className="text-xs font-medium text-zinc-400 uppercase tracking-wide">Admin &amp; store managers</p>
-              <YouTubeLazyEmbed
-                title="Biro Labels admin walkthrough for store managers"
-                videoId="oGaejTwxYNc"
-                borderClass="border border-white/10"
-              />
             </div>
           </div>
         </div>
@@ -511,10 +505,7 @@ export default function PortfolioSite() {
               >
                 View Playlist
               </a>
-              <a 
-                href="/work/cloverleaf"
-                className="inline-block px-4 py-2 rounded-2xl border border-white/20 text-white text-sm font-medium hover:bg-white/10 transition-colors"
-              >
+              <a href="/work/cloverleaf" className={FEATURE_CASE_STUDY_BTN}>
                 Read Case Study
               </a>
             </div>
