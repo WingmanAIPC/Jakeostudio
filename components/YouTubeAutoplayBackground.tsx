@@ -21,6 +21,7 @@ export default function YouTubeAutoplayBackground({
   startSeconds = 0,
   loop = true,
   embedDelayMs = 0,
+  fillContainer = false,
 }: {
   videoId: string;
   posterSrc: string;
@@ -28,6 +29,8 @@ export default function YouTubeAutoplayBackground({
   startSeconds?: number;
   loop?: boolean;
   embedDelayMs?: number;
+  /** When true, fills its container (for 16:9 wrappers). Default false = viewport-cover sizing. */
+  fillContainer?: boolean;
 }) {
   const reactId = useId().replace(/:/g, "");
   const containerId = `ytbg-${reactId}`;
@@ -139,18 +142,24 @@ export default function YouTubeAutoplayBackground({
     };
   }, [isActive, videoId, containerId, startSeconds, loop, embedDelayMs]);
 
-  const coverStyle = {
-    width: "177.78vh" as const,
-    height: "100vh" as const,
-    minWidth: "100vw" as const,
-    minHeight: "56.25vw" as const,
-    transform: "translate(-50%, -50%)" as const,
-  };
+  const coverStyle = fillContainer
+    ? undefined
+    : {
+        width: "177.78vh" as const,
+        height: "100vh" as const,
+        minWidth: "100vw" as const,
+        minHeight: "56.25vw" as const,
+        transform: "translate(-50%, -50%)" as const,
+      };
 
   return (
     <div className="absolute inset-0 overflow-hidden">
       <div
-        className="absolute top-1/2 left-1/2 pointer-events-none"
+        className={
+          fillContainer
+            ? "absolute inset-0 pointer-events-none"
+            : "absolute top-1/2 left-1/2 pointer-events-none"
+        }
         style={coverStyle}
       >
         <div id={containerId} className="h-full w-full" />

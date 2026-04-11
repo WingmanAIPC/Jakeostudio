@@ -182,6 +182,7 @@ function ThumbsThenVideoBackground({
 function SlideBackground({
   project,
   isActive,
+  fillContainer = false,
   onCloverleafComplete,
   reportCloverleafProgress,
   onSegmentComplete,
@@ -190,6 +191,8 @@ function SlideBackground({
 }: {
   project: FeaturedProject;
   isActive: boolean;
+  /** When true, YouTube/segment players fill their container (for 16:9 mobile wrappers). */
+  fillContainer?: boolean;
   onCloverleafComplete?: () => void;
   reportCloverleafProgress?: (fraction: number) => void;
   /** Hire + Biro admin: fired after last YouTube segment */
@@ -240,8 +243,12 @@ function SlideBackground({
               className="absolute inset-0 h-full w-full object-cover"
             />
             <div
-              className="absolute top-1/2 left-1/2 pointer-events-none"
-              style={segmentStyle}
+              className={
+                fillContainer
+                  ? "absolute inset-0 pointer-events-none"
+                  : "absolute top-1/2 left-1/2 pointer-events-none"
+              }
+              style={fillContainer ? undefined : segmentStyle}
             >
               <YouTubeSegmentPlayer
                 videoId={project.youtubeVideoId}
@@ -263,6 +270,7 @@ function SlideBackground({
             startSeconds={project.youtubeStartSeconds ?? 0}
             loop={project.youtubeLoop !== false}
             embedDelayMs={project.youtubeEmbedDelayMs}
+            fillContainer={fillContainer}
           />
         )}
       </>
@@ -342,6 +350,8 @@ export default function ProjectShowcase() {
   const [biroSlot, setBiroSlot] = useState(0);
 
   const progressRef = useRef<HTMLDivElement>(null);
+  const mobileProgressRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
   const timerRef = useRef<ReturnType<typeof setTimeout>>();
   const startTimeRef = useRef(Date.now());
   const rafRef = useRef<number>();
@@ -554,6 +564,14 @@ export default function ProjectShowcase() {
     };
   }, [activeIndex, biroSlot, slideCount, runSlideTransition]);
 
+  useLayoutEffect(() => {
+    const mq = window.matchMedia("(max-width: 767px)");
+    setIsMobile(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+
   const reportCloverleafProgress = useCallback((p: number) => {
     cloverleafProgressRef.current = p;
   }, []);
@@ -566,10 +584,9 @@ export default function ProjectShowcase() {
     biroProgressRef.current = p;
   }, []);
 
-  // Progress bar
+  // Progress bar — updates both desktop and mobile progress indicators
   useEffect(() => {
     const update = () => {
-      if (!progressRef.current) return;
       const slug = FEATURED_PROJECTS[activeIndex]?.slug;
       let progress: number;
       if (slug === "cloverleaf") {
@@ -588,7 +605,10 @@ export default function ProjectShowcase() {
           );
         }
       }
-      progressRef.current.style.transform = `scaleX(${progress})`;
+      if (progressRef.current)
+        progressRef.current.style.transform = `scaleX(${progress})`;
+      if (mobileProgressRef.current)
+        mobileProgressRef.current.style.transform = `scaleX(${progress})`;
       rafRef.current = requestAnimationFrame(update);
     };
     rafRef.current = requestAnimationFrame(update);
@@ -615,86 +635,208 @@ export default function ProjectShowcase() {
   return (
     <section
       id="top"
-      className="relative w-full overflow-hidden"
-      style={{ height: "100svh" }}
+      className="relative w-full md:overflow-hidden md:[height:100svh]"
     >
-      {FEATURED_PROJECTS.map((_, i) => {
-        const merged = mergedProject(i);
-        const slug = FEATURED_PROJECTS[i].slug;
-        const segmentMode =
-          !!merged.youtubeSegments && merged.youtubeSegments.length > 0;
-        return (
-          <div
-            key={FEATURED_PROJECTS[i].slug}
-            className="absolute inset-0"
-            style={{
-              opacity: i === activeIndex ? 1 : 0,
-              zIndex: i === activeIndex ? 1 : 0,
-              transition: "none",
-            }}
-            aria-hidden={i !== activeIndex}
-          >
-            <SlideBackground
-              project={merged}
-              isActive={i === activeIndex}
-              onCloverleafComplete={
-                slug === "cloverleaf" ? advanceCloverleaf : undefined
-              }
-              reportCloverleafProgress={
-                slug === "cloverleaf" ? reportCloverleafProgress : undefined
-              }
-              onSegmentComplete={
-                segmentMode && slug === "hire"
-                  ? advanceHire
-                  : segmentMode && slug === "biro-labels"
-                    ? advanceBiro
-                    : undefined
-              }
-              reportSegmentProgress={
-                segmentMode && slug === "hire"
-                  ? reportHireProgress
-                  : segmentMode && slug === "biro-labels"
-                    ? reportBiroProgress
-                    : undefined
-              }
-              cloverRemountKey={
-                slug === "cloverleaf"
-                  ? cloverleaf.videoIds.join("|") || "clover"
-                  : undefined
-              }
-            />
-          </div>
-        );
-      })}
-
-      <div
-        className="absolute inset-0 z-[2] pointer-events-none"
-        style={{
-          background:
-            "linear-gradient(to top, rgba(0,0,0,0.38) 0%, rgba(0,0,0,0.128) 42%, rgba(0,0,0,0.045) 72%, rgba(0,0,0,0.102) 100%)",
-        }}
-      />
-      <div
-        className="absolute inset-0 z-[2] pointer-events-none"
-        style={{
-          background:
-            "linear-gradient(to right, rgba(0,0,0,0.06) 0%, transparent 58%)",
-        }}
-      />
-
+      {/* Flash overlay — fixed so it covers the full viewport for both layouts */}
       <div
         ref={flashOverlayRef}
-        className="pointer-events-none absolute inset-0 z-[100] bg-white"
+        className="pointer-events-none fixed inset-0 z-[500] bg-white"
         style={{ opacity: 0 }}
         aria-hidden
       />
 
+      {/* ─── Shared video area ──────────────────────────────────────────
+          Mobile:  relative + aspect-video (in normal flow, edge-to-edge)
+          Desktop: absolute inset-0 (covers full 100svh section)
+          The aspectRatio style is ignored on desktop because inset:0 wins.
+      ─────────────────────────────────────────────────────────────────── */}
+      <div
+        className="relative w-full overflow-hidden md:absolute md:inset-0"
+        style={{ aspectRatio: "16/9" }}
+      >
+        {FEATURED_PROJECTS.map((_, i) => {
+          const merged = mergedProject(i);
+          const slug = FEATURED_PROJECTS[i].slug;
+          const segmentMode =
+            !!merged.youtubeSegments && merged.youtubeSegments.length > 0;
+          return (
+            <div
+              key={FEATURED_PROJECTS[i].slug}
+              className="absolute inset-0"
+              style={{
+                opacity: i === activeIndex ? 1 : 0,
+                zIndex: i === activeIndex ? 1 : 0,
+                transition: "none",
+              }}
+              aria-hidden={i !== activeIndex}
+            >
+              <SlideBackground
+                project={merged}
+                isActive={i === activeIndex}
+                fillContainer={isMobile}
+                onCloverleafComplete={
+                  slug === "cloverleaf" ? advanceCloverleaf : undefined
+                }
+                reportCloverleafProgress={
+                  slug === "cloverleaf" ? reportCloverleafProgress : undefined
+                }
+                onSegmentComplete={
+                  segmentMode && slug === "hire"
+                    ? advanceHire
+                    : segmentMode && slug === "biro-labels"
+                      ? advanceBiro
+                      : undefined
+                }
+                reportSegmentProgress={
+                  segmentMode && slug === "hire"
+                    ? reportHireProgress
+                    : segmentMode && slug === "biro-labels"
+                      ? reportBiroProgress
+                      : undefined
+                }
+                cloverRemountKey={
+                  slug === "cloverleaf"
+                    ? cloverleaf.videoIds.join("|") || "clover"
+                    : undefined
+                }
+              />
+            </div>
+          );
+        })}
+        {/* Gradient overlays — live inside video area, appear over video on both layouts */}
+        <div
+          className="absolute inset-0 z-[2] pointer-events-none"
+          style={{
+            background:
+              "linear-gradient(to top, rgba(0,0,0,0.38) 0%, rgba(0,0,0,0.128) 42%, rgba(0,0,0,0.045) 72%, rgba(0,0,0,0.102) 100%)",
+          }}
+        />
+        <div
+          className="absolute inset-0 z-[2] pointer-events-none"
+          style={{
+            background:
+              "linear-gradient(to right, rgba(0,0,0,0.06) 0%, transparent 58%)",
+          }}
+        />
+      </div>
+
+      {/* ─── Mobile info area (hidden on desktop) ───────────────────────
+          Appears below the video strip in normal flow on mobile.
+          Fixed min-height prevents layout shift as slides cycle.
+      ─────────────────────────────────────────────────────────────────── */}
+      <div
+        className="relative bg-black md:hidden overflow-hidden"
+        style={{ minHeight: "270px" }}
+      >
+        {FEATURED_PROJECTS.map((project, i) => {
+          const isActive = i === activeIndex;
+          return (
+            <div
+              key={`mtext-${project.slug}`}
+              className="absolute inset-0 flex flex-col px-5 pt-4"
+              style={{
+                opacity: isActive ? 1 : 0,
+                transform: isActive ? "translateY(0)" : "translateY(12px)",
+                transitionProperty: "opacity, transform",
+                transitionDuration: `${TEXT_FADE_MS}ms`,
+                transitionTimingFunction: "ease-out",
+                transitionDelay: isActive ? "400ms" : "0ms",
+                pointerEvents: isActive ? "auto" : "none",
+              }}
+              aria-hidden={!isActive}
+            >
+              <h2
+                className="text-[1.35rem] font-bold mb-1.5 tracking-tight"
+                style={
+                  project.titleFont
+                    ? { fontFamily: project.titleFont }
+                    : undefined
+                }
+              >
+                {project.title}
+              </h2>
+              <p className="text-sm text-zinc-300 mb-2.5 leading-relaxed line-clamp-2">
+                {project.subtitle}
+              </p>
+              {project.tags.length > 0 && (
+                <div className="flex flex-wrap gap-1.5 mb-3">
+                  {project.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded-full bg-white/10 backdrop-blur-sm border border-white/10 px-2.5 py-0.5 text-[11px] text-zinc-200"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
+              <div className="flex flex-row flex-wrap gap-2 pb-9">
+                {project.cta.map((action) =>
+                  action.external ? (
+                    <a
+                      key={action.label}
+                      href={action.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={ctaSecondaryClass}
+                    >
+                      {action.icon === "apple" && <AppleIcon />}
+                      {action.label}
+                    </a>
+                  ) : (
+                    <Link
+                      key={action.label}
+                      href={action.href}
+                      className={ctaPrimaryClass}
+                    >
+                      <span
+                        className="pointer-events-none absolute inset-x-0 top-0 h-1/2 rounded-t-2xl bg-gradient-to-b from-white/25 to-transparent opacity-70"
+                        aria-hidden
+                      />
+                      <span className="relative">{action.label}</span>
+                    </Link>
+                  ),
+                )}
+              </div>
+            </div>
+          );
+        })}
+        {/* Dot indicators + progress bar — anchored to bottom of info area */}
+        <div className="absolute bottom-3 left-0 right-0 z-[10] flex flex-col items-center gap-2 px-5">
+          <div className="flex gap-2">
+            {FEATURED_PROJECTS.map((_, i) => (
+              <button
+                key={i}
+                type="button"
+                onClick={() => goToSlide(i)}
+                className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                  i === activeIndex
+                    ? "w-8 bg-white"
+                    : "w-2 bg-white/30 hover:bg-white/50"
+                }`}
+                aria-label={`Go to slide ${i + 1}`}
+              />
+            ))}
+          </div>
+          <div className="w-full max-w-xs h-[2px] bg-white/10 rounded-full overflow-hidden">
+            <div
+              ref={mobileProgressRef}
+              className="h-full bg-white/50 origin-left"
+              style={{ transform: "scaleX(0)" }}
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* ─── Desktop: text overlays (hidden on mobile) ──────────────────
+          Absolutely positioned over the full-screen video on desktop.
+      ─────────────────────────────────────────────────────────────────── */}
       {FEATURED_PROJECTS.map((project, i) => {
         const isActive = i === activeIndex;
         return (
           <div
             key={`text-${project.slug}`}
-            className="absolute bottom-16 sm:bottom-20 md:bottom-28 left-0 right-0 z-[3] px-6 sm:px-8 md:px-16 lg:px-20"
+            className="hidden md:block absolute bottom-28 left-0 right-0 z-[3] md:px-16 lg:px-20"
             style={{
               opacity: isActive ? 1 : 0,
               transform: isActive ? "translateY(0)" : "translateY(12px)",
@@ -704,11 +846,12 @@ export default function ProjectShowcase() {
               transitionDelay: isActive ? "400ms" : "0ms",
               pointerEvents: isActive ? "auto" : "none",
             }}
+            aria-hidden={!isActive}
           >
-            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+            <div className="flex flex-row items-end justify-between gap-6">
               <div className="min-w-0">
                 <h1
-                  className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold mb-2 md:mb-3 tracking-tight max-w-4xl"
+                  className="text-6xl lg:text-7xl font-bold mb-3 tracking-tight max-w-4xl"
                   style={
                     project.titleFont
                       ? { fontFamily: project.titleFont }
@@ -720,8 +863,8 @@ export default function ProjectShowcase() {
                 <p
                   className={
                     project.slug === "biro-labels"
-                      ? "text-base md:text-lg text-zinc-200 mb-4 max-w-2xl md:max-w-none md:whitespace-nowrap leading-relaxed"
-                      : "text-base md:text-lg text-zinc-200 mb-4 max-w-2xl leading-relaxed"
+                      ? "text-lg text-zinc-200 mb-4 max-w-none whitespace-nowrap leading-relaxed"
+                      : "text-lg text-zinc-200 mb-4 max-w-2xl leading-relaxed"
                   }
                 >
                   {project.subtitle}
@@ -739,8 +882,7 @@ export default function ProjectShowcase() {
                   </div>
                 )}
               </div>
-
-              <div className="flex flex-row flex-wrap gap-3 shrink-0 md:items-end md:justify-end">
+              <div className="flex flex-row flex-wrap gap-3 shrink-0 items-end justify-end">
                 {project.cta.map((action) =>
                   action.external ? (
                     <a
@@ -773,10 +915,11 @@ export default function ProjectShowcase() {
         );
       })}
 
+      {/* ─── Desktop: prev/next arrows ──────────────────────────────── */}
       <button
         type="button"
         onClick={prev}
-        className="absolute left-4 top-1/2 -translate-y-1/2 z-50 flex h-10 w-10 items-center justify-center rounded-full bg-black/40 text-white/70 backdrop-blur-sm border border-white/10 opacity-0 md:opacity-60 hover:opacity-100 hover:bg-black/60 transition-opacity"
+        className="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 z-50 h-10 w-10 items-center justify-center rounded-full bg-black/40 text-white/70 backdrop-blur-sm border border-white/10 opacity-60 hover:opacity-100 hover:bg-black/60 transition-opacity"
         aria-label="Previous project"
       >
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
@@ -786,7 +929,7 @@ export default function ProjectShowcase() {
       <button
         type="button"
         onClick={next}
-        className="absolute right-4 top-1/2 -translate-y-1/2 z-50 flex h-10 w-10 items-center justify-center rounded-full bg-black/40 text-white/70 backdrop-blur-sm border border-white/10 opacity-0 md:opacity-60 hover:opacity-100 hover:bg-black/60 transition-opacity"
+        className="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 z-50 h-10 w-10 items-center justify-center rounded-full bg-black/40 text-white/70 backdrop-blur-sm border border-white/10 opacity-60 hover:opacity-100 hover:bg-black/60 transition-opacity"
         aria-label="Next project"
       >
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
@@ -794,7 +937,8 @@ export default function ProjectShowcase() {
         </svg>
       </button>
 
-      <div className="absolute bottom-4 sm:bottom-8 left-0 right-0 z-50 flex flex-col items-center gap-3 sm:gap-4 px-8">
+      {/* ─── Desktop: dots + progress bar ───────────────────────────── */}
+      <div className="hidden md:flex absolute bottom-8 left-0 right-0 z-50 flex-col items-center gap-4 px-8">
         <div className="flex gap-2">
           {FEATURED_PROJECTS.map((_, i) => (
             <button

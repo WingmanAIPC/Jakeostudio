@@ -44,20 +44,13 @@ const expandPillBaseClass =
 const expandLabelClass =
   "text-xs font-medium tracking-tight text-white whitespace-nowrap opacity-0 -translate-x-1.5 transition-[opacity,transform] duration-150 ease-in delay-0 group-hover:opacity-100 group-hover:translate-x-0 group-hover:duration-[820ms] group-hover:delay-[260ms] group-hover:ease-[cubic-bezier(0.22,1,0.36,1)] group-focus-visible:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:duration-[820ms] group-focus-visible:delay-[260ms] group-focus-visible:ease-[cubic-bezier(0.22,1,0.36,1)]";
 
-/** One row so email ↔ phone ↔ resume share the same gap (avoids nested gap-2 vs parent gap-3 mismatch). */
+/** Desktop-only expandable contact + resume pills in the top header. */
 function ContactAndResumeActions() {
   return (
     <div
-      className="flex items-center gap-2 sm:gap-3"
+      className="hidden md:flex items-center gap-3"
       aria-label="Quick contact and resume"
     >
-      <a
-        href={MAILTO_HREF}
-        className={`${iconRoundBtnClass} md:hidden hover:scale-[1.04]`}
-        aria-label="Email"
-      >
-        <MailIcon />
-      </a>
       <a
         href={MAILTO_HREF}
         className={`${expandPillBaseClass} hover:max-w-[min(100vw-8rem,320px)] focus-visible:max-w-[min(100vw-8rem,320px)]`}
@@ -67,13 +60,6 @@ function ContactAndResumeActions() {
           <MailIcon />
         </span>
         <span className={`pr-6 ${expandLabelClass}`}>jakeostudio@gmail.com</span>
-      </a>
-      <a
-        href={PHONE_HREF}
-        className={`${iconRoundBtnClass} md:hidden hover:scale-[1.04]`}
-        aria-label="Call"
-      >
-        <PhoneIcon />
       </a>
       <a
         href={PHONE_HREF}
@@ -89,15 +75,6 @@ function ContactAndResumeActions() {
         href={SITE_RESUME_PDF_HREF}
         target="_blank"
         rel="noopener noreferrer"
-        className={`${iconRoundBtnClass} md:hidden hover:scale-[1.04]`}
-        aria-label="View resume"
-      >
-        <ResumeIcon />
-      </a>
-      <a
-        href={SITE_RESUME_PDF_HREF}
-        target="_blank"
-        rel="noopener noreferrer"
         className={`${expandPillBaseClass} hover:max-w-[220px] focus-visible:max-w-[220px]`}
         aria-label="View resume"
       >
@@ -105,6 +82,44 @@ function ContactAndResumeActions() {
           <ResumeIcon />
         </span>
         <span className={`pr-6 ${expandLabelClass}`}>Resume</span>
+      </a>
+    </div>
+  );
+}
+
+/** Fixed bottom bar — mobile only (md:hidden). Email / Call / Resume shortcuts. */
+export function MobileContactBar() {
+  return (
+    <div
+      className="fixed bottom-0 left-0 right-0 z-[100] md:hidden flex items-center justify-around px-2 pt-2 bg-black/60 backdrop-blur-2xl border-t border-white/[0.08]"
+      style={{ paddingBottom: "max(env(safe-area-inset-bottom, 0px), 0.75rem)" }}
+      aria-label="Quick contact and resume"
+    >
+      <a
+        href={MAILTO_HREF}
+        className="flex flex-col items-center gap-0.5 px-5 py-1 text-white/80 hover:text-white transition-colors active:scale-95"
+        aria-label="Email"
+      >
+        <MailIcon className="w-[22px] h-[22px]" />
+        <span className="text-[10px] font-medium tracking-wide">Email</span>
+      </a>
+      <a
+        href={PHONE_HREF}
+        className="flex flex-col items-center gap-0.5 px-5 py-1 text-white/80 hover:text-white transition-colors active:scale-95"
+        aria-label="Call"
+      >
+        <PhoneIcon className="w-[22px] h-[22px]" />
+        <span className="text-[10px] font-medium tracking-wide">Call</span>
+      </a>
+      <a
+        href={SITE_RESUME_PDF_HREF}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex flex-col items-center gap-0.5 px-5 py-1 text-white/80 hover:text-white transition-colors active:scale-95"
+        aria-label="Resume"
+      >
+        <ResumeIcon className="w-[22px] h-[22px]" />
+        <span className="text-[10px] font-medium tracking-wide">Resume</span>
       </a>
     </div>
   );
