@@ -4,8 +4,11 @@ import React, { useEffect, useState } from "react";
 
 const POSTER_SRC = "/OutofSync.jpg";
 
-const triggerClass =
-  "underline decoration-zinc-500 underline-offset-[3px] hover:decoration-white hover:text-white transition-colors cursor-pointer bg-transparent border-0 p-0 font-inherit text-inherit text-[15px] leading-relaxed text-left inline";
+const triggerButtonClass =
+  "group inline max-w-full cursor-pointer bg-transparent border-0 p-0 font-inherit text-inherit text-[15px] leading-relaxed align-baseline whitespace-normal text-left [word-break:break-word]";
+
+const triggerLabelClass =
+  "underline decoration-zinc-500 underline-offset-[3px] transition-colors group-hover:decoration-white group-hover:text-white";
 
 export default function HowIWorkContent() {
   const [open, setOpen] = useState(false);
@@ -44,14 +47,17 @@ export default function HowIWorkContent() {
           media arts program — where I eventually placed{" "}
           <button
             type="button"
-            className={triggerClass}
+            className={triggerButtonClass}
             onClick={() => setOpen(true)}
             aria-haspopup="dialog"
             aria-expanded={open}
           >
-            1st out of 44,000 students in the Adobe ACA US National Championship
+            <span className={triggerLabelClass}>
+              1st out of 44,000 students in the Adobe ACA US National Championship
+            </span>
+            .{" "}
           </button>
-          . I studied graphic design at the University of Dayton, starting in
+          I studied graphic design at the University of Dayton, starting in
           digital and fine art, then moving through typography, design systems,
           branding, and client work. Along the way I picked up a minor in video
           production, which put me in the truck as a technical director for live
