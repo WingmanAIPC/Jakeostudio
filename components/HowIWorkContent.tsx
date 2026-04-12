@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 const POSTER_SRC = "/OutofSync.jpg";
 
 const triggerButtonClass =
-  "group inline max-w-full cursor-pointer bg-transparent border-0 p-0 font-inherit text-inherit text-[15px] leading-relaxed align-baseline whitespace-normal text-left [word-break:break-word]";
+  "group inline m-0 cursor-pointer bg-transparent border-0 p-0 font-inherit text-inherit align-baseline whitespace-normal [word-break:break-word]";
 
 const triggerLabelClass =
   "underline decoration-zinc-500 underline-offset-[3px] transition-colors group-hover:decoration-white group-hover:text-white";
