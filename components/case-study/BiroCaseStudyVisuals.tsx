@@ -2,7 +2,7 @@ import React from "react";
 
 // Brand SVG paths from Simple Icons (MIT): https://github.com/simple-icons/simple-icons
 
-/** Hero `<h1>` scale — white BIRO + accent LABELS (matches live site). */
+/** Hero `<h1>` scale: white BIRO + accent LABELS (matches live site). */
 export function BiroHeroWordmark({ className = "" }: { className?: string }) {
   return (
     <span className={`text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight ${className}`}>
@@ -25,7 +25,7 @@ export function BiroSiteWordmark({ className = "" }: { className?: string }) {
   );
 }
 
-/* Simple Icons (MIT) — https://github.com/simple-icons/simple-icons */
+/* Simple Icons (MIT): https://github.com/simple-icons/simple-icons */
 
 function IconShell({
   children,
@@ -100,7 +100,7 @@ export function QuickBooksIcon({ className }: { className?: string }) {
   );
 }
 
-/** Compact row of marks for services referenced in copy — keeps the page scannable. */
+/** Compact row of marks for services referenced in copy; keeps the page scannable. */
 export function BiroIntegrationStrip() {
   return (
     <div className="rounded-xl border border-white/10 bg-zinc-950/40 px-4 py-4">

@@ -59,6 +59,13 @@ export const toolStackIconMap: Partial<Record<string, IconType>> = {
   Stripe: SiStripe,
   GitHub: SiGithub,
   HubSpot: SiHubspot,
+  /** Hero / work featured tags */
+  "LLM Integration": SiOpenai,
+  "iOS Development": SiSwift,
+  "EQ Frameworks": TbSparkles,
+  "Video Production": TbMovie,
+  "Motion Design": TbBrandAdobeAfterEffect,
+  "AI Development": SiOpenai,
 };
 
 /** Subtle tinted pill (dark UI): icon at brand hex, soft fill + border. */
@@ -194,5 +201,35 @@ export const toolStackPillTheme: Partial<Record<string, ToolStackPillTheme>> = {
     color: "#ff7a59",
     background: "rgba(255, 122, 89, 0.12)",
     border: "rgba(255, 122, 89, 0.32)",
+  },
+  "LLM Integration": {
+    color: "#10a37f",
+    background: "rgba(16, 163, 127, 0.12)",
+    border: "rgba(16, 163, 127, 0.35)",
+  },
+  "iOS Development": {
+    color: "#0a84ff",
+    background: "rgba(10, 132, 255, 0.12)",
+    border: "rgba(10, 132, 255, 0.35)",
+  },
+  "EQ Frameworks": {
+    color: "#a78bfa",
+    background: "rgba(167, 139, 250, 0.12)",
+    border: "rgba(167, 139, 250, 0.35)",
+  },
+  "Video Production": {
+    color: "#f472b6",
+    background: "rgba(244, 114, 182, 0.1)",
+    border: "rgba(244, 114, 182, 0.32)",
+  },
+  "Motion Design": {
+    color: "#a78bfa",
+    background: "rgba(153, 153, 255, 0.12)",
+    border: "rgba(153, 153, 255, 0.35)",
+  },
+  "AI Development": {
+    color: "#34d399",
+    background: "rgba(52, 211, 153, 0.12)",
+    border: "rgba(52, 211, 153, 0.35)",
   },
 };

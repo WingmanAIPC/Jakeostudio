@@ -6,6 +6,7 @@ import React, {
   useLayoutEffect,
 } from "react";
 import Link from "next/link";
+import { ToolStackPill } from "./ToolStackPill";
 import YouTubeSegmentPlayer from "./YouTubeSegmentPlayer";
 import YouTubeAutoplayBackground from "./YouTubeAutoplayBackground";
 import {
@@ -20,6 +21,7 @@ import {
   BIRO_CUSTOMER_VIDEO_ID,
   getCloverleafShowcasePair,
   type FeaturedProject,
+  type ProjectCta,
 } from "../lib/work";
 
 const DEFAULT_SLIDE_MS = 9000;
@@ -37,6 +39,29 @@ const ctaPrimaryClass =
 /** Secondary CTA — glass outline, no outer glow */
 const ctaSecondaryClass =
   "inline-flex items-center gap-2 px-5 py-3 rounded-2xl text-sm font-medium text-white whitespace-nowrap transition-all duration-300 border border-white/28 bg-black/25 backdrop-blur-2xl shadow-[0_0_0_1px_rgba(255,255,255,0.05)_inset] hover:border-white/50 hover:bg-black/35 hover:shadow-[0_0_0_1px_rgba(255,255,255,0.08)_inset] hover:scale-[1.02] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-black/40";
+
+/** Mobile showcase — minimal underlined text links */
+const mobileHeroLinkClass =
+  "text-sm text-white underline underline-offset-[5px] decoration-white/35 hover:decoration-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-sm";
+
+function mobileCtaLabel(action: ProjectCta): string {
+  switch (action.label) {
+    case "View Case Study":
+      return "Read case study →";
+    case "Get in Touch":
+      return "Get in touch →";
+    case "Download Resume":
+      return "Download resume →";
+    case "Watch Playlist":
+      return "Watch playlist →";
+    case "Visit Site":
+      return "Visit site →";
+    case "App Store":
+      return "App Store →";
+    default:
+      return `${action.label} →`;
+  }
+}
 
 function AppleIcon() {
   return (
@@ -750,8 +775,8 @@ export default function ProjectShowcase() {
       </div>
 
       {/* Mobile: slide dots + timer bar directly under the video (YouTube-style) */}
-      <div className="md:hidden bg-black px-4 pt-2 pb-2.5">
-        <div className="flex gap-2 justify-center mb-3">
+      <div className="md:hidden bg-black px-4 py-3 flex flex-col gap-3">
+        <div className="flex gap-2 justify-center">
           {FEATURED_PROJECTS.map((_, i) => (
             <button
               key={i}
@@ -775,20 +800,28 @@ export default function ProjectShowcase() {
         </div>
       </div>
 
-      {/* ─── Mobile info area (hidden on desktop) ───────────────────────
-          Appears below the video strip in normal flow on mobile.
-          Fixed min-height prevents layout shift as slides cycle.
+      {/* ─── Mobile info area (hidden on desktop) — case-study style + hire grid
+          Active slide is in normal flow (height = content). Inactive layers are
+          absolute so they don’t force a tall min-height gap above the next section.
       ─────────────────────────────────────────────────────────────────── */}
-      <div
-        className="relative bg-black md:hidden overflow-hidden"
-        style={{ minHeight: "340px" }}
-      >
+      <div className="relative bg-black md:hidden overflow-hidden pb-6">
         {FEATURED_PROJECTS.map((project, i) => {
           const isActive = i === activeIndex;
+          const body =
+            project.heroBlurb ||
+            project.description ||
+            project.subtitle;
+          const meta = project.caseStudyMeta;
+          const hireRoles = (project.hireMobileRoles ?? []).slice(0, 6);
+
           return (
             <div
               key={`mtext-${project.slug}`}
-              className="absolute inset-0 flex flex-col px-5 pt-4"
+              className={`flex flex-col px-5 pt-6 gap-6 ${
+                isActive
+                  ? "relative z-[1]"
+                  : "pointer-events-none absolute left-0 right-0 top-0 z-0"
+              }`}
               style={{
                 opacity: isActive ? 1 : 0,
                 transform: isActive ? "translateY(0)" : "translateY(12px)",
@@ -800,59 +833,223 @@ export default function ProjectShowcase() {
               }}
               aria-hidden={!isActive}
             >
-              <h2
-                className="text-[1.35rem] font-bold mb-1.5 tracking-tight"
-                style={
-                  project.titleFont
-                    ? { fontFamily: project.titleFont }
-                    : undefined
-                }
-              >
-                {project.title}
-              </h2>
-              <p className="text-sm text-zinc-300 mb-2.5 leading-relaxed line-clamp-2">
-                {project.subtitle}
-              </p>
-              {project.tags.length > 0 && (
-                <div className="flex flex-wrap gap-1.5 mb-3">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="rounded-full bg-white/10 backdrop-blur-sm border border-white/10 px-2.5 py-0.5 text-[11px] text-zinc-200"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              )}
-              <div className="flex flex-row flex-wrap gap-3 justify-center pb-6">
-                {project.cta.map((action) =>
-                  action.external ? (
-                    <a
-                      key={action.label}
-                      href={action.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={ctaSecondaryClass}
-                    >
-                      {action.icon === "apple" && <AppleIcon />}
-                      {action.label}
-                    </a>
-                  ) : (
-                    <Link
-                      key={action.label}
-                      href={action.href}
-                      className={ctaPrimaryClass}
-                    >
-                      <span
-                        className="pointer-events-none absolute inset-x-0 top-0 h-1/2 rounded-t-2xl bg-gradient-to-b from-white/25 to-transparent opacity-70"
-                        aria-hidden
-                      />
-                      <span className="relative">{action.label}</span>
+              {project.slug === "hire" ? (
+                <>
+                  <h2 className="text-[1.5rem] font-bold tracking-tight text-white">
+                    {project.title}
+                  </h2>
+                  <p
+                    className="text-[15px] text-zinc-300 leading-relaxed whitespace-pre-line"
+                    style={{ textWrap: "balance" }}
+                  >
+                    {project.subtitle}
+                  </p>
+                  {hireRoles.length > 0 && (
+                    <div className="grid grid-cols-2 gap-x-6 gap-y-3 text-left">
+                      {hireRoles.map((label) => (
+                        <span
+                          key={label}
+                          className="text-sm text-zinc-200 leading-snug"
+                        >
+                          {label}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                  <div className="flex flex-col gap-3 items-start">
+                    <Link href="/work" className={mobileHeroLinkClass}>
+                      Dive deeper →
                     </Link>
-                  ),
-                )}
-              </div>
+                    {project.cta
+                      .filter(
+                        (action) =>
+                          action.label !== "Get in Touch" &&
+                          action.href !== "/hire",
+                      )
+                      .map((action) =>
+                        action.external ? (
+                          <a
+                            key={action.label}
+                            href={action.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={mobileHeroLinkClass}
+                          >
+                            {mobileCtaLabel(action)}
+                          </a>
+                        ) : (
+                          <Link
+                            key={action.label}
+                            href={action.href}
+                            className={mobileHeroLinkClass}
+                          >
+                            {mobileCtaLabel(action)}
+                          </Link>
+                        ),
+                      )}
+                  </div>
+                  <div className="flex justify-start">
+                    <img
+                      src="/jakeostudiowhite.png"
+                      alt="Jakeo Studio"
+                      className="w-full max-w-[min(65%,200px)] h-auto object-contain object-left opacity-90"
+                    />
+                  </div>
+                </>
+              ) : (
+                <>
+                  <h2
+                    className="text-[1.5rem] font-bold tracking-tight text-white"
+                    style={
+                      project.titleFont
+                        ? { fontFamily: project.titleFont }
+                        : undefined
+                    }
+                  >
+                    {project.title}
+                  </h2>
+                  <p className="text-[15px] text-zinc-200 leading-relaxed">
+                    {body}
+                  </p>
+                  {meta ? (
+                    <div className="grid grid-cols-2 gap-x-6 gap-y-5 text-left items-start">
+                      <div>
+                        <div className="text-[11px] font-medium uppercase tracking-wider text-zinc-500">
+                          Role
+                        </div>
+                        <p className="text-sm text-white mt-1.5 leading-snug">
+                          {meta.role}
+                        </p>
+                      </div>
+                      <div>
+                        <div className="text-[11px] font-medium uppercase tracking-wider text-zinc-500">
+                          Timeline
+                        </div>
+                        <p className="text-sm text-white mt-1.5 leading-snug">
+                          {meta.timeline}
+                        </p>
+                      </div>
+                      <div className="flex flex-col items-start">
+                        {meta.live ? (
+                          <>
+                            <div className="text-[11px] font-medium uppercase tracking-wider text-zinc-500">
+                              Live
+                            </div>
+                            {meta.live.external ? (
+                              <a
+                                href={meta.live.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={`${mobileHeroLinkClass} mt-1.5 block text-left`}
+                              >
+                                {meta.live.label}
+                              </a>
+                            ) : (
+                              <Link
+                                href={meta.live.href}
+                                className={`${mobileHeroLinkClass} mt-1.5 block text-left`}
+                              >
+                                {meta.live.label}
+                              </Link>
+                            )}
+                          </>
+                        ) : null}
+                      </div>
+                      <div className="flex flex-col items-start">
+                        {meta.live ? (
+                          <>
+                            <div
+                              className="text-[11px] font-medium uppercase tracking-wider text-transparent select-none"
+                              aria-hidden
+                            >
+                              Live
+                            </div>
+                            <div className="mt-1.5 flex flex-col gap-3 items-start w-full">
+                              {project.cta.map((action) =>
+                                action.external ? (
+                                  <a
+                                    key={action.label}
+                                    href={action.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className={`${mobileHeroLinkClass} block text-left w-full`}
+                                  >
+                                    {mobileCtaLabel(action)}
+                                  </a>
+                                ) : (
+                                  <Link
+                                    key={action.label}
+                                    href={action.href}
+                                    className={`${mobileHeroLinkClass} block text-left w-full`}
+                                  >
+                                    {mobileCtaLabel(action)}
+                                  </Link>
+                                ),
+                              )}
+                            </div>
+                          </>
+                        ) : (
+                          <div className="flex flex-col gap-3 items-start w-full">
+                            {project.cta.map((action) =>
+                              action.external ? (
+                                <a
+                                  key={action.label}
+                                  href={action.href}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className={`${mobileHeroLinkClass} block text-left w-full`}
+                                >
+                                  {mobileCtaLabel(action)}
+                                </a>
+                              ) : (
+                                <Link
+                                  key={action.label}
+                                  href={action.href}
+                                  className={`${mobileHeroLinkClass} block text-left w-full`}
+                                >
+                                  {mobileCtaLabel(action)}
+                                </Link>
+                              ),
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  ) : null}
+                  {project.tags.length > 0 && (
+                    <div className="flex flex-wrap gap-2">
+                      {project.tags.map((tag) => (
+                        <ToolStackPill key={tag} label={tag} />
+                      ))}
+                    </div>
+                  )}
+                  {!meta ? (
+                    <div className="flex flex-col gap-3 items-start pb-2">
+                      {project.cta.map((action) =>
+                        action.external ? (
+                          <a
+                            key={action.label}
+                            href={action.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={mobileHeroLinkClass}
+                          >
+                            {mobileCtaLabel(action)}
+                          </a>
+                        ) : (
+                          <Link
+                            key={action.label}
+                            href={action.href}
+                            className={mobileHeroLinkClass}
+                          >
+                            {mobileCtaLabel(action)}
+                          </Link>
+                        ),
+                      )}
+                    </div>
+                  ) : null}
+                </>
+              )}
             </div>
           );
         })}
@@ -895,7 +1092,14 @@ export default function ProjectShowcase() {
                   className={
                     project.slug === "biro-labels"
                       ? "text-lg text-zinc-200 mb-4 max-w-none whitespace-nowrap leading-relaxed"
-                      : "text-lg text-zinc-200 mb-4 max-w-2xl leading-relaxed"
+                      : project.slug === "hire"
+                        ? "text-lg text-zinc-200 mb-4 max-w-2xl leading-relaxed whitespace-pre-line"
+                        : "text-lg text-zinc-200 mb-4 max-w-2xl leading-relaxed"
+                  }
+                  style={
+                    project.slug === "hire"
+                      ? { textWrap: "balance" }
+                      : undefined
                   }
                 >
                   {project.subtitle}
@@ -903,12 +1107,7 @@ export default function ProjectShowcase() {
                 {project.tags.length > 0 && (
                   <div className="flex flex-wrap gap-2">
                     {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="rounded-full bg-white/10 backdrop-blur-sm border border-white/10 px-3 py-1 text-xs text-zinc-200"
-                      >
-                        {tag}
-                      </span>
+                      <ToolStackPill key={tag} label={tag} />
                     ))}
                   </div>
                 )}

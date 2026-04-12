@@ -72,7 +72,7 @@ export default function BiroLabels() {
         title: "Biro Sales Inc.",
         heroTitle: <BiroHeroWordmark />,
         description:
-          "A modern e-commerce platform replacing an outdated WooCommerce site — custom storefront with Amazon-style ordering, Stripe checkout, QuickBooks integration, and a purpose-built admin dashboard for order fulfillment.",
+          "A modern e-commerce platform replacing an outdated WooCommerce site: custom storefront with Amazon-style ordering, Stripe checkout, QuickBooks integration, and a purpose-built admin dashboard for order fulfillment.",
         role: "Solo Designer & Developer",
         timeline: "Jan – Apr 2026 (4 months)",
         liveUrl: "https://birolabels.com",
@@ -97,13 +97,13 @@ export default function BiroLabels() {
         <div className="grid md:grid-cols-2 gap-8">
           <div className="space-y-4 text-sm text-zinc-300 leading-relaxed">
             <p>
-              Biro Sales is a thermal label distributor serving primarily commercial grocery stores — the labels printed at meat counters, produce scales, and for UPC/safe-handling compliance. Their catalog spans 171+ SKUs across multiple manufacturers.
+              Biro Sales is a thermal label distributor serving primarily commercial grocery stores: the labels printed at meat counters, produce scales, and for UPC/safe-handling compliance. Their catalog spans 171+ SKUs across multiple manufacturers.
             </p>
             <p>
               Their existing WooCommerce site was outdated in design, navigation, and mobile experience. WooCommerce&apos;s plugin ecosystem added unnecessary complexity, and the storefront didn&apos;t reflect the straightforward, utilitarian experience their B2B customers needed.
             </p>
             <p>
-              Fulfillment was handled through a patchwork of WooCommerce&apos;s built-in tools, QuickBooks for accounting and inventory, and UPS for shipping — with no unified view.
+              Fulfillment was handled through a patchwork of WooCommerce&apos;s built-in tools, QuickBooks for accounting and inventory, and UPS for shipping, with no unified view.
             </p>
           </div>
           <div className="rounded-2xl border border-white/10 bg-zinc-900/50 p-6">
@@ -144,7 +144,7 @@ export default function BiroLabels() {
             <p className="text-xs font-medium text-zinc-400 uppercase tracking-wide">Customer Experience</p>
             <YouTubeLazyEmbed title="Biro Sales Inc. customer walkthrough" videoId="nJfioQ8lLSg" />
             <p className="text-sm text-zinc-400">
-              Full storefront flow — browsing, filtering, cart, and Stripe checkout with multiple payment methods.
+              Full storefront flow: browsing, filtering, cart, and Stripe checkout with multiple payment methods.
             </p>
           </div>
           <div className="space-y-3">
@@ -165,25 +165,25 @@ export default function BiroLabels() {
           <div className="rounded-2xl border border-white/10 bg-zinc-900/50 p-6 space-y-3">
             <h3 className="text-base font-semibold">Why Next.js + React</h3>
             <p className="text-sm text-zinc-300 leading-relaxed">
-              Next.js provided the most open-ended architecture for connecting external services via API routes — no plugin lock-in like WooCommerce or Shopify. Combined with AI-assisted development through Cursor, this stack allowed rapid iteration while maintaining full control over the checkout flow, admin tools, and third-party integrations.
+              Next.js provided the most open-ended architecture for connecting external services via API routes, with no plugin lock-in like WooCommerce or Shopify. Combined with AI-assisted development through Cursor, this stack allowed rapid iteration while maintaining full control over the checkout flow, admin tools, and third-party integrations.
             </p>
           </div>
           <div className="rounded-2xl border border-white/10 bg-zinc-900/50 p-6 space-y-3">
             <h3 className="text-base font-semibold">Why Supabase</h3>
             <p className="text-sm text-zinc-300 leading-relaxed">
-              Supabase offered a fast setup with a clean API, built-in auth for customer and admin accounts, and real-time capabilities. Cursor&apos;s Supabase skills gave the AI models direct context for efficient integration — making database operations, RLS policies, and auth flows straightforward to implement.
+              Supabase offered a fast setup with a clean API, built-in auth for customer and admin accounts, and real-time capabilities. Cursor&apos;s Supabase skills gave the AI models direct context for efficient integration, making database operations, RLS policies, and auth flows straightforward to implement.
             </p>
           </div>
           <div className="rounded-2xl border border-white/10 bg-zinc-900/50 p-6 space-y-3">
             <h3 className="text-base font-semibold">Stripe over PayPal</h3>
             <p className="text-sm text-zinc-300 leading-relaxed">
-              The client initially wanted crypto payment capabilities. Stripe won over PayPal because it offered Apple Pay, Google Pay, direct ACH, credit card, and crypto via USDC stablecoins — all with lower surcharge fees. Stripe&apos;s Acodei plugin for QuickBooks also solved the accounting sync challenge without building a custom invoice payment route.
+              The client initially wanted crypto payment capabilities. Stripe won over PayPal because it offered Apple Pay, Google Pay, direct ACH, credit card, and crypto via USDC stablecoins, all with lower surcharge fees. Stripe&apos;s Acodei plugin for QuickBooks also solved the accounting sync challenge without building a custom invoice payment route.
             </p>
           </div>
           <div className="rounded-2xl border border-white/10 bg-zinc-900/50 p-6 space-y-3">
             <h3 className="text-base font-semibold">QuickBooks Integration</h3>
             <p className="text-sm text-zinc-300 leading-relaxed">
-              QuickBooks was the client&apos;s existing accounting and product database system. Rather than building a direct QuickBooks payment integration (which proved unfriendly for UX), Stripe&apos;s Acodei plugin provided automatic sync between Stripe transactions and QuickBooks — keeping the client&apos;s accounting workflow intact.
+              QuickBooks was the client&apos;s existing accounting and product database system. Rather than building a direct QuickBooks payment integration (which proved unfriendly for UX), Stripe&apos;s Acodei plugin provided automatic sync between Stripe transactions and QuickBooks, keeping the client&apos;s accounting workflow intact.
             </p>
           </div>
         </div>
@@ -233,10 +233,10 @@ export default function BiroLabels() {
             <p>
               <strong className="text-zinc-100">Time estimate without AI:</strong> 4 months for design alone, 12+ months for full development.
               <br />
-              <strong className="text-zinc-100">Actual time:</strong> 4 months total — design, development, and deployment.
+              <strong className="text-zinc-100">Actual time:</strong> 4 months total, including design, development, and deployment.
             </p>
             <p>
-              The biggest accelerators were API route generation (reading third-party API docs and integrating them within the codebase context), managing 171 products across scattered data sources, and debugging middleware for production auth security — separating admin accounts from customer accounts using environment-level email validation.
+              The biggest accelerators were API route generation (reading third-party API docs and integrating them within the codebase context), managing 171 products across scattered data sources, and debugging middleware for production auth security, separating admin accounts from customer accounts using environment-level email validation.
             </p>
             <p>
               A custom Cursor script was even used to generate placeholder product images from SKU data for early wireframing, which later prompted the client&apos;s team to photograph all missing labels and share them via Dropbox.
@@ -245,25 +245,25 @@ export default function BiroLabels() {
 
           <DetailCard number="02" title="Admin Dashboard">
             <p>
-              The dashboard splits into two core functions: <strong className="text-zinc-100">order management</strong> and <strong className="text-zinc-100">store management</strong> — matching the client&apos;s real-world workflow of processing orders and maintaining product data.
+              The dashboard splits into two core functions: <strong className="text-zinc-100">order management</strong> and <strong className="text-zinc-100">store management</strong>, matching the client&apos;s real-world workflow of processing orders and maintaining product data.
             </p>
             <p>
-              <strong className="text-zinc-100">Order Management:</strong> View all orders including incomplete ones (captured customer info, unpaid). Each order displays product SKUs for warehouse fulfillment, with a dedicated field for entering UPS tracking numbers. Once entered, HubSpot automations trigger customer notifications — order confirmation, shipping updates, and delivery confirmation.
+              <strong className="text-zinc-100">Order Management:</strong> View all orders including incomplete ones (captured customer info, unpaid). Each order displays product SKUs for warehouse fulfillment, with a dedicated field for entering UPS tracking numbers. Once entered, HubSpot automations trigger customer notifications: order confirmation, shipping updates, and delivery confirmation.
             </p>
             <p>
-              <strong className="text-zinc-100">Store Management:</strong> All 171+ products organized, filterable, and editable — images, descriptions, SKUs, stock counts, and admin notes. Smart search finds products by name, SKU, size, type, or any detail. This replaced the scattered spreadsheet/QuickBooks workflow the client had been using.
+              <strong className="text-zinc-100">Store Management:</strong> All 171+ products organized, filterable, and editable, including images, descriptions, SKUs, stock counts, and admin notes. Smart search finds products by name, SKU, size, type, or any detail. This replaced the scattered spreadsheet/QuickBooks workflow the client had been using.
             </p>
             <p>
-              Admin access is secured via environment variables containing authorized email addresses, enforced through middleware — a practical cybersecurity approach for a small team.
+              Admin access is secured via environment variables containing authorized email addresses, enforced through middleware, a practical cybersecurity approach for a small team.
             </p>
           </DetailCard>
 
           <DetailCard number="03" title="AI Video Production">
             <p>
-              Utilized Google&apos;s Vertex AI Studio (Veo 3.1) during the free $300 trial to produce studio-grade video content showcasing thermal labels in commercial grocery environments — labels on scales from various manufacturers, bulk case ordering visuals, and brand storytelling.
+              Utilized Google&apos;s Vertex AI Studio (Veo 3.1) during the free $300 trial to produce studio-grade video content showcasing thermal labels in commercial grocery environments: labels on scales from various manufacturers, bulk case ordering visuals, and brand storytelling.
             </p>
             <p>
-              The creative direction aligned with the owner&apos;s vision: utilitarian, &ldquo;present and sell labels plainly,&rdquo; at an Amazon-level customer experience. This bridged AI content generation with real product marketing — producing assets that would typically require a production team and on-location shoots.
+              The creative direction aligned with the owner&apos;s vision: utilitarian, &ldquo;present and sell labels plainly,&rdquo; at an Amazon-level customer experience. This bridged AI content generation with real product marketing, producing assets that would typically require a production team and on-location shoots.
             </p>
             <div className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 mt-2">
               <p className="text-xs text-zinc-400">
@@ -277,7 +277,7 @@ export default function BiroLabels() {
               With 171 products and data scattered across QuickBooks, multiple spreadsheets, and internal storage systems, migration was a significant challenge. Rather than waiting for perfect data, products were imported iteratively as data and images became available.
             </p>
             <p>
-              This &ldquo;progressive import&rdquo; approach was unconventional but practical — it avoided the bottleneck of traditional bulk imports (like Shopify CSV or WooCommerce exports) and naturally led to building the store management dashboard as a better long-term solution for maintaining product data.
+              This &ldquo;progressive import&rdquo; approach was unconventional but practical, and it avoided the bottleneck of traditional bulk imports (like Shopify CSV or WooCommerce exports) and naturally led to building the store management dashboard as a better long-term solution for maintaining product data.
             </p>
           </DetailCard>
         </div>
@@ -290,17 +290,17 @@ export default function BiroLabels() {
         <div className="grid md:grid-cols-2 gap-8">
           <div className="space-y-4 text-sm text-zinc-300 leading-relaxed">
             <p>
-              The site is live at <a href="https://birolabels.com" target="_blank" rel="noopener noreferrer" className="text-white underline underline-offset-4 decoration-white/30 hover:decoration-white">birolabels.com</a>. Client feedback has been consistently positive — &ldquo;this is awesome, exactly what I envisioned, great work.&rdquo;
+              The site is live at <a href="https://birolabels.com" target="_blank" rel="noopener noreferrer" className="text-white underline underline-offset-4 decoration-white/30 hover:decoration-white">birolabels.com</a>. Client feedback has been consistently positive: &ldquo;this is awesome, exactly what I envisioned, great work.&rdquo;
             </p>
             <p>
-              The fulfillment workflow now flows from browser-based order review to warehouse packing to UPS tracking entry, with automated customer emails at every stage. The designated UPS computer at the warehouse integrates naturally — staff enter tracking numbers in the admin dashboard, and the system handles the rest.
+              The fulfillment workflow now flows from browser-based order review to warehouse packing to UPS tracking entry, with automated customer emails at every stage. The designated UPS computer at the warehouse integrates naturally: staff enter tracking numbers in the admin dashboard, and the system handles the rest.
             </p>
             <div className="rounded-xl border border-white/10 bg-white/5 p-4">
               <p className="text-xs text-zinc-400 mb-2 font-medium">Development was broken into 3 phases:</p>
               <ul className="text-xs text-zinc-400 space-y-1">
-                <li><strong className="text-zinc-300">Phase 1:</strong> Discovery — architecture planning, wireframes, integration selection (Next.js over WooCommerce, Supabase, Vercel)</li>
-                <li><strong className="text-zinc-300">Phase 2:</strong> Core build — storefront, product catalog, auth, admin dashboard</li>
-                <li><strong className="text-zinc-300">Phase 3:</strong> Integrations — switched from PayPal to Stripe, HubSpot email flows, Google Merchant for SEO</li>
+                <li><strong className="text-zinc-300">Phase 1:</strong> Discovery: architecture planning, wireframes, integration selection (Next.js over WooCommerce, Supabase, Vercel)</li>
+                <li><strong className="text-zinc-300">Phase 2:</strong> Core build: storefront, product catalog, auth, admin dashboard</li>
+                <li><strong className="text-zinc-300">Phase 3:</strong> Integrations: switched from PayPal to Stripe, HubSpot email flows, Google Merchant for SEO</li>
               </ul>
             </div>
           </div>
@@ -310,7 +310,7 @@ export default function BiroLabels() {
               The iterative product import approach was creative and efficient, but it caused friction when managing images and SKUs across 171 products before the admin dashboard was fully built. In v2, I&apos;d build the product management UI first, then import.
             </p>
             <p>
-              UPS API integration was explored but proved extremely difficult to custom-integrate — their developer experience is notably poor. The manual tracking-number workflow ended up being pragmatic for this client&apos;s scale, but a direct API integration would reduce steps.
+              UPS API integration was explored but proved extremely difficult to custom-integrate; their developer experience is notably poor. The manual tracking-number workflow ended up being pragmatic for this client&apos;s scale, but a direct API integration would reduce steps.
             </p>
             <p>
               HubSpot configuration for timed reorder reminders (e.g., emailing customers when they&apos;re likely running low on labels) is set up but could be refined with better purchase frequency data over time.

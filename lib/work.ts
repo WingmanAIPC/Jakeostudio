@@ -10,6 +10,13 @@ export interface ProjectCta {
   icon?: "apple";
 }
 
+/** Mobile hero metadata grid (case-study intro style). */
+export interface CaseStudyMeta {
+  role: string;
+  timeline: string;
+  live?: { label: string; href: string; external?: boolean };
+}
+
 /** Hire carousel: ordered time ranges [start, end) in seconds; playback uses YouTube IFrame API. */
 export interface HireShowcaseClip {
   id: string;
@@ -50,7 +57,7 @@ export function hireClipTotalMs(clip: HireShowcaseClip): number {
 /** Biro carousel: customer-facing walkthrough (iframe, loops) */
 export const BIRO_CUSTOMER_VIDEO_ID = "nJfioQ8lLSg";
 
-/** Biro carousel: admin dashboard walkthrough — segment playback */
+/** Biro carousel: admin dashboard walkthrough (segment playback) */
 export const BIRO_ADMIN_VIDEO_ID = "oGaejTwxYNc";
 
 export const BIRO_CAROUSEL_EMBED_DELAY_MS = 3000;
@@ -148,6 +155,12 @@ export interface FeaturedProject {
   /** Cloverleaf landing: two YouTube ids aligned with `thumbnails` for short muted previews */
   cloverleafPreviewVideoIds?: string[];
   cta: ProjectCta[];
+  /** Long intro paragraph for mobile showcase (falls back to description, then subtitle). */
+  heroBlurb?: string;
+  /** Role / timeline / live link grid on mobile when set. */
+  caseStudyMeta?: CaseStudyMeta;
+  /** Hire slide only: six labels in row-major order for a 2×3 grid. */
+  hireMobileRoles?: string[];
 }
 
 export const FEATURED_PROJECTS: FeaturedProject[] = [
@@ -178,6 +191,17 @@ export const FEATURED_PROJECTS: FeaturedProject[] = [
         icon: "apple",
       },
     ],
+    heroBlurb:
+      "A native iOS AI companion that uses a 13-metric emotional intelligence framework to personalize every conversation — turning generic AI chat into a context-aware life coach, therapist, and thinking partner.",
+    caseStudyMeta: {
+      role: "Solo Designer & Developer",
+      timeline: "2024 – Present (ongoing)",
+      live: {
+        label: "App Store",
+        href: "https://apps.apple.com/us/app/wingman-eq-life-coach/id6747995730",
+        external: true,
+      },
+    },
   },
   {
     slug: "cloverleaf",
@@ -206,6 +230,17 @@ export const FEATURED_PROJECTS: FeaturedProject[] = [
         external: true,
       },
     ],
+    heroBlurb:
+      "Testimonial video production, short-form content strategy, and motion design for B2B SaaS — customer stories that convert, from interview through final motion graphics.",
+    caseStudyMeta: {
+      role: "Video & Motion Lead",
+      timeline: "2023 – Present",
+      live: {
+        label: "Watch playlist",
+        href: "https://www.youtube.com/playlist?list=PL18Q1CsxcdgRhhpWPSXSjkJCx12SRp_1_",
+        external: true,
+      },
+    },
   },
   {
     slug: "biro-labels",
@@ -213,9 +248,9 @@ export const FEATURED_PROJECTS: FeaturedProject[] = [
     titleFont: "Helvetica, Arial, sans-serif",
     slideDuration: 30000,
     subtitle:
-      "B2B label sales storefront, fulfillment workflows, and management — built solo with AI.",
+      "B2B label sales storefront, fulfillment workflows, and management, built solo with AI.",
     description:
-      "Storefront, admin, and payment handoff to QuickBooks — solo build, team-operated.",
+      "Storefront, admin, and payment handoff to QuickBooks. Solo build, team-operated.",
     tags: ["Next.js", "React", "Supabase", "Stripe", "AI Development"],
     workCardTheme: "biro",
     color: "from-blue-500/20 to-cyan-500/20",
@@ -227,12 +262,24 @@ export const FEATURED_PROJECTS: FeaturedProject[] = [
       { label: "View Case Study", href: "/work/biro-labels" },
       { label: "Visit Site", href: "https://birolabels.com", external: true },
     ],
+    heroBlurb:
+      "B2B storefront, fulfillment workflows, and admin tooling, built solo with AI-assisted development. Stripe, Supabase, and QuickBooks handoff so the team can sell labels and run operations without friction.",
+    caseStudyMeta: {
+      role: "Solo Product & Engineer",
+      timeline: "2024 – Present",
+      live: {
+        label: "Live site",
+        href: "https://birolabels.com",
+        external: true,
+      },
+    },
   },
   {
     slug: "hire",
     title: "Available for Work",
     slideDuration: 120000,
-    subtitle: "AI Creative Technologist — Design, Production, and AI Development",
+    subtitle:
+      "AI Creative Technologist\nDesign, production, and AI development",
     description: "",
     tags: [],
     color: "from-white/10 to-white/5",
@@ -249,6 +296,14 @@ export const FEATURED_PROJECTS: FeaturedProject[] = [
         href: SITE_RESUME_PDF_HREF,
         external: true,
       },
+    ],
+    hireMobileRoles: [
+      "Product & UX",
+      "Creative direction",
+      "Motion & video",
+      "AI development",
+      "Full-stack web",
+      "Brand systems",
     ],
   },
 ];

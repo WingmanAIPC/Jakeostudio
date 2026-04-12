@@ -122,7 +122,7 @@ const VIDEO_GRID_ITEMS = [
   },
   {
     id: "oGaejTwxYNc",
-    title: "Biro Sales Inc. — Admin Dashboard Walkthrough",
+    title: "Biro Sales Inc.: Admin Dashboard Walkthrough",
     subtitle: "Full-Stack • Supabase • Stripe • QuickBooks Integration",
     process: "Process: design → develop → integrate → deploy",
     stack: "Stack: Next.js, Supabase, Stripe, QuickBooks, HubSpot",

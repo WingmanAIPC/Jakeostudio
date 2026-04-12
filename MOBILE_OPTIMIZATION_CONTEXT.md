@@ -62,14 +62,16 @@ Branch: `claude/mobile-optimization-wZNQZ`
 - **Shared video area**: `mt-14 md:mt-0 relative w-full overflow-hidden md:absolute md:inset-0` with `style={{ aspectRatio: "16/9" }}`
   - Mobile: in normal flow as a 16:9 strip below the header (`mt-14`)
   - Desktop: `inset:0` overrides aspect-ratio, fills full `100svh`
-- **Mobile info area**: `relative bg-black md:hidden overflow-hidden` with `minHeight: "340px"`
-  - 4 text divs `absolute inset-0 flex flex-col px-5 pt-4` with opacity + translateY transitions
-  - Dots + progress bar anchored `absolute bottom-6`
+- **Mobile controls strip** (`md:hidden`): slide dots + timer bar directly under the 16:9 video (`flex flex-col gap-3 py-3`)
+- **Mobile info area**: `relative pb-6`; active slide `relative z-[1]` (sets height from content), inactive slides `absolute left-0 right-0 top-0` + opacity cross-fade (no fixed min-height gap above the next section)
+  - **Case-study style** (project slides): title, body (`heroBlurb` → `description` → `subtitle`), optional **Role / Timeline / Live** grid from `caseStudyMeta`, tags as muted `join(" · ")`, CTAs as underlined text links (`mobileCtaLabel` maps e.g. View Case Study → “Read case study →”)
+  - **Hire slide**: subtitle, `/jakeostudiowhite.png`, **2×3** `hireMobileRoles`, “Dive deeper →” → `/work`, then text links for contact + resume
+  - Data: [`lib/work.ts`](lib/work.ts) — `heroBlurb?`, `caseStudyMeta?`, `hireMobileRoles?`, exported `CaseStudyMeta`
 - **Desktop text overlays**: `hidden md:block absolute bottom-28` (unchanged)
 
 #### Flash overlay — split into two refs
 - **Desktop flash**: `pointer-events-none fixed inset-0 z-[500] bg-white hidden md:block` — covers full viewport, desktop only
-- **Mobile flash**: `pointer-events-none absolute inset-0 z-[500] bg-white md:hidden` inside the `md:contents` wrapper — clips to hero area only
+- **Mobile flash**: `pointer-events-none absolute inset-0 z-[500] bg-white md:hidden` **inside the 16:9 video div** — white wipe only over the player, not the info panel; `runSlideTransition` uses `matchMedia` so `transitionend` attaches to the visible overlay
 - **`runSlideTransition`** updated to animate both refs simultaneously; listens on whichever is non-null for transition timing
 
 #### Cloverleaf video zoom fix
@@ -80,9 +82,8 @@ Branch: `claude/mobile-optimization-wZNQZ`
 
 #### Animation / spacing
 - `TEXT_FADE_MS`: `400` → `800` (2× slower text fade-in/out, both mobile and desktop)
-- CTA buttons: `justify-center gap-3` (centered side-by-side)
-- CTA bottom padding: `pb-9` → `pb-16` (clears the dots bar)
-- Dots container: `absolute bottom-3` → `absolute bottom-6`
+- **Desktop** CTA row: glass pills unchanged at bottom overlay
+- **Mobile** CTAs: underlined links only (no glass buttons in the info panel)
 - `isMobile` state via `useLayoutEffect` + `matchMedia("(max-width: 767px)")` — synchronous before paint
 - `mobileProgressRef` added alongside `progressRef` — RAF loop updates both
 
@@ -104,10 +105,11 @@ Branch: `claude/mobile-optimization-wZNQZ`
 | `MobileHeader` | `fixed top-0`, visible | `md:hidden` |
 | `HeaderFloatingBar` | `hidden` | `md:flex`, floating pill nav |
 | Video area | 16:9 aspect ratio, normal flow | `absolute inset-0`, fills 100svh |
-| Info area | visible below video | `md:hidden` |
+| Info area | case-study / hire grid below controls strip | `md:hidden` |
+| Dots + timer | strip under 16:9 video | `hidden` (desktop uses bottom overlay) |
 | Desktop text overlays | `hidden` | `md:block absolute bottom-28` |
 | Desktop flash | `hidden` | `md:block fixed inset-0` |
-| Mobile flash | `absolute inset-0` in hero wrapper | `md:hidden` |
+| Mobile flash | `absolute inset-0` on **video div only** | `md:hidden` |
 | Footer bottom padding | none | none |
 
 ### `fillContainer` prop chain

@@ -95,51 +95,35 @@ export function MobileHeader({ logoHref = "/" }: { logoHref?: string }) {
       className="fixed top-0 left-0 right-0 z-[101] md:hidden flex items-center justify-between px-4 bg-black/70 backdrop-blur-2xl border-b border-white/[0.08]"
       style={{ height: "52px" }}
     >
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2 min-w-0">
         <Link href={logoHref} aria-label="Home">
           <img
             src={SITE_LOGO_HEADER_SRC}
             alt="jakeostudio"
-            className="h-6 w-auto object-contain"
+            className="h-5 w-auto object-contain shrink-0"
           />
         </Link>
-        <nav className="flex items-center" aria-label="Primary">
+        <nav className="flex items-center flex-wrap gap-x-0.5" aria-label="Primary">
           {PRIMARY_NAV.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="px-2 py-1 text-xs font-medium text-zinc-400 hover:text-white transition-colors whitespace-nowrap"
+              className="px-1.5 py-1 text-[11px] font-medium text-zinc-400 hover:text-white transition-colors whitespace-nowrap"
               aria-label={item.ariaLabel}
             >
               {item.label}
             </Link>
           ))}
+          <a
+            href={SITE_RESUME_PDF_HREF}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-1.5 py-1 text-[11px] font-medium text-zinc-400 hover:text-white transition-colors whitespace-nowrap"
+            aria-label="Download resume PDF"
+          >
+            Resume
+          </a>
         </nav>
-      </div>
-      <div className="flex items-center gap-1">
-        <a
-          href={MAILTO_HREF}
-          className="flex items-center justify-center w-8 h-8 text-zinc-400 hover:text-white transition-colors"
-          aria-label="Email"
-        >
-          <MailIcon className="w-5 h-5" />
-        </a>
-        <a
-          href={PHONE_HREF}
-          className="flex items-center justify-center w-8 h-8 text-zinc-400 hover:text-white transition-colors"
-          aria-label="Call"
-        >
-          <PhoneIcon className="w-5 h-5" />
-        </a>
-        <a
-          href={SITE_RESUME_PDF_HREF}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center justify-center w-8 h-8 text-zinc-400 hover:text-white transition-colors"
-          aria-label="Resume"
-        >
-          <ResumeIcon className="w-5 h-5" />
-        </a>
       </div>
     </div>
   );
