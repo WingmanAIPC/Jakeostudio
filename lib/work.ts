@@ -299,7 +299,7 @@ export const FEATURED_PROJECTS: FeaturedProject[] = [
       },
     ],
     heroBlurb:
-      "B2B storefront, fulfillment workflows, and admin tooling, built solo with AI-assisted development. Stripe, Supabase, and QuickBooks handoff so the team can sell labels and run operations without friction.",
+      "B2B storefront, fulfillment workflows, and admin tooling, built solo with AI-assisted development. Stripe, Supabase, and QuickBooks handoff so the team can sell and run operations frictionless.",
     caseStudyMeta: {
       role: "Solo Product & Engineer",
       timeline: "2025 – Present",
