@@ -32,7 +32,7 @@ export default function Cloverleaf() {
         description:
           "Testimonial video production, short-form content strategy (Opal), and animated motion graphics for a B2B team-development SaaS platform — cutting long-form interviews into compelling product stories.",
         role: "Video Producer & Motion Designer",
-        timeline: "2024 (Internship)",
+        timeline: "May 2024 – Jan 2025",
         liveUrl: `https://www.youtube.com/playlist?list=${CLOVERLEAF_PLAYLIST_ID}`,
         liveLabel: "YouTube Playlist",
         heroImage: CLOVERLEAF_BRANDMARK_SRC,

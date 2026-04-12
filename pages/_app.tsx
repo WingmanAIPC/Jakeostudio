@@ -1,5 +1,5 @@
 import "../styles/globals.css";
-import "../components/PillNav.css";
+import "../components/DesktopUnifiedNav.css";
 import type { AppProps } from "next/app";
 import { Inter } from "next/font/google";
 

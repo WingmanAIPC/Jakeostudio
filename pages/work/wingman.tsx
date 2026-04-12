@@ -264,8 +264,8 @@ export default function Wingman() {
       {/* Approach */}
       <Section label="Approach" title="Technical Decisions">
         <div className="grid md:grid-cols-2 gap-6">
-          <div className="rounded-2xl border border-white/10 bg-zinc-900/50 p-6 space-y-3">
-            <h3 className="text-base font-semibold">Native iOS via SwiftUI</h3>
+          <div className="rounded-2xl border border-orange-500/30 bg-gradient-to-br from-orange-500/12 via-orange-950/20 to-zinc-900/60 p-6 space-y-3 shadow-[inset_0_1px_0_0_rgba(251,146,60,0.12)]">
+            <h3 className="text-base font-semibold text-orange-100">Native iOS via SwiftUI</h3>
             <p className="text-sm text-zinc-300 leading-relaxed">
               Built native for the personal experience of having it on iPhone — and for the exclusivity that comes with Apple&apos;s ecosystem. When presented as a marketing final video in class, it drew visible reactions. Early development used Xcode&apos;s beta ChatGPT integration, but Cursor and Claude Code quickly proved more capable for the heavy lifting.
             </p>

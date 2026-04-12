@@ -8,13 +8,27 @@ import {
   SITE_LOGO_HEADER_SRC,
   SITE_RESUME_PDF_HREF,
 } from "../lib/siteNav";
-import { HIRE_SHOWCASE_CLIPS } from "../lib/work";
+import {
+  HIRE_DEFAULT_HEADLINE,
+  HIRE_HEADLINE_CROSSFADE_MS,
+  HIRE_HEADLINE_CYCLE_MS,
+  HIRE_SHOWCASE_CLIPS,
+} from "../lib/work";
 
 export default function HirePage() {
   const [videoIndex, setVideoIndex] = useState(0);
   const [scrollBlack, setScrollBlack] = useState(0);
+  const [hireBadgeShowProject, setHireBadgeShowProject] = useState(false);
   const rolesRef = useRef<HTMLElement>(null);
   const clip = HIRE_SHOWCASE_CLIPS[videoIndex % HIRE_SHOWCASE_CLIPS.length];
+
+  useEffect(() => {
+    setHireBadgeShowProject(false);
+    const id = window.setInterval(() => {
+      setHireBadgeShowProject((prev) => !prev);
+    }, HIRE_HEADLINE_CYCLE_MS);
+    return () => clearInterval(id);
+  }, [videoIndex, clip.id]);
 
   useEffect(() => {
     const updateOverlay = () => {
@@ -126,10 +140,27 @@ export default function HirePage() {
 
         <section className="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 pb-16 text-center pt-14 sm:pb-20">
           <div className="flex w-full max-w-2xl flex-col items-center">
-            <div className="inline-flex items-center gap-2 rounded-full bg-emerald-500/20 border border-emerald-500/30 px-4 py-1.5 mb-6 sm:mb-8">
-              <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="text-xs font-medium text-emerald-300 tracking-wide uppercase">
-                Available for Work
+            <div className="inline-flex items-center gap-2 rounded-full bg-emerald-500/20 border border-emerald-500/30 px-4 py-1.5 mb-6 sm:mb-8 max-w-[min(100%,22rem)]">
+              <span className="h-2 w-2 shrink-0 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="text-xs font-medium text-emerald-300 tracking-wide min-w-0 grid [&>*]:col-start-1 [&>*]:row-start-1 text-left">
+                <span
+                  className="uppercase transition-opacity ease-out"
+                  style={{
+                    opacity: hireBadgeShowProject ? 0 : 1,
+                    transitionDuration: `${HIRE_HEADLINE_CROSSFADE_MS}ms`,
+                  }}
+                >
+                  {HIRE_DEFAULT_HEADLINE}
+                </span>
+                <span
+                  className="normal-case transition-opacity ease-out leading-snug"
+                  style={{
+                    opacity: hireBadgeShowProject ? 1 : 0,
+                    transitionDuration: `${HIRE_HEADLINE_CROSSFADE_MS}ms`,
+                  }}
+                >
+                  {clip.headlineTitle}
+                </span>
               </span>
             </div>
             <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-8 max-w-2xl sm:mb-10">

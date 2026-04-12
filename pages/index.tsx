@@ -213,6 +213,16 @@ const DESIGN_GALLERY: { src: string; alt: string; ratio: string }[] = [
     alt: "Professional Development 2023–2024 — University of Dayton Center for Leadership",
     ratio: "3/4",
   },
+  {
+    src: encodeURI("/Poster 1 (Design Process).png"),
+    alt: "Creative process visualized — design poster",
+    ratio: "16/9",
+  },
+  {
+    src: encodeURI("/Senior Exhibition Radial Poster.jpg"),
+    alt: "2024 Senior Exhibition — …is THIS it? — Roger Glass Center for the Arts",
+    ratio: "3/4",
+  },
 ];
 
 export default function PortfolioSite() {
@@ -266,7 +276,10 @@ export default function PortfolioSite() {
           <LogoIntro onComplete={() => setIntroComplete(true)} />
         )}
 
-        <MobileHeader logoHref="#top" />
+        <MobileHeader
+          logoHref="#top"
+          peekTimerActive={introComplete && heroReady}
+        />
 
         <HeaderFloatingBar>
           <PrimaryNavCluster logoHref="#top" />

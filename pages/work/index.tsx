@@ -1,7 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import Link from "next/link";
-import HeaderFloatingBar from "../../components/HeaderFloatingBar";
+import HeaderFloatingBar, { MobileHeader } from "../../components/HeaderFloatingBar";
 import PrimaryNavCluster from "../../components/PrimaryNavCluster";
 import { CAPABILITY_CARDS } from "../../lib/capabilities";
 import { DOCUMENT_TITLE, SITE_LOGO_WORDMARK_SRC } from "../../lib/siteNav";
@@ -28,6 +28,7 @@ export default function WorkIndex() {
       </Head>
 
       <div className="min-h-screen bg-black text-zinc-100">
+        <MobileHeader />
         <HeaderFloatingBar>
           <PrimaryNavCluster activeHref="/work" />
         </HeaderFloatingBar>

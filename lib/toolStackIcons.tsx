@@ -1,6 +1,7 @@
 import type { IconType } from "react-icons";
 import {
   SiAffinity,
+  SiApple,
   SiClaude,
   SiFigma,
   SiGithub,
@@ -23,6 +24,7 @@ import {
   TbBrandAdobePhotoshop,
   TbBrandAdobePremier,
   TbBrandVscode,
+  TbKeyframes,
   TbMicrophone2,
   TbMovie,
   TbRoute,
@@ -44,6 +46,8 @@ export const toolStackIconMap: Partial<Record<string, IconType>> = {
   TypeScript: SiTypescript,
   "Tailwind CSS": SiTailwindcss,
   SwiftUI: SiSwift,
+  /** Distinct from SwiftUI (both were SiSwift before). */
+  "iOS Development": SiApple,
   "REST APIs": TbApi,
   "Node.js": SiNodedotjs,
   Figma: SiFigma,
@@ -61,11 +65,11 @@ export const toolStackIconMap: Partial<Record<string, IconType>> = {
   HubSpot: SiHubspot,
   /** Hero / work featured tags */
   "LLM Integration": SiOpenai,
-  "iOS Development": SiSwift,
   "EQ Frameworks": TbSparkles,
   "Video Production": TbMovie,
-  "Motion Design": TbBrandAdobeAfterEffect,
-  "AI Development": SiOpenai,
+  "Motion Design": TbKeyframes,
+  /** Biro showcase tag — Claude-assisted build (not OpenAI). */
+  "AI Development": SiClaude,
 };
 
 /** Subtle tinted pill (dark UI): icon at brand hex, soft fill + border. */
@@ -228,8 +232,8 @@ export const toolStackPillTheme: Partial<Record<string, ToolStackPillTheme>> = {
     border: "rgba(153, 153, 255, 0.35)",
   },
   "AI Development": {
-    color: "#34d399",
-    background: "rgba(52, 211, 153, 0.12)",
-    border: "rgba(52, 211, 153, 0.35)",
+    color: "#d97757",
+    background: "rgba(217, 119, 87, 0.14)",
+    border: "rgba(217, 119, 87, 0.4)",
   },
 };

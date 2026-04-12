@@ -3,19 +3,36 @@ import { SITE_RESUME_PDF_HREF } from "./siteNav";
 
 export type { WorkCardThemeKey };
 
+export type ProjectCtaIcon = "apple" | "mail" | "document" | "play" | "globe";
+
 export interface ProjectCta {
   label: string;
   href: string;
   external?: boolean;
-  icon?: "apple";
+  icon?: ProjectCtaIcon;
 }
 
 /** Mobile hero metadata grid (case-study intro style). */
 export interface CaseStudyMeta {
   role: string;
   timeline: string;
-  live?: { label: string; href: string; external?: boolean };
+  live?: {
+    label: string;
+    href: string;
+    external?: boolean;
+    /** Matches CTA icon (e.g. App Store apple) for trailing icon on the Live link. */
+    icon?: ProjectCtaIcon;
+  };
 }
+
+/** Default hero / badge line before each hire showcase clip title fades in. */
+export const HIRE_DEFAULT_HEADLINE = "Available for Work";
+
+/** Crossfade duration (ms) when switching between the two hire headline layers. */
+export const HIRE_HEADLINE_CROSSFADE_MS = 650;
+
+/** How long each headline stays visible while alternating on the hire slide (`Available for Work` ↔ clip title). */
+export const HIRE_HEADLINE_CYCLE_MS = 8000;
 
 /** Hire carousel: ordered time ranges [start, end) in seconds; playback uses YouTube IFrame API. */
 export interface HireShowcaseClip {
@@ -23,12 +40,15 @@ export interface HireShowcaseClip {
   segments: { start: number; end: number }[];
   /** Extra wait after slide/page is active before loading & playing (ms) */
   startDelayMs?: number;
+  /** Shown in the hero (and hire page badge), alternating with `HIRE_DEFAULT_HEADLINE` every `HIRE_HEADLINE_CYCLE_MS`. */
+  headlineTitle: string;
 }
 
 export const HIRE_SHOWCASE_CLIPS: HireShowcaseClip[] = [
   {
     id: "OZf9mW6tnT8",
     startDelayMs: 2000,
+    headlineTitle: "Stargirl: A Short Film",
     segments: [
       { start: 9, end: 40 },
       { start: 95, end: 111 },
@@ -36,6 +56,7 @@ export const HIRE_SHOWCASE_CLIPS: HireShowcaseClip[] = [
   },
   {
     id: "iZUIeVODCgs",
+    headlineTitle: "Midwest: A Short Film",
     segments: [
       { start: 17, end: 50 },
       { start: 163, end: 202 },
@@ -43,7 +64,14 @@ export const HIRE_SHOWCASE_CLIPS: HireShowcaseClip[] = [
   },
   {
     id: "3Uy1mO11f7s",
+    headlineTitle: "Worldwide Technologies",
     segments: [{ start: 0, end: 20 }],
+  },
+  {
+    id: "qyEqyyxWXnA",
+    startDelayMs: 2000,
+    headlineTitle: "Levitt Pavillion Dayton",
+    segments: [{ start: 0, end: 33 }],
   },
 ];
 
@@ -200,12 +228,13 @@ export const FEATURED_PROJECTS: FeaturedProject[] = [
         label: "App Store",
         href: "https://apps.apple.com/us/app/wingman-eq-life-coach/id6747995730",
         external: true,
+        icon: "apple",
       },
     },
   },
   {
     slug: "cloverleaf",
-    title: "Cloverleaf Testimonials",
+    title: "Cloverleaf",
     titleFont: "var(--font-inter), 'Inter', sans-serif",
     subtitle:
       "Video production & motion design for B2B SaaS customer storytelling",
@@ -228,17 +257,19 @@ export const FEATURED_PROJECTS: FeaturedProject[] = [
         label: "Watch Playlist",
         href: "https://www.youtube.com/playlist?list=PL18Q1CsxcdgRhhpWPSXSjkJCx12SRp_1_",
         external: true,
+        icon: "play",
       },
     ],
     heroBlurb:
-      "Testimonial video production, short-form content strategy, and motion design for B2B SaaS — customer stories that convert, from interview through final motion graphics.",
+      "Testimonial video production, short-form content strategy, and motion design for B2B SaaS, with customer stories built to convert from interview through final motion graphics.",
     caseStudyMeta: {
       role: "Video & Motion Lead",
-      timeline: "2023 – Present",
+      timeline: "May 2024 – Jan 2025",
       live: {
         label: "Watch playlist",
         href: "https://www.youtube.com/playlist?list=PL18Q1CsxcdgRhhpWPSXSjkJCx12SRp_1_",
         external: true,
+        icon: "play",
       },
     },
   },
@@ -260,17 +291,23 @@ export const FEATURED_PROJECTS: FeaturedProject[] = [
     backgroundImage: `https://img.youtube.com/vi/${BIRO_CUSTOMER_VIDEO_ID}/maxresdefault.jpg`,
     cta: [
       { label: "View Case Study", href: "/work/biro-labels" },
-      { label: "Visit Site", href: "https://birolabels.com", external: true },
+      {
+        label: "Visit Site",
+        href: "https://birolabels.com",
+        external: true,
+        icon: "globe",
+      },
     ],
     heroBlurb:
       "B2B storefront, fulfillment workflows, and admin tooling, built solo with AI-assisted development. Stripe, Supabase, and QuickBooks handoff so the team can sell labels and run operations without friction.",
     caseStudyMeta: {
       role: "Solo Product & Engineer",
-      timeline: "2024 – Present",
+      timeline: "2025 – Present",
       live: {
-        label: "Live site",
+        label: "Visit Site",
         href: "https://birolabels.com",
         external: true,
+        icon: "globe",
       },
     },
   },
@@ -289,14 +326,7 @@ export const FEATURED_PROJECTS: FeaturedProject[] = [
     youtubeSegmentStartDelayMs: HIRE_SHOWCASE_CLIPS[0].startDelayMs,
     youtubeLoop: false,
     backgroundImage: `https://img.youtube.com/vi/${HIRE_SHOWCASE_CLIPS[0].id}/maxresdefault.jpg`,
-    cta: [
-      { label: "Get in Touch", href: "/hire" },
-      {
-        label: "Download Resume",
-        href: SITE_RESUME_PDF_HREF,
-        external: true,
-      },
-    ],
+    cta: [{ label: "Get in Touch", href: "/hire" }],
     hireMobileRoles: [
       "Product & UX",
       "Creative direction",

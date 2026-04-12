@@ -143,7 +143,7 @@ export default function AboutPage() {
 
               {/* Right: tools first, then background — sticky on lg so it pins while left story scrolls */}
               <div className="min-w-0 lg:border-l lg:border-white/10 lg:pl-12 xl:pl-16 lg:flex lg:flex-col">
-                <div className="space-y-20 lg:sticky lg:top-28 lg:w-full lg:max-h-[calc(100vh-8rem)] lg:overflow-y-auto lg:overscroll-contain lg:pb-1">
+                <div className="space-y-20 lg:sticky lg:top-28 lg:w-full lg:max-h-[calc(100vh-8rem)] lg:overflow-y-auto lg:overscroll-contain lg:pb-1 lg:[-ms-overflow-style:none] lg:[scrollbar-width:none] lg:[&::-webkit-scrollbar]:hidden">
                   <section>
                     <h2 className="text-2xl font-semibold mb-6">
                       Tools & Stack

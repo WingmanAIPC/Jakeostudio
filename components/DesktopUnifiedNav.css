@@ -1,0 +1,299 @@
+/* Desktop-only unified header pill (Russian-doll: logo → nav + Contact → Email/Call/Resume). */
+
+.desktop-unified-nav {
+  --nav-h: 50px;
+  --du-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --du-dur: 1.25s;
+  --du-opacity-dur: 0.95s;
+  display: flex;
+  align-items: center;
+  height: var(--nav-h);
+  min-height: var(--nav-h);
+  box-sizing: border-box;
+  border-radius: 9999px;
+  background: rgba(0, 0, 0, 0.42);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  box-shadow:
+    0 4px 28px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  justify-content: flex-start;
+  padding: 0 18px 0 10px;
+  gap: 8px;
+  color: #ffffff;
+  max-width: 92px;
+  overflow: hidden;
+  transition:
+    max-width var(--du-dur) var(--du-ease),
+    box-shadow 0.35s ease,
+    padding 0.35s ease,
+    gap 0.35s ease,
+    justify-content 0.35s ease;
+}
+
+/* Idle: center the logo in the pill; no flex gap (rail was eating width and clipping the right) */
+.desktop-unified-nav:not(:hover):not(:focus-within) {
+  justify-content: center;
+  gap: 0;
+  padding-left: 12px;
+  padding-right: 12px;
+  max-width: 112px;
+}
+
+.desktop-unified-nav:hover,
+.desktop-unified-nav:focus-within {
+  justify-content: flex-start;
+  gap: 8px;
+  padding: 0 18px 0 10px;
+  max-width: min(96vw, 760px);
+}
+
+/* Logo: no inner pill at rest (reads as one glass bar); hover matches link chips */
+.desktop-unified-nav__logo {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 34px;
+  margin: 8px 0;
+  padding: 0 10px;
+  border-radius: 9999px;
+  text-decoration: none;
+  color: inherit;
+  background: transparent;
+  box-shadow: none;
+  transition:
+    background-color 0.22s ease,
+    box-shadow 0.22s ease,
+    border-radius 0.22s ease,
+    padding 0.22s ease;
+}
+
+.desktop-unified-nav__logo:hover,
+.desktop-unified-nav__logo:focus-visible {
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  outline: none;
+}
+
+.desktop-unified-nav__logo-mark {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.desktop-unified-nav__logo-img {
+  display: block;
+  height: auto;
+  width: auto;
+  max-height: 22px;
+  object-fit: contain;
+  object-position: center center;
+  transition:
+    opacity 0.22s ease,
+    max-width var(--du-dur) var(--du-ease),
+    max-height var(--du-dur) var(--du-ease),
+    object-position 0.35s ease;
+}
+
+.desktop-unified-nav__logo-img--hover {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.desktop-unified-nav__logo:hover .desktop-unified-nav__logo-img--default,
+.desktop-unified-nav__logo:focus-visible .desktop-unified-nav__logo-img--default {
+  opacity: 0;
+}
+
+.desktop-unified-nav__logo:hover .desktop-unified-nav__logo-img--hover,
+.desktop-unified-nav__logo:focus-visible .desktop-unified-nav__logo-img--hover {
+  opacity: 1;
+}
+
+.desktop-unified-nav:hover .desktop-unified-nav__logo,
+.desktop-unified-nav:focus-within .desktop-unified-nav__logo {
+  padding: 0 14px;
+}
+
+.desktop-unified-nav:not(:hover):not(:focus-within) .desktop-unified-nav__logo {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.desktop-unified-nav:not(:hover):not(:focus-within) .desktop-unified-nav__logo-img {
+  max-width: 72px;
+}
+
+.desktop-unified-nav:hover .desktop-unified-nav__logo-img,
+.desktop-unified-nav:focus-within .desktop-unified-nav__logo-img {
+  max-width: 200px;
+  max-height: 28px;
+  object-position: left center;
+}
+
+.desktop-unified-nav__rail {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  flex: 0 1 auto;
+  max-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
+  transition:
+    max-width var(--du-dur) var(--du-ease),
+    opacity var(--du-dur) var(--du-ease);
+}
+
+.desktop-unified-nav:hover .desktop-unified-nav__rail,
+.desktop-unified-nav:focus-within .desktop-unified-nav__rail {
+  visibility: visible;
+  flex: 0 1 auto;
+  width: auto;
+  max-width: 680px;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.desktop-unified-nav__tier1 {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 6px;
+  padding: 0 10px 0 4px;
+}
+
+.desktop-unified-nav__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 34px;
+  padding: 0 16px;
+  margin: 8px 0;
+  border-radius: 9999px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #ffffff;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  transition: background-color 0.22s ease, color 0.22s ease, box-shadow 0.22s ease;
+}
+
+.desktop-unified-nav__link:hover,
+.desktop-unified-nav__link:focus-visible {
+  background: #ffffff;
+  color: #000000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  outline: none;
+}
+
+.desktop-unified-nav__link.is-active {
+  background: rgba(255, 255, 255, 0.92);
+  color: #000000;
+}
+
+/* Contact column — tier2 reveal; no vertical split shadow */
+.desktop-unified-nav__contact {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.desktop-unified-nav__contact-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 34px;
+  padding: 0 16px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 9999px;
+  background: transparent;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: default;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: box-shadow 0.22s ease, color 0.22s ease;
+}
+
+.desktop-unified-nav__contact:hover .desktop-unified-nav__contact-trigger,
+.desktop-unified-nav__contact:focus-within .desktop-unified-nav__contact-trigger {
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.1),
+    0 3px 12px rgba(0, 0, 0, 0.4);
+}
+
+.desktop-unified-nav__contact-trigger:focus {
+  outline: none;
+}
+
+.desktop-unified-nav__contact-trigger:focus-visible {
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.45);
+}
+
+.desktop-unified-nav__tier2 {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
+  transition:
+    max-width var(--du-dur) var(--du-ease),
+    opacity var(--du-opacity-dur) ease,
+    padding 0.2s ease;
+  padding-left: 0;
+}
+
+.desktop-unified-nav__contact:not(:hover):not(:focus-within)
+  .desktop-unified-nav__tier2 {
+  visibility: hidden;
+}
+
+.desktop-unified-nav__contact:hover .desktop-unified-nav__tier2,
+.desktop-unified-nav__contact:focus-within .desktop-unified-nav__tier2 {
+  visibility: visible;
+  max-width: 340px;
+  opacity: 1;
+  pointer-events: auto;
+  padding-left: 8px;
+}
+
+.desktop-unified-nav__action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 34px;
+  padding: 0 14px;
+  margin: 8px 0;
+  border-radius: 9999px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #ffffff;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.22s ease, color 0.22s ease, box-shadow 0.22s ease;
+}
+
+.desktop-unified-nav__action:hover,
+.desktop-unified-nav__action:focus-visible {
+  background: #ffffff;
+  color: #000000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  outline: none;
+}

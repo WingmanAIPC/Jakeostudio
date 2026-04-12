@@ -1,32 +1,26 @@
-import React from "react";
+"use client";
+
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { SITE_RESUME_PDF_HREF, SITE_LOGO_HEADER_SRC, PRIMARY_NAV } from "../lib/siteNav";
+import {
+  SITE_RESUME_PDF_HREF,
+  SITE_LOGO_HEADER_SRC,
+  SITE_MAILTO_HREF,
+  SITE_PHONE_HREF,
+  PRIMARY_NAV,
+} from "../lib/siteNav";
 
-const MAILTO_HREF =
-  "mailto:jakeostudio@gmail.com?subject=Opportunity&body=Hi Jake, I'd like to connect about a role or project.";
+const PEEK_MS = 20000;
+const PEEK_COLLAPSE_MS = 750;
 
-/** E.164 (e.g. +15551234567). Update to your real number. */
-const PHONE_HREF = "tel:+15555550100";
+/** Mobile header: icon only (no glass bubble). Desktop nav is `DesktopUnifiedNav` in `HeaderFloatingBar` children. */
+const iconPlainMobileClass =
+  "flex shrink-0 items-center justify-center p-1.5 text-zinc-400 transition-colors hover:text-white active:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-md";
 
-const iconRoundBtnClass =
-  "flex h-[42px] w-[42px] items-center justify-center rounded-full border border-white/15 bg-white/[0.06] text-white shadow-lg backdrop-blur-2xl transition-[color,background-color,border-color,box-shadow,transform] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-white/30 hover:bg-white/[0.12] active:scale-[0.97]";
-
-function PhoneIcon({ className }: { className?: string }) {
+function UserIcon({ className }: { className?: string }) {
   return (
     <svg className={className} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} aria-hidden>
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"
-      />
-    </svg>
-  );
-}
-
-function MailIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} aria-hidden>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
     </svg>
   );
 }
@@ -39,91 +33,246 @@ function ResumeIcon({ className }: { className?: string }) {
   );
 }
 
-const expandPillBaseClass =
-  "group relative hidden h-[42px] max-w-[42px] items-center overflow-hidden rounded-full border border-white/15 bg-white/[0.06] text-white shadow-lg backdrop-blur-2xl transition-[max-width,background-color,border-color,box-shadow] duration-[240ms] ease-[cubic-bezier(0.4,0,1,1)] hover:duration-[1050ms] hover:ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-white/35 hover:bg-white/[0.12] hover:shadow-[0_10px_40px_-12px_rgba(255,255,255,0.18)] focus-visible:duration-[1050ms] focus-visible:ease-[cubic-bezier(0.22,1,0.36,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-black/40 md:inline-flex";
+type PeekState = "collapsed" | "peeking" | "collapsing";
 
-const expandLabelClass =
-  "text-xs font-medium tracking-tight text-white whitespace-nowrap opacity-0 -translate-x-1.5 transition-[opacity,transform] duration-150 ease-in delay-0 group-hover:opacity-100 group-hover:translate-x-0 group-hover:duration-[820ms] group-hover:delay-[260ms] group-hover:ease-[cubic-bezier(0.22,1,0.36,1)] group-focus-visible:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:duration-[820ms] group-focus-visible:delay-[260ms] group-focus-visible:ease-[cubic-bezier(0.22,1,0.36,1)]";
-
-/** Desktop-only expandable contact + resume pills in the top header. */
-function ContactAndResumeActions() {
-  return (
-    <div
-      className="hidden md:flex items-center gap-3"
-      aria-label="Quick contact and resume"
-    >
-      <a
-        href={MAILTO_HREF}
-        className={`${expandPillBaseClass} hover:max-w-[min(100vw-8rem,320px)] focus-visible:max-w-[min(100vw-8rem,320px)]`}
-        aria-label="Email jakeostudio@gmail.com"
-      >
-        <span className="flex h-[42px] w-[42px] shrink-0 items-center justify-center" aria-hidden>
-          <MailIcon />
-        </span>
-        <span className={`pr-6 ${expandLabelClass}`}>jakeostudio@gmail.com</span>
-      </a>
-      <a
-        href={PHONE_HREF}
-        className={`${expandPillBaseClass} hover:max-w-[200px] focus-visible:max-w-[200px]`}
-        aria-label="Call me"
-      >
-        <span className="flex h-[42px] w-[42px] shrink-0 items-center justify-center" aria-hidden>
-          <PhoneIcon />
-        </span>
-        <span className={`pr-6 ${expandLabelClass}`}>Call me</span>
-      </a>
-      <a
-        href={SITE_RESUME_PDF_HREF}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={`${expandPillBaseClass} hover:max-w-[220px] focus-visible:max-w-[220px]`}
-        aria-label="View resume"
-      >
-        <span className="flex h-[42px] w-[42px] shrink-0 items-center justify-center" aria-hidden>
-          <ResumeIcon />
-        </span>
-        <span className={`pr-6 ${expandLabelClass}`}>Resume</span>
-      </a>
-    </div>
-  );
+function useOutsideClose(
+  open: boolean,
+  setOpen: (v: boolean) => void,
+  ref: React.RefObject<HTMLElement | null>,
+) {
+  useEffect(() => {
+    if (!open) return;
+    const onDoc = (e: MouseEvent | TouchEvent) => {
+      if (!ref.current?.contains(e.target as Node)) setOpen(false);
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("mousedown", onDoc);
+    document.addEventListener("touchstart", onDoc);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onDoc);
+      document.removeEventListener("touchstart", onDoc);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [open, ref, setOpen]);
 }
 
-/** Fixed full-width glass header — mobile only (md:hidden). Logo + nav on left, icons on right. */
-export function MobileHeader({ logoHref = "/" }: { logoHref?: string }) {
+/** Fixed full-width glass header — mobile only (md:hidden). */
+export function MobileHeader({
+  logoHref = "/",
+  peekTimerActive = false,
+}: {
+  logoHref?: string;
+  /** When true, run ~20s nav peek then collapse (homepage after intro + hero). */
+  peekTimerActive?: boolean;
+}) {
+  const [peekState, setPeekState] = useState<PeekState>(() =>
+    peekTimerActive ? "peeking" : "collapsed",
+  );
+  /** After peek: logo tap fades Work / About / Hire in place (same row as logo), not a dropdown. */
+  const [navRevealed, setNavRevealed] = useState(false);
+  const [contactOpen, setContactOpen] = useState(false);
+  const peekTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const collapseTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const contactRef = useRef<HTMLDivElement>(null);
+
+  useOutsideClose(navRevealed, setNavRevealed, menuRef);
+  useOutsideClose(contactOpen, setContactOpen, contactRef);
+
+  useEffect(() => {
+    const navShown =
+      peekState === "peeking" ||
+      peekState === "collapsing" ||
+      (peekState === "collapsed" && navRevealed);
+    if (navShown) setContactOpen(false);
+  }, [peekState, navRevealed]);
+
+  useEffect(() => {
+    if (peekTimerRef.current) clearTimeout(peekTimerRef.current);
+    if (collapseTimerRef.current) clearTimeout(collapseTimerRef.current);
+
+    if (!peekTimerActive) {
+      setPeekState("collapsed");
+      return;
+    }
+
+    setPeekState("peeking");
+    peekTimerRef.current = setTimeout(() => {
+      setPeekState("collapsing");
+      collapseTimerRef.current = setTimeout(
+        () => setPeekState("collapsed"),
+        PEEK_COLLAPSE_MS,
+      );
+    }, PEEK_MS);
+
+    return () => {
+      if (peekTimerRef.current) clearTimeout(peekTimerRef.current);
+      if (collapseTimerRef.current) clearTimeout(collapseTimerRef.current);
+    };
+  }, [peekTimerActive]);
+
+  useEffect(() => {
+    if (peekState === "peeking" || peekState === "collapsing") {
+      setNavRevealed(false);
+    }
+  }, [peekState]);
+
+  const navLinkClass =
+    "px-1.5 py-1 text-[11px] font-medium text-zinc-400 hover:text-white transition-colors whitespace-nowrap";
+
+  const onLogoClick = useCallback(
+    (e: React.MouseEvent) => {
+      if (peekState !== "collapsed") return;
+      e.preventDefault();
+      setContactOpen(false);
+      setNavRevealed((v) => !v);
+    },
+    [peekState],
+  );
+
+  const navMotionClass =
+    peekState === "peeking"
+      ? "opacity-100 translate-x-0"
+      : peekState === "collapsing"
+        ? "pointer-events-none opacity-0 -translate-x-3"
+        : peekState === "collapsed" && navRevealed
+          ? "opacity-100 translate-x-0"
+          : "pointer-events-none opacity-0 -translate-x-2";
+
+  const contactMotionClass = contactOpen
+    ? "opacity-100 translate-x-0 pointer-events-auto"
+    : "pointer-events-none opacity-0 translate-x-2";
+
+  const primaryNavLinksVisible =
+    peekState === "peeking" ||
+    peekState === "collapsing" ||
+    (peekState === "collapsed" && navRevealed);
+
   return (
     <div
-      className="fixed top-0 left-0 right-0 z-[101] md:hidden flex items-center justify-between px-4 bg-black/70 backdrop-blur-2xl border-b border-white/[0.08]"
+      className="fixed top-0 left-0 right-0 z-[101] md:hidden flex items-center justify-between gap-2 px-3 bg-black/70 backdrop-blur-2xl border-b border-white/[0.08]"
       style={{ height: "52px" }}
     >
-      <div className="flex items-center gap-2 min-w-0">
-        <Link href={logoHref} aria-label="Home">
-          <img
-            src={SITE_LOGO_HEADER_SRC}
-            alt="jakeostudio"
-            className="h-5 w-auto object-contain shrink-0"
-          />
-        </Link>
-        <nav className="flex items-center flex-wrap gap-x-0.5" aria-label="Primary">
-          {PRIMARY_NAV.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="px-1.5 py-1 text-[11px] font-medium text-zinc-400 hover:text-white transition-colors whitespace-nowrap"
-              aria-label={item.ariaLabel}
-            >
-              {item.label}
-            </Link>
-          ))}
-          <a
-            href={SITE_RESUME_PDF_HREF}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-1.5 py-1 text-[11px] font-medium text-zinc-400 hover:text-white transition-colors whitespace-nowrap"
-            aria-label="Download resume PDF"
+      <div ref={menuRef} className="relative flex min-w-0 flex-1 items-center gap-1">
+        <div className="relative z-[2] flex shrink-0 items-center">
+          <Link
+            href={logoHref}
+            onClick={onLogoClick}
+            className="block rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
+            aria-label={
+              peekState === "collapsed"
+                ? navRevealed
+                  ? "Hide navigation"
+                  : "Show navigation"
+                : "Home"
+            }
+            aria-expanded={
+              peekState === "collapsed" ? navRevealed : undefined
+            }
           >
-            Resume
-          </a>
+            <img
+              src={SITE_LOGO_HEADER_SRC}
+              alt="jakeostudio"
+              className="h-5 w-auto object-contain"
+            />
+          </Link>
+        </div>
+
+        {/* Same horizontal slot as the initial peek (beside logo) — fade in/out, no dropdown panel. */}
+        <nav
+          className={`absolute left-10 top-1/2 z-[1] flex -translate-y-1/2 items-center gap-x-0.5 transition-[opacity,transform] ease-[cubic-bezier(0.33,1,0.68,1)] ${
+            peekState === "collapsing" ? "duration-[750ms]" : "duration-300"
+          } ${navMotionClass}`}
+          aria-label="Primary"
+          aria-hidden={
+            !(
+              peekState === "peeking" ||
+              (peekState === "collapsed" && navRevealed)
+            )
+          }
+        >
+          {peekState === "collapsed" && navRevealed ? (
+            <Link
+              href={logoHref}
+              className={navLinkClass}
+              onClick={() => setNavRevealed(false)}
+            >
+              Home
+            </Link>
+          ) : null}
+          {(peekState === "peeking" ||
+            peekState === "collapsing" ||
+            (peekState === "collapsed" && navRevealed)) &&
+            PRIMARY_NAV.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={navLinkClass}
+                aria-label={item.ariaLabel}
+                onClick={() => setNavRevealed(false)}
+              >
+                {item.label}
+              </Link>
+            ))}
         </nav>
+      </div>
+
+      <div
+        ref={contactRef}
+        className="relative flex shrink-0 items-center justify-end gap-1"
+      >
+        <div
+          className={`relative flex min-w-0 items-center justify-end transition-opacity duration-300 ease-out ${
+            primaryNavLinksVisible
+              ? "opacity-0 pointer-events-none"
+              : "opacity-100"
+          }`}
+        >
+          <nav
+            className={`absolute right-full top-1/2 z-[1] mr-1 flex -translate-y-1/2 items-center gap-x-0.5 transition-[opacity,transform] ease-[cubic-bezier(0.33,1,0.68,1)] duration-300 ${contactMotionClass}`}
+            aria-label="Contact"
+            aria-hidden={!contactOpen}
+          >
+            <a
+              href={SITE_MAILTO_HREF}
+              className={navLinkClass}
+              onClick={() => setContactOpen(false)}
+            >
+              Email
+            </a>
+            <a
+              href={SITE_PHONE_HREF}
+              className={navLinkClass}
+              onClick={() => setContactOpen(false)}
+            >
+              Call
+            </a>
+          </nav>
+          <button
+            type="button"
+            className={`${iconPlainMobileClass} relative z-[2]`}
+            aria-label={contactOpen ? "Hide contact links" : "Show contact links"}
+            aria-expanded={contactOpen}
+            onClick={() => {
+              setNavRevealed(false);
+              setContactOpen((c) => !c);
+            }}
+          >
+            <UserIcon className="h-[19.8px] w-[19.8px] -translate-y-px" />
+          </button>
+        </div>
+        <a
+          href={SITE_RESUME_PDF_HREF}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={iconPlainMobileClass}
+          aria-label="View resume PDF"
+        >
+          <ResumeIcon className="h-[19.8px] w-[19.8px] block" />
+        </a>
       </div>
     </div>
   );
@@ -134,7 +283,6 @@ export default function HeaderFloatingBar({ children }: { children: React.ReactN
     <div className="pointer-events-none fixed top-4 left-0 right-0 z-[100] hidden md:flex justify-center px-2 sm:px-3">
       <div className="pointer-events-auto flex flex-wrap items-center justify-center gap-2 sm:gap-3">
         {children}
-        <ContactAndResumeActions />
       </div>
     </div>
   );
