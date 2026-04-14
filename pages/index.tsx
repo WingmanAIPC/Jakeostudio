@@ -359,10 +359,10 @@ export default function PortfolioSite() {
         <section id="contact" className={`${PAGE_WIDE_SECTION} py-20`}>
           <div className="mx-auto w-full max-w-3xl border border-white/10 rounded-2xl p-8 md:p-12 text-center">
             <h3 className="text-2xl font-semibold mb-4">
-              AI Creative Technologist available for remote work
+              Design, production, and software development available for remote work
             </h3>
             <p className="text-sm text-zinc-300 mb-8">
-              Design, production, and AI development solutions. I respond within 24
+              Design, production, and software development solutions. I respond within 24
               hours.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-4">
