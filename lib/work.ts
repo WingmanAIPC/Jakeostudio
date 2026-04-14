@@ -316,7 +316,7 @@ export const FEATURED_PROJECTS: FeaturedProject[] = [
     title: "Available for Work",
     slideDuration: 120000,
     subtitle:
-      "Design, production, and software development",
+      "AI Creative Technologist\nDesign, production, and software development",
     description: "",
     tags: [],
     color: "from-white/10 to-white/5",
