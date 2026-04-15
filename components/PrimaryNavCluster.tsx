@@ -5,14 +5,20 @@ import DesktopUnifiedNav from "./DesktopUnifiedNav";
 export default function PrimaryNavCluster({
   activeHref = "",
   logoHref = "/",
+  peekTimerActive = false,
 }: {
   activeHref?: string;
   /** `#top` on homepage for scroll-to-top; `/` elsewhere */
   logoHref?: string;
+  peekTimerActive?: boolean;
 }) {
   return (
     <div className="hidden md:block">
-      <DesktopUnifiedNav logoHref={logoHref} activeHref={activeHref} />
+      <DesktopUnifiedNav
+        logoHref={logoHref}
+        activeHref={activeHref}
+        peekTimerActive={peekTimerActive}
+      />
     </div>
   );
 }

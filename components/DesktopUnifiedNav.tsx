@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import { NAV_PEEK_MS } from "../lib/navPeek";
 import {
   PRIMARY_NAV,
   SITE_LOGO_DESKTOP_HEADER_HOVER_SRC,
@@ -21,11 +22,25 @@ export default function DesktopUnifiedNav({
   logoHref = "/",
   activeHref = "",
   className = "",
+  peekTimerActive = false,
 }: {
   logoHref?: string;
   activeHref?: string;
   className?: string;
+  /** Homepage: expand pill with primary links for `NAV_PEEK_MS`, then collapse (matches mobile). */
+  peekTimerActive?: boolean;
 }) {
+  const [isPeekOpen, setIsPeekOpen] = useState(false);
+
+  useEffect(() => {
+    if (!peekTimerActive) {
+      setIsPeekOpen(false);
+      return;
+    }
+    setIsPeekOpen(true);
+    const id = window.setTimeout(() => setIsPeekOpen(false), NAV_PEEK_MS);
+    return () => window.clearTimeout(id);
+  }, [peekTimerActive]);
   const logoInner = (
     <span className="desktop-unified-nav__logo-mark" aria-hidden>
       <img
@@ -60,7 +75,7 @@ export default function DesktopUnifiedNav({
 
   return (
     <nav
-      className={`desktop-unified-nav ${className}`.trim()}
+      className={`desktop-unified-nav${isPeekOpen ? " is-peek-open" : ""} ${className}`.trim()}
       aria-label="Primary"
     >
       {logoEl}

@@ -2,6 +2,7 @@
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { NAV_PEEK_COLLAPSE_MS, NAV_PEEK_MS } from "../lib/navPeek";
 import {
   SITE_RESUME_PDF_HREF,
   SITE_LOGO_HEADER_SRC,
@@ -9,9 +10,6 @@ import {
   SITE_PHONE_HREF,
   PRIMARY_NAV,
 } from "../lib/siteNav";
-
-const PEEK_MS = 20000;
-const PEEK_COLLAPSE_MS = 750;
 
 /** Mobile header: icon only (no glass bubble). Desktop nav is `DesktopUnifiedNav` in `HeaderFloatingBar` children. */
 const iconPlainMobileClass =
@@ -104,9 +102,9 @@ export function MobileHeader({
       setPeekState("collapsing");
       collapseTimerRef.current = setTimeout(
         () => setPeekState("collapsed"),
-        PEEK_COLLAPSE_MS,
+        NAV_PEEK_COLLAPSE_MS,
       );
-    }, PEEK_MS);
+    }, NAV_PEEK_MS);
 
     return () => {
       if (peekTimerRef.current) clearTimeout(peekTimerRef.current);

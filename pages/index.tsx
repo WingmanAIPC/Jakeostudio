@@ -282,7 +282,10 @@ export default function PortfolioSite() {
         />
 
         <HeaderFloatingBar>
-          <PrimaryNavCluster logoHref="#top" />
+          <PrimaryNavCluster
+            logoHref="#top"
+            peekTimerActive={introComplete && heroReady}
+          />
         </HeaderFloatingBar>
 
         {/* Hero — mount only after session intro check so first paint is never bright slides */}
