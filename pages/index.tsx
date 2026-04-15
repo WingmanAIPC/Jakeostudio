@@ -362,7 +362,7 @@ export default function PortfolioSite() {
         <section id="contact" className={`${PAGE_WIDE_SECTION} py-20`}>
           <div className="mx-auto w-full max-w-3xl border border-white/10 rounded-2xl p-8 md:p-12 text-center">
             <h3 className="text-2xl font-semibold mb-4">
-              Design, production, and software development available for remote work
+              Available for Work
             </h3>
             <p className="text-sm text-zinc-300 mb-8">
               Design, production, and software development solutions. I respond within 24
