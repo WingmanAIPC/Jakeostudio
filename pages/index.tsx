@@ -11,7 +11,7 @@ import {
   SITE_RESUME_PDF_HREF,
 } from "../lib/siteNav";
 import LogoIntro, { shouldShowIntro } from "../components/LogoIntro";
-import ProjectShowcase from "../components/ProjectShowcase";
+import ShowcaseHero from "../components/showcase/ShowcaseHero";
 
 function YouTubeLazyEmbed({
   title,
@@ -228,8 +228,12 @@ const DESIGN_GALLERY: { src: string; alt: string; ratio: string }[] = [
 export default function PortfolioSite() {
   const [showIntro, setShowIntro] = useState(false);
   const [introComplete, setIntroComplete] = useState(true);
-  /** False until client runs session check — avoids painting ProjectShowcase before LogoIntro */
+  /** False until client runs session check — avoids painting the hero before LogoIntro */
   const [heroReady, setHeroReady] = useState(false);
+  /** Hero clock runs once the intro starts revealing (or immediately when there is no intro) */
+  const [heroStarted, setHeroStarted] = useState(false);
+  /** Hero's first clip can play — lets the intro leave early */
+  const [heroMediaReady, setHeroMediaReady] = useState(false);
   const [lightbox, setLightbox] = useState<{
     src: string;
     alt: string;
@@ -239,6 +243,8 @@ export default function PortfolioSite() {
     if (shouldShowIntro()) {
       setShowIntro(true);
       setIntroComplete(false);
+    } else {
+      setHeroStarted(true);
     }
     setHeroReady(true);
   }, []);
@@ -273,7 +279,11 @@ export default function PortfolioSite() {
       >
         {/* Logo Intro — once per session, removed from DOM after exit */}
         {showIntro && !introComplete && (
-          <LogoIntro onComplete={() => setIntroComplete(true)} />
+          <LogoIntro
+            ready={heroMediaReady}
+            onReveal={() => setHeroStarted(true)}
+            onComplete={() => setIntroComplete(true)}
+          />
         )}
 
         <MobileHeader
@@ -288,14 +298,14 @@ export default function PortfolioSite() {
           />
         </HeaderFloatingBar>
 
-        {/* Hero — mount only after session intro check so first paint is never bright slides */}
+        {/* Hero — mounts under the intro so its first clip buffers while the logo plays */}
         {heroReady ? (
-          <ProjectShowcase />
-        ) : (
-          <div
-            className="h-screen w-full bg-[#0a0a0a]"
-            aria-hidden
+          <ShowcaseHero
+            started={heroStarted}
+            onFirstReady={() => setHeroMediaReady(true)}
           />
+        ) : (
+          <div className="h-[100svh] w-full bg-black" aria-hidden />
         )}
 
         {/* Design Section */}

@@ -63,7 +63,7 @@ function segmentsKey(segments: YoutubeTimeSegment[]): string {
 
 /**
  * Muted background playback through ordered [start, end) time ranges; calls onComplete after the last segment.
- * Keeps a poster on top of the iframe until PLAYING (same idea as `YouTubeAutoplayBackground`), and briefly
+ * Keeps a poster on top of the iframe until PLAYING, and briefly
  * restores it when seeking to the next segment so YouTube’s black buffer frame does not flash through.
  */
 export default function YouTubeSegmentPlayer({
