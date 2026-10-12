@@ -113,9 +113,6 @@ export function planVisit(slide: ShowcaseSlide, visit: number): ShowcaseClip[] {
   return slide.outro ? [...picked, slide.outro] : picked;
 }
 
-/** Placeholder CTA for client builds until their live URLs are added. */
-const ABOUT_ME: ProjectCta = { label: "About me", href: "/about" };
-
 export const SHOWCASE_SLIDES: ShowcaseSlide[] = [
   {
     id: "wingman",
@@ -166,10 +163,12 @@ export const SHOWCASE_SLIDES: ShowcaseSlide[] = [
         duration: 27,
       },
     ],
-    // TODO(jake): add { label: "Visit Site", href: "https://…", external: true, icon: "globe" }
-    cta: [ABOUT_ME],
+    cta: [
+      { label: "Visit Site", href: "https://cm-chicken-eta.vercel.app", external: true, icon: "globe" },
+    ],
   },
-  // 3 — 513 Inspections: slot reserved until the ad is finished. To add it:
+  // 3 — 513 Home Inspections (https://513-home-inspections.vercel.app): slot reserved
+  //     until the ad is finished. To add it:
   //   scripts/encode-showcase-video.sh <ad.mp4> 513-inspections <thumb-seconds>
   // then add a slide here shaped like "jsi-cabinetry" (file clip, poster, thumb, duration).
   {
@@ -194,8 +193,9 @@ export const SHOWCASE_SLIDES: ShowcaseSlide[] = [
         silent: true,
       },
     ],
-    // TODO(jake): add { label: "Visit Site", href: "https://…", external: true, icon: "globe" }
-    cta: [ABOUT_ME],
+    cta: [
+      { label: "Visit Site", href: "https://jsi-cabinetry.vercel.app", external: true, icon: "globe" },
+    ],
   },
   {
     id: "jgmma",
@@ -218,8 +218,9 @@ export const SHOWCASE_SLIDES: ShowcaseSlide[] = [
         duration: 32,
       },
     ],
-    // TODO(jake): add { label: "Visit Site", href: "https://…", external: true, icon: "globe" }
-    cta: [ABOUT_ME],
+    cta: [
+      { label: "Visit Site", href: "https://jgmma-web.vercel.app", external: true, icon: "globe" },
+    ],
   },
   {
     id: "biro-labels",
