@@ -9,9 +9,6 @@ export interface ProjectCta {
   icon?: ProjectCtaIcon;
 }
 
-/** Biro: customer-facing walkthrough */
-export const BIRO_CUSTOMER_VIDEO_ID = "nJfioQ8lLSg";
-
 /** Biro: admin dashboard walkthrough (segment playback) */
 export const BIRO_ADMIN_VIDEO_ID = "oGaejTwxYNc";
 

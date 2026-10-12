@@ -28,7 +28,11 @@ export type ScopeIcon =
   | "ledger"
   | "film"
   | "motion"
-  | "shortform";
+  | "shortform"
+  | "search"
+  | "booking"
+  | "glass"
+  | "events";
 
 export interface WorkScopeItem {
   label: string;
@@ -90,6 +94,57 @@ const WORK_COPY: WorkCopy[] = [
     detail: {
       figure: "2",
       text: "locations on one menu, with ordering handed straight to delivery.",
+    },
+  },
+  {
+    id: "513-inspections",
+    sector: "Home inspector · Cincinnati to Dayton",
+    year: "2026",
+    summary:
+      "A website built to book, and an operations hub behind it for leads, scheduling, and signed agreements.",
+    scope: [
+      { label: "Website", icon: "web" },
+      { label: "Local search pages", icon: "search" },
+      { label: "Online booking", icon: "booking" },
+      { label: "Operations hub", icon: "dashboard" },
+    ],
+    detail: {
+      figure: "3",
+      text: "documents, one signature, on any device. Agreements are signed on the spot.",
+    },
+  },
+  {
+    id: "operator-labs",
+    sector: "Software studio · Cincinnati, OH",
+    year: "2026",
+    summary:
+      "Brand, website, and launch commercial for a studio that builds custom software for small businesses.",
+    scope: [
+      { label: "Brand identity", icon: "brand" },
+      { label: "Website", icon: "web" },
+      { label: "Launch commercial", icon: "film" },
+      { label: "Motion design", icon: "motion" },
+    ],
+    detail: {
+      figure: "Weeks",
+      text: "not months, from first call to launch. Pricing is on the page.",
+    },
+  },
+  {
+    id: "safi",
+    sector: "Wine bar · Over-the-Rhine, Cincinnati",
+    year: "2026",
+    summary:
+      "A redesign for Over-the-Rhine's neighborhood wine bar: a warmer identity, menus worth browsing, and room for private events.",
+    scope: [
+      { label: "Web redesign", icon: "web" },
+      { label: "Brand refresh", icon: "brand" },
+      { label: "Menus", icon: "glass" },
+      { label: "Private events", icon: "events" },
+    ],
+    detail: {
+      figure: "OTR",
+      text: "Hours, location, and whether it's open right now, all up front.",
     },
   },
   {
@@ -161,20 +216,25 @@ const WORK_COPY: WorkCopy[] = [
   },
 ];
 
-export const WORK_ENTRIES: WorkEntry[] = WORK_COPY.map((copy) => {
-  const slide = SHOWCASE_SLIDES.find((s) => s.id === copy.id);
-  if (!slide) throw new Error(`No showcase slide for work entry "${copy.id}"`);
-  return {
-    ...copy,
-    title: slide.title,
-    short: slide.short,
-    categories: slide.categories,
-    accent: slide.accent,
-    thumb: slide.thumb,
-    clips: slide.outro ? [...slide.clips, slide.outro] : slide.clips,
-    cta: slide.cta,
-  };
-});
+/** One entry per hero slide that has copy above, in the hero's order. */
+export const WORK_ENTRIES: WorkEntry[] = SHOWCASE_SLIDES.reduce<WorkEntry[]>(
+  (entries, slide) => {
+    const copy = WORK_COPY.find((c) => c.id === slide.id);
+    if (!copy) return entries;
+    entries.push({
+      ...copy,
+      title: slide.title,
+      short: slide.short,
+      categories: slide.categories,
+      accent: slide.accent,
+      thumb: slide.thumb,
+      clips: slide.outro ? [...slide.clips, slide.outro] : slide.clips,
+      cta: slide.cta,
+    });
+    return entries;
+  },
+  [],
+);
 
 /* ───────────────────────── Archive strips ───────────────────────── */
 

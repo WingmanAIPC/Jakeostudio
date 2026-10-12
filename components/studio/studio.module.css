@@ -10,7 +10,8 @@
   --dim: rgba(255, 255, 255, 0.62);
   --faint: rgba(255, 255, 255, 0.4);
   --mono: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
-  --display: var(--font-inter), Helvetica, Arial, sans-serif;
+  /* Same stack as the hero. No Helvetica: local installs can resolve to condensed cuts. */
+  --display: var(--font-inter), system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
 
   position: relative;
   min-height: 100vh;
