@@ -204,6 +204,55 @@ export const SHOWCASE_SLIDES: ShowcaseSlide[] = [
     ],
   },
   {
+    id: "operator-labs",
+    short: "Operator Labs",
+    title: "Operator Labs",
+    subtitle:
+      "Brand, website, and launch commercial for a software studio building custom tools for small businesses — design, custom software, and operations, with transparent pricing.",
+    categories: ["Brand", "Website", "Commercial"],
+    tags: ["Brand Identity", "Motion Design", "Web Design", "Custom Software"],
+    accent: "#E8456B",
+    thumb: "/showcase/operator-labs-thumb.jpg",
+    clips: [
+      {
+        kind: "file",
+        id: "commercial",
+        src: "/showcase/operator-labs-1080.mp4",
+        srcSmall: "/showcase/operator-labs-720.mp4",
+        poster: "/showcase/operator-labs-poster.jpg",
+        duration: 30,
+      },
+    ],
+    cta: [
+      { label: "Visit Site", href: "https://operatorlabs.dev", external: true, icon: "globe" },
+    ],
+  },
+  {
+    id: "safi",
+    short: "Safi Wine Bar",
+    title: "Safi Wine Bar",
+    subtitle:
+      "A redesign for Over-the-Rhine's neighborhood wine bar — a warmer identity, menus worth browsing, private events, and hours and location up front.",
+    categories: ["Brand", "Website"],
+    tags: ["Web Redesign", "Brand Refresh", "Menus", "Private Events"],
+    accent: "#E8845C",
+    thumb: "/showcase/safi-thumb.jpg",
+    clips: [
+      {
+        kind: "file",
+        id: "reel",
+        src: "/showcase/safi-1080.mp4",
+        srcSmall: "/showcase/safi-720.mp4",
+        poster: "/showcase/safi-poster.jpg",
+        duration: 21,
+        silent: true,
+      },
+    ],
+    cta: [
+      { label: "View Redesign", href: "https://safi-remodel.vercel.app", external: true, icon: "globe" },
+    ],
+  },
+  {
     id: "jsi-cabinetry",
     short: "JSI Cabinetry",
     title: "JSI Cabinetry",
