@@ -116,70 +116,7 @@ export function planVisit(slide: ShowcaseSlide, visit: number): ShowcaseClip[] {
 /** Placeholder CTA for client builds until their live URLs are added. */
 const ABOUT_ME: ProjectCta = { label: "About me", href: "/about" };
 
-/** Film rotation — one clip per visit; ranges are [start, end) seconds. */
-const FILM_CLIPS: YouTubeClip[] = [
-  {
-    kind: "youtube",
-    id: "stargirl",
-    videoId: "OZf9mW6tnT8",
-    label: "Stargirl: A Short Film",
-    segments: [
-      { start: 9, end: 40 },
-      { start: 95, end: 111 },
-    ],
-  },
-  {
-    kind: "youtube",
-    id: "midwest",
-    videoId: "iZUIeVODCgs",
-    label: "Midwest: A Short Film",
-    segments: [
-      { start: 17, end: 50 },
-      { start: 163, end: 202 },
-    ],
-  },
-  {
-    kind: "youtube",
-    id: "wwt",
-    videoId: "3Uy1mO11f7s",
-    label: "Worldwide Technologies",
-    segments: [{ start: 0, end: 20 }],
-  },
-  {
-    kind: "youtube",
-    id: "levitt",
-    videoId: "qyEqyyxWXnA",
-    label: "Levitt Pavilion Dayton",
-    segments: [{ start: 0, end: 33 }],
-  },
-];
-
 export const SHOWCASE_SLIDES: ShowcaseSlide[] = [
-  {
-    id: "jsi-cabinetry",
-    short: "JSI Cabinetry",
-    title: "JSI Cabinetry",
-    subtitle:
-      "A new brand site with a photo-based kitchen visualizer, plus a field app for sales reps and a dashboard for their managers.",
-    categories: ["Website", "Mobile App", "Dashboard"],
-    // TODO(jake): swap in the real stack (e.g. "Next.js", "Supabase") — tool names render with icons.
-    tags: ["Kitchen Visualizer", "Rep App", "Manager Dashboard", "Lead Routing"],
-    accent: "#8EA7DB",
-    thumb: "/showcase/jsi-cabinetry-thumb.jpg",
-    clips: [
-      {
-        kind: "file",
-        id: "reel",
-        src: "/showcase/jsi-cabinetry-1080.mp4",
-        srcSmall: "/showcase/jsi-cabinetry-720.mp4",
-        poster: "/showcase/jsi-cabinetry-poster.jpg",
-        duration: 40,
-        silent: true,
-      },
-    ],
-    // TODO(jake): add { label: "Visit Site", href: "https://…", external: true, icon: "globe" }
-    cta: [ABOUT_ME],
-  },
   {
     id: "wingman",
     short: "Wingman",
@@ -232,40 +169,33 @@ export const SHOWCASE_SLIDES: ShowcaseSlide[] = [
     // TODO(jake): add { label: "Visit Site", href: "https://…", external: true, icon: "globe" }
     cta: [ABOUT_ME],
   },
+  // 3 — 513 Inspections: slot reserved until the ad is finished. To add it:
+  //   scripts/encode-showcase-video.sh <ad.mp4> 513-inspections <thumb-seconds>
+  // then add a slide here shaped like "jsi-cabinetry" (file clip, poster, thumb, duration).
   {
-    id: "cloverleaf",
-    short: "Cloverleaf",
-    title: "Cloverleaf",
+    id: "jsi-cabinetry",
+    short: "JSI Cabinetry",
+    title: "JSI Cabinetry",
     subtitle:
-      "Customer testimonial production and motion design for B2B SaaS — stories built to convert, from interview to final graphics.",
-    categories: ["Testimonials", "Motion"],
-    tags: ["Video Production", "Motion Design", "After Effects", "Premiere Pro"],
-    accent: "#79E000",
-    thumb: ytPoster("ITr7VHyHa2E"),
-    clips: CLOVERLEAF_THUMB_VIDEO_IDS.map((videoId) => ({
-      kind: "youtube" as const,
-      id: videoId,
-      videoId,
-      segments: [{ start: 0, end: 6 }],
-      poster: cloverleafYouTubeThumbUrl(videoId),
-    })),
-    clipsPerVisit: 2,
-    outro: {
-      kind: "file",
-      id: "outro",
-      src: encodeURI("/Cloverleaf Outro Final.mp4"),
-      poster: "/showcase/cloverleaf-outro-poster.jpg",
-      duration: 5,
-    },
-    cta: [
-      { label: "View Case Study", href: "/work/cloverleaf" },
+      "A new brand site with a photo-based kitchen visualizer, plus a field app for sales reps and a dashboard for their managers.",
+    categories: ["Website", "Mobile App", "Dashboard"],
+    // TODO(jake): swap in the real stack (e.g. "Next.js", "Supabase") — tool names render with icons.
+    tags: ["Kitchen Visualizer", "Rep App", "Manager Dashboard", "Lead Routing"],
+    accent: "#8EA7DB",
+    thumb: "/showcase/jsi-cabinetry-thumb.jpg",
+    clips: [
       {
-        label: "Watch Playlist",
-        href: "https://www.youtube.com/playlist?list=PL18Q1CsxcdgRhhpWPSXSjkJCx12SRp_1_",
-        external: true,
-        icon: "play",
+        kind: "file",
+        id: "reel",
+        src: "/showcase/jsi-cabinetry-1080.mp4",
+        srcSmall: "/showcase/jsi-cabinetry-720.mp4",
+        poster: "/showcase/jsi-cabinetry-poster.jpg",
+        duration: 40,
+        silent: true,
       },
     ],
+    // TODO(jake): add { label: "Visit Site", href: "https://…", external: true, icon: "globe" }
+    cta: [ABOUT_ME],
   },
   {
     id: "jgmma",
@@ -329,20 +259,38 @@ export const SHOWCASE_SLIDES: ShowcaseSlide[] = [
     ],
   },
   {
-    id: "films",
-    short: "Films",
-    title: "Film & Commercial",
+    id: "cloverleaf",
+    short: "Cloverleaf",
+    title: "Cloverleaf",
     subtitle:
-      "Short films and commercial work — concept, shoot, edit, grade, and VFX.",
-    categories: ["Film", "Commercial"],
-    tags: ["Direction", "Premiere Pro", "After Effects", "Photoshop"],
-    accent: "#F5D48A",
-    thumb: ytPoster(FILM_CLIPS[0].videoId),
-    clips: FILM_CLIPS,
-    clipsPerVisit: 1,
+      "Customer testimonial production and motion design for B2B SaaS — stories built to convert, from interview to final graphics.",
+    categories: ["Testimonials", "Motion"],
+    tags: ["Video Production", "Motion Design", "After Effects", "Premiere Pro"],
+    accent: "#79E000",
+    thumb: ytPoster("ITr7VHyHa2E"),
+    clips: CLOVERLEAF_THUMB_VIDEO_IDS.map((videoId) => ({
+      kind: "youtube" as const,
+      id: videoId,
+      videoId,
+      segments: [{ start: 0, end: 6 }],
+      poster: cloverleafYouTubeThumbUrl(videoId),
+    })),
+    clipsPerVisit: 2,
+    outro: {
+      kind: "file",
+      id: "outro",
+      src: encodeURI("/Cloverleaf Outro Final.mp4"),
+      poster: "/showcase/cloverleaf-outro-poster.jpg",
+      duration: 5,
+    },
     cta: [
-      { label: "Watch the films", href: "#video", icon: "play" },
-      { label: "About me", href: "/about" },
+      { label: "View Case Study", href: "/work/cloverleaf" },
+      {
+        label: "Watch Playlist",
+        href: "https://www.youtube.com/playlist?list=PL18Q1CsxcdgRhhpWPSXSjkJCx12SRp_1_",
+        external: true,
+        icon: "play",
+      },
     ],
   },
 ];
