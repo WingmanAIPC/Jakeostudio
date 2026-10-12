@@ -15,6 +15,12 @@ export default function App({ Component, pageProps }: AppProps) {
       className={`${inter.variable} min-h-screen bg-black`}
       style={{ backgroundColor: "#000000" }}
     >
+      {/* Expose Inter on :root too, so <html>/<body> (Tailwind's font-sans base) resolve it. */}
+      <style jsx global>{`
+        :root {
+          --font-inter: ${inter.style.fontFamily};
+        }
+      `}</style>
       <Component {...pageProps} />
     </div>
   );

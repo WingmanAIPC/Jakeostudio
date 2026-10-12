@@ -110,7 +110,7 @@ export const FEATURED_PROJECTS: FeaturedProject[] = [
   {
     slug: "wingman",
     title: "Wingman",
-    titleFont: "Helvetica, Arial, sans-serif",
+    titleFont: "var(--font-inter), sans-serif",
     slideDuration: 32000,
     subtitle:
       "EQ Anxiety Coach — Native iOS AI companion with a 13-metric emotional\u00A0intelligence framework. Live on the App Store.",
@@ -191,7 +191,7 @@ export const FEATURED_PROJECTS: FeaturedProject[] = [
   {
     slug: "biro-labels",
     title: "Biro Sales Inc.",
-    titleFont: "Helvetica, Arial, sans-serif",
+    titleFont: "var(--font-inter), sans-serif",
     slideDuration: 30000,
     subtitle:
       "B2B label sales storefront, fulfillment workflows, and management, built solo with AI.",

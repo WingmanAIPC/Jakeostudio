@@ -11,7 +11,6 @@
 import {
   BIRO_ADMIN_SEGMENTS,
   BIRO_ADMIN_VIDEO_ID,
-  BIRO_CUSTOMER_VIDEO_ID,
   CLOVERLEAF_THUMB_VIDEO_IDS,
   cloverleafYouTubeThumbUrl,
   type ProjectCta,
@@ -81,11 +80,20 @@ export interface ShowcaseSlide {
   clipsPerVisit?: number;
   /** Appended after each visit's clips */
   outro?: ShowcaseClip;
+  /** "Now showing" caption for YouTube clips that have no `label` of their own */
+  clipCaption?: string;
   cta: ProjectCta[];
 }
 
 export function ytPoster(videoId: string): string {
   return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+}
+
+/** Opens the full video on YouTube, from the start of the clip's first segment. */
+export function youtubeWatchUrl(clip: YouTubeClip): string {
+  const start = Math.floor(clip.segments[0]?.start ?? 0);
+  const t = start > 0 ? `&t=${start}s` : "";
+  return `https://www.youtube.com/watch?v=${encodeURIComponent(clip.videoId)}${t}`;
 }
 
 export function clipPoster(clip: ShowcaseClip): string {
@@ -123,13 +131,15 @@ export const SHOWCASE_SLIDES: ShowcaseSlide[] = [
     categories: ["Mobile App", "AI"],
     tags: ["SwiftUI", "LLM Integration", "iOS Development", "EQ Frameworks"],
     accent: "#34D399",
-    thumb: ytPoster("Ag7EAF_djj4"),
+    thumb: "/showcase/wingman-thumb.jpg",
     clips: [
       {
-        kind: "youtube",
+        kind: "file",
         id: "commercial",
-        videoId: "Ag7EAF_djj4",
-        segments: [{ start: 0, end: 32 }],
+        src: "/showcase/wingman-1080.mp4",
+        srcSmall: "/showcase/wingman-720.mp4",
+        poster: "/showcase/wingman-poster.jpg",
+        duration: 45,
       },
     ],
     cta: [
@@ -167,10 +177,32 @@ export const SHOWCASE_SLIDES: ShowcaseSlide[] = [
       { label: "Visit Site", href: "https://cm-chicken-eta.vercel.app", external: true, icon: "globe" },
     ],
   },
-  // 3 — 513 Home Inspections (https://513-home-inspections.vercel.app): slot reserved
-  //     until the ad is finished. To add it:
-  //   scripts/encode-showcase-video.sh <ad.mp4> 513-inspections <thumb-seconds>
-  // then add a slide here shaped like "jsi-cabinetry" (file clip, poster, thumb, duration).
+  {
+    id: "513-inspections",
+    short: "513 Inspections",
+    title: "513 Home Inspections",
+    subtitle:
+      "Website and operations hub for a home inspector serving Cincinnati to Dayton — 98 local town pages, booking in a few taps, and one hub for leads, scheduling, and signed agreements.",
+    categories: ["Website", "Dashboard"],
+    // TODO(jake): swap in the real stack — tool names render with icons.
+    tags: ["Local SEO", "Online Booking", "Lead Inbox", "E-Sign Agreements"],
+    accent: "#F2726A",
+    thumb: "/showcase/513-inspections-thumb.jpg",
+    clips: [
+      {
+        kind: "file",
+        id: "reel",
+        src: "/showcase/513-inspections-1080.mp4",
+        srcSmall: "/showcase/513-inspections-720.mp4",
+        poster: "/showcase/513-inspections-poster.jpg",
+        duration: 47,
+        silent: true,
+      },
+    ],
+    cta: [
+      { label: "Visit Site", href: "https://513-home-inspections.vercel.app", external: true, icon: "globe" },
+    ],
+  },
   {
     id: "jsi-cabinetry",
     short: "JSI Cabinetry",
@@ -231,13 +263,16 @@ export const SHOWCASE_SLIDES: ShowcaseSlide[] = [
     categories: ["E-commerce", "Dashboard"],
     tags: ["Next.js", "React", "Supabase", "Stripe", "AI Development"],
     accent: "#60A5FA",
-    thumb: ytPoster(BIRO_CUSTOMER_VIDEO_ID),
+    thumb: "/showcase/biro-storefront-thumb.jpg",
     clips: [
       {
-        kind: "youtube",
+        kind: "file",
         id: "storefront",
-        videoId: BIRO_CUSTOMER_VIDEO_ID,
-        segments: [{ start: 0, end: 27 }],
+        // Source recording is 720p — one encode serves every viewport.
+        src: "/showcase/biro-storefront-720.mp4",
+        poster: "/showcase/biro-storefront-poster.jpg",
+        duration: 60,
+        silent: true,
         label: "Storefront walkthrough",
       },
       {
@@ -277,6 +312,7 @@ export const SHOWCASE_SLIDES: ShowcaseSlide[] = [
       poster: cloverleafYouTubeThumbUrl(videoId),
     })),
     clipsPerVisit: 2,
+    clipCaption: "Customer testimonial",
     outro: {
       kind: "file",
       id: "outro",
