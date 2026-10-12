@@ -7,7 +7,6 @@ import {
   SITE_LOGO_DESKTOP_HEADER_SRC,
   SITE_MAILTO_HREF,
   SITE_PHONE_HREF,
-  SITE_RESUME_PDF_HREF,
 } from "../lib/siteNav";
 
 function isRouterHref(href: string) {
@@ -121,14 +120,6 @@ export default function DesktopUnifiedNav({
               </a>
               <a href={SITE_PHONE_HREF} className="desktop-unified-nav__action">
                 Call
-              </a>
-              <a
-                href={SITE_RESUME_PDF_HREF}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="desktop-unified-nav__action"
-              >
-                Resume
               </a>
             </div>
           </div>

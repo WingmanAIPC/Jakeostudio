@@ -1,81 +1,158 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { SITE_LOGO_WORDMARK_SRC } from "../lib/siteNav";
+import styles from "./intro.module.css";
 
 const STORAGE_KEY = "jo_intro_seen";
-/** ~50% slower than original 1500ms */
-const FADE_IN_MS = 2250;
-const HOLD_MS = 1000;
-/** ~2× original 600ms, eased out */
-const FADE_OUT_MS = 1200;
+/** Choreography length before the intro is allowed to leave */
+const MIN_MS = 2400;
+/** Leave even if the hero's first video still isn't ready */
+const MAX_MS = 4600;
+/** Shutter travel (must cover the CSS transition + delay) */
+const EXIT_MS = 1300;
 
 export function shouldShowIntro(): boolean {
   if (typeof window === "undefined") return false;
-  return !sessionStorage.getItem(STORAGE_KEY);
+  try {
+    return !sessionStorage.getItem(STORAGE_KEY);
+  } catch {
+    return false;
+  }
 }
 
+function reducedMotion() {
+  return (
+    typeof window !== "undefined" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
+}
+
+/**
+ * Once-per-session logo intro. The hero mounts underneath while this plays so
+ * its first video buffers; the intro waits (up to MAX_MS) for `ready`, then
+ * parts like a shutter onto the already-playing slideshow.
+ */
 export default function LogoIntro({
+  ready = false,
+  onReveal,
   onComplete,
 }: {
+  /** Hero's first clip can play */
+  ready?: boolean;
+  /** Shutter starts opening — start hero playback now */
+  onReveal?: () => void;
+  /** Fully gone — unmount */
   onComplete: () => void;
 }) {
-  const [exiting, setExiting] = useState(false);
+  const [phase, setPhase] = useState<"enter" | "exit">("enter");
+  const [minElapsed, setMinElapsed] = useState(false);
+  const exitingRef = useRef(false);
+  const onRevealRef = useRef(onReveal);
+  const onCompleteRef = useRef(onComplete);
+  onRevealRef.current = onReveal;
+  onCompleteRef.current = onComplete;
 
-  const finish = useCallback(() => {
+  const exit = useCallback(() => {
+    if (exitingRef.current) return;
+    exitingRef.current = true;
     try {
       sessionStorage.setItem(STORAGE_KEY, "1");
-    } catch {}
-    onComplete();
-  }, [onComplete]);
+    } catch {
+      /* private mode */
+    }
+    setPhase("exit");
+    onRevealRef.current?.();
+    window.setTimeout(
+      () => onCompleteRef.current(),
+      reducedMotion() ? 550 : EXIT_MS,
+    );
+  }, []);
 
   useEffect(() => {
-    const exitTimer = setTimeout(
-      () => setExiting(true),
-      FADE_IN_MS + HOLD_MS,
-    );
-    const doneTimer = setTimeout(finish, FADE_IN_MS + HOLD_MS + FADE_OUT_MS);
+    const rm = reducedMotion();
+    const minT = window.setTimeout(() => setMinElapsed(true), rm ? 900 : MIN_MS);
+    const maxT = window.setTimeout(exit, rm ? 2500 : MAX_MS);
     return () => {
-      clearTimeout(exitTimer);
-      clearTimeout(doneTimer);
+      clearTimeout(minT);
+      clearTimeout(maxT);
     };
-  }, [finish]);
+  }, [exit]);
+
+  useEffect(() => {
+    if (minElapsed && ready) exit();
+  }, [minElapsed, ready, exit]);
+
+  // Any intent to get to the content skips straight to the reveal.
+  useEffect(() => {
+    const skip = () => exit();
+    window.addEventListener("keydown", skip);
+    window.addEventListener("wheel", skip, { passive: true });
+    window.addEventListener("touchmove", skip, { passive: true });
+    return () => {
+      window.removeEventListener("keydown", skip);
+      window.removeEventListener("wheel", skip);
+      window.removeEventListener("touchmove", skip);
+    };
+  }, [exit]);
 
   return (
     <div
-      className={`fixed inset-0 z-[300] flex items-center justify-center bg-black transition-opacity ${
-        exiting ? "opacity-0" : "opacity-100"
-      }`}
-      style={{
-        transitionDuration: `${FADE_OUT_MS}ms`,
-        transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)",
-      }}
+      className={styles.root}
+      data-phase={phase}
+      data-ready={ready ? "" : undefined}
+      onClick={exit}
+      role="presentation"
     >
-      <style jsx>{`
-        @keyframes logoReveal {
-          0% {
-            opacity: 0;
-            transform: scale(0.97);
+      <div className={styles.shutterTop} />
+      <div className={styles.shutterBottom} />
+
+      <div className={styles.content}>
+        <div
+          className={styles.mark}
+          style={
+            {
+              "--logo": `url("${SITE_LOGO_WORDMARK_SRC}")`,
+            } as React.CSSProperties
           }
-          100% {
-            opacity: 1;
-            transform: scale(1);
-          }
-        }
-        .intro-logo-wrap {
-          animation: logoReveal ${FADE_IN_MS}ms cubic-bezier(0.33, 1, 0.68, 1) forwards;
-        }
-      `}</style>
-      {/*
-        Wordmark is wide — a square box forces object-contain to shrink it to a short strip,
-        which makes the mark look broken/overlapping. Size by max-width and let height follow.
-      */}
-      <div className="intro-logo-wrap px-6">
-        <img
-          src={SITE_LOGO_WORDMARK_SRC}
-          alt="jakeostudio"
-          className="w-auto max-w-[min(62vw,20rem)] sm:max-w-[min(88vw,34rem)] h-auto max-h-[min(27vh,8rem)] sm:max-h-[min(42vh,14rem)] object-contain object-center select-none"
-          draggable={false}
-        />
+        >
+          <img
+            src={SITE_LOGO_WORDMARK_SRC}
+            alt="jakeostudio"
+            className={styles.markImg}
+            draggable={false}
+          />
+          <span className={styles.sheen} aria-hidden />
+          <svg
+            className={styles.glint}
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            aria-hidden
+          >
+            <path d="M12 0c.6 6.9 5.1 11.4 12 12-6.9.6-11.4 5.1-12 12-.6-6.9-5.1-11.4-12-12C6.9 11.4 11.4 6.9 12 0z" />
+          </svg>
+        </div>
+        <div className={styles.tagline} aria-hidden>
+          <span>Design</span>
+          <i />
+          <span>Film</span>
+          <i />
+          <span>Software</span>
+        </div>
       </div>
+
+      <div className={styles.loader} aria-hidden>
+        <span className={styles.loaderFill} />
+      </div>
+
+      <button
+        type="button"
+        className={styles.skip}
+        onClick={(e) => {
+          e.stopPropagation();
+          exit();
+        }}
+      >
+        Skip
+      </button>
     </div>
   );
 }

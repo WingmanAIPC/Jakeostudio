@@ -72,7 +72,7 @@ export default function WorkIndex() {
                 Case studies
               </h2>
               <div className="grid gap-6">
-                {FEATURED_PROJECTS.filter((p) => p.slug !== "hire").map((project, i) => {
+                {FEATURED_PROJECTS.map((project, i) => {
                   const cardTheme = project.workCardTheme
                     ? WORK_PAGE_CARD_THEMES[project.workCardTheme]
                     : null;

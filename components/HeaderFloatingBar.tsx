@@ -4,7 +4,6 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { NAV_PEEK_COLLAPSE_MS, NAV_PEEK_MS } from "../lib/navPeek";
 import {
-  SITE_RESUME_PDF_HREF,
   SITE_LOGO_HEADER_SRC,
   SITE_MAILTO_HREF,
   SITE_PHONE_HREF,
@@ -19,14 +18,6 @@ function UserIcon({ className }: { className?: string }) {
   return (
     <svg className={className} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} aria-hidden>
       <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-    </svg>
-  );
-}
-
-function ResumeIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} aria-hidden>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
     </svg>
   );
 }
@@ -69,7 +60,7 @@ export function MobileHeader({
   const [peekState, setPeekState] = useState<PeekState>(() =>
     peekTimerActive ? "peeking" : "collapsed",
   );
-  /** After peek: logo tap fades Work / About / Hire in place (same row as logo), not a dropdown. */
+  /** After peek: logo tap fades Work / About in place (same row as logo), not a dropdown. */
   const [navRevealed, setNavRevealed] = useState(false);
   const [contactOpen, setContactOpen] = useState(false);
   const peekTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -262,15 +253,6 @@ export function MobileHeader({
             <UserIcon className="h-[19.8px] w-[19.8px] -translate-y-px" />
           </button>
         </div>
-        <a
-          href={SITE_RESUME_PDF_HREF}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={iconPlainMobileClass}
-          aria-label="View resume PDF"
-        >
-          <ResumeIcon className="h-[19.8px] w-[19.8px] block" />
-        </a>
       </div>
     </div>
   );

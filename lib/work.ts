@@ -1,5 +1,4 @@
 import type { WorkCardThemeKey } from "./workPageCardThemes";
-import { SITE_RESUME_PDF_HREF } from "./siteNav";
 
 export type { WorkCardThemeKey };
 
@@ -25,63 +24,6 @@ export interface CaseStudyMeta {
   };
 }
 
-/** Default hero / badge line before each hire showcase clip title fades in. */
-export const HIRE_DEFAULT_HEADLINE = "Available for Work";
-
-/** Crossfade duration (ms) when switching between the two hire headline layers. */
-export const HIRE_HEADLINE_CROSSFADE_MS = 650;
-
-/** How long each headline stays visible while alternating on the hire slide (`Available for Work` ↔ clip title). */
-export const HIRE_HEADLINE_CYCLE_MS = 8000;
-
-/** Hire carousel: ordered time ranges [start, end) in seconds; playback uses YouTube IFrame API. */
-export interface HireShowcaseClip {
-  id: string;
-  segments: { start: number; end: number }[];
-  /** Extra wait after slide/page is active before loading & playing (ms) */
-  startDelayMs?: number;
-  /** Shown in the hero (and hire page badge), alternating with `HIRE_DEFAULT_HEADLINE` every `HIRE_HEADLINE_CYCLE_MS`. */
-  headlineTitle: string;
-}
-
-export const HIRE_SHOWCASE_CLIPS: HireShowcaseClip[] = [
-  {
-    id: "OZf9mW6tnT8",
-    startDelayMs: 2000,
-    headlineTitle: "Stargirl: A Short Film",
-    segments: [
-      { start: 9, end: 40 },
-      { start: 95, end: 111 },
-    ],
-  },
-  {
-    id: "iZUIeVODCgs",
-    headlineTitle: "Midwest: A Short Film",
-    segments: [
-      { start: 17, end: 50 },
-      { start: 163, end: 202 },
-    ],
-  },
-  {
-    id: "3Uy1mO11f7s",
-    headlineTitle: "Worldwide Technologies",
-    segments: [{ start: 0, end: 20 }],
-  },
-  {
-    id: "qyEqyyxWXnA",
-    startDelayMs: 2000,
-    headlineTitle: "Levitt Pavillion Dayton",
-    segments: [{ start: 0, end: 33 }],
-  },
-];
-
-export function hireClipTotalMs(clip: HireShowcaseClip): number {
-  return clip.segments.reduce(
-    (a, s) => a + Math.max(0, s.end - s.start) * 1000,
-    0,
-  );
-}
-
 /** Biro carousel: customer-facing walkthrough (iframe, loops) */
 export const BIRO_CUSTOMER_VIDEO_ID = "nJfioQ8lLSg";
 
@@ -96,14 +38,6 @@ export const BIRO_ADMIN_SEGMENTS: { start: number; end: number }[] = [
   { start: 26, end: 32 },
   { start: 66, end: 87 },
 ];
-
-export function biroAdminClipTotalMs(): number {
-  const segmentsMs = BIRO_ADMIN_SEGMENTS.reduce(
-    (a, s) => a + Math.max(0, s.end - s.start) * 1000,
-    0,
-  );
-  return BIRO_CAROUSEL_EMBED_DELAY_MS + segmentsMs;
-}
 
 /** Pool for Cloverleaf showcase: pairs of thumbnails (2 people) rotate each visit. */
 export const CLOVERLEAF_THUMB_VIDEO_IDS = [
@@ -131,23 +65,6 @@ export function cloverleafYouTubeThumbUrl(videoId: string): string {
   return `https://img.youtube.com/vi/${videoId}/${size}.jpg`;
 }
 
-/** One logical pair for the hero showcase — thumbs + embed ids stay in lockstep. */
-export function getCloverleafShowcasePair(pairIndex: number): {
-  thumbUrls: string[];
-  videoIds: string[];
-} {
-  const pool = CLOVERLEAF_THUMB_VIDEO_IDS;
-  const nPairs = Math.floor(pool.length / 2);
-  if (nPairs < 1) return { thumbUrls: [], videoIds: [] };
-  const p = ((pairIndex % nPairs) + nPairs) % nPairs;
-  const a = pool[p * 2]!;
-  const b = pool[p * 2 + 1]!;
-  return {
-    thumbUrls: [cloverleafYouTubeThumbUrl(a), cloverleafYouTubeThumbUrl(b)],
-    videoIds: [a, b],
-  };
-}
-
 export interface FeaturedProject {
   slug: string;
   title: string;
@@ -171,11 +88,11 @@ export interface FeaturedProject {
   youtubeVideoId?: string;
   /** Start offset for YouTube embed (seconds) */
   youtubeStartSeconds?: number;
-  /** Default true; set false for segment-only backgrounds (e.g. hire slide) */
+  /** Default true; set false for segment-only backgrounds */
   youtubeLoop?: boolean;
-  /** Hire-style multi-range playback (YouTube IFrame API) */
+  /** Multi-range playback (YouTube IFrame API) */
   youtubeSegments?: { start: number; end: number }[];
-  /** After slide active, wait before segment player init (hire STARGIRL, etc.) */
+  /** After slide active, wait before segment player init */
   youtubeSegmentStartDelayMs?: number;
   /** Delay before iframe src loads (ms), e.g. after slide transition */
   youtubeEmbedDelayMs?: number;
@@ -187,8 +104,6 @@ export interface FeaturedProject {
   heroBlurb?: string;
   /** Role / timeline / live link grid on mobile when set. */
   caseStudyMeta?: CaseStudyMeta;
-  /** Hire slide only: six labels in row-major order for a 2×3 grid. */
-  hireMobileRoles?: string[];
 }
 
 export const FEATURED_PROJECTS: FeaturedProject[] = [
@@ -310,30 +225,5 @@ export const FEATURED_PROJECTS: FeaturedProject[] = [
         icon: "globe",
       },
     },
-  },
-  {
-    slug: "hire",
-    title: "Available for Work",
-    slideDuration: 120000,
-    subtitle:
-      "AI Creative Technologist\nDesign, production, and software development",
-    description: "",
-    tags: [],
-    color: "from-white/10 to-white/5",
-    mediaType: "youtube",
-    youtubeVideoId: HIRE_SHOWCASE_CLIPS[0].id,
-    youtubeSegments: HIRE_SHOWCASE_CLIPS[0].segments,
-    youtubeSegmentStartDelayMs: HIRE_SHOWCASE_CLIPS[0].startDelayMs,
-    youtubeLoop: false,
-    backgroundImage: `https://img.youtube.com/vi/${HIRE_SHOWCASE_CLIPS[0].id}/maxresdefault.jpg`,
-    cta: [{ label: "Get in Touch", href: "/hire" }],
-    hireMobileRoles: [
-      "Product & UX",
-      "Creative direction",
-      "Motion & video",
-      "AI development",
-      "Full-stack web",
-      "Brand systems",
-    ],
   },
 ];

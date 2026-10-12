@@ -1,4 +1,4 @@
-/** Shared copy for hire page + work “what I offer” cards */
+/** Copy for the /work “what I offer” cards */
 export const CAPABILITY_CARDS = [
   {
     title: "AI Creative Technologist",
