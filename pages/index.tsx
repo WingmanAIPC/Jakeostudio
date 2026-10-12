@@ -8,7 +8,6 @@ import { TbBrandLinkedin } from "react-icons/tb";
 import {
   DOCUMENT_TITLE,
   SITE_LOGO_WORDMARK_SRC,
-  SITE_RESUME_PDF_HREF,
 } from "../lib/siteNav";
 import LogoIntro, { shouldShowIntro } from "../components/LogoIntro";
 import ShowcaseHero from "../components/showcase/ShowcaseHero";
@@ -371,37 +370,33 @@ export default function PortfolioSite() {
         {/* Contact Section */}
         <section id="contact" className={`${PAGE_WIDE_SECTION} py-20`}>
           <div className="mx-auto w-full max-w-3xl border border-white/10 rounded-2xl p-8 md:p-12 text-center">
-            <h3 className="text-2xl font-semibold mb-4">
-              Available for Work
-            </h3>
+            <h3 className="text-2xl font-semibold mb-4">Say hello</h3>
             <p className="text-sm text-zinc-300 mb-8">
-              Design, production, and software development solutions. I respond within 24
-              hours.
+              Questions about any of this work, or want to hear how it was made? I&apos;d
+              like to hear from you.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-4">
-              <a
-                href="mailto:jakeostudio@gmail.com?subject=Project Inquiry&body=Hi Jake, I'd like to discuss a project with you."
-                className="inline-block px-6 py-3 rounded-2xl bg-white text-black text-sm font-medium hover:bg-zinc-100 transition-colors"
-              >
-                Get in touch
-              </a>
-              <a
-                href={SITE_RESUME_PDF_HREF}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block px-6 py-3 rounded-2xl border border-white/20 text-white text-sm font-medium hover:bg-white/10 transition-colors"
-              >
-                View Resume
-              </a>
               <Link
                 href="/about"
-                className="inline-block px-6 py-3 rounded-2xl border border-white/20 text-white text-sm font-medium hover:bg-white/10 transition-colors"
+                className="inline-block px-6 py-3 rounded-2xl bg-white text-black text-sm font-medium hover:bg-zinc-100 transition-colors"
               >
                 About me
               </Link>
+              <Link
+                href="/work"
+                className="inline-block px-6 py-3 rounded-2xl border border-white/20 text-white text-sm font-medium hover:bg-white/10 transition-colors"
+              >
+                All work
+              </Link>
+              <a
+                href="mailto:jakeostudio@gmail.com"
+                className="inline-block px-6 py-3 rounded-2xl border border-white/20 text-white text-sm font-medium hover:bg-white/10 transition-colors"
+              >
+                Email
+              </a>
             </div>
             <div className="text-xs text-zinc-500">
-              jakeostudio@gmail.com · Based in USA · Available for remote
+              jakeostudio@gmail.com · Based in USA
             </div>
           </div>
         </section>

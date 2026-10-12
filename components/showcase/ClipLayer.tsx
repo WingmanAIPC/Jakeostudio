@@ -7,7 +7,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { loadYouTubeIframeApi } from "../YouTubeSegmentPlayer";
+import { loadYouTubeIframeApi } from "../../lib/youtube";
 import {
   clipPoster,
   type FileClip,

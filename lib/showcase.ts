@@ -13,11 +13,9 @@ import {
   BIRO_ADMIN_VIDEO_ID,
   BIRO_CUSTOMER_VIDEO_ID,
   CLOVERLEAF_THUMB_VIDEO_IDS,
-  HIRE_SHOWCASE_CLIPS,
   cloverleafYouTubeThumbUrl,
   type ProjectCta,
 } from "./work";
-import { SITE_RESUME_PDF_HREF } from "./siteNav";
 
 export type ShowcaseCategory =
   | "Website"
@@ -115,7 +113,46 @@ export function planVisit(slide: ShowcaseSlide, visit: number): ShowcaseClip[] {
   return slide.outro ? [...picked, slide.outro] : picked;
 }
 
-const START_A_PROJECT: ProjectCta = { label: "Start a project", href: "/hire" };
+/** Placeholder CTA for client builds until their live URLs are added. */
+const ABOUT_ME: ProjectCta = { label: "About me", href: "/about" };
+
+/** Film rotation — one clip per visit; ranges are [start, end) seconds. */
+const FILM_CLIPS: YouTubeClip[] = [
+  {
+    kind: "youtube",
+    id: "stargirl",
+    videoId: "OZf9mW6tnT8",
+    label: "Stargirl: A Short Film",
+    segments: [
+      { start: 9, end: 40 },
+      { start: 95, end: 111 },
+    ],
+  },
+  {
+    kind: "youtube",
+    id: "midwest",
+    videoId: "iZUIeVODCgs",
+    label: "Midwest: A Short Film",
+    segments: [
+      { start: 17, end: 50 },
+      { start: 163, end: 202 },
+    ],
+  },
+  {
+    kind: "youtube",
+    id: "wwt",
+    videoId: "3Uy1mO11f7s",
+    label: "Worldwide Technologies",
+    segments: [{ start: 0, end: 20 }],
+  },
+  {
+    kind: "youtube",
+    id: "levitt",
+    videoId: "qyEqyyxWXnA",
+    label: "Levitt Pavilion Dayton",
+    segments: [{ start: 0, end: 33 }],
+  },
+];
 
 export const SHOWCASE_SLIDES: ShowcaseSlide[] = [
   {
@@ -141,7 +178,7 @@ export const SHOWCASE_SLIDES: ShowcaseSlide[] = [
       },
     ],
     // TODO(jake): add { label: "Visit Site", href: "https://…", external: true, icon: "globe" }
-    cta: [START_A_PROJECT],
+    cta: [ABOUT_ME],
   },
   {
     id: "wingman",
@@ -193,7 +230,7 @@ export const SHOWCASE_SLIDES: ShowcaseSlide[] = [
       },
     ],
     // TODO(jake): add { label: "Visit Site", href: "https://…", external: true, icon: "globe" }
-    cta: [START_A_PROJECT],
+    cta: [ABOUT_ME],
   },
   {
     id: "cloverleaf",
@@ -229,6 +266,30 @@ export const SHOWCASE_SLIDES: ShowcaseSlide[] = [
         icon: "play",
       },
     ],
+  },
+  {
+    id: "jgmma",
+    short: "JGMMA",
+    title: "JGMMA",
+    subtitle:
+      "Brand, website, and member platform for Jorge Gurgel Mixed Martial Arts in West Chester, Ohio — a gamified member app plus an admin dashboard for check-ins, members, and orders.",
+    categories: ["Brand", "Website", "Mobile App", "Dashboard"],
+    // TODO(jake): swap in the real stack — tool names render with icons.
+    tags: ["Brand Identity", "Member App", "Gamification", "Admin Dashboard"],
+    accent: "#E8282E",
+    thumb: "/showcase/jgmma-thumb.jpg",
+    clips: [
+      {
+        kind: "file",
+        id: "reel",
+        src: "/showcase/jgmma-1080.mp4",
+        srcSmall: "/showcase/jgmma-720.mp4",
+        poster: "/showcase/jgmma-poster.jpg",
+        duration: 32,
+      },
+    ],
+    // TODO(jake): add { label: "Visit Site", href: "https://…", external: true, icon: "globe" }
+    cta: [ABOUT_ME],
   },
   {
     id: "biro-labels",
@@ -268,38 +329,20 @@ export const SHOWCASE_SLIDES: ShowcaseSlide[] = [
     ],
   },
   {
-    id: "available",
+    id: "films",
     short: "Films",
-    title: "Available for Work",
+    title: "Film & Commercial",
     subtitle:
-      "AI Creative Technologist — design, production, and software development.",
+      "Short films and commercial work — concept, shoot, edit, grade, and VFX.",
     categories: ["Film", "Commercial"],
-    tags: [
-      "Product & UX",
-      "Creative direction",
-      "Motion & video",
-      "AI development",
-      "Full-stack web",
-      "Brand systems",
-    ],
+    tags: ["Direction", "Premiere Pro", "After Effects", "Photoshop"],
     accent: "#F5D48A",
-    thumb: ytPoster(HIRE_SHOWCASE_CLIPS[0].id),
-    clips: HIRE_SHOWCASE_CLIPS.map((c) => ({
-      kind: "youtube" as const,
-      id: c.id,
-      videoId: c.id,
-      segments: c.segments,
-      label: c.headlineTitle,
-    })),
+    thumb: ytPoster(FILM_CLIPS[0].videoId),
+    clips: FILM_CLIPS,
     clipsPerVisit: 1,
     cta: [
-      { label: "Get in Touch", href: "/hire" },
-      {
-        label: "Resume",
-        href: SITE_RESUME_PDF_HREF,
-        external: true,
-        icon: "document",
-      },
+      { label: "Watch the films", href: "#video", icon: "play" },
+      { label: "About me", href: "/about" },
     ],
   },
 ];

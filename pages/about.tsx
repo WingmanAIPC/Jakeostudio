@@ -4,7 +4,6 @@ import Link from "next/link";
 import {
   DOCUMENT_TITLE,
   SITE_LOGO_HEADER_SRC,
-  SITE_RESUME_PDF_HREF,
 } from "../lib/siteNav";
 import HowIWorkContent from "../components/HowIWorkContent";
 import { ToolStackPill } from "../components/ToolStackPill";
@@ -104,14 +103,12 @@ export default function AboutPage() {
                 className="h-6 w-auto max-w-[2.75rem] object-contain object-center sm:h-7 sm:max-w-[3.25rem]"
               />
             </Link>
-            <a
-              href={SITE_RESUME_PDF_HREF}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/work"
               className="relative z-10 text-xs text-zinc-500 hover:text-white transition-colors"
             >
-              Resume
-            </a>
+              Work
+            </Link>
           </div>
         </nav>
 
@@ -214,23 +211,15 @@ export default function AboutPage() {
                   </a>
                 </p>
                 <div className="flex flex-wrap gap-3 justify-center">
-                  <a
-                    href={SITE_RESUME_PDF_HREF}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-block px-5 py-2.5 rounded-2xl bg-white text-black text-sm font-medium hover:bg-zinc-100 transition-colors"
-                  >
-                    Download Resume
-                  </a>
                   <Link
                     href="/work"
-                    className="inline-block px-5 py-2.5 rounded-2xl border border-white/20 text-white text-sm font-medium hover:bg-white/10 transition-colors"
+                    className="inline-block px-5 py-2.5 rounded-2xl bg-white text-black text-sm font-medium hover:bg-zinc-100 transition-colors"
                   >
                     View Work
                   </Link>
                 </div>
                 <p className="text-xs text-zinc-500 mt-4">
-                  Based in USA · Available for remote work
+                  Based in USA
                 </p>
               </div>
             </section>

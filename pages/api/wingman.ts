@@ -11,7 +11,7 @@ About Jake:
 - Development: JavaScript, TypeScript, React, Next.js, Node.js, HTML, CSS, SwiftUI, REST APIs
 - Platforms: Cursor, Kiro, Supabase, Vercel, Stripe, GitHub, AWS
 - Created testimonial videos for Cloverleaf, commercial demos, short films, music videos
-- Based in the USA, available for remote work
+- Based in the USA
 - Contact: jakeostudio@gmail.com
 
 Your personality:

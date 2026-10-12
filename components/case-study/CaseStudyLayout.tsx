@@ -4,7 +4,6 @@ import Link from "next/link";
 import {
   DOCUMENT_TITLE,
   SITE_LOGO_HEADER_SRC,
-  SITE_RESUME_PDF_HREF,
 } from "../../lib/siteNav";
 
 export interface CaseStudyMeta {
@@ -293,14 +292,12 @@ export default function CaseStudyLayout({ meta, techStack, children, heroAddon }
                 className="h-6 w-auto max-w-[2.75rem] object-contain object-center sm:h-7 sm:max-w-[3.25rem]"
               />
             </Link>
-            <a
-              href={SITE_RESUME_PDF_HREF}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/work"
               className="text-xs text-zinc-500 hover:text-white transition-colors"
             >
-              Resume
-            </a>
+              All work
+            </Link>
           </div>
         </nav>
 

@@ -1,4 +1,4 @@
-/* Desktop-only unified header pill (Russian-doll: logo → nav + Contact → Email/Call/Resume). */
+/* Desktop-only unified header pill (Russian-doll: logo → nav + Contact → Email/Call). */
 
 .desktop-unified-nav {
   --nav-h: 50px;
