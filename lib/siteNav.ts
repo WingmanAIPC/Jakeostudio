@@ -19,12 +19,12 @@ export type PillNavItem = {
   ariaLabel?: string;
 };
 
-export const SITE_CONTACT_EMAIL = "jakeostudio@gmail.com";
+export const SITE_CONTACT_EMAIL = "jake@operatorlabs.dev";
 
 export const SITE_MAILTO_HREF = `mailto:${SITE_CONTACT_EMAIL}?subject=Opportunity&body=Hi Jake, I'd like to connect about a role or project.`;
 
-/** E.164. Update to your real number. */
-export const SITE_PHONE_HREF = "tel:+15555550100";
+/** E.164. */
+export const SITE_PHONE_HREF = "tel:+15134006854";
 
 export const PRIMARY_NAV: PillNavItem[] = [
   { label: "Work", href: "/work", ariaLabel: "Work and capabilities" },

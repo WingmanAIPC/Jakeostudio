@@ -385,7 +385,7 @@ export default function CaseStudyLayout({ meta, techStack, children, heroAddon }
           <div className="mx-auto max-w-5xl px-4 py-16 text-center">
             <p className="text-sm text-zinc-500 mb-4">Interested in working together?</p>
             <a
-              href="mailto:jakeostudio@gmail.com?subject=Project Inquiry&body=Hi Jake, I'd like to discuss a project with you."
+              href="mailto:jake@operatorlabs.dev?subject=Project Inquiry&body=Hi Jake, I'd like to discuss a project with you."
               className="inline-block px-6 py-3 rounded-2xl bg-white text-black text-sm font-medium hover:bg-zinc-100 transition-colors"
             >
               Get in touch

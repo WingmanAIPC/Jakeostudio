@@ -389,14 +389,14 @@ export default function PortfolioSite() {
                 All work
               </Link>
               <a
-                href="mailto:jakeostudio@gmail.com"
+                href="mailto:jake@operatorlabs.dev"
                 className="inline-block px-6 py-3 rounded-2xl border border-white/20 text-white text-sm font-medium hover:bg-white/10 transition-colors"
               >
                 Email
               </a>
             </div>
             <div className="text-xs text-zinc-500">
-              jakeostudio@gmail.com · Based in USA
+              jake@operatorlabs.dev · Based in USA
             </div>
           </div>
         </section>
