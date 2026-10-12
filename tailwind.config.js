@@ -15,6 +15,13 @@ module.exports = {
           'Arial',
           'sans-serif',
         ],
+        mono: [
+          'var(--font-mono)',
+          'ui-monospace',
+          'SFMono-Regular',
+          'Menlo',
+          'monospace',
+        ],
       },
     },
   },

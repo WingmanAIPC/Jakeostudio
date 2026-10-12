@@ -1,0 +1,407 @@
+/* Shared interface language for /work and /about:
+   mono labels, hairlines, pill buttons, scroll reveals, marquees, closing CTA. */
+
+.page {
+  --gutter: clamp(1.25rem, 4vw, 5rem);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-io: cubic-bezier(0.76, 0, 0.24, 1);
+  --line: rgba(255, 255, 255, 0.12);
+  --line-strong: rgba(255, 255, 255, 0.28);
+  --dim: rgba(255, 255, 255, 0.62);
+  --faint: rgba(255, 255, 255, 0.4);
+  --mono: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  --display: var(--font-inter), Helvetica, Arial, sans-serif;
+
+  position: relative;
+  min-height: 100vh;
+  overflow-x: clip;
+  background: #000;
+  color: #fff;
+  font-family: var(--display);
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.page ::selection {
+  background: #fff;
+  color: #000;
+}
+
+.wrap {
+  width: 100%;
+  max-width: var(--wrap, 1440px);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+/* ───────────────────────── Type ───────────────────────── */
+
+.label {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dim);
+  font-variant-numeric: tabular-nums;
+}
+
+.labelRow {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.sparkle {
+  flex: none;
+  width: 0.95em;
+  height: 0.95em;
+  color: #fff;
+}
+
+.sparkleSpin {
+  animation: sparkleSpin 9s linear infinite;
+}
+
+@keyframes sparkleSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Dot-matrix field behind page heroes */
+.field {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: min(100vh, 60rem);
+  pointer-events: none;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.16) 1px, transparent 1.4px);
+  background-size: 28px 28px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 0%, #000 0%, transparent 75%);
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 0%, #000 0%, transparent 75%);
+  opacity: 0;
+  animation: fieldIn 1600ms ease 200ms forwards;
+}
+
+@keyframes fieldIn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* ───────────────────────── Reveals ───────────────────────── */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  filter: blur(6px);
+  transition:
+    opacity 700ms var(--ease-out),
+    transform 1000ms var(--ease-out),
+    filter 700ms var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 80ms + var(--d, 0ms));
+}
+
+.reveal[data-inview],
+[data-inview] .reveal {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+/* A line of display type sliding up out of its own baseline */
+.mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.14em;
+  margin-bottom: -0.14em;
+}
+
+.mask > span {
+  display: block;
+  transform: translateY(112%);
+  transition: transform 1200ms var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 95ms + var(--d, 0ms));
+}
+
+[data-inview] .mask > span {
+  transform: none;
+}
+
+/* A hairline that draws left to right */
+.rule {
+  display: block;
+  height: 1px;
+  background: var(--line-strong);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 1300ms var(--ease-io);
+  transition-delay: calc(var(--i, 0) * 80ms + var(--d, 0ms));
+}
+
+[data-inview] .rule,
+.rule[data-inview] {
+  transform: none;
+}
+
+/* ───────────────────────── Buttons ───────────────────────── */
+
+.btn,
+.btnGhost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  transition:
+    background-color 250ms ease,
+    border-color 250ms ease,
+    color 250ms ease,
+    transform 250ms var(--ease-out);
+}
+
+.btn {
+  padding: 0.8rem 1.3rem;
+  background: #fff;
+  color: #000;
+}
+
+.btn:hover {
+  background: #e9e9e9;
+}
+
+.btnGhost {
+  padding: calc(0.8rem - 1px) calc(1.2rem - 1px);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  background: rgba(255, 255, 255, 0.03);
+  color: #fff;
+}
+
+.btnGhost:hover {
+  border-color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.btn:active,
+.btnGhost:active {
+  transform: scale(0.97);
+}
+
+.btn:focus-visible,
+.btnGhost:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.7);
+  outline-offset: 3px;
+}
+
+.btnArrow {
+  flex: none;
+  transition: transform 300ms var(--ease-out);
+}
+
+.btn:hover .btnArrow,
+.btnGhost:hover .btnArrow {
+  transform: translateX(3px);
+}
+
+/* ───────────────────────── Marquee ───────────────────────── */
+
+.marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+}
+
+.marqueeTrack {
+  display: flex;
+  width: max-content;
+  animation: marquee var(--dur, 48s) linear infinite;
+}
+
+.marquee[data-reverse] .marqueeTrack {
+  animation-direction: reverse;
+}
+
+.marquee[data-pausable]:hover .marqueeTrack,
+.marquee[data-pausable]:focus-within .marqueeTrack {
+  animation-play-state: paused;
+}
+
+.marqueeGroup {
+  display: flex;
+  flex: none;
+  align-items: center;
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ───────────────────────── Closing CTA + footer ───────────────────────── */
+
+.outro {
+  position: relative;
+  border-top: 1px solid var(--line);
+  padding: clamp(5rem, 14vh, 10rem) 0 clamp(3rem, 8vh, 5rem);
+  overflow: hidden;
+}
+
+.outroGlow {
+  position: absolute;
+  left: 50%;
+  bottom: -45%;
+  width: min(120vw, 90rem);
+  aspect-ratio: 2 / 1;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.13), transparent 62%);
+  pointer-events: none;
+}
+
+.outroTitle {
+  margin-top: 1.4rem;
+  font-size: clamp(2.6rem, 8.6vw, 9rem);
+  font-weight: 600;
+  line-height: 0.92;
+  letter-spacing: -0.05em;
+}
+
+.outroTitle em {
+  font-style: normal;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.75);
+}
+
+.outroRow {
+  margin-top: clamp(2rem, 5vh, 3.5rem);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem 2.5rem;
+}
+
+.outroLead {
+  max-width: 30rem;
+  font-size: clamp(1rem, 1.25vw, 1.2rem);
+  line-height: 1.5;
+  color: var(--dim);
+  text-wrap: pretty;
+}
+
+.outroActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.footer {
+  border-top: 1px solid var(--line);
+  padding: 1.75rem 0 2.25rem;
+}
+
+.footerRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem 2rem;
+}
+
+.footerLogo {
+  display: block;
+  height: 1.75rem;
+  width: auto;
+  opacity: 0.9;
+  transition: opacity 200ms ease;
+}
+
+.footerLogo:hover {
+  opacity: 1;
+}
+
+.footerNav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 1.4rem;
+}
+
+.footerLink {
+  color: var(--dim);
+  transition: color 200ms ease;
+}
+
+.footerLink:hover,
+.footerLink:focus-visible {
+  color: #fff;
+  outline: none;
+}
+
+.socials {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.social {
+  display: inline-flex;
+  height: 38px;
+  width: 38px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: rgba(255, 255, 255, 0.8);
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease,
+    color 200ms ease;
+}
+
+.social:hover,
+.social:focus-visible {
+  background: #fff;
+  border-color: #fff;
+  color: #000;
+  outline: none;
+}
+
+/* ───────────────────────── Motion preferences ───────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    transform: none;
+    filter: none;
+    transition: opacity 250ms ease;
+    transition-delay: 0ms;
+  }
+
+  .mask > span,
+  .rule {
+    transform: none;
+    transition: none;
+  }
+
+  .sparkleSpin {
+    animation: none;
+  }
+
+  .field {
+    animation: none;
+    opacity: 1;
+  }
+
+  .marquee {
+    overflow-x: auto;
+  }
+
+  .marqueeTrack {
+    animation: none;
+  }
+}

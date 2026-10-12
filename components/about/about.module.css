@@ -1,0 +1,902 @@
+/* /about — hero + profile card, background strip, story chapters with
+   small animated vignettes, scroll-lit statement, toolkit grid. */
+
+.page {
+  --wrap: 1360px;
+}
+
+/* ───────────────────────── Hero ───────────────────────── */
+
+.hero {
+  position: relative;
+  padding-top: clamp(6.5rem, 16vh, 11rem);
+}
+
+.heroGrid {
+  position: relative;
+  display: grid;
+  gap: clamp(2.5rem, 6vh, 4rem) clamp(2rem, 5vw, 5rem);
+  align-items: end;
+}
+
+@media (min-width: 1024px) {
+  .heroGrid {
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  }
+}
+
+.name {
+  margin-top: 1.4rem;
+  font-size: clamp(3.4rem, 15vw, 6rem);
+  font-weight: 600;
+  line-height: 0.9;
+  letter-spacing: -0.06em;
+}
+
+@media (min-width: 1024px) {
+  .name {
+    font-size: clamp(5rem, 9.4vw, 9.5rem);
+  }
+}
+
+.role {
+  margin-top: clamp(1.25rem, 3vh, 2rem);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem 1.1rem;
+  font-size: clamp(1.25rem, 2.1vw, 1.9rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+}
+
+/* Design / Film / Software — each lights up in turn */
+.cycle {
+  display: inline-flex;
+  gap: 0.9rem;
+}
+
+.cycle span {
+  color: var(--faint);
+  animation: cycle 6s linear infinite;
+  animation-delay: calc(var(--n) * 2s);
+}
+
+@keyframes cycle {
+  0%,
+  30% {
+    color: #fff;
+  }
+  36%,
+  100% {
+    color: rgba(255, 255, 255, 0.4);
+  }
+}
+
+.tagline {
+  margin-top: 0.9rem;
+  max-width: 32rem;
+  font-size: clamp(1rem, 1.3vw, 1.25rem);
+  line-height: 1.5;
+  color: var(--dim);
+  text-wrap: pretty;
+}
+
+/* ── Profile card ── */
+
+.card {
+  position: relative;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.015));
+  overflow: hidden;
+}
+
+.cardHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1.1rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.cardBody {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 1.1rem;
+  align-items: center;
+  padding: 1.25rem 1.1rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.mark {
+  position: relative;
+  display: flex;
+  height: 5.25rem;
+  width: 5.25rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: #000;
+  overflow: hidden;
+}
+
+.mark img {
+  height: 2.6rem;
+  width: auto;
+}
+
+/* Light sweeping across the monogram */
+.mark::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, 0.28) 50%, transparent 65%);
+  background-size: 260% 100%;
+  animation: sheen 5.5s ease-in-out infinite;
+}
+
+@keyframes sheen {
+  0%,
+  55% {
+    background-position: 130% 0;
+  }
+  100% {
+    background-position: -40% 0;
+  }
+}
+
+.cardName {
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.035em;
+}
+
+.cardRows {
+  display: grid;
+}
+
+.cardRow {
+  display: grid;
+  grid-template-columns: 5.75rem minmax(0, 1fr);
+  gap: 0.75rem;
+  align-items: baseline;
+  padding: 0.7rem 1.1rem;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.92rem;
+  letter-spacing: -0.01em;
+}
+
+.cardRow:last-child {
+  border-bottom: 0;
+}
+
+.cardRow a {
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 255, 255, 0.3);
+  text-underline-offset: 3px;
+  transition: text-decoration-color 200ms ease;
+}
+
+.cardRow a:hover,
+.cardRow a:focus-visible {
+  text-decoration-color: #fff;
+  outline: none;
+}
+
+/* ───────────────────────── Background strip ───────────────────────── */
+
+.facts {
+  margin-top: clamp(3rem, 8vh, 5.5rem);
+  display: grid;
+  gap: 1px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--line);
+}
+
+@media (min-width: 640px) {
+  .facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1100px) {
+  .facts {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.fact {
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem 1.3rem 1.35rem;
+  background: #000;
+}
+
+.factTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.factIcon {
+  width: 22px;
+  height: 22px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.factFigure {
+  margin-top: 2.6rem;
+  font-size: clamp(2.2rem, 3.4vw, 3.1rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.055em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.factFigure small {
+  font-size: 0.42em;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--dim);
+}
+
+.factText {
+  margin-top: 0.6rem;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: var(--dim);
+  text-wrap: pretty;
+}
+
+/* ───────────────────────── Sections ───────────────────────── */
+
+.section {
+  margin-top: clamp(5rem, 13vh, 9rem);
+  border-top: 1px solid var(--line);
+  padding-top: clamp(3rem, 8vh, 5rem);
+}
+
+.sectionTitle {
+  margin-top: 1.2rem;
+  font-size: clamp(2.3rem, 5.6vw, 5rem);
+  font-weight: 600;
+  line-height: 0.98;
+  letter-spacing: -0.05em;
+}
+
+.outline {
+  font-style: normal;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.78);
+}
+
+/* ───────────────────────── Story ───────────────────────── */
+
+.chapters {
+  margin-top: clamp(2.5rem, 6vh, 4rem);
+}
+
+.chapter {
+  display: grid;
+  gap: 1.75rem clamp(2rem, 5vw, 5rem);
+  padding: clamp(2.25rem, 6vh, 3.75rem) 0;
+  border-top: 1px solid var(--line);
+}
+
+@media (min-width: 960px) {
+  .chapter {
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.2fr);
+    align-items: start;
+  }
+
+  .chapterSide {
+    position: sticky;
+    top: 6.5rem;
+  }
+}
+
+.chapterHead {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.chapterIcon {
+  width: 18px;
+  height: 18px;
+  color: #fff;
+}
+
+.chapterTitle {
+  margin-top: 0.9rem;
+  font-size: clamp(1.8rem, 3.4vw, 3rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.045em;
+}
+
+.vignette {
+  margin-top: 1.5rem;
+  max-width: 26rem;
+}
+
+.prose {
+  font-size: clamp(1.05rem, 1.45vw, 1.3rem);
+  line-height: 1.6;
+  letter-spacing: -0.012em;
+  color: rgba(255, 255, 255, 0.82);
+  text-wrap: pretty;
+}
+
+.prose p + p {
+  margin-top: 1.1em;
+}
+
+.prose strong {
+  font-weight: 500;
+  color: #fff;
+}
+
+.proseLink {
+  color: #fff;
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 255, 255, 0.35);
+  text-underline-offset: 4px;
+  cursor: pointer;
+  transition: text-decoration-color 200ms ease;
+}
+
+.proseLink:hover,
+.proseLink:focus-visible {
+  text-decoration-color: #fff;
+  outline: none;
+}
+
+/* ───────────────────────── Vignettes (shared shell) ───────────────────────── */
+
+.panel {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.025);
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dim);
+  font-variant-numeric: tabular-nums;
+}
+
+.panelBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.6rem 0.8rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.panelDots {
+  display: inline-flex;
+  gap: 5px;
+}
+
+.panelDots i {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.panelBody {
+  padding: 1rem 0.9rem 1.05rem;
+}
+
+.bright {
+  color: #fff;
+}
+
+.live {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: #fff;
+}
+
+.live::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: #fff;
+  animation: blink 1.4s steps(2, jump-none) infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0.15;
+  }
+}
+
+/* ── 01 Render window ── */
+
+.renderRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.renderClock {
+  font-size: 1.9rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: #fff;
+}
+
+.renderBar {
+  position: relative;
+  height: 10px;
+  margin: 0.9rem 0 0.7rem;
+  overflow: hidden;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.renderFill {
+  position: absolute;
+  inset: 0;
+  transform-origin: left center;
+  background: repeating-linear-gradient(
+    90deg,
+    #fff 0 5px,
+    rgba(255, 255, 255, 0.55) 5px 6px
+  );
+  transition: transform 200ms linear;
+}
+
+/* ── 02 Poster ── */
+
+.poster {
+  position: relative;
+  display: flex;
+  width: 100%;
+  align-items: stretch;
+  gap: 1rem;
+  padding: 0.9rem;
+  text-align: left;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.025);
+  transition:
+    border-color 300ms ease,
+    background-color 300ms ease;
+}
+
+.poster:hover,
+.poster:focus-visible {
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.05);
+  outline: none;
+}
+
+.posterArt {
+  flex: none;
+  width: 6.75rem;
+  aspect-ratio: 437 / 640;
+  overflow: hidden;
+  border-radius: 6px;
+  background: #111;
+  transform: rotate(-2.5deg);
+  box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.9);
+  transition: transform 700ms var(--ease-out);
+}
+
+.poster:hover .posterArt,
+.poster:focus-visible .posterArt {
+  transform: rotate(0deg) scale(1.04);
+}
+
+.posterArt img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.posterMeta {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.75rem;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+.posterRank {
+  font-family: var(--display);
+  font-size: 2.6rem;
+  font-weight: 600;
+  line-height: 0.95;
+  letter-spacing: -0.055em;
+  text-transform: none;
+  color: #fff;
+}
+
+.posterRank small {
+  display: block;
+  margin-top: 0.3rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--dim);
+}
+
+.posterOpen {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #fff;
+}
+
+/* ── 03 Multiview ── */
+
+.multiview {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 5px;
+}
+
+.cam {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 4px;
+  border: 1px solid var(--line);
+  transition:
+    background-color 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease;
+}
+
+.cam[data-live] {
+  background: #fff;
+  border-color: #fff;
+  color: #000;
+}
+
+.camLabel {
+  position: absolute;
+  left: 5px;
+  bottom: 4px;
+  font-size: 9px;
+  line-height: 1;
+}
+
+.camTally {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  font-size: 8px;
+  line-height: 1;
+  opacity: 0;
+}
+
+.cam[data-live] .camTally {
+  opacity: 1;
+}
+
+/* Crosshair inside each camera tile */
+.cam::before,
+.cam::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background: currentColor;
+  opacity: 0.35;
+}
+
+.cam::before {
+  width: 12px;
+  height: 1px;
+  margin: 0 0 0 -6px;
+}
+
+.cam::after {
+  width: 1px;
+  height: 12px;
+  margin: -6px 0 0 0;
+}
+
+.program {
+  position: relative;
+  margin-bottom: 5px;
+  aspect-ratio: 16 / 6;
+  overflow: hidden;
+  border-radius: 4px;
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.programCam {
+  font-family: var(--display);
+  font-size: 2.1rem;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  text-transform: none;
+  color: #fff;
+  animation: cut 320ms var(--ease-out) both;
+}
+
+@keyframes cut {
+  from {
+    opacity: 0;
+    transform: scale(1.12);
+    filter: blur(4px);
+  }
+}
+
+.programTag {
+  position: absolute;
+  left: 7px;
+  top: 6px;
+}
+
+.programTag2 {
+  position: absolute;
+  right: 7px;
+  top: 6px;
+}
+
+/* ── 04 EQ radar ── */
+
+.radarWrap {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 1rem;
+  align-items: center;
+}
+
+.radar {
+  width: 9.5rem;
+  height: 9.5rem;
+}
+
+.radarGrid {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.16);
+  stroke-width: 0.6;
+}
+
+.radarShape {
+  fill: rgba(255, 255, 255, 0.14);
+  stroke: #fff;
+  stroke-width: 1.2;
+  stroke-linejoin: round;
+}
+
+.radarList {
+  display: grid;
+  gap: 0.42rem;
+  font-size: 9.5px;
+  line-height: 1.2;
+}
+
+.radarList li {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.6rem;
+  white-space: nowrap;
+}
+
+/* ───────────────────────── Statement ───────────────────────── */
+
+.statement {
+  margin-top: clamp(3rem, 9vh, 6rem);
+  padding: clamp(3rem, 10vh, 7rem) 0 0;
+  border-top: 1px solid var(--line);
+}
+
+.statementText {
+  margin-top: 1.5rem;
+  max-width: 24ch;
+  font-size: clamp(2.1rem, 6.4vw, 6rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  text-wrap: balance;
+}
+
+/* Each word brightens as the block scrolls through the viewport (--p: 0 → 1). */
+.word {
+  opacity: clamp(0.16, calc((var(--p, 0) - var(--w)) * var(--n) + 0.16), 1);
+  transition: opacity 180ms linear;
+}
+
+/* ───────────────────────── Toolkit ───────────────────────── */
+
+.toolGroups {
+  margin-top: clamp(2.25rem, 6vh, 3.5rem);
+  border-bottom: 1px solid var(--line);
+}
+
+.toolGroup {
+  display: grid;
+  gap: 1rem 2rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--line);
+}
+
+@media (min-width: 900px) {
+  .toolGroup {
+    grid-template-columns: 15rem minmax(0, 1fr);
+    align-items: start;
+  }
+}
+
+.toolGroupHead {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding-top: 0.55rem;
+}
+
+.toolGroupName {
+  color: #fff;
+}
+
+.tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tool {
+  --tone: #fff;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 0.95rem 0.6rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  font-size: 0.92rem;
+  letter-spacing: -0.01em;
+  color: rgba(255, 255, 255, 0.88);
+  cursor: default;
+  transition:
+    border-color 300ms ease,
+    background-color 300ms ease,
+    color 300ms ease,
+    transform 500ms var(--ease-out);
+}
+
+.toolIcon {
+  flex: none;
+  width: 17px;
+  height: 17px;
+  color: rgba(255, 255, 255, 0.6);
+  transition:
+    color 300ms ease,
+    transform 600ms var(--ease-out);
+}
+
+/* Monochrome at rest; each tool shows its own colour on hover */
+.tool:hover {
+  border-color: var(--tone);
+  background: color-mix(in srgb, var(--tone) 12%, transparent);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.tool:hover .toolIcon {
+  color: var(--tone);
+  transform: rotate(-8deg) scale(1.15);
+}
+
+.tail {
+  margin-top: clamp(5rem, 13vh, 9rem);
+}
+
+/* ───────────────────────── Poster dialog ───────────────────────── */
+
+.dialog {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 4.5rem 1.25rem 2rem;
+  background: rgba(0, 0, 0, 0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  animation: dialogIn 300ms ease both;
+}
+
+@keyframes dialogIn {
+  from {
+    opacity: 0;
+  }
+}
+
+.dialogImage {
+  max-width: 100%;
+  max-height: calc(100vh - 11rem);
+  border-radius: 6px;
+  object-fit: contain;
+  animation: dialogPop 600ms var(--ease-out) both;
+}
+
+@keyframes dialogPop {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(10px);
+  }
+}
+
+.dialogClose {
+  position: absolute;
+  right: 1.1rem;
+  top: 1.1rem;
+  display: inline-flex;
+  height: 40px;
+  width: 40px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  transition:
+    background-color 200ms ease,
+    color 200ms ease;
+}
+
+.dialogClose:hover,
+.dialogClose:focus-visible {
+  background: #fff;
+  color: #000;
+  outline: none;
+}
+
+/* ───────────────────────── Motion preferences ───────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .cycle span,
+  .mark::after,
+  .live::before,
+  .programCam,
+  .dialog,
+  .dialogImage {
+    animation: none;
+  }
+
+  .cycle span {
+    color: #fff;
+  }
+
+  .word {
+    opacity: 1;
+    transition: none;
+  }
+}

@@ -1,23 +1,48 @@
-/** Copy for the /work “what I offer” cards */
-export const CAPABILITY_CARDS = [
+export type CapabilityIcon =
+  | "technologist"
+  | "fullstack"
+  | "product"
+  | "motion"
+  | "graphic";
+
+export interface Capability {
+  icon: CapabilityIcon;
+  title: string;
+  desc: string;
+  /** Tools and methods, shown as small tags */
+  tools: string[];
+}
+
+/** Copy for the /work capabilities grid */
+export const CAPABILITY_CARDS: Capability[] = [
   {
-    title: "AI Creative Technologist",
-    desc: "Building products with AI as core infrastructure — Cursor, Claude Code, LLM integration, prompt engineering",
+    icon: "technologist",
+    title: "Creative Technologist",
+    desc: "Building products with AI as core infrastructure.",
+    tools: ["Cursor", "Claude Code", "LLM integration", "Prompt engineering"],
   },
   {
+    icon: "fullstack",
     title: "Full-Stack Developer",
-    desc: "React, Next.js, TypeScript, Node.js, Supabase, Stripe, REST APIs — shipping production apps solo",
+    desc: "Shipping production apps solo.",
+    tools: ["React", "Next.js", "TypeScript", "Node.js", "Supabase", "Stripe", "REST APIs"],
   },
   {
+    icon: "product",
     title: "UX & Product Designer",
-    desc: "Interaction design, prototyping, information architecture, user research — design that feels right",
+    desc: "Design that feels right.",
+    tools: ["Interaction design", "Prototyping", "Information architecture", "User research"],
   },
   {
+    icon: "motion",
     title: "Motion & Video Producer",
-    desc: "After Effects, Premiere Pro, testimonial production, short-form content, brand storytelling",
+    desc: "Brand storytelling, from interview to final cut.",
+    tools: ["After Effects", "Premiere Pro", "Testimonials", "Short-form"],
   },
   {
+    icon: "graphic",
     title: "Graphic Designer",
-    desc: "Brand systems, layout, typography, and campaign-ready visuals — web, social, and print",
+    desc: "Campaign-ready visuals for web, social, and print.",
+    tools: ["Brand systems", "Layout", "Typography"],
   },
-] as const;
+];

@@ -268,7 +268,7 @@ export default function PortfolioSite() {
         <title>{DOCUMENT_TITLE}</title>
         <meta
           name="description"
-          content="Portfolio of Jake Owens — AI Creative Technologist specializing in full-stack development, AI product design, and creative production."
+          content="Portfolio of Jake Owens — Creative Technologist specializing in full-stack development, AI product design, and creative production."
         />
       </Head>
 
