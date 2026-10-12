@@ -1,8 +1,8 @@
 /**
  * Landing hero slideshow data.
  *
- * Kept separate from `FEATURED_PROJECTS` (which drives the /work case-study cards)
- * so a project can appear in the hero without needing a /work/<slug> page.
+ * The /work page reuses these slides (clips, thumb, accent, links) and adds its
+ * own short copy in lib/workIndex.ts — a new slide needs an entry there too.
  *
  * Every clip carries an explicit duration (file clips) or explicit time ranges
  * (YouTube clips), so the progress rail never has to guess. YouTube clips are
@@ -47,6 +47,8 @@ export type FileClip = ClipBase & {
   srcSmall?: string;
   /** Exact first frame of the encode, so poster → playback has no visible jump */
   poster: string;
+  /** Representative frame for clip pickers (/work); falls back to `poster` */
+  thumb?: string;
   /** Seconds of the file to play */
   duration: number;
 };
@@ -367,6 +369,7 @@ export const SHOWCASE_SLIDES: ShowcaseSlide[] = [
       id: "outro",
       src: encodeURI("/Cloverleaf Outro Final.mp4"),
       poster: "/showcase/cloverleaf-outro-poster.jpg",
+      thumb: "/showcase/cloverleaf-outro-thumb.jpg",
       duration: 5,
     },
     cta: [
