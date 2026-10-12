@@ -10,8 +10,14 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
+        // Inter (self-hosted via next/font in pages/_app.tsx). No Helvetica in the stack:
+        // locally installed "Helvetica" families can resolve to condensed/black cuts.
         sans: [
-          'Helvetica',
+          'var(--font-inter)',
+          'system-ui',
+          '-apple-system',
+          '"Segoe UI"',
+          'Roboto',
           'Arial',
           'sans-serif',
         ],

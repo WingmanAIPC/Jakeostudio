@@ -110,7 +110,7 @@ export function MobileHeader({
   }, [peekState]);
 
   const navLinkClass =
-    "px-1.5 py-1 text-[11px] font-medium text-zinc-400 hover:text-white transition-colors whitespace-nowrap";
+    "px-1.5 py-1 text-[13px] font-semibold tracking-[-0.01em] text-zinc-300 hover:text-white transition-colors whitespace-nowrap";
 
   const onLogoClick = useCallback(
     (e: React.MouseEvent) => {

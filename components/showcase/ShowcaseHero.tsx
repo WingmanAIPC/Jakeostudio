@@ -6,7 +6,7 @@ import React, {
   type CSSProperties,
 } from "react";
 import Link from "next/link";
-import { SiApple } from "react-icons/si";
+import { SiApple, SiYoutube } from "react-icons/si";
 import {
   TbArrowRight,
   TbArrowUpRight,
@@ -27,6 +27,7 @@ import {
   clipDuration,
   clipPoster,
   planVisit,
+  youtubeWatchUrl,
   type ShowcaseClip,
 } from "../../lib/showcase";
 import type { ProjectCta } from "../../lib/work";
@@ -49,6 +50,10 @@ const SWIPE_MIN_PX = 48;
 const IDLE_MS = 2600;
 /** Landscape: description condenses to eyebrow + title + CTAs after this long on a slide */
 const CONDENSE_MS = 6500;
+/** Phones: one-time "swipe or tap Next" coach mark */
+const NAV_HINT_KEY = "jo_nav_hint_seen";
+const NAV_HINT_DELAY_MS = 2500;
+const NAV_HINT_VISIBLE_MS = 5000;
 
 type Cursor = { slide: number; visit: number; clip: number };
 type LayerDesc = { key: string; slide: number; clip: ShowcaseClip };
@@ -168,6 +173,7 @@ export default function ShowcaseHero({
   const [idle, setIdle] = useState(false);
   const [small] = useState(prefersSmallMedia);
   const [condensed, setCondensed] = useState(false);
+  const [navHint, setNavHint] = useState(false);
   /** Current clip has produced frames — only then start warming the next one. */
   const [activeStartedKey, setActiveStartedKey] = useState<string | null>(null);
 
@@ -244,20 +250,36 @@ export default function ShowcaseHero({
     else enterSlide((cur.slide + 1) % N);
   }, [commit, enterSlide]);
 
+  /** Set once the coach mark has shown, or the visitor has navigated on their own. */
+  const hintDoneRef = useRef(false);
+  const retireHint = useCallback(() => {
+    if (!hintDoneRef.current) {
+      hintDoneRef.current = true;
+      try {
+        window.localStorage.setItem(NAV_HINT_KEY, "1");
+      } catch {
+        /* private mode */
+      }
+    }
+    setNavHint(false);
+  }, []);
+
+  // User-initiated navigation (auto-advance goes through `advance`, not these).
   const goToSlide = useCallback(
     (s: number) => {
+      retireHint();
       if (s !== cursorRef.current.slide) enterSlide(s);
     },
-    [enterSlide],
+    [enterSlide, retireHint],
   );
-  const goNext = useCallback(
-    () => enterSlide((cursorRef.current.slide + 1) % N),
-    [enterSlide],
-  );
-  const goPrev = useCallback(
-    () => enterSlide((cursorRef.current.slide - 1 + N) % N),
-    [enterSlide],
-  );
+  const goNext = useCallback(() => {
+    retireHint();
+    enterSlide((cursorRef.current.slide + 1) % N);
+  }, [enterSlide, retireHint]);
+  const goPrev = useCallback(() => {
+    retireHint();
+    enterSlide((cursorRef.current.slide - 1 + N) % N);
+  }, [enterSlide, retireHint]);
 
   const advanceRef = useRef(advance);
   advanceRef.current = advance;
@@ -381,6 +403,42 @@ export default function ShowcaseHero({
     return () => clearTimeout(t);
   }, [slideVisitKey, runnable]);
 
+  /* ── phones: teach swipe / Next once, after the first clip is actually playing ── */
+
+  useEffect(() => {
+    if (hintDoneRef.current || !runnable || activeStartedKey === null) return;
+    if (!window.matchMedia("(max-width: 767px)").matches) return;
+    try {
+      if (window.localStorage.getItem(NAV_HINT_KEY)) {
+        hintDoneRef.current = true;
+        return;
+      }
+    } catch {
+      return;
+    }
+    // Pausing or scrolling away flips `runnable`, and this cleanup cancels the pending show.
+    const t = setTimeout(() => {
+      if (hintDoneRef.current) return;
+      hintDoneRef.current = true;
+      setNavHint(true);
+      try {
+        window.localStorage.setItem(NAV_HINT_KEY, "1");
+      } catch {
+        /* private mode */
+      }
+    }, NAV_HINT_DELAY_MS);
+    return () => clearTimeout(t);
+  }, [runnable, activeStartedKey]);
+  useEffect(() => {
+    if (!navHint) return;
+    const t = setTimeout(() => setNavHint(false), NAV_HINT_VISIBLE_MS);
+    return () => clearTimeout(t);
+  }, [navHint]);
+  // Auto-advance tucks a visible hint away too.
+  useEffect(() => {
+    setNavHint(false);
+  }, [cursor.slide]);
+
   /* ── environment: visibility, viewport, input ── */
 
   useEffect(() => {
@@ -435,6 +493,7 @@ export default function ShowcaseHero({
 
   const touchRef = useRef<{ x: number; y: number } | null>(null);
   const onTouchStart = (e: React.TouchEvent) => {
+    setNavHint(false);
     if (e.touches.length !== 1) return;
     touchRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
   };
@@ -474,8 +533,19 @@ export default function ShowcaseHero({
   layers.push({ d: active, state: "active", z: 3 });
 
   const activeSlide = SLIDES[cursor.slide];
+  const nextSlide = SLIDES[(cursor.slide + 1) % N];
   const activeClip = active.clip;
   const showSound = !activeClip.silent;
+  const activeYtUrl =
+    activeClip.kind === "youtube" ? youtubeWatchUrl(activeClip) : null;
+  const activeCaption =
+    activeClip.label ??
+    (activeClip.kind === "youtube" ? activeSlide.clipCaption : undefined);
+  const ytLabel = `Watch on YouTube: ${
+    activeCaption ?? activeSlide.title
+  } (opens in a new tab)`;
+  /** Keep the caption row mounted for the whole visit so clips within a slide never reflow the copy. */
+  const slideUsesCaption = plan.some((c) => !!c.label || c.kind === "youtube");
 
   return (
     <section
@@ -549,6 +619,47 @@ export default function ShowcaseHero({
         </span>
       </button>
 
+      {/* Portrait: tap the framed video like a story — left = back, right = next */}
+      <div className={styles.frameNav} aria-hidden>
+        <button
+          type="button"
+          tabIndex={-1}
+          className={styles.frameNavPrev}
+          onClick={goPrev}
+        >
+          <span className={styles.frameNavGlyph}>
+            <TbChevronLeft className="h-[18px] w-[18px]" />
+          </span>
+        </button>
+        <button
+          type="button"
+          tabIndex={-1}
+          className={styles.frameNavNext}
+          onClick={goNext}
+        >
+          <span className={styles.frameNavGlyph}>
+            <TbChevronRight className="h-[18px] w-[18px]" />
+          </span>
+        </button>
+      </div>
+
+      {/* Portrait: "Watch on YouTube" sits on the video itself, not in the copy stack */}
+      {activeYtUrl ? (
+        <div key={`yt-${active.key}`} className={styles.ytFrame}>
+          <a
+            href={activeYtUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`${styles.ytLink} ${styles.ytFrameLink}`}
+            aria-label={ytLabel}
+          >
+            <SiYoutube className="h-[15px] w-[15px] text-[#FF0033]" aria-hidden />
+            <span>Watch on YouTube</span>
+            <TbArrowUpRight className="h-3.5 w-3.5" aria-hidden />
+          </a>
+        </div>
+      ) : null}
+
       <div className={styles.bottom}>
         {/* ── Slide copy ── */}
         <div className={styles.panels} aria-live={paused ? "polite" : "off"}>
@@ -617,11 +728,46 @@ export default function ShowcaseHero({
                         ) : null}
                       </div>
                     </div>
-                    {isActive && activeClip.label ? (
-                      <p key={active.key} className={styles.caption}>
-                        Now showing <span className="text-white/35">—</span>{" "}
-                        <strong>{activeClip.label}</strong>
-                      </p>
+                    {isActive && slideUsesCaption ? (
+                      <div
+                        key={active.key}
+                        className={styles.caption}
+                        data-empty={
+                          !activeCaption && !activeYtUrl ? "" : undefined
+                        }
+                        data-compact-empty={
+                          !activeClip.label ? "" : undefined
+                        }
+                        data-no-link={!activeYtUrl ? "" : undefined}
+                      >
+                        {activeCaption ? (
+                          <span
+                            className={`${styles.captionText} ${
+                              activeClip.label ? "" : styles.captionFallback
+                            }`}
+                          >
+                            Now showing{" "}
+                            <span className="text-white/35">—</span>{" "}
+                            <strong>{activeCaption}</strong>
+                          </span>
+                        ) : null}
+                        {activeYtUrl ? (
+                          <a
+                            href={activeYtUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={`${styles.ytLink} ${styles.ytLinkInline}`}
+                            aria-label={ytLabel}
+                          >
+                            <SiYoutube
+                              className="h-[15px] w-[15px] text-[#FF0033]"
+                              aria-hidden
+                            />
+                            <span>Watch on YouTube</span>
+                            <TbArrowUpRight className="h-3.5 w-3.5" aria-hidden />
+                          </a>
+                        ) : null}
+                      </div>
                     ) : null}
                   </div>
                   <div
@@ -648,8 +794,13 @@ export default function ShowcaseHero({
           className={`${styles.chrome} mt-[clamp(1.1rem,4.2vh,2.75rem)] hidden items-end gap-8 md:flex`}
         >
           <ol
-            className="grid flex-1 gap-4"
-            style={{ gridTemplateColumns: `repeat(${N}, minmax(0, 1fr))` }}
+            className={`${styles.railGrid} grid flex-1 gap-4`}
+            style={{
+              // The playing project's segment widens so its full name fits.
+              gridTemplateColumns: SLIDES.map((_, i) =>
+                i === cursor.slide ? "minmax(0, 2.4fr)" : "minmax(0, 1fr)",
+              ).join(" "),
+            }}
             aria-label="Projects"
           >
             {SLIDES.map((s, i) => {
@@ -786,13 +937,21 @@ export default function ShowcaseHero({
               </button>
             ))}
           </div>
-          <div className="mt-1.5 flex items-center justify-between gap-3">
-            <span className="min-w-0 truncate text-[11px] font-medium uppercase tracking-[0.16em] text-white/60 tabular-nums">
-              {pad(cursor.slide + 1)} / {pad(N)}
-              <span className="px-2 text-white/30">·</span>
-              <span className="text-white/85">{activeSlide.short}</span>
-            </span>
+          <div className="relative mt-1.5 flex items-center justify-between gap-3">
             <div className="flex shrink-0 items-center gap-2">
+              <button
+                type="button"
+                className={styles.iconBtn}
+                onClick={() => setPaused((p) => !p)}
+                aria-label={paused ? "Play slideshow" : "Pause slideshow"}
+                aria-pressed={paused}
+              >
+                {paused ? (
+                  <TbPlayerPlayFilled className="h-4 w-4" aria-hidden />
+                ) : (
+                  <TbPlayerPauseFilled className="h-4 w-4" aria-hidden />
+                )}
+              </button>
               {showSound ? (
                 <button
                   type="button"
@@ -808,20 +967,33 @@ export default function ShowcaseHero({
                   )}
                 </button>
               ) : null}
-              <button
-                type="button"
-                className={styles.iconBtn}
-                onClick={() => setPaused((p) => !p)}
-                aria-label={paused ? "Play slideshow" : "Pause slideshow"}
-                aria-pressed={paused}
-              >
-                {paused ? (
-                  <TbPlayerPlayFilled className="h-4 w-4" aria-hidden />
-                ) : (
-                  <TbPlayerPauseFilled className="h-4 w-4" aria-hidden />
-                )}
-              </button>
+              {activeYtUrl ? (
+                <a
+                  href={activeYtUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`${styles.iconBtn} ${styles.ytRowBtn}`}
+                  aria-label={ytLabel}
+                >
+                  <SiYoutube className="h-[17px] w-[17px] text-[#FF0033]" aria-hidden />
+                </a>
+              ) : null}
             </div>
+            <button
+              type="button"
+              className={styles.nextPill}
+              onClick={goNext}
+              aria-label={`Next ${nextSlide.short}`}
+            >
+              <span className={styles.nextPillLabel}>Next</span>
+              <span className={styles.nextPillName}>{nextSlide.short}</span>
+              <TbChevronRight className="h-4 w-4 shrink-0" aria-hidden />
+            </button>
+            {navHint ? (
+              <div className={styles.navHint} role="status">
+                Swipe or tap <strong>Next</strong> for more
+              </div>
+            ) : null}
           </div>
         </div>
       </div>
