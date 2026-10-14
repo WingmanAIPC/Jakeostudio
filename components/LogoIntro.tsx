@@ -45,6 +45,8 @@ export default function LogoIntro({
 }) {
   const [phase, setPhase] = useState<"enter" | "exit">("enter");
   const [minElapsed, setMinElapsed] = useState(false);
+  /** After the empty bar has painted, so the width transition has a start frame. */
+  const [armed, setArmed] = useState(false);
   const exitingRef = useRef(false);
   const onRevealRef = useRef(onReveal);
   const onCompleteRef = useRef(onComplete);
@@ -65,6 +67,18 @@ export default function LogoIntro({
       () => onCompleteRef.current(),
       reducedMotion() ? 550 : EXIT_MS,
     );
+  }, []);
+
+  useEffect(() => {
+    // Two frames so the 0-width bar is painted before the target width changes.
+    let inner = 0;
+    const outer = window.requestAnimationFrame(() => {
+      inner = window.requestAnimationFrame(() => setArmed(true));
+    });
+    return () => {
+      window.cancelAnimationFrame(outer);
+      window.cancelAnimationFrame(inner);
+    };
   }, []);
 
   useEffect(() => {
@@ -98,6 +112,7 @@ export default function LogoIntro({
     <div
       className={styles.root}
       data-phase={phase}
+      data-armed={armed ? "" : undefined}
       data-ready={ready ? "" : undefined}
       onClick={exit}
       role="presentation"

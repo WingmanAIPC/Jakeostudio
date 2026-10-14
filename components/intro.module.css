@@ -190,43 +190,46 @@
   }
 }
 
-/* ── Loader hairline (tracks the hero's first video) ── */
+/* ── Loader hairline (tracks the hero's first video) ──
+   Grows by width so the 1px line paints while it moves.
+   `data-armed` waits until the empty bar has painted; full width
+   also waits for `data-ready`, so the transition continues from
+   the current width instead of restarting. */
 
 .loader {
   position: absolute;
-  left: 50%;
+  left: 0;
+  right: 0;
+  margin-inline: auto;
   bottom: max(2.5rem, calc(env(safe-area-inset-bottom) + 1.5rem));
   width: min(40vw, 11rem);
   height: 1px;
-  transform: translateX(-50%);
   background: rgba(255, 255, 255, 0.12);
-  overflow: hidden;
   transition: opacity 400ms ease;
 }
 
 .loaderFill {
   position: absolute;
-  inset: 0;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0;
   background: rgba(255, 255, 255, 0.7);
-  transform-origin: left center;
-  transform: scaleX(0);
-  animation: load 2300ms cubic-bezier(0.3, 0.6, 0.4, 1) forwards;
+  transition: width 2300ms cubic-bezier(0.3, 0.6, 0.4, 1);
 }
 
-.root[data-ready] .loaderFill {
-  animation: none;
-  transform: scaleX(1);
-  transition: transform 400ms ease;
+.root[data-armed] .loaderFill {
+  width: 82%;
+}
+
+.root[data-armed][data-ready] .loaderFill {
+  width: 100%;
+  transition-duration: 400ms;
+  transition-timing-function: ease;
 }
 
 .root[data-phase="exit"] .loader {
   opacity: 0;
-}
-
-@keyframes load {
-  to {
-    transform: scaleX(0.82);
-  }
 }
 
 .skip {
@@ -270,6 +273,11 @@
   .tagline {
     letter-spacing: 0.34em;
     animation: brighten 500ms ease 200ms forwards;
+  }
+
+  .loaderFill {
+    transition-duration: 400ms;
+    transition-timing-function: ease;
   }
 
   .shutterTop,
