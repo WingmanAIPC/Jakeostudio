@@ -8,7 +8,7 @@ Photos pairs the two files when both carry the same content identifier:
 No Apple frameworks are needed; the QuickTime atoms are written here directly.
 
 usage: livephoto.py --video clip.mp4 --still key.png --out DIR --name BASE
-                    [--size WxH] [--crop W:H:X:Y] [--crf 20]
+                    [--size WxH] [--crop W:H:X:Y] [--crf 24]
 The key photo is the clip's first frame (still-image-time = 0).
 """
 import argparse
@@ -151,7 +151,7 @@ def main():
     ap.add_argument('--name', required=True)
     ap.add_argument('--size')          # WxH: scale after crop
     ap.add_argument('--crop')          # W:H:X:Y (ffmpeg crop)
-    ap.add_argument('--crf', default='20')
+    ap.add_argument('--crf', default='24')   # ~10 Mbps at 1320x2868: grain survives, size stays near Apple's own
     a = ap.parse_args()
     os.makedirs(a.out, exist_ok=True)
     cid = str(uuid.uuid4()).upper()
@@ -180,7 +180,7 @@ def main():
     if vf:
         cmd += ['-vf', ','.join(vf)]
     cmd += ['-an', '-c:v', 'libx265', '-preset', 'medium', '-crf', a.crf, '-pix_fmt', 'yuv420p', '-tag:v', 'hvc1',
-            '-x265-params', 'log-level=error:aq-mode=3',
+            '-x265-params', 'log-level=error:aq-mode=3:psy-rd=2.0:psy-rdoq=1.0',
             '-color_primaries', 'bt709', '-color_trc', 'bt709', '-colorspace', 'bt709',
             '-movflags', 'use_metadata_tags', '-metadata', f'com.apple.quicktime.content.identifier={cid}',
             '-f', 'mov', tmp]
