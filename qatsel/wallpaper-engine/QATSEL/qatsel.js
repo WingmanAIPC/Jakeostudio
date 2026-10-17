@@ -1327,6 +1327,8 @@ void main(){
     constructor(canvas, opts = {}) {
       this.canvas = canvas;
       const { gl, floatRT } = makeGL(canvas);
+      // the figure field and HDR light need half-float targets; without them the image would be wrong, so refuse
+      if (!floatRT) throw new Error('QATSEL needs WebGL2 half-float render targets');
       this.gl = gl;
       this.float = floatRT;
       this.opts = Object.assign({ design: 1, width: 1320, height: 2868, duo: false, loop: 10, scale: 1, glitchAt: 0.42, glitchAmp: 1, offscreen: false, typeOpacity: 1, strips: 1, grainScale: 1, grainHold: 1 }, opts);
