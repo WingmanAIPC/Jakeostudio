@@ -1,0 +1,33 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>QATSEL render</title></head>
+<body style="margin:0;background:#000">
+<canvas id="c" width="16" height="16"></canvas>
+<script src="qatsel-fonts.js"></script>
+<script src="qatsel.js"></script>
+<script>
+(async () => {
+  const q = new URLSearchParams(location.search);
+  await QATSEL.loadFonts();
+  const eng = new QATSEL.Engine(document.getElementById('c'), { offscreen: true });
+  eng.configure({
+    design: +q.get('design') || 1, width: +q.get('w'), height: +q.get('h'),
+    duo: q.get('duo') === '1', loop: +q.get('loop') || 10, strips: +q.get('strips') || 1,
+    typeOpacity: q.has('type') ? +q.get('type') : 1,
+    mode: q.has('mode') ? +q.get('mode') : null,
+    grainScale: q.has('grain') ? +q.get('grain') : 1, grainHold: q.has('ghold') ? +q.get('ghold') : 1,
+  });
+  window.ENG = eng;
+  window.renderFrame = async (t, frame, gl, gs) => {
+    eng.glitchOverride = gl == null ? null : gl;
+    eng.gseedOverride = gs == null ? null : gs;
+    const t0 = performance.now();
+    const g = eng.render(t, frame);
+    const px = eng.readPixels();
+    const t1 = performance.now();
+    await fetch('/frame', { method: 'POST', body: px });
+    return { render: t1 - t0, send: performance.now() - t1, glitch: g };
+  };
+  window.READY = true;
+})().catch(e => { window.ERR = String(e && e.stack || e); });
+</script>
+</body></html>

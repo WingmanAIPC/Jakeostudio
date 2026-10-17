@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>QATSEL</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #04081c; overflow: hidden; }
+  canvas { position: fixed; inset: 0; width: 100vw; height: 100vh; display: block; }
+</style>
+</head>
+<body>
+<canvas id="q"></canvas>
+<script src="qatsel-fonts.js"></script>
+<script src="qatsel.js"></script>
+<script src="live.js"></script>
+<script>
+(async () => {
+  const live = await QATSEL_LIVE.start(document.getElementById('q'));
+  window.QATSEL_APP = live;
+  // Wallpaper Engine user properties
+  window.wallpaperPropertyListener = {
+    applyUserProperties(p) {
+      const v = (k) => (p[k] ? p[k].value : undefined);
+      live.set({
+        design: v('design'),
+        glitch: v('glitchinterval'),
+        intensity: v('glitchintensity') != null ? v('glitchintensity') / 100 : undefined,
+        type: v('typography'),
+        scale: v('renderscale') != null ? v('renderscale') / 100 : undefined,
+        speed: v('speed') != null ? v('speed') / 100 : undefined,
+        audio: v('audioreactive'),
+      });
+    },
+    setPaused(paused) { live.set({ paused }); },
+  };
+  // Wallpaper Engine audio: low-end energy breathes the light
+  if (window.wallpaperRegisterAudioListener) {
+    window.wallpaperRegisterAudioListener((a) => {
+      let s = 0;
+      for (let i = 0; i < 16; i++) s += a[i] + a[i + 64];
+      live.audioLevel(Math.min(1, s / 12));
+    });
+  }
+  // click / tap anywhere to break the illusion on demand
+  addEventListener('pointerdown', () => live.glitchNow());
+})();
+</script>
+</body>
+</html>
